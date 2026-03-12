@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three-Tier AI Governance Classification</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0B1120;
+    --bg-card: #111B2E;
+    --bg-card-hover: #162240;
+    --border-subtle: rgba(186, 163, 120, 0.12);
+    --border-active: rgba(186, 163, 120, 0.35);
+    --gold: #BAA378;
+    --gold-bright: #D4C098;
+    --gold-dim: #8A7A5A;
+    --text-primary: #E8E4DD;
+    --text-secondary: #9BA3B2;
+    --text-muted: #5E6878;
+    --tier-1: #4A90A4;
+    --tier-2: #C49A5C;
+    --tier-3: #C45C4A;
+    --tier-1-bg: rgba(74, 144, 164, 0.06);
+    --tier-2-bg: rgba(196, 154, 92, 0.06);
+    --tier-3-bg: rgba(196, 92, 74, 0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(186, 163, 120, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(74, 144, 164, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-label::before,
+  .header-label::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: justify;
+  }
+
+  /* ── TIER ROWS ── */
+  .tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+
+  .tier {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .tier:hover {
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+  }
+
+  /* Left identity column */
+  .tier-identity {
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .tier:nth-child(1) .tier-identity { background: var(--tier-1-bg); }
+  .tier:nth-child(2) .tier-identity { background: var(--tier-2-bg); }
+  .tier:nth-child(3) .tier-identity { background: var(--tier-3-bg); }
+
+  .tier-identity::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+  }
+
+  .tier:nth-child(1) .tier-identity::before { background: var(--tier-1); }
+  .tier:nth-child(2) .tier-identity::before { background: var(--tier-2); }
+  .tier:nth-child(3) .tier-identity::before { background: var(--tier-3); }
+
+  .tier-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .tier:nth-child(1) .tier-num { color: var(--tier-1); }
+  .tier:nth-child(2) .tier-num { color: var(--tier-2); }
+  .tier:nth-child(3) .tier-num { color: var(--tier-3); }
+
+  .tier-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .tier-risk {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .tier:nth-child(1) .tier-risk {
+    color: var(--tier-1);
+    background: rgba(74, 144, 164, 0.12);
+  }
+  .tier:nth-child(2) .tier-risk {
+    color: var(--tier-2);
+    background: rgba(196, 154, 92, 0.12);
+  }
+  .tier:nth-child(3) .tier-risk {
+    color: var(--tier-3);
+    background: rgba(196, 92, 74, 0.12);
+  }
+
+  /* Middle — characteristics */
+  .tier-chars {
+    padding: 28px 28px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-subtle);
+  }
+
+  .tier-col-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .tier-chars-body {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+  }
+
+  .tier-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tier-example-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    line-height: 1.3;
+  }
+
+  /* Right — governance approach */
+  .tier-gov {
+    padding: 28px 28px;
+    background: var(--bg-card);
+  }
+
+  .tier-gov-body {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .tier-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tier-pillar-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    line-height: 1.3;
+  }
+
+  .tier:nth-child(1) .tier-pillar-tag {
+    color: var(--tier-1);
+    background: rgba(74, 144, 164, 0.1);
+    border: 1px solid rgba(74, 144, 164, 0.15);
+  }
+  .tier:nth-child(2) .tier-pillar-tag {
+    color: var(--tier-2);
+    background: rgba(196, 154, 92, 0.1);
+    border: 1px solid rgba(196, 154, 92, 0.15);
+  }
+  .tier:nth-child(3) .tier-pillar-tag {
+    color: var(--tier-3);
+    background: rgba(196, 92, 74, 0.1);
+    border: 1px solid rgba(196, 92, 74, 0.15);
+  }
+
+  /* ── INSIGHT BAR ── */
+  .insight {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 32px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease-out 0.4s both;
+  }
+
+  .insight-accent {
+    width: 4px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, var(--tier-1), var(--tier-2), var(--tier-3));
+  }
+
+  .insight-content {
+    padding: 22px 28px;
+    background: var(--bg-card);
+  }
+
+  .insight-content p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .insight-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── SCALE INDICATOR ── */
+  .scale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding: 0 4px;
+    animation: fadeUp 0.8s ease-out 0.5s both;
+  }
+
+  .scale-bar {
+    flex: 1;
+    height: 3px;
+    margin: 0 16px;
+    background: linear-gradient(90deg, var(--tier-1), var(--tier-2), var(--tier-3));
+    border-radius: 2px;
+    opacity: 0.5;
+  }
+
+  .scale-end {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    animation: fadeUp 0.7s ease-out 0.6s both;
+  }
+
+  .footer-left {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .footer-left strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .container { padding: 40px 20px 60px; }
+    .tier { grid-template-columns: 1fr; }
+    .tier-identity { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .tier-chars { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-label">Risk-Proportional Governance</div>
+    <h1>Three-Tier AI <em>Impact</em> Classification</h1>
+    <p class="header-sub">Not all AI applications carry the same risk. Governance resources should be allocated proportionally — fast-tracking routine uses while ensuring high-impact decisions receive robust oversight.</p>
+    <p class="header-sub" style="margin-top:14px;font-size:13.5px;">The strongest governance frameworks already reflect this logic. The EU AI Act differentiates obligations by risk. NIST AI RMF encourages context-specific governance. OECD principles point toward proportionate oversight rather than one-size-fits-all controls.</p>
+  </header>
+
+  <!-- THREE TIERS -->
+  <div class="tiers">
+
+    <!-- TIER 1 -->
+    <div class="tier">
+      <div class="tier-identity">
+        <div class="tier-num">Tier 1</div>
+        <div class="tier-name">Routine Automation</div>
+        <div class="tier-risk">Lightweight</div>
+      </div>
+      <div class="tier-chars">
+        <div class="tier-col-label">Characteristics</div>
+        <div class="tier-chars-body">AI that automates internal administrative tasks with no direct citizen or customer impact.</div>
+        <div class="tier-examples">
+          <span class="tier-example-tag">Document summarization</span>
+          <span class="tier-example-tag">Scheduling optimization</span>
+          <span class="tier-example-tag">Data entry automation</span>
+        </div>
+      </div>
+      <div class="tier-gov">
+        <div class="tier-col-label">Governance Approach</div>
+        <div class="tier-gov-body">Department-level approval, standard data quality checks, periodic review.</div>
+        <div class="tier-pillars">
+          <span class="tier-pillar-tag">Efficiency & Service</span>
+          <span class="tier-pillar-tag">Data Quality</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier">
+      <div class="tier-identity">
+        <div class="tier-num">Tier 2</div>
+        <div class="tier-name">Decision Support</div>
+        <div class="tier-risk">Moderate</div>
+      </div>
+      <div class="tier-chars">
+        <div class="tier-col-label">Characteristics</div>
+        <div class="tier-chars-body">AI that informs human decisions affecting citizens, customers, or resource allocation.</div>
+        <div class="tier-examples">
+          <span class="tier-example-tag">Workload prioritization</span>
+          <span class="tier-example-tag">Permit review support</span>
+          <span class="tier-example-tag">Trend analysis</span>
+        </div>
+      </div>
+      <div class="tier-gov">
+        <div class="tier-col-label">Governance Approach</div>
+        <div class="tier-gov-body">Documented human-in-the-loop requirements, transparency about AI's role, data privacy impact review.</div>
+        <div class="tier-pillars">
+          <span class="tier-pillar-tag">Data Privacy & Security</span>
+          <span class="tier-pillar-tag">Human Decision-Making</span>
+          <span class="tier-pillar-tag">Transparency</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="tier">
+      <div class="tier-identity">
+        <div class="tier-num">Tier 3</div>
+        <div class="tier-name">High-Impact Decisions</div>
+        <div class="tier-risk">Robust</div>
+      </div>
+      <div class="tier-chars">
+        <div class="tier-col-label">Characteristics</div>
+        <div class="tier-chars-body">AI that directly affects citizen or customer outcomes, rights, or access to services.</div>
+        <div class="tier-examples">
+          <span class="tier-example-tag">Eligibility determinations</span>
+          <span class="tier-example-tag">Risk assessments</span>
+          <span class="tier-example-tag">Automated decision comms</span>
+        </div>
+      </div>
+      <div class="tier-gov">
+        <div class="tier-col-label">Governance Approach</div>
+        <div class="tier-gov-body">Human oversight at the decision point, transparency to affected citizens, data quality validation, and a mechanism for concerns about automated decisions.</div>
+        <div class="tier-pillars">
+          <span class="tier-pillar-tag">All Five Governance Pillars Apply</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCALE INDICATOR -->
+  <div class="scale">
+    <span class="scale-end">Low impact</span>
+    <div class="scale-bar"></div>
+    <span class="scale-end">High impact</span>
+  </div>
+
+  <!-- INSIGHT BAR -->
+  <div class="insight">
+    <div class="insight-accent"></div>
+    <div class="insight-content">
+      <p><strong>Why this matters:</strong> When Tier 1 use cases can move quickly under lightweight controls, teams are less likely to bypass governance altogether. That is one of the most effective ways to reduce shadow AI. Governance becomes something people work within — not something they route around.</p>
+    </div>
+  </div>
+
+  <!-- PROVENANCE -->
+  <div class="insight" style="margin-top:12px">
+    <div class="insight-accent" style="background:var(--gold)"></div>
+    <div class="insight-content">
+      <p style="font-size:13px"><strong>Provenance:</strong> Developed through global comparative governance research at the Center for AI and Digital Policy (CAIDP). Part of the <strong>MPBP Framework</strong> for operationalizing AI governance.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+    </div>
+    <div class="footer-right">
+      THREE-TIER CLASSIFICATION<br>
+      RISK-PROPORTIONAL GOVERNANCE<br>
+      ARRELL ADVISORY 2026
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

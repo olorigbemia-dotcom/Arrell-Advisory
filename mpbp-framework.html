@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPBP Framework — Operationalizing AI Governance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0B1120;
+    --bg-card: #111B2E;
+    --bg-card-hover: #162240;
+    --border-subtle: rgba(186, 163, 120, 0.12);
+    --border-active: rgba(186, 163, 120, 0.35);
+    --gold: #BAA378;
+    --gold-bright: #D4C098;
+    --gold-dim: #8A7A5A;
+    --text-primary: #E8E4DD;
+    --text-secondary: #9BA3B2;
+    --text-muted: #5E6878;
+    --accent-warn: #C45C4A;
+    --accent-warn-bg: rgba(196, 92, 74, 0.08);
+    --phase-1: #4A90A4;
+    --phase-2: #6A8F6E;
+    --phase-3: #9B7DB8;
+    --phase-4: #C49A5C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(186, 163, 120, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(74, 144, 164, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    margin-bottom: 64px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    max-width: 800px;
+    letter-spacing: -0.5px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 680px;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── THESIS BAR ── */
+  .thesis {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 72px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease-out 0.15s both;
+  }
+
+  .thesis-accent {
+    width: 4px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, var(--phase-1), var(--phase-2), var(--phase-3), var(--phase-4));
+  }
+
+  .thesis-content {
+    padding: 28px 36px;
+    background: var(--bg-card);
+  }
+
+  .thesis-content p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .thesis-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── FRAMEWORK GRID ── */
+  .framework {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 72px;
+  }
+
+  /* ── PATTERN CARD ── */
+  .pattern {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    padding: 40px 36px 36px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+  }
+
+  .pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--pattern-color);
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+  }
+
+  .pattern:hover {
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .pattern:hover::before {
+    opacity: 1;
+  }
+
+  .pattern-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--pattern-color);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  .pattern-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+    letter-spacing: -0.2px;
+  }
+
+  .pattern-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  .pattern-example {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    padding: 16px 20px;
+    background: rgba(0,0,0,0.2);
+    border-left: 2px solid var(--pattern-color);
+    border-radius: 0 2px 2px 0;
+    margin-bottom: 20px;
+  }
+
+  .pattern-example strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Anti-pattern */
+  .antipattern {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--accent-warn-bg);
+    border-radius: 2px;
+    border: 1px solid rgba(196, 92, 74, 0.12);
+  }
+
+  .antipattern-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    color: var(--accent-warn);
+    opacity: 0.8;
+  }
+
+  .antipattern p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--accent-warn);
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  /* ── PHASE COLORS ── */
+  .pattern:nth-child(1) { --pattern-color: var(--phase-1); animation: fadeUp 0.7s ease-out 0.2s both; }
+  .pattern:nth-child(2) { --pattern-color: var(--phase-2); animation: fadeUp 0.7s ease-out 0.3s both; }
+  .pattern:nth-child(3) { --pattern-color: var(--phase-3); animation: fadeUp 0.7s ease-out 0.4s both; }
+  .pattern:nth-child(4) { --pattern-color: var(--phase-4); animation: fadeUp 0.7s ease-out 0.5s both; }
+
+  /* ── DEPENDENCY FLOW ── */
+  .flow {
+    animation: fadeUp 0.7s ease-out 0.6s both;
+  }
+
+  .flow-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .flow-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  .flow-node {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 8px;
+  }
+
+  .flow-dot {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--bg-deep);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .flow-node:nth-child(1) .flow-dot { background: var(--phase-1); }
+  .flow-node:nth-child(3) .flow-dot { background: var(--phase-2); }
+  .flow-node:nth-child(5) .flow-dot { background: var(--phase-3); }
+  .flow-node:nth-child(7) .flow-dot { background: var(--phase-4); }
+
+  .flow-node-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
+  }
+
+  .flow-node-sub {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    font-weight: 400;
+    line-height: 1.45;
+  }
+
+  .flow-arrow {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+
+  .flow-arrow svg {
+    width: 48px;
+    height: 12px;
+    color: var(--text-muted);
+    opacity: 0.4;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 72px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    animation: fadeUp 0.7s ease-out 0.7s both;
+  }
+
+  .footer-left {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .footer-left strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .container { padding: 40px 24px 60px; }
+    .framework { grid-template-columns: 1fr; }
+    .flow-track { flex-direction: column; gap: 16px; }
+    .flow-arrow { transform: rotate(90deg); padding-bottom: 0; }
+    .footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-label">The MPBP Framework</div>
+    <h1>Four Patterns to <em>Operationalize</em> AI Governance</h1>
+    <p class="header-sub">What separates jurisdictions that operationalize AI governance from those that produce frameworks that sit on a shelf — drawn from global comparative research across national and subnational governance transitions.</p>
+  </header>
+
+  <!-- THESIS -->
+  <div class="thesis">
+    <div class="thesis-accent"></div>
+    <div class="thesis-content">
+      <p><strong>The distance between governance principles and operational frameworks is significant.</strong> Every organization that has committed to AI governance discovers this: the principles are the easy part. The hard part is translating them into something people can actually use when deciding whether to deploy an AI tool next Tuesday morning.</p>
+    </div>
+  </div>
+
+  <!-- FOUR PATTERNS -->
+  <div class="framework">
+
+    <!-- PATTERN 1 -->
+    <div class="pattern">
+      <div class="pattern-num">PATTERN 01</div>
+      <div class="pattern-title">Map: What Already Exists</div>
+      <div class="pattern-body">Before building governance, understand what you're governing. Identify which AI tools are already in use, which decisions they support, and what data they access. This creates the foundation everything else builds on.</div>
+      <div class="pattern-example">
+        <strong>In practice</strong>
+        Conduct an inventory of current and planned AI use across each department — including vendor-provided tools with AI capabilities that may not be labeled as "AI."
+      </div>
+      <div class="antipattern">
+        <svg class="antipattern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p>Without mapping: Frameworks get built for theoretical scenarios while real AI use grows ungoverned.</p>
+      </div>
+    </div>
+
+    <!-- PATTERN 2 -->
+    <div class="pattern">
+      <div class="pattern-num">PATTERN 02</div>
+      <div class="pattern-title">Prioritize: By Impact</div>
+      <div class="pattern-body">Not all AI applications carry the same risk. An AI tool that automates scheduling is fundamentally different from one that supports eligibility determinations. Prioritize which use cases need robust governance first.</div>
+      <div class="pattern-example">
+        <strong>In practice</strong>
+        A three-tier classification: routine automation (lightweight governance), decision support (moderate governance), and citizen- or customer-facing decisions (robust governance across all principles).
+      </div>
+      <div class="antipattern">
+        <svg class="antipattern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p>Without prioritization: Governance becomes so comprehensive that nothing gets implemented — driving agencies to adopt AI informally.</p>
+      </div>
+    </div>
+
+    <!-- PATTERN 3 -->
+    <div class="pattern">
+      <div class="pattern-num">PATTERN 03</div>
+      <div class="pattern-title">Build: On Tested Frameworks</div>
+      <div class="pattern-body">NIST AI RMF, OECD AI Principles, and the EU AI Act risk classification have all been tested at scale. They offer structures, terminology, and assessment methods that can be adapted — freeing energy for jurisdiction-specific questions no external framework can answer.</div>
+      <div class="pattern-example">
+        <strong>In practice</strong>
+        Benchmark your governance pillars against OECD principles and NIST AI RMF functions. Adapt internationally tested structures while focusing original effort on the organization-specific questions no external framework can answer.
+      </div>
+      <div class="antipattern">
+        <svg class="antipattern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p>Without leverage: Teams reinvent what others have already solved, consuming time on solved problems instead of organization-specific ones.</p>
+      </div>
+    </div>
+
+    <!-- PATTERN 4 -->
+    <div class="pattern">
+      <div class="pattern-num">PATTERN 04</div>
+      <div class="pattern-title">Pilot: Govern Around Real Deployments</div>
+      <div class="pattern-body">Governance frameworks developed in isolation almost always require significant revision once they meet actual workflows. A framework developed alongside a real pilot deployment embeds practical wisdom from the start.</div>
+      <div class="pattern-example">
+        <strong>In practice</strong>
+        Each department identifies one well-scoped AI pilot — a practical deployment where the governance framework is built and tested in real time, producing evidence alongside documentation.
+      </div>
+      <div class="antipattern">
+        <svg class="antipattern-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <p>Without pilots: Frameworks don't survive contact with reality — producing documents that sit on a shelf instead of governance that works.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DEPENDENCY FLOW -->
+  <div class="flow">
+    <div class="flow-label">MPBP Sequential Flow</div>
+    <div class="flow-track">
+      <div class="flow-node">
+        <div class="flow-dot">01</div>
+        <div class="flow-node-label">Map</div>
+        <div class="flow-node-sub">Visibility first</div>
+      </div>
+      <div class="flow-arrow">
+        <svg viewBox="0 0 48 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="6" x2="40" y2="6"/>
+          <polyline points="36,2 42,6 36,10"/>
+        </svg>
+      </div>
+      <div class="flow-node">
+        <div class="flow-dot">02</div>
+        <div class="flow-node-label">Prioritize</div>
+        <div class="flow-node-sub">Risk-proportional</div>
+      </div>
+      <div class="flow-arrow">
+        <svg viewBox="0 0 48 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="6" x2="40" y2="6"/>
+          <polyline points="36,2 42,6 36,10"/>
+        </svg>
+      </div>
+      <div class="flow-node">
+        <div class="flow-dot">03</div>
+        <div class="flow-node-label">Build</div>
+        <div class="flow-node-sub">Leverage, don't reinvent</div>
+      </div>
+      <div class="flow-arrow">
+        <svg viewBox="0 0 48 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="6" x2="40" y2="6"/>
+          <polyline points="36,2 42,6 36,10"/>
+        </svg>
+      </div>
+      <div class="flow-node">
+        <div class="flow-dot">04</div>
+        <div class="flow-node-label">Pilot</div>
+        <div class="flow-node-sub">Learn by doing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+    </div>
+    <div class="footer-right">
+      THE MPBP FRAMEWORK<br>
+      OPERATIONALIZING AI GOVERNANCE<br>
+      ARRELL ADVISORY 2026
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
