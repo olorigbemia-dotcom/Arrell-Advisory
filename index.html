@@ -170,6 +170,13 @@ section{padding:6rem 3rem;position:relative}
 .contact-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23B8945F' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
 .contact-form select option{background:var(--bg);color:var(--text-1)}
 
+/* BACK LINK */
+.back-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:400;color:var(--text-3);text-decoration:none;letter-spacing:0.05em;cursor:pointer;transition:color 0.3s;padding:5.5rem 3rem 0;max-width:1100px;margin:0 auto;display:block}
+.back-link:hover{color:var(--gold)}
+.back-link svg{width:14px;height:14px;display:inline;vertical-align:middle;margin-right:0.3rem}
+.back-link+.portfolio-hero,.back-link+section.principal-hero{padding-top:2rem}
+.back-link+.contact-page{padding-top:2rem}
+
 /* FOOTER */
 footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .footer-brand{display:flex;flex-direction:column;gap:0.25rem}
@@ -325,6 +332,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- ============================================ -->
 <div class="page" id="page-portfolio">
 
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
   <div class="portfolio-hero">
     <div class="sl">Portfolio</div>
     <h2 class="sh">Governance Artifacts &amp; Frameworks</h2>
@@ -460,6 +469,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- ============================================ -->
 <div class="page" id="page-principal">
 
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
   <section class="principal-hero">
     <div class="sl">Principal</div>
     <h2 class="sh">Dr. Gbemisola Adetayo</h2>
@@ -565,6 +576,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- ============================================ -->
 <div class="page" id="page-speaking">
 
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
   <div class="portfolio-hero">
     <div class="sl">Speaking</div>
     <h2 class="sh">Keynotes &amp; Workshops</h2>
@@ -588,6 +601,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- PAGE: MISSOURI REPORT                       -->
 <!-- ============================================ -->
 <div class="page" id="page-missouri-report">
+
+  <a onclick="goTo('portfolio')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Portfolio</a>
 
   <div class="portfolio-hero">
     <div class="sl">Missouri AI Governance</div>
@@ -708,6 +723,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- PAGE: CONTACT                                -->
 <!-- ============================================ -->
 <div class="page" id="page-contact">
+
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
 
   <div class="contact-page">
     <div class="sc">

@@ -1209,9 +1209,30 @@
     .section { page-break-inside: avoid; }
     .visual-block { page-break-inside: avoid; }
   }
+
+  /* SITE NAV BAR */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.75rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(11,17,32,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(186,163,120,0.1)}
+  .site-nav-brand{font-family:"Playfair Display",serif;font-size:1rem;font-weight:600;color:var(--text-primary);text-decoration:none;letter-spacing:0.02em}
+  .site-nav-brand span{font-family:"Source Sans 3",sans-serif;font-size:0.6rem;font-weight:400;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-left:0.5rem}
+  .site-nav-links{display:flex;gap:1.5rem;align-items:center}
+  .site-nav-links a{font-size:0.75rem;font-weight:400;color:var(--text-secondary);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.3s}
+  .site-nav-links a:hover{color:var(--gold)}
+  .site-nav-links a.nav-cta{color:var(--gold);border:1px solid rgba(186,163,120,0.3);padding:0.35rem 0.9rem;border-radius:2px}
+  .site-nav-links a.nav-cta:hover{background:rgba(186,163,120,0.1);border-color:var(--gold)}
+  @media(max-width:600px){.site-nav-links a:not(.nav-cta){display:none}}
+
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <a href="https://arrelladvisory.com" class="site-nav-brand">Arrell Advisory<span>AI Governance</span></a>
+  <div class="site-nav-links">
+    <a href="https://arrelladvisory.com/#portfolio">Portfolio</a>
+    <a href="https://arrelladvisory.com/#principal">Principal</a>
+    <a href="https://arrelladvisory.com/#contact" class="nav-cta">Start a Conversation</a>
+  </div>
+</nav>
+
 
 <div class="progress-bar" id="progressBar"></div>
 
@@ -1258,7 +1279,7 @@
        EXECUTIVE SUMMARY
        ══════════════════════════════════════ -->
   <section class="section">
-    <div class="container">
+    <div class="container" style="padding-top:3.5rem">
       <div class="section-label">Executive Summary</div>
       <h2>Missouri Embedded AI Governance Inside a <em>Broader Transformation</em> Agenda</h2>
 
