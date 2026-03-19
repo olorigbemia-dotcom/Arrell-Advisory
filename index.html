@@ -309,7 +309,9 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
     <li><a onclick="goTo('principal')" data-page="principal">Principal</a></li>
     <li><a onclick="goTo('insights')" data-page="insights">Insights</a></li>
     <li><a href="governance-readiness-assessment.html" class="nav-assess">Assessment</a></li>
+    <li><a onclick="goTo('strategy')" data-page="strategy">Strategy Session</a></li>
     <li><a onclick="goTo('debrief')" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
+    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
   </ul>
   <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -321,7 +323,9 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <a onclick="goTo('principal');document.getElementById('mobileMenu').classList.remove('active')">Principal</a>
   <a onclick="goTo('insights');document.getElementById('mobileMenu').classList.remove('active')">Insights</a>
   <a href="governance-readiness-assessment.html" onclick="document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Take the Assessment</a>
+  <a onclick="goTo('strategy');document.getElementById('mobileMenu').classList.remove('active')">Strategy Session</a>
   <a onclick="goTo('debrief');document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Book a Debrief</a>
+  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" onclick="document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--text-3)">AI Ready Leaders ↗</a>
 </div>
 
 <!-- ============================================ -->
@@ -337,7 +341,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <p class="hero-sub">The Nested Governance Architecture&#8482; is built for this, embedding AI governance inside your organizational transformation so it functions as a built-in operating standard, not a compliance layer that gets bypassed the moment it creates friction.</p>
       <div class="btn-row">
         <a href="governance-readiness-assessment.html" class="btn-primary">Find out where your governance breaks down <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">or book a strategy session</a>
+        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">or book a strategy session</a>
       </div>
     </div>
   </section>
@@ -402,7 +406,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
       </div>
       <div style="margin-top:2.5rem;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap">
         <a href="governance-readiness-assessment.html" class="btn-primary">Take the Governance Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">Or book a strategy session</a>
+        <a onclick="goTo('strategy')" class="btn-ghost" style="cursor:pointer">Or book a strategy session</a>
       </div>
     </div>
   </section>
@@ -426,7 +430,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
           <div class="problem-label">Advisory</div>
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Strategic AI Governance</h3>
           <p>Ongoing advisory partnership for organizations navigating the governance demands of scaling autonomous AI. Policy versioning, adversarial testing protocols, risk tiering systems, and strategic positioning.</p>
-          <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="problem-cta" style="margin-top:1.5rem;display:inline-flex">Book a strategy session &rarr;</a>
+          <a onclick="goTo('strategy')" class="problem-cta" style="margin-top:1.5rem;display:inline-flex;cursor:pointer">Book a strategy session &rarr;</a>
         </div>
 
         <div class="problem-card">
@@ -576,6 +580,100 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 </div>
 
 <!-- ============================================ -->
+<!-- PAGE: STRATEGY SESSION                       -->
+<!-- ============================================ -->
+<div class="page" id="page-strategy">
+
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
+  <div class="debrief-hero">
+    <div class="debrief-hero-badge">Strategy Session · $500</div>
+    <h2 class="sh">Your AI governance questions deserve a direct answer — not a framework pitch.</h2>
+    <p class="sb" style="margin-bottom:0">You are not at the beginning of this conversation. The board has asked. A vendor has pitched. A regulator has knocked. Someone in your organization has said the quiet part out loud. You are past the point of wondering whether AI governance matters, and you are not sure where to start, or whether what you have built will hold. This session is for that moment. Sixty minutes with a practitioner who will engage your actual situation — not a sales conversation, not a capabilities overview.</p>
+  </div>
+
+  <div class="debrief-body">
+    <div class="debrief-what">
+
+      <h3>Who this session is for</h3>
+      <p>Senior leaders and operators who have a governance question they cannot cleanly answer. The question is usually triggered by one of the following:</p>
+
+      <div style="display:grid;gap:1rem;margin-top:1.25rem;margin-bottom:2rem">
+        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
+          <h4 style="margin-bottom:0.5rem">&#8220;What is our AI strategy?&#8221; — asked by your board</h4>
+          <p>You need to present an architecture, not an aspiration. The session works through what governance infrastructure you would need in place before that question becomes answerable, and what that infrastructure should look like given your organizational context.</p>
+        </div>
+        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
+          <h4 style="margin-bottom:0.5rem">A vendor pitched an AI solution and you are not sure how to evaluate it</h4>
+          <p>Evaluation requires criteria that exist before the vendor calls. The session helps you identify what classification, consequence tier, and governance requirements should already be defined — so the next pitch lands inside a framework, not in a gap.</p>
+        </div>
+        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
+          <h4 style="margin-bottom:0.5rem">&#8220;What does this mean for our roles?&#8221; — asked by your team</h4>
+          <p>Your people need a structural answer, not a town hall that manages anxiety. The session surfaces what governance would need to be in place to give employees a clear line between what AI can do, what it cannot do in your context, and where human authority is protected.</p>
+        </div>
+        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
+          <h4 style="margin-bottom:0.5rem">&#8220;Show us your AI governance&#8221; — asked by a regulator or client</h4>
+          <p>Documentation that reflects what actually operates is different from documentation that reflects what was intended. The session helps you understand the gap between the two, and what closing it requires before the next ask arrives.</p>
+        </div>
+        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
+          <h4 style="margin-bottom:0.5rem">&#8220;Show me the ROI&#8221; — asked by your CEO</h4>
+          <p>AI governance built inside your transformation mandate produces measurable outcomes. The session examines whether your current governance structure is positioned to demonstrate value, or whether it is operating as a cost center by design.</p>
+        </div>
+      </div>
+
+      <h3>What the session produces</h3>
+      <p>You will leave with a clear-eyed read on where your governance actually stands relative to the question you brought in. Not a general overview of AI governance — a direct engagement with your situation, your trigger, and your organizational constraints.</p>
+      <p style="margin-top:1rem">The written deliverable, delivered within 48 hours, documents:</p>
+      <ul class="debrief-deliverable-list">
+        <li><strong style="color:var(--text);font-weight:500">A plain-language diagnosis of your governance position.</strong> Where you have structure, where you have aspiration, and where the gap between the two creates the most exposure right now.</li>
+        <li><strong style="color:var(--text);font-weight:500">A direct response to the question you brought.</strong> What your board question, vendor evaluation, regulator ask, or CEO challenge requires in governance terms — and whether what you currently have is sufficient to answer it.</li>
+        <li><strong style="color:var(--text);font-weight:500">Structural observations about your governance placement.</strong> Whether governance in your organization has the authority to enforce what it recommends, or whether it is operating informally. This distinction shapes every recommendation that follows.</li>
+        <li><strong style="color:var(--text);font-weight:500">2–3 actions within 30 days.</strong> Calibrated to what is actually executable given your structure, authority, and current state — not a generic governance checklist.</li>
+        <li><strong style="color:var(--text);font-weight:500">A clear next step recommendation.</strong> Whether a deeper engagement is warranted, what type, and why — or what needs to happen internally first before external support adds value.</li>
+      </ul>
+
+      <div class="debrief-value-box" style="margin-top:2rem">
+        <h4>Why a practitioner conversation produces what a framework cannot</h4>
+        <p>Every major AI governance framework — NIST AI RMF, ISO/IEC 42001, the EU AI Act — tells you what governance should cover. None of them tell you where governance should sit in your organization's hierarchy, who has authority to enforce it, or what happens when governance recommendations meet organizational resistance.</p>
+        <p style="margin-top:0.75rem">That gap is organizational. It requires a practitioner who has built governance inside real institutions — not a framework that describes an ideal state. The strategy session engages that layer directly. That is what makes it useful at the moment you are actually in, not the moment a framework assumes you are in.</p>
+      </div>
+
+      <h3 style="margin-top:2rem">What to bring</h3>
+      <p>The specific question, trigger, or situation that made you book. Not a cleaned-up version — the actual one. A board meeting that surfaced a gap you could not close, a vendor pitch that created more uncertainty, a team conversation that revealed something about your governance authority you were not expecting.</p>
+      <p style="margin-top:0.75rem">If you have taken the Governance Readiness Assessment, bring your score. It will sharpen the session considerably. If you have not, the session works from the situation you describe. The assessment is the faster path to clarity — but it is not a prerequisite.</p>
+      <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:1rem;display:inline-flex">Take the Assessment first →</a>
+
+    </div>
+
+    <div>
+      <div class="debrief-booking">
+        <div class="debrief-booking-price">$500</div>
+        <div class="debrief-booking-sub">One-time · 60-minute session · Written output within 48 hours</div>
+        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-primary">Book Your Strategy Session <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <div style="font-size:0.8rem;color:var(--text-3);margin-bottom:1.5rem">Payment via Stripe at booking. Scheduling via Calendly.</div>
+        <div class="debrief-booking-details">
+          <span>60-minute working session with Dr. Adetayo</span>
+          <span>Written deliverable within 48 hours</span>
+          <span>30-min buffer before and after</span>
+          <span>Calendly intake: your trigger question, AI use cases in view, organizational context</span>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+          <div class="hwh-sidebar-label">Want a sharper starting point?</div>
+          <p style="font-size:0.85rem;color:var(--text-2);margin-top:0.5rem;line-height:1.7">The Governance Readiness Assessment takes three minutes and gives you a scored baseline to bring into the session. No login required.</p>
+          <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:0.75rem;display:inline-flex">Take the Assessment →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="debrief-fallback">
+    <div class="divider" style="max-width:100%;margin-bottom:2rem"></div>
+    <p>Ready to go deeper? <a onclick="goTo('contact')">Start a conversation</a> about the Governance Gap Report or a full Governance Architecture Engagement.</p>
+  </div>
+
+</div>
+
+<!-- ============================================ -->
 <!-- PAGE: DEBRIEF                                -->
 <!-- ============================================ -->
 <div class="page" id="page-debrief">
@@ -622,7 +720,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <div class="debrief-booking">
         <div class="debrief-booking-price">$500</div>
         <div class="debrief-booking-sub">One-time · 60-minute session · Written output within 48 hours</div>
-        <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-primary">Book Your Debrief <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-primary">Book Your Debrief <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         <div style="font-size:0.8rem;color:var(--text-3);margin-bottom:1.5rem">Payment via Stripe at booking. Scheduling via Calendly.</div>
         <div class="debrief-booking-details">
           <span>60-minute working session with Dr. Adetayo</span>
