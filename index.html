@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arrell Advisory | AI Governance Consulting</title>
-  <link rel="icon" type="image/png" href="favicon.png.png">
 <meta name="description" content="We design governance architectures that make AI deployment defensible to your board, your regulators, and your customers. Take the Governance Readiness Assessment to find out where you stand.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,6 +238,19 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 .portfolio-hero .sh{margin:0 auto 0.5rem;text-align:center}
 .portfolio-hero .sb{margin:0 auto;text-align:center}
 
+/* INSIGHTS */
+.insights-hero{padding:8rem 3rem 3rem;text-align:center}
+.insights-hero .sh{margin:0 auto 0.5rem;text-align:center}
+.insights-hero .sb{margin:0 auto;text-align:center}
+.insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem;max-width:1100px;margin:3rem auto 0;padding:0 3rem}
+.insight-card{border:1px solid var(--border);border-radius:3px;padding:2rem;transition:all 0.4s;display:flex;flex-direction:column;cursor:pointer}
+.insight-card:hover{border-color:rgba(184,148,95,0.2);background:rgba(184,148,95,0.02)}
+.insight-card-type{font-size:0.62rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+.insight-card h3{font-family:var(--serif);font-size:1.25rem;font-weight:400;margin-bottom:0.6rem;line-height:1.35}
+.insight-card p{font-size:0.88rem;color:var(--text-2);line-height:1.75;flex:1}
+.insight-card-meta{font-size:0.75rem;color:var(--text-3);margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.insight-card-cta{font-size:0.75rem;color:var(--gold);letter-spacing:0.05em}
+
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease}
@@ -295,7 +307,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <ul class="nav-links">
     <li><a onclick="goTo('methodology')" data-page="methodology">Methodology</a></li>
     <li><a onclick="goTo('principal')" data-page="principal">Principal</a></li>
-    <li><a href="https://www.linkedin.com/in/gbemisolaadetayo/recent-activity/all/" target="_blank" rel="noopener">Insights</a></li>
+    <li><a onclick="goTo('insights')" data-page="insights">Insights</a></li>
     <li><a href="governance-readiness-assessment.html" class="nav-assess">Assessment</a></li>
     <li><a onclick="goTo('debrief')" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
   </ul>
@@ -307,7 +319,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <a onclick="goTo('home');document.getElementById('mobileMenu').classList.remove('active')">Home</a>
   <a onclick="goTo('methodology');document.getElementById('mobileMenu').classList.remove('active')">Methodology</a>
   <a onclick="goTo('principal');document.getElementById('mobileMenu').classList.remove('active')">Principal</a>
-  <a href="https://www.linkedin.com/in/gbemisolaadetayo/recent-activity/all/" target="_blank" rel="noopener" onclick="document.getElementById('mobileMenu').classList.remove('active')">Insights</a>
+  <a onclick="goTo('insights');document.getElementById('mobileMenu').classList.remove('active')">Insights</a>
   <a href="governance-readiness-assessment.html" onclick="document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Take the Assessment</a>
   <a onclick="goTo('debrief');document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Book a Debrief</a>
 </div>
@@ -321,11 +333,11 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-label">AI Governance and Transformation</div>
-      <h1>You were asked a question<br>about your AI. <em>You couldn't<br>answer it cleanly.</em></h1>
-      <p class="hero-sub">Most organizations reach that moment and discover the same thing: the policy exists. The governance doesn't. Not in any form that would survive a board question, a procurement audit, or a deployment that goes sideways. We build the governance architecture that turns oversight language into an operating condition.</p>
+      <h1>Autonomous AI is already<br>operational. <em>The organizational<br>architecture to scale it does not exist.</em></h1>
+      <p class="hero-sub">The Nested Governance Architecture&#8482; is built for this, embedding AI governance inside your organizational transformation so it functions as a built-in operating standard, not a compliance layer that gets bypassed the moment it creates friction.</p>
       <div class="btn-row">
         <a href="governance-readiness-assessment.html" class="btn-primary">Find out where your governance breaks down <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a onclick="goTo('debrief')" class="btn-ghost">or book a governance debrief</a>
+        <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">or book a strategy session</a>
       </div>
     </div>
   </section>
@@ -345,12 +357,52 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
           <p>Different teams are doing different things. Some have informal approval. Some have nothing. The exposure is not theoretical: it is in tools already running, touching data you may not have mapped. The inventory that would tell you this does not exist yet.</p>
         </div>
         <div class="problem-card">
-          <div class="problem-label">"If I had to explain our governance posture today, I could not."</div>
-          <p>Not to a board member. Not to a client asking about AI controls in a procurement process. Not to a regulator who wants to see the process, not the policy. The gap is not knowledge. It is the absence of a control structure you can actually point to.</p>
+          <div class="problem-label">&#8220;AI is moving through the organization. I don&#8217;t have a complete picture of it.&#8221;</div>
+          <p>Different teams making different calls. Vendor-embedded AI no one procured as AI. Decisions being influenced by tools no governance process has touched. The exposure is not hypothetical: it is in workflows already running. And when the board question comes, the regulatory review arrives, or a deployment creates an incident, the absence of that picture is the first thing anyone asks for.</p>
         </div>
       </div>
       <div style="margin-top:2.5rem">
         <a href="governance-readiness-assessment.html" class="problem-cta">Eight questions will show you which layer of your governance is the breaking point → Take the Assessment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSSIBILITIES -->
+  <section>
+    <div class="sc reveal">
+      <div class="sl">What operational governance makes possible</div>
+      <h2 class="sh">When governance runs, every AI question<br>in your organization has an answer.</h2>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;margin-top:2.5rem">
+
+        <div class="problem-card" style="grid-column:span 2">
+          <div class="problem-label">When your board asks: &#8220;What is our AI strategy?&#8221;</div>
+          <p>You present an architecture, not an aspiration. Risk registers, accountability structures, and regulatory positioning built for your organization&#8217;s context. The board question becomes a demonstration of organizational maturity, not a gap you are managing around.</p>
+        </div>
+
+        <div class="problem-card" style="grid-column:span 2">
+          <div class="problem-label">When a vendor pitches an AI solution</div>
+          <p>Every pitch lands inside a framework that already exists. Classification criteria, consequence tier, governance requirements: defined before the vendor called. You evaluate on fit, not on exposure you are discovering in real time.</p>
+        </div>
+
+        <div class="problem-card" style="grid-column:span 2">
+          <div class="problem-label">When your team asks: &#8220;What does this mean for our roles?&#8221;</div>
+          <p>Your people get a structural answer: what AI can and cannot do in your context, where human authority is protected, and what oversight looks like for decisions that affect them. Not a town hall that manages anxiety. A governance framework that tells people where the lines are.</p>
+        </div>
+
+        <div class="problem-card" style="grid-column:span 3">
+          <div class="problem-label">When regulators ask: &#8220;Show us your AI governance.&#8221;</div>
+          <p>Documentation that reflects what actually operates, not what was intended when the policy was written. EU AI Act classification, accountability structures, audit trails. Evidence of governance, not evidence that governance was planned.</p>
+        </div>
+
+        <div class="problem-card" style="grid-column:span 3">
+          <div class="problem-label">When the CEO asks: &#8220;Show me the ROI.&#8221;</div>
+          <p>AI governance built inside your transformation mandate produces measurable outcomes from day one: success metrics, tracking frameworks, and a board reporting structure that connects AI initiatives to business value. Governance as an enablement function, not a cost center.</p>
+        </div>
+
+      </div>
+      <div style="margin-top:2.5rem;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap">
+        <a href="governance-readiness-assessment.html" class="btn-primary">Take the Governance Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">Or book a strategy session</a>
       </div>
     </div>
   </section>
@@ -367,20 +419,21 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.6rem">Operational Governance Architecture</h3>
           <p style="font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.75rem">From the breaking point to an operating condition</p>
           <p>Design and implementation of operational governance for AI adoption.</p>
-          <a href="https://arrelladvisory.com/mpbp-framework.html" target="_blank" rel="noopener" class="problem-cta" style="margin-top:1.5rem">Explore the MPBP Framework →</a>
+          <a onclick="goTo('methodology')" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
         </div>
 
         <div class="problem-card">
           <div class="problem-label">Advisory</div>
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Strategic AI Governance</h3>
           <p>Ongoing advisory partnership for organizations navigating the governance demands of scaling autonomous AI. Policy versioning, adversarial testing protocols, risk tiering systems, and strategic positioning.</p>
+          <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="problem-cta" style="margin-top:1.5rem;display:inline-flex">Book a strategy session &rarr;</a>
         </div>
 
         <div class="problem-card">
           <div class="problem-label">Delivery</div>
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Risk-Tiered Operational Governance</h3>
           <p>Minimum viable constraint at maximum operational confidence. Capability boundaries calibrated to deployment risk context, and sequenced for operationalizing existing AI governance standards.</p>
-          <a href="https://arrelladvisory.com/risk-tiering.html" target="_blank" rel="noopener" class="problem-cta" style="margin-top:1.5rem">Explore Risk-Tiered Governance →</a>
+          <a onclick="goTo('methodology')" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
         </div>
 
       </div>
@@ -416,6 +469,18 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 
   <div class="divider" style="max-width:1100px;margin:0 auto"></div>
+
+  <section style="padding-top:2.5rem;padding-bottom:0">
+    <div class="sc">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 2rem;border:1px solid var(--gold-b);border-radius:3px;background:rgba(184,148,95,0.03)">
+        <div>
+          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem">Architecture Reference</div>
+          <p style="font-size:0.95rem;color:var(--text-2);line-height:1.6">The intellectual foundation behind this methodology — the Nested Governance Architecture™, MPBP Framework™, and Risk-Proportional Governance™ in full.</p>
+        </div>
+        <a href="https://www.arrelladvisory.com/nga-white-paper" target="_blank" rel="noopener" class="offer-cta-ghost" style="white-space:nowrap;flex-shrink:0">Read the NGA™ White Paper →</a>
+      </div>
+    </div>
+  </section>
 
   <section style="padding-top:0">
     <div class="sc">
@@ -488,7 +553,6 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
               <p class="hwh-card-desc">The failure mode we see most often is not organizations that ignore AI governance. It is organizations that build something real — a policy, a committee, a framework — and then watch it get bypassed the first time a team moves fast on a deployment. Not because people are careless. Because governance had no operational home, no structural authority, and no enforcement condition that did not depend on someone remembering.</p>
               <p class="hwh-card-desc" style="margin-top:1rem">The Governance Architecture Engagement is built around a live deployment, not a hypothetical. That is the only way to test whether a governance architecture survives contact with how your organization actually operates. We design the control structure alongside real AI work: use case classification by consequence, control design proportionate to actual risk level, and operating model construction with defined ownership and enforcement conditions.</p>
               <p class="hwh-card-desc" style="margin-top:1rem">The output is a governance operating model your team owns. Not a policy update. Not a set of recommendations filed in a shared drive. A functioning architecture with a structural home, accountability at every layer, and enforcement conditions that do not require good intentions to hold.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">Ongoing strategic advisory following this engagement belongs to Arlgate, our dedicated enterprise consulting brand.</p>
               <div class="hwh-card-ctarow">
                 <a onclick="goTo('contact')" class="offer-cta-primary">Start a Conversation</a>
               </div>
@@ -625,15 +689,14 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
             <p>What to ask, what to avoid, and how to stay in control with AI tools. The practical guide behind the framework.</p>
           </div>
         </a>
-        <div class="about-card" style="grid-column:1/-1">
-          <div class="about-card-label">Report</div>
-          <h3><a onclick="goTo('missouri-report')" style="cursor:pointer">Missouri AI Governance: From Executive Order to Governance Architecture</a></h3>
-          <p>Practitioner's analysis of Missouri's AI governance approach, executive orders, MPBP framework, risk tiering, and implementation roadmap for the November 2026 deadline.</p>
-          <div style="margin-top:1rem;display:flex;gap:0.75rem;flex-wrap:wrap">
-            <a onclick="goTo('missouri-report')" class="offer-cta-primary" style="font-size:0.72rem;padding:0.5rem 1rem;cursor:pointer">Read Report</a>
-            <a href="https://drive.google.com/file/d/1voiN9MzIfkbl6Ywb94eUCpJixlfwwBid/view" target="_blank" rel="noopener" class="offer-cta-ghost" style="font-size:0.72rem">Download Full Report</a>
+        <a href="https://www.arrelladvisory.com/nga-white-paper" target="_blank" rel="noopener" class="pub-card">
+          <div class="pub-body" style="padding:0.25rem 0">
+            <span class="card-type">White Paper &bull; Architecture</span>
+            <h3>The Nested Governance Architecture™</h3>
+            <p>The complete design pattern for embedding AI governance within organizational transformation — including the MPBP Framework™ and Risk-Proportional Governance™ model. The intellectual foundation behind Arrell Advisory's methodology.</p>
           </div>
-        </div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -670,7 +733,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 <!-- ============================================ -->
 <div class="page" id="page-missouri-report">
 
-  <a onclick="goTo('methodology')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Methodology</a>
+  <a onclick="goTo('insights')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Insights</a>
 
   <div class="portfolio-hero">
     <div class="sl">Missouri AI Governance</div>
@@ -782,6 +845,40 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 </div>
 
 <!-- ============================================ -->
+<!-- PAGE: INSIGHTS                               -->
+<!-- ============================================ -->
+<div class="page" id="page-insights">
+
+  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
+  <div class="insights-hero">
+    <div class="sl">Insights</div>
+    <h2 class="sh" style="margin:0 auto 1rem">AI governance in practice</h2>
+    <p class="sb" style="margin:0 auto">Analysis, case studies, and frameworks from the field — what it actually takes to operationalize AI governance in real organizations.</p>
+  </div>
+
+  <div class="insights-grid reveal">
+
+    <div class="insight-card" onclick="goTo('missouri-report')">
+      <div class="insight-card-type">Case Study &bull; Public Sector</div>
+      <h3>Missouri AI Governance: From Executive Order to Governance Architecture</h3>
+      <p>Practitioner's analysis of Missouri's dual executive orders embedding AI governance inside a broader government transformation agenda. Four departments, five principles, one November 2026 deadline — and what it takes to execute.</p>
+      <div class="insight-card-meta">
+        <span>January 2026 &middot; Dr. Gbemisola Adetayo</span>
+        <span class="insight-card-cta">Read →</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:1100px;margin:4rem auto 0;padding:0 3rem 6rem">
+    <div class="divider" style="max-width:100%;margin-bottom:2.5rem"></div>
+    <p style="font-size:0.88rem;color:var(--text-3)">New analysis published periodically. Follow on <a href="https://www.linkedin.com/in/gbemisolaadetayo" target="_blank" rel="noopener" style="color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderColor='var(--border)'">LinkedIn</a> for updates.</p>
+  </div>
+
+</div>
+
+<!-- ============================================ -->
 <!-- PAGE: CONTACT                                -->
 <!-- ============================================ -->
 <div class="page" id="page-contact">
@@ -827,6 +924,8 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   <div class="footer-links">
     <a onclick="goTo('methodology')">Methodology</a>
     <div class="footer-sep"></div>
+    <a onclick="goTo('insights')">Insights</a>
+    <div class="footer-sep"></div>
     <a onclick="goTo('principal')">Principal</a>
     <div class="footer-sep"></div>
     <a onclick="goTo('contact')">Contact</a>
@@ -848,7 +947,9 @@ var PAGE_ALIASES = {
   'how-we-help': 'methodology',
   'principal': 'principal',
   'about': 'principal',
-  'speaking': 'principal'
+  'speaking': 'principal',
+  'blog': 'insights',
+  'articles': 'insights'
 };
 
 function goTo(page) {
