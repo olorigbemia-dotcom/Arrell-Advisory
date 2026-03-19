@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrell Advisory — Debrief Preview v7</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0e1420; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+
+  .preview-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .preview-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+  }
+
+  .doc-card {
+    width: 100%;
+    background: #080c14;
+    border: 1px solid rgba(184,148,95,0.25);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .doc-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .doc-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b8945f;
+  }
+
+  .doc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: #e8e4de;
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .doc-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    text-align: right;
+    line-height: 2;
+  }
+
+  .doc-meta-client {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(184,148,95,0.6);
+    letter-spacing: 0.06em;
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(184,148,95,0.1);
+    border: 1px solid rgba(184,148,95,0.3);
+    border-radius: 2px;
+    padding: 4px 10px;
+    margin: 0.75rem 1.5rem 0;
+  }
+
+  .tier-dot { width: 6px; height: 6px; border-radius: 50%; background: #b8945f; }
+
+  .tier-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b8945f;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.5rem 1rem;
+  }
+
+  /* Score color system: 0–9 red · 10–19 amber · 20–26 gold · 27–32 green */
+  .score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #e8e4de; /* default; overridden by tier class */
+    line-height: 1;
+  }
+  .score-tier-critical { color: #d95e5e; }   /* 0–9  */
+  .score-tier-fragmented { color: #c97d3a; } /* 10–19 */
+  .score-tier-developing { color: #b8945f; } /* 20–26 */
+  .score-tier-strong { color: #5aab8c; }     /* 27–32 */
+
+  .score-denom {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+  }
+
+  .score-divider {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,0.08);
+    margin: 0 0.25rem;
+  }
+
+  .score-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    color: rgba(232,228,222,0.5);
+    line-height: 1.5;
+    max-width: 160px;
+  }
+
+  .doc-section {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #b8945f;
+    margin-bottom: 0.75rem;
+  }
+
+  .layer-row-item {
+    display: grid;
+    grid-template-columns: 1fr 120px 28px;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .layer-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10.5px;
+    color: rgba(232,228,222,0.6);
+  }
+
+  .layer-track {
+    height: 5px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .layer-fill-red { background: rgba(196,92,74,0.75); }
+  .layer-fill-amber { background: rgba(196,154,92,0.75); }
+  .layer-fill-green { background: rgba(74,144,92,0.75); }
+
+  .layer-status {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    justify-self: center;
+  }
+
+  .status-red { background: rgba(196,92,74,0.9); }
+  .status-amber { background: rgba(196,154,92,0.9); }
+  .status-green { background: rgba(74,144,92,0.9); }
+
+  .weakest-callout {
+    background: rgba(196,92,74,0.08);
+    border: 1px solid rgba(196,92,74,0.2);
+    border-left: 3px solid rgba(196,92,74,0.6);
+    border-radius: 0 2px 2px 0;
+    padding: 0.55rem 0.75rem;
+    margin-top: 0.65rem;
+  }
+
+  .weakest-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(196,92,74,0.8);
+    margin-bottom: 4px;
+  }
+
+  .weakest-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(196,92,74,0.85);
+    margin-bottom: 5px;
+  }
+
+  .body-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    color: rgba(232,228,222,0.65);
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .body-text-sm {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10.5px;
+    color: rgba(232,228,222,0.6);
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+
+  .mpbp-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .mpbp-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .mpbp-active-m { background: rgba(74,144,164,0.2); border: 1px solid rgba(74,144,164,0.4); }
+  .mpbp-dim { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+
+  .mpbp-letter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .m-active { color: rgba(74,144,164,0.95); }
+  .m-dim { color: rgba(255,255,255,0.25); }
+
+  .action-item {
+    display: flex;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .action-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #b8945f;
+    flex-shrink: 0;
+    width: 14px;
+    margin-top: 2px;
+  }
+
+  .action-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(232,228,222,0.85);
+    margin-bottom: 3px;
+  }
+
+  .debrief-cta-box {
+    background: rgba(184,148,95,0.1);
+    border: 1px solid rgba(184,148,95,0.3);
+    border-radius: 3px;
+    padding: 0.85rem 1rem;
+    margin-top: 0.6rem;
+    text-align: center;
+  }
+
+  .debrief-cta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(184,148,95,0.6);
+    margin-bottom: 6px;
+  }
+
+  .debrief-cta-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #e8e4de;
+    margin-bottom: 5px;
+    line-height: 1.3;
+  }
+
+  .debrief-cta-sub {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    color: rgba(232,228,222,0.45);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .debrief-btn {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #080c14;
+    background: #b8945f;
+    border-radius: 2px;
+    padding: 6px 16px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .sample-zone { position: relative; }
+
+  .sample-watermark {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .sample-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 110px;
+    font-weight: 600;
+    color: rgba(184,148,95,0.28);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transform: rotate(-25deg);
+    white-space: nowrap;
+    user-select: none;
+    -webkit-text-stroke: 1.5px rgba(184,148,95,0.35);
+  }
+
+  .cta-zone { position: relative; }
+
+  .lock-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent 0%, #080c14 45%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 1.25rem;
+    gap: 0.45rem;
+    z-index: 20;
+  }
+
+  .lock-icon {
+    width: 24px; height: 24px;
+    border: 1px solid rgba(184,148,95,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+
+  .lock-cta {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #b8945f;
+    letter-spacing: 0.04em;
+  }
+
+  .lock-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+  }
+
+  .stamp-wrap { display: flex; justify-content: center; }
+
+  .stamp-inner {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(184,148,95,0.45);
+    border: 1px solid rgba(184,148,95,0.18);
+    border-radius: 2px;
+    padding: 3px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="preview-wrap">
+  <div class="preview-label">What your debrief deliverable looks like — your results will reflect your organization</div>
+
+  <div class="doc-card">
+
+    <div class="doc-header">
+      <div>
+        <div class="doc-brand">Arrell Advisory</div>
+        <div class="doc-title">Governance Readiness<br>Debrief Summary</div>
+      </div>
+      <div style="text-align:right">
+        <div class="doc-meta">CONFIDENTIAL</div>
+        <div class="doc-meta">DELIVERED WITHIN 48HRS</div>
+        <div style="height:4px"></div>
+        <div class="doc-meta" style="color:rgba(255,255,255,0.18);font-size:8px;letter-spacing:0.08em">PREPARED FOR</div>
+        <div class="doc-meta-client">Meridian Health Group</div>
+      </div>
+    </div>
+
+    <div class="tier-badge">
+      <div class="tier-dot"></div>
+      <div class="tier-text">Emerging — Score: 14 / 32</div>
+    </div>
+
+    <div class="score-row">
+      <div>
+        <div class="score-num score-tier-fragmented">14</div>
+        <div class="score-denom">of 32</div>
+      </div>
+      <div class="score-divider"></div>
+      <div class="score-label">Governance awareness exists but is fragmented. No consistent enforcement layer.</div>
+    </div>
+
+    <!-- SECTION 1 — CLEAR -->
+    <div class="doc-section">
+      <div class="section-label">01 · Five-Layer Governance Analysis</div>
+
+      <div class="layer-row-item">
+        <div class="layer-name">Risk-Tiered Capability Boundaries</div>
+        <div class="layer-track"><div class="layer-fill-red" style="width:28%"></div></div>
+        <div class="layer-status status-red"></div>
+      </div>
+      <div class="layer-row-item">
+        <div class="layer-name">Constraint Encoding</div>
+        <div class="layer-track"><div class="layer-fill-red" style="width:22%"></div></div>
+        <div class="layer-status status-red"></div>
+      </div>
+      <div class="layer-row-item">
+        <div class="layer-name">Human-Authority Mechanisms</div>
+        <div class="layer-track"><div class="layer-fill-amber" style="width:55%"></div></div>
+        <div class="layer-status status-amber"></div>
+      </div>
+      <div class="layer-row-item">
+        <div class="layer-name">Behavioral Monitoring</div>
+        <div class="layer-track"><div class="layer-fill-amber" style="width:48%"></div></div>
+        <div class="layer-status status-amber"></div>
+      </div>
+      <div class="layer-row-item">
+        <div class="layer-name">Policy Versioning &amp; Testing</div>
+        <div class="layer-track"><div class="layer-fill-green" style="width:75%"></div></div>
+        <div class="layer-status status-green"></div>
+      </div>
+
+      <div class="weakest-callout">
+        <div class="weakest-label">Critical Gap · Highest Operational Risk</div>
+        <div class="weakest-name">Constraint Encoding</div>
+        <div class="body-text-sm">Governance requirements exist in policy documents but are not structurally enforced at the deployment level. Teams can deploy AI systems without satisfying governance conditions — meaning governance competes with delivery timelines and loses.</div>
+      </div>
+    </div>
+
+    <!-- SECTIONS 2–3 — SAMPLE WATERMARK COVERS ONLY THESE -->
+    <div class="sample-zone">
+
+      <div class="doc-section">
+        <div class="section-label">02 · MPBP Phase Recommendation</div>
+        <div class="mpbp-row">
+          <div class="mpbp-badge mpbp-active-m"><span class="mpbp-letter m-active">Map ← Start here</span></div>
+          <div class="mpbp-badge mpbp-dim"><span class="mpbp-letter m-dim">Prioritize</span></div>
+          <div class="mpbp-badge mpbp-dim"><span class="mpbp-letter m-dim">Build</span></div>
+          <div class="mpbp-badge mpbp-dim"><span class="mpbp-letter m-dim">Pilot</span></div>
+        </div>
+        <div class="body-text">Meridian Health Group should begin at the Map phase. Before any governance controls can be designed or enforced, your organization needs a complete inventory of AI systems currently in production — who owns them, what decisions they influence, and what data they touch.</div>
+        <div class="body-text">Two of your five governance layers score below the threshold required to move directly to Prioritize. Attempting to tier use cases before completing the mapping phase will result in incomplete classification and governance gaps that compound over time.</div>
+      </div>
+
+      <div class="doc-section">
+        <div class="section-label">03 · Priority Actions · 30-Day Window</div>
+
+        <div class="action-item">
+          <div class="action-num">01</div>
+          <div>
+            <div class="action-title">Establish a deployment gate for new AI use cases</div>
+            <div class="body-text-sm">No new AI system should go live without a documented owner, use case description, and data classification. This requires no new tooling — it requires a decision that governance is a condition of deployment, not a review after the fact.</div>
+          </div>
+        </div>
+
+        <div class="action-item">
+          <div class="action-num">02</div>
+          <div>
+            <div class="action-title">Conduct a 48-hour AI use case inventory</div>
+            <div class="body-text-sm">Identify every AI tool currently in use across your organization. Shadow AI is the most common source of unmanaged governance risk at the Emerging maturity tier.</div>
+          </div>
+        </div>
+
+        <div class="action-item">
+          <div class="action-num">03</div>
+          <div>
+            <div class="action-title">Assign a governance accountability owner</div>
+            <div class="body-text-sm">Governance without a named accountable owner defaults to collective responsibility — which in practice means no responsibility. This does not require a new hire. It requires a decision.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAMPLE WATERMARK — sections 2 + 3 only -->
+      <div class="sample-watermark">
+        <div class="sample-text">SAMPLE</div>
+      </div>
+
+    </div>
+
+    <!-- SECTION 4 — VISIBLE (the conversion section clients should see) -->
+    <div class="cta-zone">
+
+      <div class="doc-section" style="padding-bottom:1.25rem">
+        <div class="section-label">04 · Next Steps</div>
+        <div class="body-text">Your layer scores and the gaps identified in this summary point to a clear starting point. The debrief session walks through each section in full — diagnosis, phase recommendation, priority actions, and a tailored next step scoped to your organization's size and deployment reality.</div>
+        <div class="debrief-cta-box">
+          <div class="debrief-cta-label">To receive your full results</div>
+          <div class="debrief-cta-heading">Book your Governance Debrief</div>
+          <div class="debrief-cta-sub">60 minutes with Dr. Adetayo · Written summary delivered within 48 hours · $500</div>
+          <a href="https://arrelladvisory.com/contact" target="_blank" class="debrief-btn">Book Your Debrief →</a>
+        </div>
+      </div>
+
+      <!-- LOCK OVERLAY — fades up over the lower portion of section 4 -->
+      <div class="lock-overlay">
+        <div class="lock-icon">
+          <svg width="11" height="13" viewBox="0 0 11 13" fill="none">
+            <rect x="1" y="5.5" width="9" height="7" rx="1" stroke="#b8945f" stroke-width="1"/>
+            <path d="M3.5 5.5V3.5a2 2 0 014 0v2" stroke="#b8945f" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="lock-cta">Your full breakdown is in your debrief</div>
+        <div class="lock-sub">Layer diagnosis · MPBP recommendation · Priority actions</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="stamp-wrap">
+    <div class="stamp-inner">Sample · Your results will reflect your organization</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance Readiness Assessment — Arrell Advisory</title>
+<meta name="description" content="Eight questions across five governance layers. Immediate score with tier classification and weakest-layer identification. Takes 3 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0e1420;
+  --bg-card: #0d1219;
+  --bg-card-h: #111820;
+  --text: #e8e4de;
+  --text-2: #8a8b8e;
+  --text-3: #5c5e63;
+  --gold: #b8945f;
+  --gold-s: rgba(184,148,95,0.12);
+  --gold-h: #d4aa6a;
+  --gold-b: rgba(184,148,95,0.2);
+  --border: rgba(255,255,255,0.06);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Outfit', system-ui, sans-serif;
+  --red: #c45c4a;
+  --amber: #c49a5c;
+  --green: #7aad80;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+::selection { background: var(--gold); color: var(--bg); }
+a { color: inherit; }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(8,12,20,0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); transition: all 0.4s;
+}
+nav.scrolled { padding: 0.85rem 3rem; }
+.nav-brand { display: flex; align-items: baseline; gap: 0.15rem; text-decoration: none; }
+.nav-brand-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+.nav-brand-type { font-family: var(--sans); font-size: 0.65rem; font-weight: 400; color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase; margin-left: 0.6rem; position: relative; top: -1px; }
+.nav-links { display: flex; gap: 2.2rem; align-items: center; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 400; color: var(--text-2); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { font-size: 0.78rem !important; font-weight: 500 !important; color: var(--gold) !important; border: 1px solid rgba(184,148,95,0.3); padding: 0.45rem 1.15rem; border-radius: 2px; transition: all 0.3s !important; }
+.nav-cta:hover { background: var(--gold-s); border-color: var(--gold); }
+.mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 101; }
+.mobile-toggle span { width: 22px; height: 1.5px; background: var(--text-2); display: block; transition: all 0.3s; }
+.mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8,12,20,0.97); z-index: 99; justify-content: center; align-items: center; flex-direction: column; gap: 2rem; }
+.mobile-overlay.active { display: flex; }
+.mobile-overlay a { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--text); text-decoration: none; cursor: pointer; transition: color 0.3s; }
+.mobile-overlay a:hover { color: var(--gold); }
+.mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-2); font-size: 1.5rem; cursor: pointer; padding: 0.5rem; line-height: 1; }
+
+/* ═══ BACK LINK ═══ */
+.back-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 400; color: var(--text-3);
+  text-decoration: none; letter-spacing: 0.05em; cursor: pointer;
+  transition: color 0.3s; padding: 5.5rem 3rem 0;
+}
+.back-link:hover { color: var(--gold); }
+.back-link svg { width: 14px; height: 14px; display: inline; vertical-align: middle; margin-right: 0.3rem; }
+
+/* ═══ SHARED ═══ */
+.sl { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.sh { font-family: var(--serif); font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 400; line-height: 1.25; color: var(--text); margin-bottom: 1.5rem; max-width: 700px; }
+.divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+/* ═══ INTRO ═══ */
+.intro-section { padding: 2rem 3rem 5rem; max-width: 1100px; margin: 0 auto; }
+.intro-section .sh { margin-bottom: 1rem; }
+.intro-text { font-size: 1rem; color: var(--text-2); max-width: 640px; line-height: 1.85; margin-bottom: 2.5rem; }
+.intro-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.meta-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
+.meta-value { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--text); }
+
+.layers-preview { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 3rem; }
+.layer-row { display: grid; grid-template-columns: 44px 1fr; border-bottom: 1px solid var(--border); transition: all 0.3s; }
+.layer-row:last-child { border-bottom: none; }
+.layer-row:hover { background: rgba(184,148,95,0.03); }
+.layer-num { padding: 1rem 0; font-family: var(--serif); font-size: 0.85rem; font-weight: 500; color: var(--gold); text-align: center; border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.layer-info { padding: 1rem 1.25rem; }
+.layer-info-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+.layer-info-desc { font-size: 0.82rem; color: var(--text-3); line-height: 1.5; }
+
+.btn-start {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--bg); background: var(--gold);
+  padding: 1rem 2.25rem; border-radius: 2px;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.btn-start:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(184,148,95,0.2); }
+.btn-start svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.btn-start:hover svg { transform: translateX(3px); }
+
+/* ═══ ASSESSMENT ═══ */
+.assess-wrap { display: none; max-width: 760px; margin: 0 auto; padding: 3rem 3rem 6rem; }
+.assess-wrap.active { display: block; }
+.progress-wrap { margin-bottom: 48px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+.progress-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.progress-layer { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+.progress-count { font-size: 0.8rem; color: var(--text-3); }
+.progress-count span { color: var(--text-2); font-weight: 500; }
+.progress-bar { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 1px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%; }
+
+.question-card { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+.question-number { font-family: var(--serif); font-size: 0.85rem; font-weight: 500; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 12px; }
+.question-text { font-family: var(--serif); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 400; line-height: 1.4; color: var(--text); margin-bottom: 32px; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 22px; border: 1px solid var(--border); border-radius: 3px;
+  background: rgba(255,255,255,0.01); cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.option::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--gold); transition: height 0.3s; }
+.option:hover { border-color: var(--gold-b); background: rgba(184,148,95,0.03); }
+.option:hover::before { height: 100%; }
+.option.selected { border-color: rgba(184,148,95,0.35); background: rgba(184,148,95,0.06); }
+.option.selected::before { height: 100%; }
+.option-marker {
+  flex-shrink: 0; width: 20px; height: 20px; border: 1px solid var(--text-3);
+  border-radius: 50%; margin-top: 2px; display: flex; align-items: center;
+  justify-content: center; transition: all 0.3s;
+}
+.option.selected .option-marker { border-color: var(--gold); background: var(--gold); }
+.option.selected .option-marker::after { content: ''; width: 6px; height: 6px; background: var(--bg); border-radius: 50%; }
+.option-label { font-size: 0.95rem; font-weight: 400; color: var(--text); line-height: 1.5; }
+
+.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+.btn-back-q { font-family: var(--sans); font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); background: none; border: none; cursor: pointer; padding: 0.6rem 0; transition: color 0.3s; }
+.btn-back-q:hover { color: var(--text-2); }
+.btn-back-q.invisible { visibility: hidden; }
+.btn-next-q { font-family: var(--sans); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); border: none; padding: 0.85rem 2rem; border-radius: 2px; cursor: pointer; transition: all 0.3s; opacity: 0.35; pointer-events: none; }
+.btn-next-q.active { opacity: 1; pointer-events: auto; }
+.btn-next-q.active:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(184,148,95,0.2); }
+
+/* ═══ EMAIL GATE ═══ */
+.email-gate { display: none; max-width: 520px; margin: 0 auto; padding: 3rem 3rem 6rem; text-align: center; }
+.email-gate.active { display: block; }
+.email-gate-icon { margin-bottom: 24px; }
+.email-gate-icon svg { width: 48px; height: 48px; color: var(--gold); opacity: 0.7; }
+.email-gate-heading { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+.email-gate-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-bottom: 28px; }
+.email-gate-form { display: flex; gap: 10px; margin-bottom: 12px; }
+.email-gate-input { flex: 1; font-family: var(--sans); font-size: 0.88rem; font-weight: 300; color: var(--text); background: var(--bg2); border: 1px solid var(--border); border-radius: 2px; padding: 0.85rem 1rem; outline: none; transition: border-color 0.3s; }
+.email-gate-input::placeholder { color: var(--text-3); }
+.email-gate-input:focus { border-color: var(--gold-b); }
+.email-gate-submit { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); border: none; padding: 0 1.6rem; border-radius: 2px; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+.email-gate-submit:hover { background: var(--gold-h); }
+.email-gate-privacy { font-size: 0.72rem; color: var(--text-3); }
+
+/* ═══ RESULTS ═══ */
+.results-wrap { display: none; max-width: 760px; margin: 0 auto; padding: 3rem 3rem 6rem; }
+.results-wrap.active { display: block; }
+
+/* Score Ring */
+.results-header { text-align: center; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+.results-score-wrap { display: flex; justify-content: center; margin-bottom: 20px; }
+.score-ring { width: 160px; height: 160px; position: relative; }
+.score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.score-ring-bg { fill: none; stroke: var(--border); stroke-width: 3; }
+.score-ring-fill { fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 408; stroke-dashoffset: 408; transition: stroke-dashoffset 1.5s cubic-bezier(0.4,0,0.2,1); }
+.score-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.score-number { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; color: var(--text); line-height: 1; }
+.score-max { font-size: 0.75rem; color: var(--text-3); margin-top: 2px; }
+.results-tier { font-family: var(--serif); font-size: 1.6rem; font-weight: 500; margin-bottom: 4px; }
+
+/* Tier colors */
+.tier-reactive .results-tier { color: var(--red); }
+.tier-emerging .results-tier { color: var(--amber); }
+.tier-structured .results-tier { color: var(--gold); }
+.tier-operational .results-tier { color: var(--green); }
+.tier-reactive .score-ring-fill { stroke: var(--red); }
+.tier-emerging .score-ring-fill { stroke: var(--amber); }
+.tier-structured .score-ring-fill { stroke: var(--gold); }
+.tier-operational .score-ring-fill { stroke: var(--green); }
+
+/* Layer Bars - V7: color only, no scores, no text */
+.layer-bars-section { margin-bottom: 28px; opacity: 0; animation: fadeUp 0.6s ease 0.3s forwards; }
+.layer-bar-row { display: flex; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.layer-bar-row:last-child { border-bottom: none; }
+.layer-bar-name { font-size: 0.78rem; font-weight: 400; color: var(--text-2); width: 200px; flex-shrink: 0; line-height: 1.3; }
+.layer-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.layer-bar-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1) 0.5s; width: 0%; }
+.layer-bar-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* Weakest Layer Callout */
+.weakest-callout { padding: 20px 24px; border: 1px solid rgba(196,92,74,0.2); border-radius: 3px; background: rgba(196,92,74,0.04); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.5s ease 0.45s forwards; }
+.weakest-callout-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--text); }
+.weakest-callout-text span { color: var(--red); }
+
+/* Sample Preview - V8: iframe debrief document preview */
+.sample-preview { margin-bottom: 40px; opacity: 0; animation: fadeUp 0.6s ease 0.55s forwards; }
+.sample-preview-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; text-align: center; }
+.sample-preview-frame { width: 100%; height: 680px; border: none; border-radius: 3px; display: block; }
+
+/* CTA Section - V7: tier-specific headline + Calendly */
+.cta-section { text-align: center; padding: 40px; border: 1px solid var(--border); border-radius: 3px; background: rgba(255,255,255,0.01); position: relative; overflow: hidden; opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards; }
+.cta-section::before { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 120%; height: 120%; background: radial-gradient(circle,rgba(184,148,95,0.04) 0%,transparent 60%); pointer-events: none; }
+.cta-tier-headline { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--text); margin-bottom: 16px; position: relative; line-height: 1.4; }
+.btn-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 1rem 2.25rem; text-decoration: none; border-radius: 2px; border: none; cursor: pointer; transition: all 0.3s; position: relative; }
+.btn-cta:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(184,148,95,0.2); }
+.btn-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.btn-cta:hover svg { transform: translateX(3px); }
+.cta-details { margin-top: 16px; position: relative; }
+.cta-detail-line { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; }
+.cta-detail-line strong { color: var(--text); font-weight: 500; }
+
+/* ═══ FOOTER ═══ */
+footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { display: flex; flex-direction: column; gap: 0.25rem; }
+.footer-brand-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--text-2); }
+.footer-copy { font-size: 0.75rem; color: var(--text-3); }
+.footer-links { display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap; }
+.footer-links a { font-size: 0.78rem; color: var(--text-3); text-decoration: none; transition: color 0.3s; cursor: pointer; }
+.footer-links a:hover { color: var(--gold); }
+.footer-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); opacity: 0.4; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-brand-type { display: none; }
+  .mobile-toggle { display: flex; }
+  .back-link { padding: 5.5rem 1.5rem 0; }
+  .intro-section { padding: 2rem 1.5rem 4rem; }
+  .intro-meta { gap: 2rem; }
+  .layer-row { grid-template-columns: 36px 1fr; }
+  .assess-wrap { padding: 2rem 1.5rem 5rem; }
+  .email-gate { padding: 2rem 1.5rem 5rem; }
+  .email-gate-form { flex-direction: column; }
+  .email-gate-submit { padding: 0.85rem 1.6rem; }
+  .results-wrap { padding: 2rem 1.5rem 5rem; }
+  .layer-bar-row { flex-wrap: wrap; gap: 8px; }
+  .layer-bar-name { width: 100%; }
+  .layer-bar-dot { order: -1; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="https://www.arrelladvisory.com" class="nav-brand">
+    <span class="nav-brand-name">Arrell Advisory</span>
+    <span class="nav-brand-type">AI Governance</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://www.arrelladvisory.com/#portfolio">Portfolio</a></li>
+    <li><a href="https://www.arrelladvisory.com/#principal">Principal</a></li>
+    <li><a href="https://www.arrelladvisory.com/#speaking">Speaking</a></li>
+    <li><a href="https://www.linkedin.com/in/gbemisolaadetayo/recent-activity/all/" target="_blank" rel="noopener">Blog</a></li>
+    <li><a href="https://www.arrelladvisory.com/#contact" class="nav-cta">Start a Conversation</a></li>
+  </ul>
+  <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-overlay" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">&times;</button>
+  <a href="https://www.arrelladvisory.com">Home</a>
+  <a href="https://www.arrelladvisory.com/#portfolio">Portfolio</a>
+  <a href="https://www.arrelladvisory.com/#principal">Principal</a>
+  <a href="https://www.arrelladvisory.com/#speaking">Speaking</a>
+  <a href="https://www.linkedin.com/in/gbemisolaadetayo/recent-activity/all/" target="_blank" rel="noopener">Blog</a>
+  <a href="https://www.arrelladvisory.com/#contact" style="color:var(--gold)">Start a Conversation</a>
+</div>
+
+<!-- BACK LINK -->
+<a href="https://www.arrelladvisory.com" class="back-link" id="backLink">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  Home
+</a>
+
+<!-- INTRO -->
+<section class="intro-section" id="introSection">
+  <div class="sl">Governance Readiness Assessment</div>
+  <h1 class="sh" style="max-width:640px">How enforceable is your organization's <em style="font-style:italic;color:var(--gold)">AI governance?</em></h1>
+  <p class="intro-text">Most leaders know whether they have AI governance. Far fewer know which parts are actually working. This assessment maps your operational maturity across five governance layers and surfaces the gaps that are hardest to see from inside the organization.</p>
+
+  <div class="intro-meta">
+    <div class="meta-item">
+      <span class="meta-label">Questions</span>
+      <span class="meta-value">8</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Time</span>
+      <span class="meta-value">3 minutes</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Output</span>
+      <span class="meta-value">Where you stand + where to focus</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom:0.75rem">
+    <span class="sl" style="margin-bottom:0.75rem;display:block">Five Governance Layers Assessed</span>
+  </div>
+  <div class="layers-preview">
+    <div class="layer-row"><div class="layer-num">01</div><div class="layer-info"><div class="layer-info-name">Risk-Tiered Capability Boundaries</div><div class="layer-info-desc">Classify use cases by risk and define what each AI system can and cannot do.</div></div></div>
+    <div class="layer-row"><div class="layer-num">02</div><div class="layer-info"><div class="layer-info-name">Constraint Encoding</div><div class="layer-info-desc">Whether governance requirements are structural deployment gates or advisory documents.</div></div></div>
+    <div class="layer-row"><div class="layer-num">03</div><div class="layer-info"><div class="layer-info-name">Human-Authority Mechanisms</div><div class="layer-info-desc">Risk-based human review, override authority, and escalation paths.</div></div></div>
+    <div class="layer-row"><div class="layer-num">04</div><div class="layer-info"><div class="layer-info-name">Behavioral Monitoring</div><div class="layer-info-desc">Traceability, post-deployment detection, and containment when issues appear.</div></div></div>
+    <div class="layer-row"><div class="layer-num">05</div><div class="layer-info"><div class="layer-info-name">Policy Versioning & Testing</div><div class="layer-info-desc">How governance evolves as AI use changes across the organization.</div></div></div>
+  </div>
+
+  <button class="btn-start" onclick="startAssessment()">
+    Begin Assessment
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
+</section>
+
+<div class="divider" id="dividerLine"></div>
+
+<!-- ASSESSMENT -->
+<div class="assess-wrap" id="assessWrap">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <div class="progress-layer" id="layerLabel"></div>
+      <div class="progress-count"><span id="currentQ">1</span> of <span id="totalQ">8</span></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div id="questionArea"></div>
+  <div class="q-nav">
+    <button class="btn-back-q invisible" id="btnBack" onclick="prevQuestion()">&#8592; Back</button>
+    <button class="btn-next-q" id="btnNext" onclick="nextQuestion()">Continue</button>
+  </div>
+</div>
+
+<!-- EMAIL GATE (appears after last question, before results) -->
+<div class="email-gate" id="emailGate">
+  <div class="email-gate-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+  </div>
+  <div class="email-gate-heading">Your results are ready</div>
+  <p class="email-gate-desc">Enter your work email to see your governance posture score, layer-by-layer status, and weakest layer identification.</p>
+  <div class="email-gate-form">
+    <input type="email" class="email-gate-input" id="emailInput" placeholder="Work email address">
+    <button class="email-gate-submit" onclick="submitEmail()">See Results</button>
+  </div>
+  <p id="emailError" style="font-size:0.78rem;color:var(--red);margin-top:8px;display:none"></p>
+  <p class="email-gate-privacy">Your email is used to deliver your results. No spam.</p>
+</div>
+
+<!-- RESULTS (V7: limited on-screen results) -->
+<div class="results-wrap" id="resultsWrap">
+
+  <!-- 1. Score + Tier Label -->
+  <div class="results-header" id="resultsHeader">
+    <div class="sl">Your Governance Posture</div>
+    <div class="results-score-wrap">
+      <div class="score-ring">
+        <svg viewBox="0 0 140 140"><circle class="score-ring-bg" cx="70" cy="70" r="65"/><circle class="score-ring-fill" id="scoreRing" cx="70" cy="70" r="65"/></svg>
+        <div class="score-center"><div class="score-number" id="scoreNumber">0</div><div class="score-max">of 32</div></div>
+      </div>
+    </div>
+    <div class="results-tier" id="tierName"></div>
+  </div>
+
+  <!-- 2. Five Layer Bars - color only -->
+  <div class="layer-bars-section" id="layerBarsSection"></div>
+
+  <!-- 3. Weakest Layer Named -->
+  <div class="weakest-callout" id="weakestCallout">
+    <div class="weakest-callout-text">Your <span id="weakestLayer"></span> is your highest-risk gap.</div>
+  </div>
+
+  <!-- 4. Sample Preview Image - v8 debrief document preview -->
+  <div class="sample-preview">
+    <div class="sample-preview-label">What the Governance Debrief delivers</div>
+    <iframe
+      src="arrell-debrief-preview-v8.html"
+      class="sample-preview-frame"
+      title="Sample Governance Debrief deliverable"
+      scrolling="no"
+      loading="lazy"
+    ></iframe>
+  </div>
+
+  <!-- 5. CTA - Score-tiered headline + Calendly -->
+  <div class="cta-section">
+    <div class="cta-tier-headline" id="ctaHeadline"></div>
+    <a href="https://calendly.com/cos-gbemia/governance-debrief" target="_blank" rel="noopener" class="btn-cta">
+      Book a Governance Debrief
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    <div class="cta-details">
+      <div class="cta-detail-line"><strong>$500</strong> &mdash; 60-minute session with Dr. Gbemisola Adetayo</div>
+      <div class="cta-detail-line">Written action summary delivered within 48 hours</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-brand-name">Arrell Advisory</div>
+    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://www.arrelladvisory.com/#portfolio">Portfolio</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.arrelladvisory.com/#principal">Principal</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.arrelladvisory.com/#speaking">Speaking</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.linkedin.com/in/gbemisolaadetayo/recent-activity/all/" target="_blank" rel="noopener">Blog</a>
+    <div class="footer-sep"></div>
+    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
+    <div class="footer-sep"></div>
+    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+  </div>
+</footer>
+
+<script>
+/* ═══ DATA ═══ */
+var layers = [
+  'Risk-Tiered Capability Boundaries',
+  'Constraint Encoding',
+  'Human-Authority Mechanisms',
+  'Behavioral Monitoring',
+  'Policy Versioning & Testing'
+];
+
+var questions = [
+  { layer:0, text:'How are AI use cases classified before deployment?', options:[
+    {label:'We do not formally classify AI use cases',score:1},
+    {label:'Classification happens informally, case by case',score:2},
+    {label:'We use documented criteria for some higher-risk use cases',score:3},
+    {label:'We apply formal risk tiers consistently before deployment',score:4}
+  ]},
+  { layer:0, text:'Are AI systems limited to approved actions, data access, and decision scope?', options:[
+    {label:'No explicit limits are defined',score:1},
+    {label:'Limits exist informally, but are not consistently applied',score:2},
+    {label:'Most systems have documented boundaries before deployment',score:3},
+    {label:'Approved boundaries are clearly defined and technically enforced',score:4}
+  ]},
+  { layer:1, text:'Are governance requirements part of deployment, or mainly written guidance?', options:[
+    {label:'Governance is mostly advisory and document-based',score:1},
+    {label:'Some teams apply governance checks, but not consistently',score:2},
+    {label:'Governance checks are part of the standard approval process',score:3},
+    {label:'Systems cannot be deployed until governance requirements are satisfied',score:4}
+  ]},
+  { layer:2, text:'For higher-impact AI outputs, when is human review required?', options:[
+    {label:'Human review is not clearly defined',score:1},
+    {label:'Human review happens ad hoc',score:2},
+    {label:'Human review is required for some high-risk use cases',score:3},
+    {label:'Human review is risk-based, clearly defined, and consistently enforced',score:4}
+  ]},
+  { layer:2, text:'Can people override, pause, or escalate an AI system when needed?', options:[
+    {label:'No clear override or escalation path exists',score:1},
+    {label:'People can intervene informally, but the process is unclear',score:2},
+    {label:'Override and escalation mechanisms exist for key workflows',score:3},
+    {label:'Override and escalation are defined, owned, and routinely used when needed',score:4}
+  ]},
+  { layer:3, text:'Can you trace what an AI system did, what data it used, and who approved it?', options:[
+    {label:'Little or no traceability exists',score:1},
+    {label:'Some logs exist, but they are incomplete',score:2},
+    {label:'Most production uses can be traced across system, data, and approval records',score:3},
+    {label:'End-to-end activity is logged, auditable, and usable for review',score:4}
+  ]},
+  { layer:3, text:'How do you detect harmful, incorrect, or out-of-bounds AI behavior after deployment?', options:[
+    {label:'We mainly find out through user complaints or incidents',score:1},
+    {label:'We rely on periodic manual checks',score:2},
+    {label:'We use routine monitoring and alerts for key systems',score:3},
+    {label:'We monitor continuously and have defined containment steps when issues appear',score:4}
+  ]},
+  { layer:4, text:'How is governance updated as AI use changes?', options:[
+    {label:'Governance is rarely updated',score:1},
+    {label:'Governance changes mainly after problems occur',score:2},
+    {label:'Governance is reviewed on a schedule or when major use cases change',score:3},
+    {label:'Governance is versioned, tested, and updated as deployment changes',score:4}
+  ]}
+];
+
+/* V7: Tier-specific CTA headlines */
+var ctaHeadlines = {
+  reactive: 'Your governance has critical exposure. See the full picture.',
+  emerging: 'You have foundations. The gaps are specific. See which ones matter most.',
+  structured: 'Your posture is strong. Find out where it\u2019s vulnerable under pressure.',
+  operational: 'You\u2019re ahead of the curve. Stress-test what you\u2019ve built.'
+};
+
+/* ═══ STATE ═══ */
+var currentIndex = 0;
+var answers = [];
+for (var i = 0; i < questions.length; i++) answers.push(null);
+
+/* ═══ NAV SCROLL ═══ */
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ═══ ASSESSMENT FLOW ═══ */
+function startAssessment() {
+  document.getElementById('introSection').style.display = 'none';
+  document.getElementById('dividerLine').style.display = 'none';
+  document.getElementById('backLink').style.display = 'none';
+  document.getElementById('assessWrap').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var q = questions[currentIndex];
+  var html = '<div class="question-card" style="animation-delay:0.05s">' +
+    '<div class="question-number">Question ' + (currentIndex+1) + '</div>' +
+    '<div class="question-text">' + q.text + '</div><div class="options">';
+  for (var i = 0; i < q.options.length; i++) {
+    html += '<div class="option' + (answers[currentIndex]===i?' selected':'') + '" onclick="selectOption('+i+')">' +
+      '<div class="option-marker"></div><div class="option-label">' + q.options[i].label + '</div></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('questionArea').innerHTML = html;
+  document.getElementById('layerLabel').textContent = 'Layer '+(q.layer+1)+' \u2014 '+layers[q.layer];
+  document.getElementById('currentQ').textContent = currentIndex+1;
+  document.getElementById('progressFill').style.width = (currentIndex/questions.length*100)+'%';
+  document.getElementById('btnBack').classList.toggle('invisible', currentIndex===0);
+  updateNextBtn();
+}
+
+function selectOption(i) {
+  answers[currentIndex] = i;
+  var opts = document.querySelectorAll('.option');
+  for (var j=0;j<opts.length;j++) opts[j].classList.toggle('selected',j===i);
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  var btn = document.getElementById('btnNext');
+  btn.textContent = currentIndex===questions.length-1?'See Results':'Continue';
+  btn.classList.toggle('active', answers[currentIndex]!==null);
+}
+
+function nextQuestion() {
+  if (answers[currentIndex]===null) return;
+  if (currentIndex<questions.length-1) {
+    currentIndex++;
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    /* V7: Show email gate after last question */
+    document.getElementById('assessWrap').classList.remove('active');
+    document.getElementById('emailGate').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+function prevQuestion() {
+  if (currentIndex>0) { currentIndex--; renderQuestion(); }
+}
+
+/* ═══ SCORING ═══ */
+function computeScores() {
+  var ls = {};
+  for (var i=0;i<layers.length;i++) ls[i]={total:0,count:0,max:0};
+  for (var i=0;i<questions.length;i++) {
+    var li = questions[i].layer;
+    ls[li].count++;
+    ls[li].max = ls[li].count * 4;
+    if (answers[i]!==null) {
+      ls[li].total += questions[i].options[answers[i]].score;
+    }
+  }
+  var total=0;
+  for (var k in ls) total += ls[k].total;
+  return {layerScores:ls, totalScore:total};
+}
+
+function getTier(s) {
+  if (s<=13) return 'reactive';
+  if (s<=19) return 'emerging';
+  if (s<=25) return 'structured';
+  return 'operational';
+}
+
+function getLayerColor(pct) {
+  if (pct <= 37.5) return 'var(--red)';
+  if (pct <= 62.5) return 'var(--amber)';
+  return 'var(--green)';
+}
+
+/* ═══ EMAIL SUBMISSION ═══ */
+function submitEmail() {
+  var inp = document.getElementById('emailInput');
+  var err = document.getElementById('emailError');
+  var em = inp.value.trim();
+
+  if (!em || !em.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    err.textContent = 'Please enter a valid work email address.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+
+  var data = computeScores();
+  var tier = getTier(data.totalScore);
+
+  /* Find weakest layer — only if not all layers are at max */
+  var wk=-1, wa=Infinity;
+  var allMax = true;
+  for (var k in data.layerScores) {
+    var ls = data.layerScores[k];
+    var pctLayer = ls.max>0 ? ls.total/ls.max : 0;
+    if (pctLayer < 1) allMax = false;
+    if (pctLayer < wa) { wa=pctLayer; wk=parseInt(k); }
+  }
+  if (allMax) wk = -1; /* perfect score — no weakest layer */
+
+  /* Build layer summary for email */
+  var layerSummary = '';
+  for (var i=0;i<layers.length;i++) {
+    var ls = data.layerScores[i];
+    var pct = ls.max>0 ? Math.round((ls.total/ls.max)*100) : 0;
+    layerSummary += layers[i]+': '+ls.total+'/'+ls.max+' ('+pct+'%)\n';
+  }
+
+  /* Send email via FormSubmit */
+  fetch('https://formsubmit.co/ajax/hello@arrelladvisory.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({
+      email: em,
+      _subject: 'Governance Assessment \u2014 '+tier.charAt(0).toUpperCase()+tier.slice(1)+' ('+data.totalScore+'/32)',
+      score: data.totalScore+' / 32',
+      tier: tier.charAt(0).toUpperCase()+tier.slice(1),
+      weakest_layer: wk >= 0 ? layers[wk] : 'None — full governance maturity',
+      layer_breakdown: layerSummary
+    })
+  }).catch(function(){});
+
+  /* Store data and show results */
+  window._ad = {
+    layerScores: data.layerScores,
+    totalScore: data.totalScore,
+    tier: tier,
+    weakest: wk,
+    email: em
+  };
+
+  document.getElementById('emailGate').classList.remove('active');
+  showResults();
+}
+
+/* ═══ RESULTS DISPLAY (V7: Limited On-Screen) ═══ */
+function showResults() {
+  var d = window._ad;
+  var resultsWrap = document.getElementById('resultsWrap');
+  resultsWrap.classList.add('active');
+
+  /* 1. Score ring + tier label */
+  document.getElementById('resultsHeader').classList.add('tier-'+d.tier);
+  var circ = 2*Math.PI*65;
+  var ring = document.getElementById('scoreRing');
+  ring.style.strokeDasharray = circ;
+  ring.style.strokeDashoffset = circ;
+  setTimeout(function(){
+    ring.style.strokeDashoffset = circ - (d.totalScore/32)*circ;
+    animateNum(document.getElementById('scoreNumber'), 0, d.totalScore, 1200);
+  }, 300);
+  document.getElementById('tierName').textContent = d.tier.charAt(0).toUpperCase()+d.tier.slice(1);
+
+  /* 2. Layer bars - V7: color only, no scores, no explanatory text */
+  var barsHtml = '';
+  for (var i=0;i<layers.length;i++) {
+    var ls = d.layerScores[i];
+    var pct = ls.max>0 ? (ls.total/ls.max)*100 : 0;
+    var color = getLayerColor(pct);
+    barsHtml += '<div class="layer-bar-row">' +
+      '<div class="layer-bar-dot" style="background:'+color+'"></div>' +
+      '<div class="layer-bar-name">'+layers[i]+'</div>' +
+      '<div class="layer-bar-track"><div class="layer-bar-fill" data-width="'+pct+'" style="background:'+color+'"></div></div>' +
+      '</div>';
+  }
+  document.getElementById('layerBarsSection').innerHTML = barsHtml;
+
+  /* Animate bar fills */
+  setTimeout(function(){
+    var fills = document.querySelectorAll('.layer-bar-fill');
+    for (var i=0;i<fills.length;i++) fills[i].style.width = fills[i].dataset.width+'%';
+  }, 400);
+
+  /* 3. Weakest layer */
+  var callout = document.getElementById('weakestCallout');
+  if (d.weakest === -1) {
+    callout.style.display = 'none';
+  } else {
+    callout.style.display = '';
+    document.getElementById('weakestLayer').textContent = layers[d.weakest];
+  }
+
+  /* 5. Tier-specific CTA headline */
+  document.getElementById('ctaHeadline').textContent = ctaHeadlines[d.tier];
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ═══ UTILITIES ═══ */
+function animateNum(el, from, to, dur) {
+  var s = performance.now();
+  function tick(n) {
+    var p = Math.min((n-s)/dur, 1);
+    el.textContent = Math.round(from + (to-from) * (1-Math.pow(1-p,3)));
+    if (p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+</script>
+</body>
+</html>
