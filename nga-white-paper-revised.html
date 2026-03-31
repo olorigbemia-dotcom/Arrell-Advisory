@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nested Governance Architecture™ | Arrell Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0B1120;
+    --bg-card: #111B2E;
+    --bg-card-hover: #162240;
+    --bg-section: #0D1526;
+    --border-subtle: rgba(186, 163, 120, 0.12);
+    --border-active: rgba(186, 163, 120, 0.35);
+    --gold: #BAA378;
+    --gold-bright: #D4C098;
+    --gold-dim: #8A7A5A;
+    --text-primary: #E8E4DD;
+    --text-secondary: #9BA3B2;
+    --text-muted: #5E6878;
+    --accent-teal: #4A90A4;
+    --accent-green: #6A8F6E;
+    --accent-purple: #9B7DB8;
+    --accent-amber: #C49A5C;
+    --accent-warn: #C45C4A;
+    --phase-1: #4A90A4;
+    --phase-2: #6A8F6E;
+    --phase-3: #9B7DB8;
+    --phase-4: #C49A5C;
+    --tier-1: #4A90A4;
+    --tier-2: #C49A5C;
+    --tier-3: #C45C4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Source Sans 3', sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 10%, rgba(186,163,120,0.035) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 90%, rgba(74,144,164,0.025) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .page { position: relative; z-index: 1; }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .container-wide {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--phase-1), var(--phase-2), var(--phase-3), var(--phase-4));
+    z-index: 100;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .hero-label::before,
+  .hero-label::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    letter-spacing: 0.2px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin-bottom: 44px;
+  }
+
+  .hero-meta-item { text-align: center; }
+
+  .hero-meta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .hero-divider {
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    margin: 0 auto 28px;
+  }
+
+  .hero-author {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .hero-author strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+    display: block;
+    font-size: 15px;
+  }
+
+  /* ══════════════════════════════════════
+     SECTION SYSTEM
+     ══════════════════════════════════════ */
+  .section {
+    padding: 80px 0;
+    position: relative;
+  }
+
+  .section + .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+    letter-spacing: -0.3px;
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 48px 0 16px;
+    line-height: 1.3;
+  }
+
+  /* ── PROSE ── */
+  .prose p {
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+
+  .prose p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .prose p em {
+    font-style: italic;
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+
+  /* ── PULLQUOTE ── */
+  .pullquote {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 40px 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .pullquote-accent {
+    width: 4px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, var(--gold), var(--accent-teal));
+  }
+
+  .pullquote-content {
+    padding: 28px 36px;
+    background: var(--bg-card);
+  }
+
+  .pullquote-content p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  .pullquote-content strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── GLOBAL REFERENCE BOX ── */
+  .ref-box {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: rgba(74, 144, 164, 0.04);
+    border: 1px solid rgba(74, 144, 164, 0.12);
+    border-left: 3px solid var(--accent-teal);
+    border-radius: 0 3px 3px 0;
+  }
+
+  .ref-box-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin-bottom: 10px;
+  }
+
+  .ref-box p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  /* ── INVENTORY LIST ── */
+  .inventory-list {
+    margin: 24px 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .inventory-item {
+    display: flex;
+    gap: 16px;
+    padding: 18px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+  }
+
+  .inventory-bullet {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-teal);
+    margin-top: 8px;
+    opacity: 0.6;
+  }
+
+  .inventory-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  /* ══════════════════════════════════════
+     EMBEDDED VISUALS: NESTED GOVERNANCE
+     ══════════════════════════════════════ */
+  .visual-block {
+    margin: 48px 0;
+  }
+
+  .nest-outer-m {
+    border: 1.5px solid var(--gold-dim);
+    border-radius: 12px;
+    padding: 36px 32px 28px;
+    position: relative;
+    background: rgba(186, 163, 120, 0.02);
+  }
+
+  .nest-tag {
+    position: absolute;
+    top: -12px;
+    left: 28px;
+    background: var(--bg-deep);
+    padding: 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nest-outer-m .nest-tag { color: var(--gold); }
+
+  .nest-label-m {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+  }
+
+  .nest-desc-m {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .nest-inner-m {
+    border: 1.5px solid var(--accent-teal);
+    border-radius: 8px;
+    padding: 28px 26px 24px;
+    position: relative;
+    background: rgba(74, 144, 164, 0.03);
+  }
+
+  .nest-inner-m .nest-tag { color: var(--accent-teal); }
+
+  .pillars-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .pillar-m {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    padding: 16px 10px 14px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .pillar-m:hover {
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+  }
+
+  .pillar-m::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent-teal);
+    opacity: 0.5;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .pillar-m-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--accent-teal);
+    opacity: 0.35;
+    margin-bottom: 8px;
+  }
+
+  .pillar-m-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .depts-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .dept-m {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .dept-m-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .dept-m-name {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    line-height: 1.35;
+  }
+
+  .nest-connector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(186, 163, 120, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+  }
+
+  .nest-connector-bar {
+    width: 3px;
+    height: 28px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, var(--gold), var(--accent-teal));
+    border-radius: 2px;
+  }
+
+  .nest-connector p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .nest-connector strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .dimensions-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .dim-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    border-left: 3px solid var(--dc);
+  }
+
+  .dim-card:nth-child(1) { --dc: var(--accent-green); }
+  .dim-card:nth-child(2) { --dc: var(--accent-purple); }
+  .dim-card:nth-child(3) { --dc: var(--accent-amber); }
+
+  .dim-card-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dim-card-icon svg {
+    width: 16px;
+    height: 16px;
+    color: var(--dc);
+    opacity: 0.8;
+  }
+
+  .dim-card-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .dim-card-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ══════════════════════════════════════
+     PILLARS TABLE (detailed)
+     ══════════════════════════════════════ */
+  .pillars-table {
+    margin: 32px 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .pillars-table-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .pillars-table-row:last-child { border-bottom: none; }
+
+  .pillars-table-row:hover {
+    background: rgba(255,255,255,0.01);
+  }
+
+  .pt-label {
+    padding: 20px 22px;
+    background: rgba(74, 144, 164, 0.04);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pt-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--accent-teal);
+    opacity: 0.3;
+    font-weight: 500;
+  }
+
+  .pt-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .pt-scope {
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  /* ══════════════════════════════════════
+     FOUR-PHASE FRAMEWORK
+     ══════════════════════════════════════ */
+  .phases-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 36px 0;
+  }
+
+  .phase-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    padding: 28px 26px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .phase-card:hover {
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--pc);
+    opacity: 0.65;
+  }
+
+  .phase-card:nth-child(1) { --pc: var(--phase-1); }
+  .phase-card:nth-child(2) { --pc: var(--phase-2); }
+  .phase-card:nth-child(3) { --pc: var(--phase-3); }
+  .phase-card:nth-child(4) { --pc: var(--phase-4); }
+
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--pc);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+
+  .phase-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .phase-body {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .phase-anti {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 14px;
+    background: rgba(196, 92, 74, 0.06);
+    border: 1px solid rgba(196, 92, 74, 0.1);
+    border-radius: 2px;
+  }
+
+  .phase-anti-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    color: var(--accent-warn);
+    opacity: 0.7;
+  }
+
+  .phase-anti p {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--accent-warn);
+    opacity: 0.8;
+    margin-bottom: 0;
+  }
+
+  .phase-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 32px 0 0;
+  }
+
+  .pf-node {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bg-deep);
+  }
+
+  .pf-node:nth-child(1) { background: var(--phase-1); }
+  .pf-node:nth-child(3) { background: var(--phase-2); }
+  .pf-node:nth-child(5) { background: var(--phase-3); }
+  .pf-node:nth-child(7) { background: var(--phase-4); }
+
+  .pf-arrow {
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pf-arrow svg {
+    width: 36px;
+    height: 10px;
+    color: var(--text-muted);
+    opacity: 0.4;
+  }
+
+  .pf-labels {
+    display: flex;
+    justify-content: center;
+    gap: 52px;
+    margin-top: 12px;
+  }
+
+  .pf-label-item {
+    text-align: center;
+    width: 40px;
+  }
+
+  .pf-label-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ══════════════════════════════════════
+     THREE-TIER CLASSIFICATION
+     ══════════════════════════════════════ */
+  .tiers-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 36px 0;
+  }
+
+  .tier-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .tier-row:hover {
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+  }
+
+  .tier-id {
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .tier-id::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+
+  .tier-row:nth-child(1) .tier-id { background: rgba(74,144,164,0.06); }
+  .tier-row:nth-child(1) .tier-id::before { background: var(--tier-1); }
+  .tier-row:nth-child(2) .tier-id { background: rgba(196,154,92,0.06); }
+  .tier-row:nth-child(2) .tier-id::before { background: var(--tier-2); }
+  .tier-row:nth-child(3) .tier-id { background: rgba(196,92,74,0.06); }
+  .tier-row:nth-child(3) .tier-id::before { background: var(--tier-3); }
+
+  .tier-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .tier-row:nth-child(1) .tier-label { color: var(--tier-1); }
+  .tier-row:nth-child(2) .tier-label { color: var(--tier-2); }
+  .tier-row:nth-child(3) .tier-label { color: var(--tier-3); }
+
+  .tier-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+
+  .tier-risk-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .tier-row:nth-child(1) .tier-risk-tag { color: var(--tier-1); background: rgba(74,144,164,0.12); }
+  .tier-row:nth-child(2) .tier-risk-tag { color: var(--tier-2); background: rgba(196,154,92,0.12); }
+  .tier-row:nth-child(3) .tier-risk-tag { color: var(--tier-3); background: rgba(196,92,74,0.12); }
+
+  .tier-col {
+    padding: 22px 22px;
+    background: var(--bg-card);
+  }
+
+  .tier-col + .tier-col { border-left: 1px solid var(--border-subtle); }
+
+  .tier-col-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .tier-col p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .tier-col p:last-child { margin-bottom: 0; }
+
+  .tier-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tier-ex-tag {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 3px 9px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 2px;
+  }
+
+  .tier-pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tier-ptag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  .tier-row:nth-child(1) .tier-ptag { color: var(--tier-1); background: rgba(74,144,164,0.1); border: 1px solid rgba(74,144,164,0.15); }
+  .tier-row:nth-child(2) .tier-ptag { color: var(--tier-2); background: rgba(196,154,92,0.1); border: 1px solid rgba(196,154,92,0.15); }
+  .tier-row:nth-child(3) .tier-ptag { color: var(--tier-3); background: rgba(196,92,74,0.1); border: 1px solid rgba(196,92,74,0.15); }
+
+  .tier-scale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .tier-scale-bar {
+    flex: 1;
+    height: 3px;
+    margin: 0 16px;
+    background: linear-gradient(90deg, var(--tier-1), var(--tier-2), var(--tier-3));
+    border-radius: 2px;
+    opacity: 0.5;
+  }
+
+  .tier-scale-end {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .tier-missouri-ex {
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    padding: 10px 14px;
+    background: rgba(186, 163, 120, 0.04);
+    border: 1px solid rgba(186, 163, 120, 0.1);
+    border-radius: 2px;
+  }
+
+  .tier-missouri-ex strong {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── CLASSIFICATION WORKFLOW ── */
+  .classify-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 32px 0 12px;
+    flex-wrap: wrap;
+  }
+
+  .classify-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+  }
+
+  .classify-step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-active);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .classify-step-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .classify-step-desc {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.4;
+    max-width: 110px;
+  }
+
+  .classify-arrow {
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+  }
+
+  .classify-arrow svg {
+    width: 28px;
+    height: 10px;
+    color: var(--text-muted);
+    opacity: 0.4;
+  }
+
+  .classify-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+
+  /* ── PHASE GATES ── */
+  .phase-gate {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(106, 143, 110, 0.06);
+    border: 1px solid rgba(106, 143, 110, 0.12);
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .phase-gate-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    color: var(--accent-green);
+    opacity: 0.7;
+  }
+
+  .phase-gate p {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--accent-green);
+    opacity: 0.85;
+    margin-bottom: 0;
+  }
+
+  /* ── CONTROLS TABLE ── */
+  .controls-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .controls-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 14px 16px;
+    text-align: left;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .controls-table td {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+  }
+
+  .controls-table tr:last-child td { border-bottom: none; }
+
+  .controls-table td:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .controls-table .tier-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+
+  .controls-table .t1 { background: var(--tier-1); }
+  .controls-table .t2 { background: var(--tier-2); }
+  .controls-table .t3 { background: var(--tier-3); }
+
+  .controls-cell-light { color: var(--text-muted); font-style: italic; }
+
+  /* ── OPERATING ARTIFACTS LIST ── */
+  .ops-artifacts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .ops-artifact {
+    padding: 16px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .ops-artifact-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .ops-artifact-desc {
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .ops-artifact-shown {
+    border-color: var(--border-active);
+  }
+
+  .ops-artifact-shown::after {
+    content: 'PREVIEW BELOW';
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    background: rgba(186, 163, 120, 0.1);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  /* ══════════════════════════════════════
+     FRAMEWORKS REFERENCE TABLE
+     ══════════════════════════════════════ */
+  .fw-table {
+    margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .fw-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .fw-row:hover { border-color: var(--border-active); }
+
+  .fw-id {
+    padding: 22px 20px;
+    background: rgba(155, 125, 184, 0.04);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+  }
+
+  .fw-id-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .fw-col {
+    padding: 20px 22px;
+    background: var(--bg-card);
+  }
+
+  .fw-col + .fw-col { border-left: 1px solid var(--border-subtle); }
+
+  .fw-col-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .fw-col p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+
+  /* ══════════════════════════════════════
+     OUTCOMES / SUCCESS
+     ══════════════════════════════════════ */
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 36px 0;
+  }
+
+  .outcome {
+    display: flex;
+    gap: 16px;
+    padding: 22px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .outcome:hover {
+    border-color: var(--border-active);
+    transform: translateY(-1px);
+  }
+
+  .outcome-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 30px;
+    text-align: right;
+  }
+
+  .outcome-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .outcome-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .outcome-deadline {
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .outcome-deadline span { color: var(--gold); }
+
+  /* ══════════════════════════════════════
+     PILOT ADVANTAGES
+     ══════════════════════════════════════ */
+  .advantages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 28px 0;
+  }
+
+  .advantage {
+    padding: 20px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    border-left: 3px solid var(--phase-4);
+  }
+
+  .advantage-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .advantage-body {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ */
+  .report-footer {
+    padding: 48px 0 56px;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 40px;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 0;
+  }
+
+  .footer-left-line,
+  .footer-right-line {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+
+  .footer-left-line.name {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .footer-right-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: right;
+    line-height: 1.9;
+  }
+
+  .footer-sources {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .footer-sources-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .footer-sources p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .container, .container-wide { padding: 0 24px; }
+    .hero { padding: 60px 24px; min-height: 80vh; }
+    .hero-meta { flex-wrap: wrap; gap: 20px; }
+    .pillars-row { grid-template-columns: repeat(3, 1fr); }
+    .depts-row { grid-template-columns: repeat(2, 1fr); }
+    .dimensions-row { grid-template-columns: 1fr; }
+    .phases-grid { grid-template-columns: 1fr; }
+    .tier-row { grid-template-columns: 1fr; }
+    .tier-id { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .tier-col + .tier-col { border-left: none; border-top: 1px solid var(--border-subtle); }
+    .fw-row { grid-template-columns: 1fr; }
+    .fw-id { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .fw-col + .fw-col { border-left: none; border-top: 1px solid var(--border-subtle); }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .advantages { grid-template-columns: 1fr; }
+    .ops-artifacts { grid-template-columns: 1fr; }
+    .classify-flow { gap: 4px; }
+    .classify-step { min-width: 70px; }
+    .classify-step-desc { max-width: 80px; font-size: 9px; }
+    .classify-arrow { width: 20px; }
+    .controls-table { font-size: 12px; }
+    .controls-table th, .controls-table td { padding: 10px 10px; }
+    .pillars-table-row { grid-template-columns: 1fr; }
+    .pt-label { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+    .footer-inner { grid-template-columns: 1fr; gap: 2px; }
+    .footer-right-line { text-align: left; margin-top: 12px; }
+    .footer-right-line:first-of-type { margin-top: 12px; }
+    .section { padding: 56px 0; }
+  }
+
+  @media (max-width: 600px) {
+    .pillars-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body::before { display: none; }
+    .progress-bar { display: none; }
+    .section { page-break-inside: avoid; }
+    .visual-block { page-break-inside: avoid; }
+  }
+</style>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════════
+       HERO
+       ══════════════════════════════════════ -->
+  <section class="hero">
+    <div>
+      <div class="hero-label">Arrell Advisory · Responsible AI Governance</div>
+      <h1>The Nested Governance<br><em>Architecture</em>™</h1>
+      <p class="hero-subtitle">A Framework for Responsible AI in Practice</p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">1</div>
+          <div class="hero-meta-label">Architecture</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">4</div>
+          <div class="hero-meta-label">Phases</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">3</div>
+          <div class="hero-meta-label">Tiers</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">1</div>
+          <div class="hero-meta-label">Case Study</div>
+        </div>
+      </div>
+
+      <div class="hero-divider"></div>
+      <div class="hero-author">
+        <strong>Dr Gbemisola Adetayo</strong>
+        Agentic AI Governance Architect<br>
+        Principal, Arrell Advisory · March 9, 2026
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       EXECUTIVE SUMMARY
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Executive Summary</div>
+      <h2>AI Governance That <em>Operates</em>, Not Just Complies</h2>
+
+      <div class="prose">
+        <p>Governments and enterprises around the world are discovering the same thing: AI governance principles are the easy part. The hard part is translating them into operational frameworks that teams can actually execute. Through my research at the Center for AI and Digital Policy (CAIDP), I have identified the patterns that separate governance architectures that work from those that sit on a shelf.</p>
+
+        <p>This paper introduces the <strong>Nested Governance Architecture™</strong>, a design pattern for embedding AI governance within broader organizational transformation so that governance operates as a built-in standard rather than an isolated compliance exercise. It includes the <strong>MPBP Framework™</strong> (Map, Prioritize, Build, Pilot), the implementation methodology for moving from governance principles to operational frameworks, and a <strong>Risk-Proportional Governance™</strong> model that matches governance intensity to actual impact.</p>
+
+        <p>To demonstrate how the architecture applies in practice, this paper uses <strong>Missouri's AI Executive Orders (26-02 and 26-03)</strong> as its primary case study.</p>
+
+        <p>On January 13, 2026, Missouri Governor Mike Kehoe signed Executive Order 26-02, directing four state departments to develop frameworks for the safe and effective integration of Artificial Intelligence within state government operations. The same day, he signed Executive Order 26-03, establishing the Missouri GREAT initiative, a government-wide efficiency and transformation program that explicitly ties AI adoption to its safety and security standards.</p>
+
+        <p>Together, these orders did something distinctive. Rather than treating AI as a standalone policy problem, Missouri embedded AI governance inside a broader government transformation agenda. The departments tasked with building Missouri's AI future (the Office of Administration, Economic Development, Natural Resources, and Higher Education and Workforce Development) now have until November 30, 2026 to deliver recommendations.</p>
+
+        <p>That's an ambitious timeline. And the question facing each department is no longer <em>whether</em> Missouri should govern AI, but <em>how</em> to translate five governance principles into operational frameworks that state employees, citizens, and businesses can actually use. The Nested Governance Architecture™ and MPBP Framework™ provide one structured answer to that question.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       WHAT MISSOURI SET IN MOTION
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">The Architecture</div>
+      <h2>The <em>Nested Governance</em> Architecture™</h2>
+
+      <div class="prose">
+        <p>Most governments that have taken action on AI governance have done so through a single mechanism: an executive order focused narrowly on AI, or a legislative bill addressing specific AI applications. This creates a structural weakness. When AI governance exists as a standalone layer, it competes for attention with operational priorities, and operational priorities usually win.</p>
+
+        <p>The <strong>Nested Governance Architecture™</strong> solves this by embedding AI-specific governance principles within a broader operational transformation agenda rather than standing them up as a separate compliance function. The architecture creates accountability at multiple levels: the outer layer sets the organizational mission and transformation goals, while the inner layer establishes AI-specific guardrails that operate within that mission context. This design prevents AI governance from becoming an isolated function that organizational leaders can deprioritize or route around.</p>
+
+        <p>Missouri's executive orders exhibit this architecture.</p>
+
+        <p><strong>Executive Order 26-02</strong> establishes the AI-specific governance principles (the inner layer). It directs four departments to develop frameworks organized around five pillars:</p>
+      </div>
+
+      <!-- PILLARS TABLE -->
+      <div class="pillars-table">
+        <div class="pillars-table-row">
+          <div class="pt-label"><span class="pt-num">1</span><span class="pt-name">Efficiency &amp; Service</span></div>
+          <div class="pt-scope">Identifying high-potential AI applications to increase government efficiency and enhance quality of services to Missourians.</div>
+        </div>
+        <div class="pillars-table-row">
+          <div class="pt-label"><span class="pt-num">2</span><span class="pt-name">Data Privacy &amp; Security</span></div>
+          <div class="pt-scope">Establishing robust policies and technical safeguards to protect sensitive data and personal information from unauthorized access or misuse by AI systems.</div>
+        </div>
+        <div class="pillars-table-row">
+          <div class="pt-label"><span class="pt-num">3</span><span class="pt-name">Human Decision-Making</span></div>
+          <div class="pt-scope">Ensuring appropriate human oversight and intervention, especially in high-impact AI use cases, to maintain accountability and preserve human judgment in critical decisions.</div>
+        </div>
+        <div class="pillars-table-row">
+          <div class="pt-label"><span class="pt-num">4</span><span class="pt-name">Transparency &amp; Accountability</span></div>
+          <div class="pt-scope">Developing guidelines for transparency regarding AI tools: how they function, what data they use, and mechanisms for citizens to raise concerns about automated decisions.</div>
+        </div>
+        <div class="pillars-table-row">
+          <div class="pt-label"><span class="pt-num">5</span><span class="pt-name">Data Quality Management</span></div>
+          <div class="pt-scope">Creating guidelines for continuous monitoring and assessment of data used in AI tools, including accuracy, completeness, consistency, timeliness, relevance, and objectivity.</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>Beyond these five pillars, EO 26-02 also addresses AI's infrastructure demands, directing the Department of Natural Resources and the Public Service Commission to ensure data center energy demands don't drive up rates for residential and small business customers. And it directs the Department of Higher Education and Workforce Development to evaluate AI education programs and launch workforce training initiatives. These additions demonstrate systems-level thinking: AI governance isn't just about the technology, it's about the infrastructure, the workforce, and the economic ecosystem around it.</p>
+
+        <p><strong>Executive Order 26-03</strong> then wraps this inside the broader Missouri GREAT initiative (the outer layer). Its Section III.3.c explicitly states that departments exploring AI applications must adhere to the safety and security standards established in EO 26-02. This is the Nested Governance Architecture™ at work: the GREAT initiative sets the operational transformation agenda, and EO 26-02's AI governance principles function as guardrails embedded within that agenda.</p>
+      </div>
+    </div>
+
+    <!-- NESTED GOVERNANCE VISUAL -->
+    <div class="container-wide">
+      <div class="visual-block">
+        <div class="nest-outer-m">
+          <div class="nest-tag">Outer Layer · EO 26-03 · GREAT Initiative</div>
+          <div class="nest-label-m">Missouri GREAT Initiative</div>
+          <div class="nest-desc-m">Government-wide efficiency and transformation program. Departments exploring AI applications must adhere to the safety and security standards established in EO 26-02. <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;">§ III.3.c</span></div>
+
+          <div class="nest-inner-m">
+            <div class="nest-tag">Inner Layer · EO 26-02 · AI Governance</div>
+            <div class="nest-label-m">AI Governance Principles</div>
+            <div class="nest-desc-m">Five pillars directing four departments to develop frameworks for the safe and effective integration of AI within state government. <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;">Deadline: November 30, 2026</span></div>
+
+            <div class="pillars-row">
+              <div class="pillar-m"><div class="pillar-m-num">1</div><div class="pillar-m-name">Efficiency &amp;<br>Service</div></div>
+              <div class="pillar-m"><div class="pillar-m-num">2</div><div class="pillar-m-name">Data Privacy &amp;<br>Security</div></div>
+              <div class="pillar-m"><div class="pillar-m-num">3</div><div class="pillar-m-name">Human<br>Decision-Making</div></div>
+              <div class="pillar-m"><div class="pillar-m-num">4</div><div class="pillar-m-name">Transparency &amp;<br>Accountability</div></div>
+              <div class="pillar-m"><div class="pillar-m-num">5</div><div class="pillar-m-name">Data Quality<br>Management</div></div>
+            </div>
+
+            <div class="depts-row">
+              <div class="dept-m"><div class="dept-m-icon">Dept 01</div><div class="dept-m-name">Office of<br>Administration</div></div>
+              <div class="dept-m"><div class="dept-m-icon">Dept 02</div><div class="dept-m-name">Economic<br>Development</div></div>
+              <div class="dept-m"><div class="dept-m-icon">Dept 03</div><div class="dept-m-name">Natural<br>Resources</div></div>
+              <div class="dept-m"><div class="dept-m-icon">Dept 04</div><div class="dept-m-name">Higher Ed &amp;<br>Workforce Dev</div></div>
+            </div>
+          </div>
+
+          <div class="nest-connector">
+            <div class="nest-connector-bar"></div>
+            <p><strong>Nested Governance Architecture™:</strong> AI governance is not a siloed compliance exercise. It's embedded within how Missouri intends to operate. Departments encounter AI governance as a built-in standard, not an afterthought.</p>
+          </div>
+
+          <div class="dimensions-row">
+            <div class="dim-card">
+              <div class="dim-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+              <div><div class="dim-card-label">Energy &amp; Infrastructure</div><div class="dim-card-desc">Data center demands must not drive up rates for residential and small business customers</div></div>
+            </div>
+            <div class="dim-card">
+              <div class="dim-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div><div class="dim-card-label">Workforce Development</div><div class="dim-card-desc">AI education programs and workforce training initiatives across state agencies</div></div>
+            </div>
+            <div class="dim-card">
+              <div class="dim-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div><div class="dim-card-label">Education &amp; Ecosystem</div><div class="dim-card-desc">Evaluating AI education programs and building the broader economic ecosystem</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="prose">
+        <p>The Nested Governance Architecture™ is what makes Missouri's approach structurally sound. In jurisdictions where AI governance exists as a standalone policy, it competes for attention with operational priorities. When governance is nested within the transformation agenda itself, departments working on efficiency, business partnerships, and modernization encounter AI governance as a built-in operating standard, not an afterthought bolted on later.</p>
+        <p>But architecture alone does not produce outcomes. The next question is implementation: how do Missouri's departments translate this structure into operational governance that their teams can execute against a November 2026 deadline? That requires an implementation methodology and an operational decision framework, both of which sit within the Nested Governance Architecture™.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       THE EXECUTION CHALLENGE
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">From Architecture to Implementation</div>
+      <h2>From Principles to <em>Operational</em> Frameworks</h2>
+
+      <div class="pullquote">
+        <div class="pullquote-accent"></div>
+        <div class="pullquote-content">
+          <p><strong>The distance between governance principles and operational frameworks is significant.</strong> Every jurisdiction that has committed to AI governance discovers this: the principles are the easy part. The hard part is translating them into something people can actually use when they're deciding whether to deploy an AI tool in a state agency next Tuesday morning.</p>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>The Nested Governance Architecture™ provides the structural foundation. But architecture without implementation is just a diagram. Missouri's four departments, like any organization implementing AI governance, now face the execution question: How do you operationalize it?</p>
+
+        <p>Through my research at CAIDP, several patterns have emerged about what accelerates this transition and what creates friction:</p>
+
+        <p><strong>Jurisdictions that start by mapping what already exists move faster.</strong> Before building new frameworks, understanding which AI tools are already in use, which decisions they support, and what data they access creates the foundation everything else builds on. Jurisdictions that skip mapping end up building frameworks for theoretical scenarios while real AI use grows ungoverned.</p>
+
+        <p><strong>Jurisdictions that prioritize by impact rather than trying to govern everything at once get further.</strong> Not all AI applications carry the same risk. An AI tool that automates scheduling is different from one that supports eligibility determinations. Prioritizing which use cases need robust governance first, and which can operate under lighter standards, prevents the framework from becoming so comprehensive that nothing gets implemented.</p>
+
+        <p><strong>Jurisdictions that learn from existing frameworks rather than starting from scratch avoid unnecessary delay.</strong> The NIST AI Risk Management Framework, the OECD AI Principles, and the governance structures emerging from the EU AI Act have all been tested at scale. They offer structures, terminology, and assessment methods that Missouri's departments could adapt rather than reinvent, freeing time and energy for the Missouri-specific questions that no external framework can answer.</p>
+
+        <p><strong>Jurisdictions that build governance around real deployments, not hypothetical ones, produce frameworks that survive contact with reality.</strong> A governance framework developed in isolation, then handed to agencies for implementation, almost always requires significant revision once it meets actual workflows. A framework developed alongside a real pilot deployment embeds practical wisdom from the start.</p>
+
+        <p>These four patterns, Map, Prioritize, Build, and Pilot, are not random observations. They represent a consistent implementation sequence that I have codified into the <strong>MPBP Framework™</strong>, the implementation methodology within the Nested Governance Architecture™.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOUR-PHASE FRAMEWORK
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">The MPBP Framework™</div>
+      <h2>Implementing the Architecture: <em>Map, Prioritize, Build, Pilot</em></h2>
+
+      <div class="prose">
+        <p><em>The MPBP Framework™ is the implementation methodology within the Nested Governance Architecture™. It provides a structured, four-phase pathway from governance principles to operational governance. Applied to Missouri, it offers one approach the departments could consider as they build toward the November 30, 2026 deadline, designed to be practical, phased, and aligned with the five governance pillars in EO 26-02.</em></p>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <div class="phases-grid">
+        <div class="phase-card">
+          <div class="phase-num">PHASE 01</div>
+          <div class="phase-name">Map What Exists</div>
+          <div class="phase-body">Before building governance, understand what you're governing. Inventory current and planned AI use, including vendor tools with AI capabilities that may not be labeled as "AI."</div>
+          <div class="phase-anti">
+            <svg class="phase-anti-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Without mapping: Frameworks get built for theoretical scenarios while real AI use grows ungoverned.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 02</div>
+          <div class="phase-name">Prioritize by Impact</div>
+          <div class="phase-body">Not all AI applications carry the same risk. Classify by tier so governance resources match the actual impact level of each application.</div>
+          <div class="phase-anti">
+            <svg class="phase-anti-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Without prioritization: Governance becomes so comprehensive that nothing gets implemented.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 03</div>
+          <div class="phase-name">Build on Tested Frameworks</div>
+          <div class="phase-body">Adapt NIST AI RMF, OECD AI Principles, and EU AI Act structures. Don't reinvent what others have already solved. Focus original effort on Missouri-specific questions.</div>
+          <div class="phase-anti">
+            <svg class="phase-anti-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Without leverage: Teams reinvent what others have solved, consuming time on solved problems.</p>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-num">PHASE 04</div>
+          <div class="phase-name">Pilot &amp; Learn</div>
+          <div class="phase-body">Each department identifies one well-scoped AI pilot where the governance framework is built and tested in real time, producing evidence alongside documentation.</div>
+          <div class="phase-anti">
+            <svg class="phase-anti-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <p>Without pilots: Frameworks don't survive contact with reality, producing documents that sit on a shelf.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-flow">
+        <div class="pf-node">01</div>
+        <div class="pf-arrow"><svg viewBox="0 0 36 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="5" x2="30" y2="5"/><polyline points="26,1.5 32,5 26,8.5"/></svg></div>
+        <div class="pf-node">02</div>
+        <div class="pf-arrow"><svg viewBox="0 0 36 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="5" x2="30" y2="5"/><polyline points="26,1.5 32,5 26,8.5"/></svg></div>
+        <div class="pf-node">03</div>
+        <div class="pf-arrow"><svg viewBox="0 0 36 10" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="0" y1="5" x2="30" y2="5"/><polyline points="26,1.5 32,5 26,8.5"/></svg></div>
+        <div class="pf-node">04</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PHASE 1: MAP
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Phase 1 · Map</div>
+      <h2>Map the <em>Current Landscape</em></h2>
+
+      <div class="prose">
+        <p><strong>Before building governance, understand what you're governing.</strong></p>
+        <p>Each department conducts an inventory of its current and planned AI use:</p>
+      </div>
+
+      <div class="inventory-list">
+        <div class="inventory-item">
+          <div class="inventory-bullet"></div>
+          <div class="inventory-text">What AI tools and systems are currently in use across the department? Including vendor-provided tools with AI capabilities that may not be labeled as "AI."</div>
+        </div>
+        <div class="inventory-item">
+          <div class="inventory-bullet"></div>
+          <div class="inventory-text">What decisions do these tools support or automate? Which of these decisions affect citizens directly?</div>
+        </div>
+        <div class="inventory-item">
+          <div class="inventory-bullet"></div>
+          <div class="inventory-text">What data do these tools access, process, or generate? What is the sensitivity level of that data?</div>
+        </div>
+        <div class="inventory-item">
+          <div class="inventory-bullet"></div>
+          <div class="inventory-text">What AI use cases are being planned or requested by department staff?</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>This mapping doesn't need to be exhaustive to be useful. A working inventory, even an imperfect one, is dramatically more valuable than a theoretical governance framework built without visibility into actual AI use. The inventory also naturally surfaces the use cases that most urgently need governance attention.</p>
+      </div>
+
+      <div class="ref-box">
+        <div class="ref-box-label">Global Reference</div>
+        <p>The OECD AI Policy Observatory maintains a repository of how member countries have approached AI use inventories within government. Korea's Framework Act on AI requires ongoing monitoring of AI deployment. The EU AI Act mandates registration of high-risk AI systems. Missouri's departments could draw on these models as reference points for designing their own inventory approach.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PHASE 2: PRIORITIZE
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Phase 2 · Prioritize</div>
+      <h2><em>Risk-Proportional</em> Governance</h2>
+
+      <div class="prose">
+        <p><strong>Not all AI use cases need the same level of governance.</strong></p>
+        <p>The Prioritize phase of the MPBP Framework™ introduces the Risk-Proportional Governance™ model, a three-tier AI impact classification that determines how much governance each AI application requires. Once the landscape is mapped, departments categorize AI applications by the level of impact they have on Missourians:</p>
+      </div>
+    </div>
+
+    <!-- THREE-TIER VISUAL -->
+    <div class="container-wide">
+      <div class="tiers-stack">
+        <div class="tier-row">
+          <div class="tier-id">
+            <div class="tier-label">Tier 1</div>
+            <div class="tier-name">Routine Automation</div>
+            <div class="tier-risk-tag">Lightweight</div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Characteristics</div>
+            <p>AI that automates internal administrative tasks with no direct citizen impact.</p>
+            <div class="tier-examples">
+              <span class="tier-ex-tag">Procurement RFP summarization</span>
+              <span class="tier-ex-tag">Payroll report generation</span>
+              <span class="tier-ex-tag">Vendor compliance checks</span>
+            </div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Oversight Level</div>
+            <p>Lightweight. Department-level governance, standard quality checks, scheduled review cycles.</p>
+            <p class="tier-missouri-ex"><strong>Missouri example:</strong> The Office of Administration's Division of Purchasing processes procurement for most state agencies through MissouriBUYS. AI summarizing RFP submissions or flagging vendor registration gaps would streamline high-volume internal operations with no citizen decision impact.</p>
+            <div class="tier-pillar-tags">
+              <span class="tier-ptag">Efficiency &amp; Service</span>
+              <span class="tier-ptag">Data Quality</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-row">
+          <div class="tier-id">
+            <div class="tier-label">Tier 2</div>
+            <div class="tier-name">Decision Support</div>
+            <div class="tier-risk-tag">Moderate</div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Characteristics</div>
+            <p>AI that informs human decisions affecting citizens or resource allocation.</p>
+            <div class="tier-examples">
+              <span class="tier-ex-tag">Permit application screening</span>
+              <span class="tier-ex-tag">Environmental monitoring analysis</span>
+              <span class="tier-ex-tag">Inspection prioritization</span>
+            </div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Oversight Level</div>
+            <p>Moderate. Human-in-the-loop requirements, documented accountability at the decision point, and privacy review before deployment.</p>
+            <p class="tier-missouri-ex"><strong>Missouri example:</strong> The Department of Natural Resources processes hundreds of permit applications annually across air, water, and land reclamation programs, many still via PDF forms submitted through the MoGEM portal. AI pre-screening applications for completeness before a permit writer's review would support, not replace, the human decision on each permit.</p>
+            <div class="tier-pillar-tags">
+              <span class="tier-ptag">Data Privacy &amp; Security</span>
+              <span class="tier-ptag">Human Decision-Making</span>
+              <span class="tier-ptag">Transparency</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tier-row">
+          <div class="tier-id">
+            <div class="tier-label">Tier 3</div>
+            <div class="tier-name">High Impact Decisions</div>
+            <div class="tier-risk-tag">Robust</div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Characteristics</div>
+            <p>AI that directly affects citizen outcomes, rights, or access to services.</p>
+            <div class="tier-examples">
+              <span class="tier-ex-tag">Financial aid eligibility</span>
+              <span class="tier-ex-tag">Fraud detection in benefits</span>
+              <span class="tier-ex-tag">Institutional certification</span>
+            </div>
+          </div>
+          <div class="tier-col">
+            <div class="tier-col-head">Oversight Level</div>
+            <p>Robust. Full governance architecture applies: all five pillars active. Oversight at the decision point, citizen-facing transparency, validated data quality, and a documented mechanism for contesting automated outcomes.</p>
+            <p class="tier-missouri-ex"><strong>Missouri example:</strong> The Department of Higher Education and Workforce Development processes Access Missouri Grant eligibility for over 40,000 students annually, disbursing more than $81 million in need-based aid. AI introduced into eligibility verification, fraud detection, or outreach targeting would directly affect whether individual Missourians can afford higher education, requiring all five governance pillars.</p>
+            <div class="tier-pillar-tags">
+              <span class="tier-ptag">All Five Governance Pillars Apply</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tier-scale">
+        <span class="tier-scale-end">Low impact</span>
+        <div class="tier-scale-bar"></div>
+        <span class="tier-scale-end">High impact</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="prose" style="margin-top: 32px;">
+        <p>This tiered approach allows departments to allocate governance resources proportionally. Tier 1 applications can move quickly under lightweight standards. Tier 3 applications get the full governance architecture. This prevents the common failure mode where governance becomes so comprehensive that even routine automation requires months of review, which drives agencies to adopt AI informally and ungoverned.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PHASE 3: BUILD
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Phase 3 · Build</div>
+      <h2>Build on <em>What Exists</em></h2>
+
+      <div class="prose">
+        <p><strong>Missouri's departments don't need to invent AI governance from scratch.</strong></p>
+        <p>Several established frameworks offer tested structures that can be adapted for Missouri's context:</p>
+      </div>
+    </div>
+
+    <div class="container-wide">
+      <div class="fw-table">
+        <div class="fw-row">
+          <div class="fw-id"><div class="fw-id-name">NIST AI Risk Management Framework</div></div>
+          <div class="fw-col">
+            <div class="fw-col-head">What It Offers</div>
+            <p>A voluntary framework organized around four functions (Govern, Map, Measure, Manage) with practical implementation guidance for each.</p>
+          </div>
+          <div class="fw-col">
+            <div class="fw-col-head">How Missouri Could Use It</div>
+            <p>Provides a structured methodology Missouri's departments could adapt for their governance framework design. Particularly useful for operationalizing EO 26-02's five pillars into actionable processes.</p>
+          </div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-id"><div class="fw-id-name">OECD AI Principles</div></div>
+          <div class="fw-col">
+            <div class="fw-col-head">What It Offers</div>
+            <p>Five principles adopted by 46 countries: inclusive growth, human-centered values, transparency, robustness/security, accountability.</p>
+          </div>
+          <div class="fw-col">
+            <div class="fw-col-head">How Missouri Could Use It</div>
+            <p>EO 26-02's five pillars align closely with OECD principles. Missouri can benchmark its frameworks against an internationally recognized standard, which also supports the federal alignment goal.</p>
+          </div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-id"><div class="fw-id-name">EU AI Act Risk Classification</div></div>
+          <div class="fw-col">
+            <div class="fw-col-head">What It Offers</div>
+            <p>A tiered approach classifying AI systems by risk level (unacceptable, high, limited, minimal) with corresponding governance requirements.</p>
+          </div>
+          <div class="fw-col">
+            <div class="fw-col-head">How Missouri Could Use It</div>
+            <p>The Risk-Proportional Governance™ model in Phase 2 draws on this approach. Departments could study the EU's classification criteria to inform how Missouri categorizes its own AI use cases.</p>
+          </div>
+        </div>
+        <div class="fw-row">
+          <div class="fw-id"><div class="fw-id-name">Nested Governance Architecture™</div></div>
+          <div class="fw-col">
+            <div class="fw-col-head">What It Offers</div>
+            <p>A governance design pattern that embeds AI-specific governance within broader organizational transformation agendas, with the MPBP Framework™ providing structured implementation and Risk-Proportional Governance™ providing the operational decision mechanism.</p>
+          </div>
+          <div class="fw-col">
+            <div class="fw-col-head">How Missouri Could Use It</div>
+            <p>Missouri's dual executive order structure already exhibits this architecture. The NGA™ provides the analytical framework for understanding why this structure works and the implementation methodology for operationalizing it across all four departments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="prose">
+        <p>Adapting these frameworks is not about importing foreign regulation. It's about learning from the substantial investment other jurisdictions have already made in solving the same operational questions Missouri's departments now face. The Missouri-specific questions, how these principles apply to Missouri's agencies, workforce, data systems, and citizen expectations, are what the departments are uniquely positioned to answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PHASE 4: PILOT
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Phase 4 · Pilot</div>
+      <h2>Pilot and <em>Learn</em></h2>
+
+      <div class="pullquote">
+        <div class="pullquote-accent" style="background: linear-gradient(180deg, var(--phase-4), var(--gold));"></div>
+        <div class="pullquote-content">
+          <p><strong>Governance frameworks designed alongside real deployments outperform frameworks designed in isolation.</strong></p>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>Rather than developing a comprehensive governance framework in theory and then implementing it, each department could identify one well-scoped AI pilot: a practical deployment where the governance framework is built and tested in real time.</p>
+        <p>The pilot approach has several advantages for Missouri's timeline:</p>
+      </div>
+
+      <div class="advantages">
+        <div class="advantage">
+          <div class="advantage-title">Tangible Results by Deadline</div>
+          <div class="advantage-body">Each department can present both a governance framework and evidence of how it performed against a real deployment, not just a theoretical document.</div>
+        </div>
+        <div class="advantage">
+          <div class="advantage-title">Surfaces Practical Questions</div>
+          <div class="advantage-body">Who approves the AI tool selection? How is training data quality validated in practice? What happens when the AI produces an unexpected output? These questions only emerge through doing.</div>
+        </div>
+        <div class="advantage">
+          <div class="advantage-title">Builds Internal Expertise</div>
+          <div class="advantage-body">The department staff who participate in the pilot become the governance practitioners who can scale the framework across additional use cases.</div>
+        </div>
+        <div class="advantage">
+          <div class="advantage-title">Aligns with GREAT Initiative</div>
+          <div class="advantage-body">EO 26-03 encourages departments to explore AI applications. A governed pilot demonstrates AI innovation and responsible governance working together, not in tension.</div>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>A good pilot candidate for each department would be a Tier 1 or Tier 2 use case (routine automation or decision support) that serves a clear operational need, uses data the department already manages, and can be implemented with existing or readily available tools. High-impact applications (Tier 3) are better served by a more mature governance framework developed after the pilot provides lessons learned.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FROM FRAMEWORK TO OPERATING SYSTEM
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">The Operating Layer</div>
+      <h2>From Framework to <em>Operating System</em></h2>
+
+      <div class="pullquote">
+        <div class="pullquote-accent" style="background: linear-gradient(180deg, var(--gold), var(--accent-green));"></div>
+        <div class="pullquote-content">
+          <p><strong>A governance framework tells departments what to do. A governance operating system tells them how to do it, who owns each step, and what evidence to produce.</strong></p>
+        </div>
+      </div>
+
+      <div class="prose">
+        <p>The Nested Governance Architecture™ provides the design pattern. The MPBP Framework™ provides the implementation sequence. The Risk-Proportional Governance™ model provides the decision mechanism. What remains is the execution infrastructure: the operational layer that program managers, governance leads, and department staff would use when an AI use case arrives on their desk next Tuesday morning.</p>
+        <p>This operational layer is the bridge between governance on paper and governance in practice. It specifies who owns what, at what threshold oversight activates, and what evidence accumulates as use cases move through the system. Designed well, it becomes self-reinforcing. Each decision produces documentation that improves the next.</p>
+        <p>Building this layer effectively requires the context only the implementing organization can provide: its existing approval chains, its data governance posture, its tolerance for friction, and the specific use cases it is most urgently trying to govern. That context shapes every design choice. A governance operating system built without it is, at best, a generic template.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       WHAT SUCCESS LOOKS LIKE
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">Case Study Outcomes · By November 30, 2026</div>
+      <h2>What NGA™ Implementation <em>Produces</em></h2>
+
+      <div class="prose">
+        <p>Missouri was among the first states to take comprehensive executive action on AI governance in 2026. Being early is an advantage, but only if the execution matches the ambition.</p>
+        <p>If the four departments execute the MPBP Framework™ across its four phases, by the November 30, 2026 reporting deadline Missouri could have:</p>
+      </div>
+
+      <div class="outcomes-grid">
+        <div class="outcome">
+          <div class="outcome-num">1</div>
+          <div class="outcome-text"><strong>A working AI use inventory across state government</strong>, the first comprehensive view of where and how AI is operating within Missouri's agencies.</div>
+        </div>
+        <div class="outcome">
+          <div class="outcome-num">2</div>
+          <div class="outcome-text"><strong>A tiered governance framework</strong> that matches governance requirements to the actual impact level of each AI application, fast-tracking routine uses while ensuring high-impact decisions receive robust oversight.</div>
+        </div>
+        <div class="outcome">
+          <div class="outcome-num">3</div>
+          <div class="outcome-text"><strong>At least four department-level AI pilots</strong> demonstrating governance in action. Not just frameworks on paper, but evidence of what works in practice.</div>
+        </div>
+        <div class="outcome">
+          <div class="outcome-num">4</div>
+          <div class="outcome-text"><strong>Workforce development programs</strong> beginning to prepare state employees for AI-augmented roles, not replacing workers but equipping them with the skills to work effectively alongside AI tools.</div>
+        </div>
+        <div class="outcome">
+          <div class="outcome-num">5</div>
+          <div class="outcome-text"><strong>An energy and infrastructure assessment</strong> ensuring Missouri's AI growth doesn't come at the expense of residential and small business ratepayers.</div>
+        </div>
+        <div class="outcome">
+          <div class="outcome-num">6</div>
+          <div class="outcome-text"><strong>A governance model that other states look to as a reference</strong>, positioning Missouri as a leader in responsible AI adoption within state government.</div>
+        </div>
+      </div>
+
+      <div class="outcome-deadline">Reporting deadline: <span>November 30, 2026</span></div>
+
+      <div class="prose" style="margin-top: 36px;">
+        <p>This outcome is ambitious but achievable. The executive orders provide clear direction. The Nested Governance Architecture™ and MPBP Framework™ offer a structured path. The existing global knowledge base, from NIST, OECD, and jurisdictions worldwide, provides tested tools. What Missouri's departments bring is the context, the operational knowledge, and the proximity to the citizens who will ultimately be served by AI governance done well.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CLOSING
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">The Leadership Moment</div>
+      <h2>Responsible AI Leadership Is Not About <em>Preventing</em> AI Adoption</h2>
+
+      <div class="prose">
+        <p>It's about ensuring that when organizations adopt AI, they do so with the governance architecture that protects the people they serve.</p>
+
+        <p>The Nested Governance Architecture™ provides a repeatable design pattern for any government or enterprise navigating this transition. The MPBP Framework™ provides the implementation sequence. The Risk-Proportional Governance™ model provides the decision mechanism. And the operating layer provides the execution infrastructure. Together, they form an integrated system for building governance that operates, not just complies.</p>
+
+        <p>Missouri's case demonstrates what this looks like in practice. Governor Kehoe's Executive Orders 26-02 and 26-03 set the direction. The governance principles are clear. The departments are tasked. The deadline is set. What happens between now and November 30, 2026 will determine whether Missouri builds an AI governance architecture that serves as a national model, or produces frameworks that sit on a shelf.</p>
+
+        <p>The difference comes down to execution. And execution, in governance as in technology, benefits from structure, learning from what others have done, and the willingness to build governance in practice rather than in theory.</p>
+
+        <p>The architecture is here. The methodology is here. The next step belongs to the organizations, and the people they serve, who will live with the governance they build.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       REFERENCES
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">References</div>
+      <h2>Sources and <em>Further Reading</em></h2>
+
+      <h3>Missouri Executive Orders</h3>
+      <div class="prose">
+        <p>Executive Order 26-02: Establishing Frameworks for the Safe and Effective Integration of Artificial Intelligence within State Government Operations. State of Missouri, January 13, 2026. Available at sos.mo.gov.</p>
+        <p>Executive Order 26-03: Establishing the Missouri GREAT Initiative. State of Missouri, January 13, 2026. Available at sos.mo.gov.</p>
+      </div>
+
+      <h3>Missouri State Departments</h3>
+      <div class="prose">
+        <p>Missouri Office of Administration. Division of Purchasing, Division of Personnel, Information Technology Services Division. oa.mo.gov.</p>
+        <p>Missouri Department of Natural Resources. Permits, Certifications, Registrations and Licenses; Missouri Gateway for Environmental Management (MoGEM); Air Pollution Control Program; Water Protection Program; Land Reclamation Program. dnr.mo.gov.</p>
+        <p>Missouri Department of Economic Development. Division of Business and Community Solutions; Missouri One Start; Regional Engagement. ded.mo.gov.</p>
+        <p>Missouri Department of Higher Education and Workforce Development. Access Missouri Financial Assistance Program; Division of Workforce Development; Coordinating Board for Higher Education. dhewd.mo.gov.</p>
+      </div>
+
+      <h3>International Frameworks and Standards</h3>
+      <div class="prose">
+        <p>National Institute of Standards and Technology. AI Risk Management Framework (AI RMF 1.0). NIST AI 100-1, January 2023. nist.gov/ai.</p>
+        <p>Organisation for Economic Co-operation and Development. OECD Principles on AI. OECD, May 2019, updated 2024. oecd.ai.</p>
+        <p>European Parliament and Council of the European Union. Regulation (EU) 2024/1689 (EU AI Act). Official Journal of the European Union, July 2024.</p>
+        <p>OECD AI Policy Observatory. National AI policies and strategies repository. oecd.ai/en/dashboards.</p>
+      </div>
+
+      <h3>U.S. Federal AI Policy</h3>
+      <div class="prose">
+        <p>The White House. Executive Order 14179: Removing Barriers to American Leadership in Artificial Intelligence. January 23, 2025.</p>
+        <p>The White House. Executive Order 14365: Ensuring a National Policy Framework for Artificial Intelligence. December 11, 2025.</p>
+        <p>Office of Management and Budget. Memorandum M-25-21: Accelerating Federal Use of AI Through Innovation, Governance, and Public Trust. April 2025.</p>
+      </div>
+
+      <h3>CAIDP and Research</h3>
+      <div class="prose">
+        <p>Center for AI and Digital Policy (CAIDP). Artificial Intelligence and Democratic Values Index. 2025 Edition. caidp.org.</p>
+        <p>CAIDP AI Policy Clinic. Research methodology and comparative governance analysis across OECD member states.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       ABOUT ARRELL ADVISORY
+       ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label">About</div>
+      <h2>Arrell <em>Advisory</em></h2>
+
+      <div class="prose">
+        <p>Autonomous AI is already operational. The organizational architecture to scale it does not exist.</p>
+        <p>The Nested Governance Architecture™ is built for this, embedding AI governance inside your organizational transformation so it functions as a built-in operating standard, not a compliance layer that gets bypassed the moment it creates friction.</p>
+      </div>
+
+      <h3>What Operational Governance Makes Possible</h3>
+      <div class="prose">
+        <p>When governance runs, every AI question in your organization has an answer.</p>
+
+        <p><strong>When your board asks: "What is our AI strategy?"</strong><br>
+        You present an architecture, not an aspiration. Risk registers, accountability structures, and regulatory positioning built for your organization's context. The board question becomes a demonstration of organizational maturity, not a gap you are managing around.</p>
+
+        <p><strong>When a vendor pitches an AI solution</strong><br>
+        Every pitch lands inside a framework that already exists. Classification criteria, consequence tier, governance requirements: defined before the vendor called. You evaluate on fit, not on exposure you are discovering in real time.</p>
+
+        <p><strong>When your team asks: "What does this mean for our roles?"</strong><br>
+        Your people get a structural answer: what AI can and cannot do in your context, where human authority is protected, and what oversight looks like for decisions that affect them. Not a town hall that manages anxiety. A governance framework that tells people where the lines are.</p>
+
+        <p><strong>When regulators ask: "Show us your AI governance."</strong><br>
+        Documentation that reflects what actually operates, not what was intended when the policy was written. EU AI Act classification, accountability structures, audit trails. Evidence of governance, not evidence that governance was planned.</p>
+
+        <p><strong>When the CEO asks: "Show me the ROI."</strong><br>
+        AI governance built inside your transformation mandate produces measurable outcomes from day one: success metrics, tracking frameworks, and a board reporting structure that connects AI initiatives to business value. Governance as an enablement function, not a cost center.</p>
+      </div>
+
+
+      <h3>Where to Start</h3>
+      <div class="prose">
+        <p>The <strong>Governance Readiness Assessment</strong> identifies which of the five operational layers is your actual breaking point. Eight questions, immediate score, no login required. Takes three minutes.</p>
+
+        <p>Organizations that complete the assessment and identify material gaps are offered a <strong>Governance Debrief</strong>: 60 minutes with Dr Adetayo, working through what your score means for your specific deployment context, where governance sits structurally in your organization, and what needs to happen first. A written diagnostic is delivered within 48 hours.</p>
+
+        <p>There is no proposal required to begin. The assessment is the entry point.</p>
+
+        <p style="margin-top: 24px;"><strong><a href="https://www.arrelladvisory.com/governance-readiness-assessment.html" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(186,163,120,0.4); padding-bottom: 2px;">Take the Governance Readiness Assessment →</a></strong></p>
+        <p><strong><a href="https://www.arrelladvisory.com" style="color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid rgba(155,163,178,0.3); padding-bottom: 2px;">arrelladvisory.com</a></strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════ -->
+  <footer class="section report-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left-line name">Dr Gbemisola Adetayo</div>
+        <div class="footer-right-line">THE NESTED GOVERNANCE ARCHITECTURE™</div>
+        <div class="footer-left-line">Agentic AI Governance Architect</div>
+        <div class="footer-right-line">ARRELL ADVISORY · MARCH 9, 2026</div>
+        <div class="footer-left-line">Principal, Arrell Advisory</div>
+        <div class="footer-right-line">WWW.ARRELLADVISORY.COM</div>
+      </div>
+
+      <div class="footer-sources">
+        <p>The Nested Governance Architecture™, MPBP Framework™, and Risk-Proportional Governance™ model are original governance design methodologies developed by Dr Gbemisola Adetayo, Principal of Arrell Advisory.</p>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const winH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / winH) * 100;
+    document.getElementById('progressBar').style.width = Math.min(pct, 100) + '%';
+  });
+</script>
+
+</body>
+</html>

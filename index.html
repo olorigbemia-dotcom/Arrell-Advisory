@@ -4,334 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arrell Advisory | AI Governance Consulting</title>
-<meta name="description" content="We design governance architectures that make AI deployment defensible to your board, your regulators, and your customers. Take the Governance Readiness Assessment to find out where you stand.">
+<meta name="description" content="We design governance architectures that make AI deployment defensible to your board, your regulators, and your customers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #080c14; --bg2: #0e1420; --bg-card: #0d1219; --bg-card-h: #111820;
-  --text: #e8e4de; --text-2: #8a8b8e; --text-3: #5c5e63;
-  --gold: #b8945f; --gold-s: rgba(184,148,95,0.12); --gold-h: #d4aa6a;
-  --gold-b: rgba(184,148,95,0.2); --border: rgba(255,255,255,0.06);
-  --serif: 'Cormorant Garamond', Georgia, serif;
-  --sans: 'Outfit', system-ui, sans-serif;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
-::selection{background:var(--gold);color:var(--bg)}
-a{color:inherit}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,12,20,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all 0.4s}
-nav.scrolled{padding:0.85rem 3rem}
-.nav-brand{display:flex;align-items:baseline;gap:0.15rem;text-decoration:none;cursor:pointer}
-.nav-brand-name{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--text);letter-spacing:0.02em}
-.nav-brand-type{font-family:var(--sans);font-size:0.65rem;font-weight:400;color:var(--text-3);letter-spacing:0.12em;text-transform:uppercase;margin-left:0.6rem;position:relative;top:-1px}
-.nav-links{display:flex;gap:2rem;align-items:center;list-style:none}
-.nav-links a{font-size:0.78rem;font-weight:400;color:var(--text-2);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.3s;cursor:pointer}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
-/* Assessment: visually distinct */
-.nav-assess{color:var(--gold)!important;border-bottom:1.5px solid rgba(184,148,95,0.4);padding-bottom:2px}
-.nav-assess:hover{border-color:var(--gold)!important}
-/* Book a Debrief CTA */
-.nav-cta{font-size:0.78rem!important;font-weight:500!important;color:var(--bg)!important;background:var(--gold);padding:0.45rem 1.15rem;border-radius:2px;transition:all 0.3s!important;border:none}
-.nav-cta:hover{background:var(--gold-h)!important;transform:translateY(-1px)}
-
-/* PAGE SYSTEM */
-.page{display:none;min-height:100vh}
-.page.active{display:block}
-
-/* SHARED */
-section{padding:6rem 3rem;position:relative}
-.sc{max-width:1100px;margin:0 auto}
-.sl{font-size:0.7rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.sh{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:400;line-height:1.25;color:var(--text);margin-bottom:1.5rem;max-width:700px}
-.sb{font-size:1.05rem;color:var(--text-2);max-width:620px;line-height:1.85;margin-bottom:3rem}
-.divider{height:1px;background:var(--border);max-width:1100px;margin:0 auto}
-.bg-alt{background:var(--bg2)}
-
-/* BUTTONS */
-.btn-primary{display:inline-flex;align-items:center;gap:0.75rem;font-size:0.85rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:1rem 2.25rem;text-decoration:none;border-radius:2px;transition:all 0.3s;border:none;cursor:pointer;font-family:var(--sans)}
-.btn-primary:hover{background:var(--gold-h);transform:translateY(-1px);box-shadow:0 8px 30px rgba(184,148,95,0.2)}
-.btn-primary svg{width:16px;height:16px;transition:transform 0.3s}
-.btn-primary:hover svg{transform:translateX(3px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.82rem;font-weight:400;color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px;transition:all 0.3s;cursor:pointer;letter-spacing:0.05em}
-.btn-ghost:hover{color:var(--gold);border-color:var(--gold)}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 3rem 6rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40%;right:-20%;width:70vw;height:70vw;background:radial-gradient(circle,rgba(184,148,95,0.04) 0%,transparent 65%);pointer-events:none}
-.hero-inner{max-width:840px;position:relative;z-index:1}
-.hero-label{font-size:0.75rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s ease 0.2s forwards}
-.hero h1{font-family:var(--serif);font-size:clamp(2.6rem,5vw,4.2rem);font-weight:400;line-height:1.15;margin-bottom:2rem;opacity:0;animation:fadeUp 0.8s ease 0.4s forwards}
-.hero h1 em{font-style:italic;color:var(--gold)}
-.hero-sub{font-size:1.1rem;font-weight:300;color:var(--text-2);max-width:620px;line-height:1.8;margin-bottom:3rem;opacity:0;animation:fadeUp 0.8s ease 0.6s forwards}
-.hero .btn-row{opacity:0;animation:fadeUp 0.8s ease 0.8s forwards;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap}
-
-/* PROBLEM SECTION */
-.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
-.problem-card{padding:2rem;border:1px solid var(--border);border-radius:3px;background:rgba(255,255,255,0.01);transition:all 0.4s;position:relative;overflow:hidden}
-.problem-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
-.problem-card:hover{border-color:rgba(184,148,95,0.15);background:rgba(184,148,95,0.02)}
-.problem-card:hover::before{transform:scaleX(1)}
-.problem-label{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
-.problem-card h3{font-family:var(--serif);font-size:1.3rem;font-weight:500;margin-bottom:0.75rem}
-.problem-card p{font-size:0.92rem;color:var(--text-2);line-height:1.75}
-.problem-cta{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--gold);cursor:pointer;margin-top:2rem;letter-spacing:0.05em;border-bottom:1px solid transparent;transition:border-color 0.3s}
-.problem-cta:hover{border-color:var(--gold-b)}
-
-/* HOW WE HELP: HOME CARDS */
-.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem;margin-top:2.5rem}
-.offer-card{padding:2.5rem;border:1px solid var(--border);border-radius:3px;position:relative;overflow:hidden;transition:all 0.4s;display:flex;flex-direction:column}
-.offer-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--gold);transition:height 0.4s}
-.offer-card:hover::after{height:100%}
-.offer-card:hover{border-color:rgba(184,148,95,0.15)}
-.offer-card.full-width{grid-column:1/-1}
-.offer-level{font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
-.offer-card h3{font-family:var(--serif);font-size:1.45rem;font-weight:500;margin-bottom:0.75rem}
-.offer-card p{font-size:0.92rem;color:var(--text-2);line-height:1.8;flex:1}
-.offer-price{font-size:0.8rem;color:var(--text-3);margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
-.offer-ctas{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem;align-items:center}
-.offer-cta-primary{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:0.6rem 1.15rem;border-radius:2px;text-decoration:none;cursor:pointer;transition:all 0.3s;border:none;font-family:var(--sans)}
-.offer-cta-primary:hover{background:var(--gold-h)}
-.offer-cta-ghost{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:400;letter-spacing:0.06em;color:var(--gold);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--gold-b);padding-bottom:1px;transition:all 0.3s}
-.offer-cta-ghost:hover{border-color:var(--gold)}
-
-/* PROOF SECTION */
-.cred-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem}
-.cred-tag{font-size:0.7rem;color:var(--text-3);padding:0.3rem 0.65rem;border:1px solid var(--border);border-radius:100px}
-
-/* ASSESSMENT BANNER */
-.assess-banner{text-align:center;padding:5rem 3rem;position:relative}
-.assess-banner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50vw;height:50vw;background:radial-gradient(circle,rgba(184,148,95,0.04) 0%,transparent 60%);pointer-events:none}
-.assess-banner .sh{margin:0 auto 1rem;text-align:center}
-.assess-banner .sb{margin:0 auto 2rem;text-align:center}
-.assess-banner-ctarow{display:flex;gap:1.25rem;justify-content:center;align-items:center;flex-wrap:wrap}
-
-/* HOW WE HELP PAGE */
-.hwh-hero{padding:8rem 3rem 3rem;text-align:center}
-.hwh-hero .sh{margin:0 auto 0.5rem;text-align:center}
-.hwh-hero .sb{margin:0 auto;text-align:center}
-.hwh-offers{display:flex;flex-direction:column;gap:2.5rem;margin-top:2.5rem}
-.hwh-card{border:1px solid var(--border);border-radius:3px;overflow:hidden;transition:border-color 0.4s}
-.hwh-card:hover{border-color:rgba(184,148,95,0.15)}
-.hwh-card-head{padding:2.5rem;background:rgba(255,255,255,0.01);border-bottom:1px solid var(--border)}
-.hwh-card-body{padding:2.5rem;display:grid;grid-template-columns:1fr 280px;gap:3rem;align-items:start}
-.hwh-card-level{font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
-.hwh-card h2{font-family:var(--serif);font-size:clamp(1.5rem,2.5vw,2rem);font-weight:400;margin-bottom:0.5rem}
-.hwh-card h2 em{font-style:italic;color:var(--gold)}
-.hwh-card-desc{font-size:0.95rem;color:var(--text-2);line-height:1.85}
-.hwh-sidebar{background:rgba(184,148,95,0.04);border:1px solid var(--gold-b);border-radius:3px;padding:1.75rem}
-.hwh-sidebar-label{font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
-.hwh-sidebar h4{font-family:var(--serif);font-size:1rem;font-weight:500;margin-bottom:0.5rem;color:var(--text)}
-.hwh-sidebar p{font-size:0.85rem;color:var(--text-2);line-height:1.7;margin-bottom:1rem}
-.hwh-price{font-size:1rem;font-weight:500;color:var(--text);margin-bottom:0.25rem;font-family:var(--serif)}
-.hwh-deliverable-list{list-style:none;margin:1rem 0;display:flex;flex-direction:column;gap:0.45rem}
-.hwh-deliverable-list li{font-size:0.82rem;color:var(--text-2);padding-left:1rem;position:relative;line-height:1.5}
-.hwh-deliverable-list li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:0.75rem}
-.hwh-card-ctarow{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem}
-.hwh-proof-note{font-size:0.82rem;color:var(--text-3);margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
-.hwh-proof-note a{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s;cursor:pointer}
-.hwh-proof-note a:hover{color:var(--gold);border-color:var(--gold)}
-
-/* DEBRIEF PAGE */
-.debrief-hero{padding:8rem 3rem 4rem;max-width:1100px;margin:0 auto}
-.debrief-hero-badge{display:inline-block;font-size:0.7rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:0.3rem 0.85rem;border-radius:2px;margin-bottom:1.5rem}
-.debrief-body{display:grid;grid-template-columns:1fr 360px;gap:4rem;align-items:start;padding:0 3rem 6rem;max-width:1100px;margin:0 auto}
-.debrief-what h3{font-family:var(--serif);font-size:1.4rem;font-weight:500;margin-bottom:1rem;margin-top:2rem}
-.debrief-what h3:first-child{margin-top:0}
-.debrief-what p{font-size:0.95rem;color:var(--text-2);line-height:1.85;margin-bottom:1rem}
-.debrief-deliverable-list{list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin:1rem 0 1.5rem}
-.debrief-deliverable-list li{display:flex;gap:0.75rem;align-items:flex-start;font-size:0.92rem;color:var(--text-2);line-height:1.6}
-.debrief-deliverable-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:0.55rem}
-.debrief-value-box{background:rgba(184,148,95,0.04);border:1px solid var(--gold-b);border-radius:3px;padding:2rem;margin-top:1.5rem}
-.debrief-value-box h4{font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:0.75rem}
-.debrief-value-box p{font-size:0.88rem;color:var(--text-2);line-height:1.75}
-/* Sticky booking card */
-.debrief-booking{position:sticky;top:6rem;border:1px solid var(--border);border-radius:3px;padding:2rem;background:var(--bg2)}
-.debrief-booking-price{font-family:var(--serif);font-size:2.5rem;color:var(--gold);margin-bottom:0.25rem}
-.debrief-booking-sub{font-size:0.82rem;color:var(--text-2);margin-bottom:1.5rem}
-.debrief-booking .btn-primary{width:100%;justify-content:center;margin-bottom:0.75rem}
-.debrief-booking-details{font-size:0.8rem;color:var(--text-3);margin-top:1rem;display:flex;flex-direction:column;gap:0.35rem}
-.debrief-booking-details span{display:flex;align-items:center;gap:0.5rem}
-.debrief-booking-details span::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
-.debrief-fallback{padding:0 3rem 4rem;max-width:1100px;margin:0 auto}
-.debrief-fallback p{font-size:0.88rem;color:var(--text-3)}
-.debrief-fallback a{color:var(--text-2);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--border);transition:all 0.3s}
-.debrief-fallback a:hover{color:var(--gold);border-color:var(--gold)}
-
-/* ABOUT (was PRINCIPAL) */
-.about-hero{padding:8rem 3rem 4rem}
-.about-layout{display:grid;grid-template-columns:260px 1fr;gap:4rem;align-items:start;margin-top:2rem;max-width:1100px;margin-left:auto;margin-right:auto}
-.about-photo{text-align:center}
-.about-photo img{width:190px;height:190px;border-radius:50%;object-fit:cover;border:3px solid var(--gold-b);padding:4px}
-.about-name{font-family:var(--serif);font-size:1.2rem;font-weight:500;margin-top:1.25rem}
-.about-title{font-size:0.8rem;color:var(--gold);margin-top:0.3rem;line-height:1.55}
-.about-social{display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:1rem;justify-content:center}
-.about-social a{font-size:0.68rem;color:var(--text-3);padding:0.3rem 0.65rem;border:1px solid var(--border);border-radius:100px;text-decoration:none;transition:all 0.3s}
-.about-social a:hover{border-color:var(--gold-b);color:var(--text-2);background:var(--gold-s)}
-.about-bio{font-size:1rem;color:var(--text-2);line-height:1.85}
-.about-bio p+p{margin-top:1.25rem}
-.about-section{padding:3rem 3rem 6rem}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1100px;margin:2rem auto 0}
-.about-card{padding:1.75rem;border:1px solid var(--border);border-radius:3px;transition:all 0.3s}
-.about-card:hover{border-color:var(--gold-b)}
-.about-card-label{font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
-.about-card h3{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:0.35rem}
-.about-card p{font-size:0.88rem;color:var(--text-2);line-height:1.7}
-.about-card a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s}
-.about-card a:hover{color:var(--gold);border-color:var(--gold)}
-.pub-card{display:flex;gap:1.5rem;padding:1.75rem;border:1px solid var(--border);border-radius:3px;text-decoration:none;color:inherit;transition:all 0.3s;grid-column:1/-1}
-.pub-card:hover{border-color:var(--gold-b);background:rgba(184,148,95,0.03)}
-.pub-img{width:90px;flex-shrink:0;border-radius:4px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
-.pub-img img{width:100%;height:auto;display:block}
-.pub-body h3{font-family:var(--serif);font-size:1.15rem;font-weight:500;margin-bottom:0.3rem}
-.pub-body p{font-size:0.88rem;color:var(--text-2);line-height:1.7}
-.pub-body .card-type{font-size:0.6rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.25rem;display:block}
-.cred-strip{display:flex;flex-wrap:wrap;gap:0.5rem;max-width:1100px;margin:2.5rem auto 0;padding:0 3rem}
-.cred-item{font-size:0.7rem;color:var(--text-3);padding:0.35rem 0.75rem;border:1px solid var(--border);border-radius:100px;transition:all 0.3s}
-.cred-item:hover{border-color:var(--gold-b);color:var(--text-2)}
-
-/* SPEAKING */
-
-/* CONTACT */
-.contact-page{display:flex;align-items:center;justify-content:center;min-height:80vh;padding:8rem 3rem;text-align:center}
-.contact-page .sh{margin:0 auto 1rem;text-align:center}
-.contact-page .sb{margin:0 auto 2.5rem;text-align:center}
-.contact-email{display:block;margin-top:1.5rem;font-size:0.85rem;color:var(--text-3)}
-.contact-email a{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s}
-.contact-email a:hover{color:var(--gold);border-color:var(--gold)}
-.contact-form{max-width:520px;margin:0 auto;text-align:left}
-.contact-form label{display:block;font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-2);margin-bottom:0.4rem}
-.contact-form input,.contact-form textarea,.contact-form select{width:100%;padding:0.75rem 1rem;font-size:0.9rem;font-family:var(--sans);color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:2px;margin-bottom:1.25rem;transition:border 0.3s;outline:none}
-.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--gold)}
-.contact-form textarea{resize:vertical;min-height:100px}
-.contact-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23B8945F' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
-.contact-form select option{background:var(--bg);color:var(--text)}
-
-/* BACK LINK */
-.back-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:400;color:var(--text-3);text-decoration:none;letter-spacing:0.05em;cursor:pointer;transition:color 0.3s;padding:5.5rem 3rem 0;max-width:1100px;margin:0 auto;display:block}
-.back-link:hover{color:var(--gold)}
-.back-link svg{width:14px;height:14px;display:inline;vertical-align:middle;margin-right:0.3rem}
-
-/* FOOTER */
-footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.footer-brand{display:flex;flex-direction:column;gap:0.25rem}
-.footer-brand-name{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--text-2)}
-.footer-copy{font-size:0.75rem;color:var(--text-3)}
-.footer-links{display:flex;gap:1.75rem;align-items:center;flex-wrap:wrap}
-.footer-links a{font-size:0.78rem;color:var(--text-3);text-decoration:none;transition:color 0.3s;cursor:pointer}
-.footer-links a:hover{color:var(--gold)}
-.footer-sep{width:3px;height:3px;border-radius:50%;background:var(--text-3);opacity:0.4}
-
-/* MOBILE MENU */
-.mobile-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,12,20,0.97);z-index:99;justify-content:center;align-items:center;flex-direction:column;gap:2rem}
-.mobile-overlay.active{display:flex}
-.mobile-overlay a{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--text);text-decoration:none;cursor:pointer;transition:color 0.3s}
-.mobile-overlay a:hover{color:var(--gold)}
-.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--text-2);font-size:1.5rem;cursor:pointer;padding:0.5rem;line-height:1}
-
-/* MISSOURI REPORT */
-.portfolio-hero{padding:8rem 3rem 3rem;text-align:center}
-.portfolio-hero .sh{margin:0 auto 0.5rem;text-align:center}
-.portfolio-hero .sb{margin:0 auto;text-align:center}
-
-/* INSIGHTS */
-.insights-hero{padding:8rem 3rem 3rem;text-align:center}
-.insights-hero .sh{margin:0 auto 0.5rem;text-align:center}
-.insights-hero .sb{margin:0 auto;text-align:center}
-.insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem;max-width:1100px;margin:3rem auto 0;padding:0 3rem}
-.insight-card{border:1px solid var(--border);border-radius:3px;padding:2rem;transition:all 0.4s;display:flex;flex-direction:column;cursor:pointer}
-.insight-card:hover{border-color:rgba(184,148,95,0.2);background:rgba(184,148,95,0.02)}
-.insight-card-type{font-size:0.62rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
-.insight-card h3{font-family:var(--serif);font-size:1.25rem;font-weight:400;margin-bottom:0.6rem;line-height:1.35}
-.insight-card p{font-size:0.88rem;color:var(--text-2);line-height:1.75;flex:1}
-.insight-card-meta{font-size:0.75rem;color:var(--text-3);margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.insight-card-cta{font-size:0.75rem;color:var(--gold);letter-spacing:0.05em}
-
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(25px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hwh-card-body{grid-template-columns:1fr;gap:2rem}
-  .hwh-sidebar{position:static}
-  .debrief-body{grid-template-columns:1fr}
-  .debrief-booking{position:static}
-  .about-layout{grid-template-columns:1fr;gap:2rem;text-align:center}
-  .about-grid{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-  nav{padding:1rem 1.5rem}
-  .nav-links{display:none}
-  .nav-brand-type{display:none}
-  section{padding:4rem 1.5rem}
-  .hero{padding:7rem 1.5rem 4rem;min-height:auto}
-  .offer-grid{grid-template-columns:1fr}
-  .problem-grid{grid-template-columns:1fr}
-  .hwh-hero{padding:6rem 1.5rem 2rem}
-  .debrief-hero{padding:6rem 1.5rem 2rem}
-  .debrief-body{padding:0 1.5rem 4rem}
-  .debrief-fallback{padding:0 1.5rem 4rem}
-  .about-hero{padding:6rem 1.5rem 3rem}
-  .about-section{padding:2rem 1.5rem 4rem}
-  footer{flex-direction:column;gap:1rem;text-align:center}
-  .footer-links{justify-content:center}
-  .pub-card{flex-direction:column;align-items:center;text-align:center}
-  .pub-img{width:100px}
-  .cred-strip{padding:0 1.5rem;justify-content:center}
-  .mobile-toggle{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:101}
-  .mobile-toggle span{width:22px;height:1.5px;background:var(--text-2);display:block;transition:all 0.3s}
-  #page-missouri-report [style*="grid-template-columns:repeat(4"]{grid-template-columns:repeat(2,1fr)!important}
-  #page-missouri-report [style*="grid-template-columns:repeat(5"]{grid-template-columns:repeat(2,1fr)!important}
-  #page-missouri-report [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
-  #page-missouri-report [style*="grid-template-columns:180px"]{grid-template-columns:1fr!important}
-  #page-missouri-report [style*="grid-template-columns:180px"] > div{border-right:none!important;border-bottom:1px solid var(--border)}
-  #page-missouri-report [style*="grid-template-columns:180px"] > div:last-child{border-bottom:none}
-}
-@media(min-width:769px){.mobile-toggle{display:none}}
-</style>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
-
 <!-- NAV -->
 <nav id="nav">
-  <a onclick="goTo('home');return false" class="nav-brand">
+  <a href="index.html" class="nav-brand">
     <span class="nav-brand-name">Arrell Advisory</span>
     <span class="nav-brand-type">AI Governance</span>
   </a>
   <ul class="nav-links">
-    <li><a onclick="goTo('methodology')" data-page="methodology">Methodology</a></li>
-    <li><a onclick="goTo('principal')" data-page="principal">Principal</a></li>
-    <li><a onclick="goTo('insights')" data-page="insights">Insights</a></li>
+    <li><a href="methodology.html" data-page="methodology">Methodology</a></li>
+    <li><a href="principal.html" data-page="principal">Principal</a></li>
+    <li><a href="insights.html" data-page="insights">Insights</a></li>
     <li><a href="governance-readiness-assessment.html" class="nav-assess">Assessment</a></li>
-    <li><a onclick="goTo('strategy')" data-page="strategy">Strategy Session</a></li>
-    <li><a onclick="goTo('debrief')" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
+    <li><a href="strategy.html" data-page="strategy">Strategy Session</a></li>
+    <li><a href="debrief.html" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
     <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
   </ul>
-  <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-overlay" id="mobileMenu">
-  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">&times;</button>
-  <a onclick="goTo('home');document.getElementById('mobileMenu').classList.remove('active')">Home</a>
-  <a onclick="goTo('methodology');document.getElementById('mobileMenu').classList.remove('active')">Methodology</a>
-  <a onclick="goTo('principal');document.getElementById('mobileMenu').classList.remove('active')">Principal</a>
-  <a onclick="goTo('insights');document.getElementById('mobileMenu').classList.remove('active')">Insights</a>
-  <a href="governance-readiness-assessment.html" onclick="document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Take the Assessment</a>
-  <a onclick="goTo('strategy');document.getElementById('mobileMenu').classList.remove('active')">Strategy Session</a>
-  <a onclick="goTo('debrief');document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--gold)">Book a Debrief</a>
-  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" onclick="document.getElementById('mobileMenu').classList.remove('active')" style="color:var(--text-3)">AI Ready Leaders ↗</a>
+  <button class="mobile-close" onclick="closeMobileMenu()">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="principal.html">Principal</a>
+  <a href="insights.html">Insights</a>
+  <a href="governance-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
+  <a href="strategy.html">Strategy Session</a>
+  <a href="debrief.html" style="color:var(--gold)">Book a Debrief</a>
+  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
 </div>
 
-<!-- ============================================ -->
-<!-- PAGE: HOME                                   -->
-<!-- ============================================ -->
-<div class="page active" id="page-home">
+
+<main class="page-content">
 
   <!-- HERO -->
   <section class="hero">
@@ -406,7 +120,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
       </div>
       <div style="margin-top:2.5rem;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap">
         <a href="governance-readiness-assessment.html" class="btn-primary">Take the Governance Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a onclick="goTo('strategy')" class="btn-ghost" style="cursor:pointer">Or book a strategy session</a>
+        <a href="strategy.html" class="btn-ghost" style="cursor:pointer">Or book a strategy session</a>
       </div>
     </div>
   </section>
@@ -423,21 +137,21 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.6rem">Operational Governance Architecture</h3>
           <p style="font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.75rem">From the breaking point to an operating condition</p>
           <p>Design and implementation of operational governance for AI adoption.</p>
-          <a onclick="goTo('methodology')" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
+          <a href="methodology.html" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
         </div>
 
         <div class="problem-card">
           <div class="problem-label">Advisory</div>
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Strategic AI Governance</h3>
           <p>Ongoing advisory partnership for organizations navigating the governance demands of scaling autonomous AI. Policy versioning, adversarial testing protocols, risk tiering systems, and strategic positioning.</p>
-          <a onclick="goTo('strategy')" class="problem-cta" style="margin-top:1.5rem;display:inline-flex;cursor:pointer">Book a strategy session &rarr;</a>
+          <a href="strategy.html" class="problem-cta" style="margin-top:1.5rem;display:inline-flex;cursor:pointer">Book a strategy session &rarr;</a>
         </div>
 
         <div class="problem-card">
           <div class="problem-label">Delivery</div>
           <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Risk-Tiered Operational Governance</h3>
           <p>Minimum viable constraint at maximum operational confidence. Capability boundaries calibrated to deployment risk context, and sequenced for operationalizing existing AI governance standards.</p>
-          <a onclick="goTo('methodology')" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
+          <a href="methodology.html" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
         </div>
 
       </div>
@@ -452,566 +166,12 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
       <p class="sb">Eight questions across five governance layers. Takes 3 minutes. Immediate score with layer-by-layer breakdown of your current posture.</p>
       <div class="assess-banner-ctarow">
         <a href="governance-readiness-assessment.html" class="btn-primary">Take the Assessment (3 min) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a onclick="goTo('debrief')" class="btn-ghost">Already know you need help? Book a Governance Debrief</a>
+        <a href="debrief.html" class="btn-ghost">Already know you need help? Book a Governance Debrief</a>
       </div>
     </div>
   </section>
 
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: METHODOLOGY (was HOW WE HELP)          -->
-<!-- ============================================ -->
-<div class="page" id="page-methodology">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="hwh-hero">
-    <div class="sl">Methodology</div>
-    <h2 class="sh" style="margin:0 auto 1rem">From AI principles to operational reality</h2>
-    <p class="sb" style="margin:0 auto 0.5rem">We design governance architectures that make responsible AI enforceable, train leaders to drive AI transformation, and build the execution infrastructure organizations need to adopt AI at scale.</p>
-  </div>
-
-  <div class="divider" style="max-width:1100px;margin:0 auto"></div>
-
-  <section style="padding-top:2.5rem;padding-bottom:0">
-    <div class="sc">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 2rem;border:1px solid var(--gold-b);border-radius:3px;background:rgba(184,148,95,0.03)">
-        <div>
-          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem">Architecture Reference</div>
-          <p style="font-size:0.95rem;color:var(--text-2);line-height:1.6">The intellectual foundation behind this methodology — the Nested Governance Architecture™, MPBP Framework™, and Risk-Proportional Governance™ in full.</p>
-        </div>
-        <a href="https://www.arrelladvisory.com/nga-white-paper" target="_blank" rel="noopener" class="offer-cta-ghost" style="white-space:nowrap;flex-shrink:0">Read the NGA™ White Paper →</a>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:0">
-    <div class="sc">
-      <div class="hwh-offers" style="margin-top:3rem">
-
-        <!-- LEVEL 1 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 01 · Diagnose</div>
-            <h2>Find the layer where your governance<br>actually breaks down: <em>not where you think it does.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">There are five operational layers where governance either holds or fails: Risk-Tiered Capability Boundaries, Constraint Encoding, Human-Authority Mechanisms, Behavioral Monitoring, and Policy Versioning &amp; Testing. Most organizations discover they have one or two that look functional and two or three with nothing structural behind them.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The assessment identifies which. Eight questions, immediate score, no login required. The score tells you where you stand. It does not tell you what that means for your organization, because that requires a conversation.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Governance Debrief is that conversation: 60 minutes with Dr. Adetayo, working through your layer results and completing the second diagnostic that no self-service tool can produce: where does governance sit structurally in your organization, and does it carry any real authority to enforce what you build? Or does that need to be addressed before anything else will stick?</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">That distinction — governance with structural authority versus governance that exists in name only — is why organizations spend money building things that get bypassed the first time a team moves fast on a deployment. The debrief names it. The written output documents it.</p>
-              <div class="hwh-card-ctarow">
-                <a href="governance-readiness-assessment.html" class="offer-cta-primary">Take the Assessment (Free)</a>
-                <a onclick="goTo('debrief')" class="offer-cta-ghost">Book a Debrief →</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Govern and Map functions: establishes the baseline for identifying where AI risk accountability is absent or unassigned</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Gap analysis against AI management system requirements, surfacing where governance documentation diverges from operational practice</li>
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act</strong> — Preliminary risk classification: identifying whether use cases in scope fall under prohibited, high-risk, or limited-risk categories before formal compliance work begins</li>
-                <li><strong style="color:var(--text);font-weight:500">OECD AI Principles</strong> — Accountability and transparency baseline: where structural gaps undermine the organization's ability to explain or justify AI decisions</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- LEVEL 2 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 02 · Design</div>
-            <h2>A roadmap that starts with what AI you actually have,<br><em>not what you assumed you had.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">Before anything can be governed, it has to be inventoried. Most organizations discover during this engagement that AI use is more widespread than leadership knew, including tools not labeled as AI, approved by no one in particular, touching data with no classification. The inventory that should exist does not. That is the starting point.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Gap Report maps that reality using the MPBP Framework: we Map what actually exists across the organization, Prioritize by actual consequence level rather than perceived risk, Build controls adapted from tested frameworks calibrated to what your organization can operationalize, and identify which use cases are ready to Pilot governance in real conditions.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The primary deliverable is the Executive Heatmap: a portfolio-level view that shows which AI use cases can move forward now, which need redesign before they do, which are creating regulatory concentration risk that no one has named yet, and which are suitable governance pilots.</p>
-              <div class="hwh-card-ctarow">
-                <a onclick="goTo('contact')" class="offer-cta-primary">Start a Conversation</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act (Annex III)</strong> — High-risk use case classification and conformity assessment requirements, mapped against your actual AI inventory rather than assumed scope</li>
-                <li><strong style="color:var(--text);font-weight:500">Colorado SB24-205</strong> — Developer and deployer obligations for algorithmic discrimination risk, including impact assessment triggers tied to deployment context</li>
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Measure and Manage functions: consequence-based prioritization aligned to the RMF's risk treatment hierarchy</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Implementation planning against management system requirements: controls mapped to what the organization can operationalize at current capacity</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- LEVEL 3 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 03 · Operationalize</div>
-            <h2>Governance that runs in your workflows,<br><em>not in a document your team forgot about.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">The failure mode we see most often is not organizations that ignore AI governance. It is organizations that build something real — a policy, a committee, a framework — and then watch it get bypassed the first time a team moves fast on a deployment. Not because people are careless. Because governance had no operational home, no structural authority, and no enforcement condition that did not depend on someone remembering.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Governance Architecture Engagement is built around a live deployment, not a hypothetical. That is the only way to test whether a governance architecture survives contact with how your organization actually operates. We design the control structure alongside real AI work: use case classification by consequence, control design proportionate to actual risk level, and operating model construction with defined ownership and enforcement conditions.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The output is a governance operating model your team owns. Not a policy update. Not a set of recommendations filed in a shared drive. A functioning architecture with a structural home, accountability at every layer, and enforcement conditions that do not require good intentions to hold.</p>
-              <div class="hwh-card-ctarow">
-                <a onclick="goTo('contact')" class="offer-cta-primary">Start a Conversation</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act</strong> — Operational requirements for high-risk AI systems: post-market monitoring obligations, human oversight mechanisms, and logging requirements embedded into the governance architecture</li>
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Govern and Manage functions at the implementation layer: defined roles, enforcement conditions, and incident response pathways aligned to the RMF operating model</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Continual improvement requirements: governance versioning, audit readiness, and management review cycles built into the operating model from day one</li>
-                <li><strong style="color:var(--text);font-weight:500">Colorado SB24-205</strong> — Deployer obligations: impact assessment processes, consumer notification conditions, and risk management documentation requirements operationalized within the governance architecture</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: STRATEGY SESSION                       -->
-<!-- ============================================ -->
-<div class="page" id="page-strategy">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="debrief-hero">
-    <div class="debrief-hero-badge">Strategy Session · $500</div>
-    <h2 class="sh">Your AI governance questions deserve a direct answer — not a framework pitch.</h2>
-    <p class="sb" style="margin-bottom:0">You are not at the beginning of this conversation. The board has asked. A vendor has pitched. A regulator has knocked. Someone in your organization has said the quiet part out loud. You are past the point of wondering whether AI governance matters, and you are not sure where to start, or whether what you have built will hold. This session is for that moment. Sixty minutes with a practitioner who will engage your actual situation — not a sales conversation, not a capabilities overview.</p>
-  </div>
-
-  <div class="debrief-body">
-    <div class="debrief-what">
-
-      <h3>Who this session is for</h3>
-      <p>Senior leaders and operators who have a governance question they cannot cleanly answer. The question is usually triggered by one of the following:</p>
-
-      <div style="display:grid;gap:1rem;margin-top:1.25rem;margin-bottom:2rem">
-        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
-          <h4 style="margin-bottom:0.5rem">&#8220;What is our AI strategy?&#8221; — asked by your board</h4>
-          <p>You need to present an architecture, not an aspiration. The session works through what governance infrastructure you would need in place before that question becomes answerable, and what that infrastructure should look like given your organizational context.</p>
-        </div>
-        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
-          <h4 style="margin-bottom:0.5rem">A vendor pitched an AI solution and you are not sure how to evaluate it</h4>
-          <p>Evaluation requires criteria that exist before the vendor calls. The session helps you identify what classification, consequence tier, and governance requirements should already be defined — so the next pitch lands inside a framework, not in a gap.</p>
-        </div>
-        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
-          <h4 style="margin-bottom:0.5rem">&#8220;What does this mean for our roles?&#8221; — asked by your team</h4>
-          <p>Your people need a structural answer, not a town hall that manages anxiety. The session surfaces what governance would need to be in place to give employees a clear line between what AI can do, what it cannot do in your context, and where human authority is protected.</p>
-        </div>
-        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
-          <h4 style="margin-bottom:0.5rem">&#8220;Show us your AI governance&#8221; — asked by a regulator or client</h4>
-          <p>Documentation that reflects what actually operates is different from documentation that reflects what was intended. The session helps you understand the gap between the two, and what closing it requires before the next ask arrives.</p>
-        </div>
-        <div class="debrief-value-box" style="padding:1.25rem 1.5rem">
-          <h4 style="margin-bottom:0.5rem">&#8220;Show me the ROI&#8221; — asked by your CEO</h4>
-          <p>AI governance built inside your transformation mandate produces measurable outcomes. The session examines whether your current governance structure is positioned to demonstrate value, or whether it is operating as a cost center by design.</p>
-        </div>
-      </div>
-
-      <h3>What the session produces</h3>
-      <p>You will leave with a clear-eyed read on where your governance actually stands relative to the question you brought in. Not a general overview of AI governance — a direct engagement with your situation, your trigger, and your organizational constraints.</p>
-      <p style="margin-top:1rem">The written deliverable, delivered within 48 hours, documents:</p>
-      <ul class="debrief-deliverable-list">
-        <li><strong style="color:var(--text);font-weight:500">A plain-language diagnosis of your governance position.</strong> Where you have structure, where you have aspiration, and where the gap between the two creates the most exposure right now.</li>
-        <li><strong style="color:var(--text);font-weight:500">A direct response to the question you brought.</strong> What your board question, vendor evaluation, regulator ask, or CEO challenge requires in governance terms — and whether what you currently have is sufficient to answer it.</li>
-        <li><strong style="color:var(--text);font-weight:500">Structural observations about your governance placement.</strong> Whether governance in your organization has the authority to enforce what it recommends, or whether it is operating informally. This distinction shapes every recommendation that follows.</li>
-        <li><strong style="color:var(--text);font-weight:500">2–3 actions within 30 days.</strong> Calibrated to what is actually executable given your structure, authority, and current state — not a generic governance checklist.</li>
-        <li><strong style="color:var(--text);font-weight:500">A clear next step recommendation.</strong> Whether a deeper engagement is warranted, what type, and why — or what needs to happen internally first before external support adds value.</li>
-      </ul>
-
-      <div class="debrief-value-box" style="margin-top:2rem">
-        <h4>Why a practitioner conversation produces what a framework cannot</h4>
-        <p>Every major AI governance framework — NIST AI RMF, ISO/IEC 42001, the EU AI Act — tells you what governance should cover. None of them tell you where governance should sit in your organization's hierarchy, who has authority to enforce it, or what happens when governance recommendations meet organizational resistance.</p>
-        <p style="margin-top:0.75rem">That gap is organizational. It requires a practitioner who has built governance inside real institutions — not a framework that describes an ideal state. The strategy session engages that layer directly. That is what makes it useful at the moment you are actually in, not the moment a framework assumes you are in.</p>
-      </div>
-
-      <h3 style="margin-top:2rem">What to bring</h3>
-      <p>The specific question, trigger, or situation that made you book. Not a cleaned-up version — the actual one. A board meeting that surfaced a gap you could not close, a vendor pitch that created more uncertainty, a team conversation that revealed something about your governance authority you were not expecting.</p>
-      <p style="margin-top:0.75rem">If you have taken the Governance Readiness Assessment, bring your score. It will sharpen the session considerably. If you have not, the session works from the situation you describe. The assessment is the faster path to clarity — but it is not a prerequisite.</p>
-      <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:1rem;display:inline-flex">Take the Assessment first →</a>
-
-    </div>
-
-    <div>
-      <div class="debrief-booking">
-        <div class="debrief-booking-price">$500</div>
-        <div class="debrief-booking-sub">One-time · 60-minute session · Written output within 48 hours</div>
-        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-primary">Book Your Strategy Session <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <div style="font-size:0.8rem;color:var(--text-3);margin-bottom:1.5rem">Payment via Stripe at booking. Scheduling via Calendly.</div>
-        <div class="debrief-booking-details">
-          <span>60-minute working session with Dr. Adetayo</span>
-          <span>Written deliverable within 48 hours</span>
-          <span>30-min buffer before and after</span>
-          <span>Calendly intake: your trigger question, AI use cases in view, organizational context</span>
-        </div>
-        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
-          <div class="hwh-sidebar-label">Want a sharper starting point?</div>
-          <p style="font-size:0.85rem;color:var(--text-2);margin-top:0.5rem;line-height:1.7">The Governance Readiness Assessment takes three minutes and gives you a scored baseline to bring into the session. No login required.</p>
-          <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:0.75rem;display:inline-flex">Take the Assessment →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="debrief-fallback">
-    <div class="divider" style="max-width:100%;margin-bottom:2rem"></div>
-    <p>Ready to go deeper? <a onclick="goTo('contact')">Start a conversation</a> about the Governance Gap Report or a full Governance Architecture Engagement.</p>
-  </div>
-
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: DEBRIEF                                -->
-<!-- ============================================ -->
-<div class="page" id="page-debrief">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="debrief-hero">
-    <div class="debrief-hero-badge">Governance Debrief · $500</div>
-    <h2 class="sh">A 60-minute session that answers the question your assessment raised.</h2>
-    <p class="sb" style="margin-bottom:0">Your score shows where the governance breaks down. The debrief shows what that means for your organization specifically, including whether the governance structure you have carries any real authority to enforce what you build, or whether that needs to change first. That is the question most organizations cannot answer from a self-service tool. It requires a conversation. The debrief is that conversation, with a written output you keep.</p>
-  </div>
-
-  <div class="debrief-body">
-    <div class="debrief-what">
-
-      <h3>What the Debrief Actually Produces</h3>
-      <p>You are not purchasing a conversation. You are purchasing a complete dual-axis diagnostic with a documented action direction. The first time both axes of your governance picture assemble in one place.</p>
-      <p style="margin-top:1rem">Most organizations arrive at the debrief knowing their score. What they do not yet know is whether the governance function in their organization has any structural authority, or whether it is advisory, informal, or dependent on individual goodwill. That distinction changes everything about what happens next. An organization with strong governance maturity but no structural authority should not commission an implementation engagement before addressing the structural problem. The debrief surfaces that before you spend money in the wrong direction.</p>
-
-      <p style="margin-top:1rem">The written deliverable: delivered within 48 hours: includes:</p>
-      <ul class="debrief-deliverable-list">
-        <li><strong style="color:var(--text);font-weight:500">Layer-by-layer diagnosis in operational language.</strong> Not "your Constraint Encoding scored amber." What that actually means for how AI decisions get made in your organization today, and what breaks when it is untested.</li>
-        <li><strong style="color:var(--text);font-weight:500">Governance placement classification.</strong> Advisory / Workaround / Checkbox / Embedded. Where your governance function sits structurally, what authority it carries, and whether implementation work will hold under organizational pressure or get bypassed the first time it creates friction.</li>
-        <li><strong style="color:var(--text);font-weight:500">What placement means for what you do next.</strong> If governance placement needs to change before implementation begins, this document says that directly, and explains what addressing it first looks like.</li>
-        <li><strong style="color:var(--text);font-weight:500">MPBP phase recommendation.</strong> Where in the Map → Prioritize → Build → Pilot sequence your organization needs to start. Not where the framework starts. Where you start, given both your maturity score and your placement classification.</li>
-        <li><strong style="color:var(--text);font-weight:500">2–3 specific actions within 30 days.</strong> Calibrated to what is actually executable given your structure, not a generic governance to-do list.</li>
-        <li><strong style="color:var(--text);font-weight:500">A clear next step recommendation.</strong> Whether the Governance Gap Report is the right next engagement, and why, or why something else needs to happen first.</li>
-      </ul>
-
-      <div class="debrief-value-box">
-        <h4>Why the placement classification changes what you do next</h4>
-        <p>Two organizations can score identically on the Five Layers assessment: both Structured maturity, both with documented policies and some oversight in place. But if one has governance structurally embedded with real enforcement authority, and the other has governance that operates in an advisory capacity with no mandate to block deployments: those are completely different situations requiring completely different next steps.</p>
-        <p style="margin-top:0.75rem">The self-service assessment cannot surface that distinction. It captures maturity. The debrief completes the diagnostic. That is what makes the $500 defensible: you are not paying for interpretation of a score. You are getting the complete picture: both axes mapped: before you decide what to commission next.</p>
-      </div>
-
-      <h3 style="margin-top:2rem">What to bring to the session</h3>
-      <p>Take the assessment first. Your score is the starting point. If you have not taken it yet, it takes three minutes and requires no login. The debrief works with your actual results, not a general conversation about AI governance.</p>
-      <p style="margin-top:0.75rem">If there was a specific trigger that made you reach out. A board question, a procurement process, a near-miss deployment, a client ask you could not answer cleanly: bring that. The debrief works best when it starts with the real situation, not the cleaned-up version.</p>
-      <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:1rem;display:inline-flex">Take the Assessment first →</a>
-
-    </div>
-
-    <div>
-      <div class="debrief-booking">
-        <div class="debrief-booking-price">$500</div>
-        <div class="debrief-booking-sub">One-time · 60-minute session · Written output within 48 hours</div>
-        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-primary">Book Your Debrief <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <div style="font-size:0.8rem;color:var(--text-3);margin-bottom:1.5rem">Payment via Stripe at booking. Scheduling via Calendly.</div>
-        <div class="debrief-booking-details">
-          <span>60-minute working session with Dr. Adetayo</span>
-          <span>Written deliverable within 48 hours</span>
-          <span>30-min buffer before and after</span>
-          <span>Calendly intake: score, AI use cases in production, trigger for booking</span>
-        </div>
-        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
-          <div class="hwh-sidebar-label">Haven't taken the assessment yet?</div>
-          <p style="font-size:0.85rem;color:var(--text-2);margin-top:0.5rem;line-height:1.7">The assessment is the starting point for the debrief. Three minutes, no login, immediate score.</p>
-          <a href="governance-readiness-assessment.html" class="offer-cta-ghost" style="margin-top:0.75rem;display:inline-flex">Take the Assessment →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="debrief-fallback">
-    <div class="divider" style="max-width:100%;margin-bottom:2rem"></div>
-    <p>Looking for a deeper engagement? <a onclick="goTo('contact')">Start a conversation</a> about the Governance Gap Report or Governance Architecture Engagement.</p>
-  </div>
-
-</div>
-
-<!-- ============================================ -->
-<!-- ============================================ -->
-<!-- PAGE: PRINCIPAL                              -->
-<!-- ============================================ -->
-<div class="page" id="page-principal">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <section class="about-hero">
-    <div class="sl">Principal</div>
-    <h2 class="sh">Dr. Gbemisola Adetayo</h2>
-    <div class="about-layout">
-      <div class="about-photo">
-        <img src="img/headshot.jpeg" alt="Dr. Gbemisola Adetayo">
-        <div class="about-name">Dr. Gbemisola Adetayo</div>
-        <div class="about-title">Agentic AI Governance Architect</div>
-        <div class="about-social">
-          <a href="https://www.linkedin.com/in/gbemisolaadetayo" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-      <div class="about-bio">
-        <p><strong style="font-family:var(--serif);font-size:1.15rem;font-weight:500">About Dr. Adetayo</strong></p>
-        <p>Dr. Gbemisola Adetayo is an Agentic AI Governance Architect focused on responsible AI deployment across institutional, public sector, and enterprise settings.</p>
-        <p>She is an AI Policy member at the Center for AI and Digital Policy (CAIDP) with executive education from Harvard and Stanford.</p>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="about-section bg-alt">
-    <div class="sc">
-      <div class="sl">Published Work</div>
-      <div class="about-grid">
-        <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener" class="pub-card">
-          <div class="pub-img"><img src="img/safe-ai-use-book.jpeg" alt="SAFE AI USE Manual"></div>
-          <div class="pub-body">
-            <span class="card-type">Book &bull; Published</span>
-            <h3>SAFE AI USE™: The User Manual for Everyone</h3>
-            <p>What to ask, what to avoid, and how to stay in control with AI tools. The practical guide behind the framework.</p>
-          </div>
-        </a>
-        <a href="https://www.arrelladvisory.com/nga-white-paper" target="_blank" rel="noopener" class="pub-card">
-          <div class="pub-body" style="padding:0.25rem 0">
-            <span class="card-type">White Paper &bull; Architecture</span>
-            <h3>The Nested Governance Architecture™</h3>
-            <p>The complete design pattern for embedding AI governance within organizational transformation — including the MPBP Framework™ and Risk-Proportional Governance™ model. The intellectual foundation behind Arrell Advisory's methodology.</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sc">
-      <div class="sl">Speaking</div>
-      <h3 style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:400;margin-bottom:0.5rem">Keynotes &amp; Workshops</h3>
-      <p style="font-size:0.95rem;color:var(--text-2);max-width:580px;margin-bottom:2rem">Conference sessions and organizational workshops on responsible AI leadership, agentic AI governance, and the future of AI-driven work.</p>
-      <div style="margin-bottom:2.5rem;border-radius:4px;overflow:hidden;border:1px solid rgba(184,148,95,0.15);max-width:800px">
-        <img src="img/stc-squared-conference.jpeg" alt="STC Squared Conference, Responsible AI Leadership: Strategic Impact Across Products, Teams, and Careers, Dr. Gbemisola Adetayo, Wednesday, March 25, 2026 2:35 PM" style="width:100%;display:block">
-      </div>
-      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center">
-        <a href="https://forms.gle/i4hSTs1mwQrtVhZv6" target="_blank" rel="noopener" class="btn-primary">Book Dr. Adetayo to Speak <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:1em;height:1em"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="governance-readiness-assessment.html" class="btn-ghost">Take the Governance Readiness Assessment</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="cred-strip">
-    <span class="cred-item">SAFE AI USE™ Creator</span>
-    <span class="cred-item">Fortune 500 Delivery: $200M+ Programs</span>
-    <span class="cred-item">WHO · Coca-Cola · Wells Fargo</span>
-    <span class="cred-item">Harvard AI Leadership</span>
-    <span class="cred-item">Center for AI &amp; Digital Policy</span>
-    <span class="cred-item">10+ Governance Frameworks</span>
-  </div>
-  <div style="height:3rem"></div>
-
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: MISSOURI REPORT                        -->
-<!-- ============================================ -->
-<div class="page" id="page-missouri-report">
-
-  <a onclick="goTo('insights')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Insights</a>
-
-  <div class="portfolio-hero">
-    <div class="sl">Missouri AI Governance</div>
-    <h2 class="sh" style="margin:0 auto 0.5rem">From Executive Order to Governance Architecture</h2>
-    <p class="sb" style="margin:0 auto">On January 13, 2026, Missouri signed two executive orders embedding AI governance inside a broader government transformation agenda. Four departments. Five principles. One deadline.</p>
-  </div>
-
-  <section style="padding-top:0">
-    <div class="sc">
-
-      <div class="reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:3rem;text-align:center">
-        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><div style="font-family:var(--serif);font-size:2rem;color:var(--gold)">4</div><div style="font-size:0.8rem;color:var(--text-2);text-transform:uppercase;letter-spacing:0.1em">Departments</div></div>
-        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><div style="font-family:var(--serif);font-size:2rem;color:var(--gold)">5</div><div style="font-size:0.8rem;color:var(--text-2);text-transform:uppercase;letter-spacing:0.1em">Pillars</div></div>
-        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><div style="font-family:var(--serif);font-size:2rem;color:var(--gold)">4</div><div style="font-size:0.8rem;color:var(--text-2);text-transform:uppercase;letter-spacing:0.1em">Phases</div></div>
-        <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><div style="font-family:var(--serif);font-size:2rem;color:var(--gold)">1</div><div style="font-size:0.8rem;color:var(--text-2);text-transform:uppercase;letter-spacing:0.1em">Deadline</div></div>
-      </div>
-
-      <div class="reveal" style="margin-bottom:3rem">
-        <div class="sl">Governance Architecture</div>
-        <h3 style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:400;margin-bottom:1rem">Missouri's <em style="color:var(--gold);font-style:italic">Nested</em> Design</h3>
-        <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:2rem;max-width:620px">AI governance embedded within broader government transformation, not siloed compliance, but a built-in standard.</p>
-        <div style="border:1px solid var(--border);border-radius:3px;padding:2rem">
-          <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">EO 26-03 &middot; GREAT Initiative</div>
-          <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:1.5rem">Government-wide efficiency and transformation. AI applications must adhere to safety and security standards established in EO 26-02.</p>
-          <div style="border:1px solid var(--gold-b);border-radius:3px;padding:1.75rem;background:rgba(184,148,95,0.03)">
-            <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem">EO 26-02 &middot; AI Governance</div>
-            <p style="font-size:0.92rem;font-weight:500;margin-bottom:1rem">AI Governance Principles</p>
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem">
-              <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:3px;font-size:0.78rem;color:var(--text-2)"><span style="display:block;font-family:var(--serif);color:var(--gold);font-size:1.1rem;margin-bottom:0.25rem">1</span>Efficiency &amp; Service</div>
-              <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:3px;font-size:0.78rem;color:var(--text-2)"><span style="display:block;font-family:var(--serif);color:var(--gold);font-size:1.1rem;margin-bottom:0.25rem">2</span>Data Privacy &amp; Security</div>
-              <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:3px;font-size:0.78rem;color:var(--text-2)"><span style="display:block;font-family:var(--serif);color:var(--gold);font-size:1.1rem;margin-bottom:0.25rem">3</span>Human Decision-Making</div>
-              <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:3px;font-size:0.78rem;color:var(--text-2)"><span style="display:block;font-family:var(--serif);color:var(--gold);font-size:1.1rem;margin-bottom:0.25rem">4</span>Transparency</div>
-              <div style="text-align:center;padding:0.75rem;border:1px solid var(--border);border-radius:3px;font-size:0.78rem;color:var(--text-2)"><span style="display:block;font-family:var(--serif);color:var(--gold);font-size:1.1rem;margin-bottom:0.25rem">5</span>Data Quality</div>
-            </div>
-          </div>
-          <p style="font-size:0.85rem;color:var(--text-2);margin-top:1.25rem;padding-left:0.75rem;border-left:2px solid var(--gold)"><strong style="color:var(--text);font-weight:500">Nested by design:</strong> Departments encounter AI governance as a built-in standard, not an afterthought bolted on later.</p>
-        </div>
-      </div>
-
-      <div class="divider" style="margin-bottom:3rem"></div>
-
-      <div class="reveal" style="margin-bottom:3rem">
-        <div class="sl">The MPBP Framework</div>
-        <h3 style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:400;margin-bottom:1rem">Four Phases to <em style="color:var(--gold);font-style:italic">Operationalize</em></h3>
-        <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:2rem;max-width:620px">What separates jurisdictions that operationalize AI governance from those that produce frameworks that sit on a shelf.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
-          <div style="padding:1.75rem;border:1px solid var(--border);border-radius:3px"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem">Phase 01 &middot; Months 1–2</div><h4 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:0.5rem">Map What Exists</h4><p style="font-size:0.88rem;color:var(--text-2);line-height:1.7">Inventory current AI use across departments, including vendor tools with AI capabilities not labeled as "AI."</p></div>
-          <div style="padding:1.75rem;border:1px solid var(--border);border-radius:3px"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem">Phase 02 &middot; Months 2–4</div><h4 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:0.5rem">Prioritize by Impact</h4><p style="font-size:0.88rem;color:var(--text-2);line-height:1.7">Not all AI carries the same risk. Classify by tier so governance resources match actual impact level.</p></div>
-          <div style="padding:1.75rem;border:1px solid var(--border);border-radius:3px"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem">Phase 03 &middot; Months 3–6</div><h4 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:0.5rem">Build on Tested Frameworks</h4><p style="font-size:0.88rem;color:var(--text-2);line-height:1.7">Adapt NIST AI RMF, OECD principles, and EU AI Act structures. Don't reinvent what others have solved.</p></div>
-          <div style="padding:1.75rem;border:1px solid var(--border);border-radius:3px"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem">Phase 04 &middot; Months 4–10</div><h4 style="font-family:var(--serif);font-size:1.1rem;font-weight:500;margin-bottom:0.5rem">Pilot &amp; Learn</h4><p style="font-size:0.88rem;color:var(--text-2);line-height:1.7">Each department identifies one well-scoped AI pilot where governance is built and tested in real time.</p></div>
-        </div>
-      </div>
-
-      <div class="divider" style="margin-bottom:3rem"></div>
-
-      <div class="reveal" style="margin-bottom:3rem">
-        <div class="sl">Risk-Proportional Governance</div>
-        <h3 style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:400;margin-bottom:1rem">Three-Tier <em style="color:var(--gold);font-style:italic">Impact</em> Classification</h3>
-        <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:2rem;max-width:620px">Fast-track routine uses. Ensure high-impact decisions receive robust oversight.</p>
-        <div style="display:flex;flex-direction:column;gap:1rem">
-          <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:3px;overflow:hidden">
-            <div style="padding:1.25rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center"><div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)">Tier 1</div><div style="font-family:var(--serif);font-size:1.05rem;font-weight:500">Routine Automation</div></div>
-            <div style="padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">What It Covers</div><p style="font-size:0.85rem;color:var(--text-2)">Internal admin tasks with no direct citizen impact: scheduling, document summarization, data entry.</p></div>
-            <div style="padding:1.25rem"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Governance</div><p style="font-size:0.85rem;color:var(--text-2)">Department-level approval, standard data quality checks, periodic review.</p></div>
-          </div>
-          <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:3px;overflow:hidden">
-            <div style="padding:1.25rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center"><div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)">Tier 2</div><div style="font-family:var(--serif);font-size:1.05rem;font-weight:500">Decision Support</div></div>
-            <div style="padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">What It Covers</div><p style="font-size:0.85rem;color:var(--text-2)">AI informing human decisions affecting citizens or resource allocation: permit review, trend analysis.</p></div>
-            <div style="padding:1.25rem"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Governance</div><p style="font-size:0.85rem;color:var(--text-2)">Human-in-the-loop requirements, transparency about AI's role, data privacy impact review.</p></div>
-          </div>
-          <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:0;border:1px solid var(--gold-b);border-radius:3px;overflow:hidden">
-            <div style="padding:1.25rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center"><div style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#c75050">Tier 3</div><div style="font-family:var(--serif);font-size:1.05rem;font-weight:500">Citizen-Facing Decisions</div></div>
-            <div style="padding:1.25rem;border-right:1px solid var(--border)"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">What It Covers</div><p style="font-size:0.85rem;color:var(--text-2)">AI directly affecting outcomes, rights, or access: eligibility determinations, risk assessments.</p></div>
-            <div style="padding:1.25rem"><div style="font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.3rem">Governance</div><p style="font-size:0.85rem;color:var(--text-2)">Full oversight at decision point, citizen transparency, concern mechanisms. All five pillars apply.</p></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider" style="margin-bottom:3rem"></div>
-
-      <div class="reveal" style="margin-bottom:3rem">
-        <div class="sl">By November 30, 2026</div>
-        <h3 style="font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:400;margin-bottom:1rem">What <em style="color:var(--gold);font-style:italic">Success</em> Looks Like</h3>
-        <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:2rem;max-width:620px">If the four departments execute well, Missouri could have all six of these by the reporting deadline.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">1</span><strong style="font-weight:500">A working AI use inventory</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">The first comprehensive view of where and how AI operates within Missouri's agencies.</span></div>
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">2</span><strong style="font-weight:500">A tiered governance framework</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">Matching governance requirements to the actual impact level of each AI application.</span></div>
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">3</span><strong style="font-weight:500">Four department-level AI pilots</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">Governance in action, not just frameworks on paper.</span></div>
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">4</span><strong style="font-weight:500">Workforce development programs</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">Equipping state employees for AI-augmented roles.</span></div>
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">5</span><strong style="font-weight:500">Energy and infrastructure assessment</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">Ensuring AI growth doesn't raise rates for residents and small businesses.</span></div>
-          <div style="padding:1.5rem;border:1px solid var(--border);border-radius:3px"><span style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-right:0.5rem">6</span><strong style="font-weight:500">A governance model other states reference</strong><span style="display:block;font-size:0.85rem;color:var(--text-2);margin-top:0.3rem">Positioning Missouri as a leader in responsible AI adoption.</span></div>
-        </div>
-        <p style="text-align:center;margin-top:1.5rem;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold)">Reporting Deadline: November 30, 2026</p>
-      </div>
-
-      <div class="reveal" style="text-align:center;padding:3rem 0;border-top:1px solid var(--border)">
-        <h3 style="font-family:var(--serif);font-size:1.5rem;font-weight:400;margin-bottom:0.75rem">Full Analysis</h3>
-        <p style="font-size:0.95rem;color:var(--text-2);margin-bottom:2rem;max-width:520px;margin-left:auto;margin-right:auto">This overview covers the core architecture. The full report includes global benchmarks, implementation guidance, anti-patterns to avoid, and the complete four-phase execution framework.</p>
-        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-          <a href="https://drive.google.com/file/d/1voiN9MzIfkbl6Ywb94eUCpJixlfwwBid/view" target="_blank" rel="noopener" class="btn-primary">Download Full Report <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-          <a href="missouri-ai-governance-report.html" target="_blank" rel="noopener" class="btn-ghost">or read full report online</a>
-        </div>
-        <p style="margin-top:2.5rem;font-size:0.8rem;color:var(--text-3)">Dr Gbemisola Adetayo &middot; Responsible AI Governance Architect &middot; Principal, Arrell Advisory</p>
-      </div>
-
-    </div>
-  </section>
-
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: INSIGHTS                               -->
-<!-- ============================================ -->
-<div class="page" id="page-insights">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="insights-hero">
-    <div class="sl">Insights</div>
-    <h2 class="sh" style="margin:0 auto 1rem">AI governance in practice</h2>
-    <p class="sb" style="margin:0 auto">Analysis, case studies, and frameworks from the field — what it actually takes to operationalize AI governance in real organizations.</p>
-  </div>
-
-  <div class="insights-grid reveal">
-
-    <div class="insight-card" onclick="goTo('missouri-report')">
-      <div class="insight-card-type">Case Study &bull; Public Sector</div>
-      <h3>Missouri AI Governance: From Executive Order to Governance Architecture</h3>
-      <p>Practitioner's analysis of Missouri's dual executive orders embedding AI governance inside a broader government transformation agenda. Four departments, five principles, one November 2026 deadline — and what it takes to execute.</p>
-      <div class="insight-card-meta">
-        <span>January 2026 &middot; Dr. Gbemisola Adetayo</span>
-        <span class="insight-card-cta">Read →</span>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="max-width:1100px;margin:4rem auto 0;padding:0 3rem 6rem">
-    <div class="divider" style="max-width:100%;margin-bottom:2.5rem"></div>
-    <p style="font-size:0.88rem;color:var(--text-3)">New analysis published periodically. Follow on <a href="https://www.linkedin.com/in/gbemisolaadetayo" target="_blank" rel="noopener" style="color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderColor='var(--border)'">LinkedIn</a> for updates.</p>
-  </div>
-
-</div>
-
-<!-- ============================================ -->
-<!-- PAGE: CONTACT                                -->
-<!-- ============================================ -->
-<div class="page" id="page-contact">
-
-  <a onclick="goTo('home')" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="contact-page">
-    <div class="sc">
-      <div class="sl">Get In Touch</div>
-      <h2 class="sh">Start a conversation</h2>
-      <p class="sb">Tell us a bit about where you are and what you're working on. We'll get back to you within two business days.</p>
-      <div class="contact-form">
-        <label for="contact-name">Name <span style="color:#c75050">*</span></label>
-        <input type="text" id="contact-name" placeholder="Your name" required>
-        <label for="contact-email">Email <span style="color:#c75050">*</span></label>
-        <input type="email" id="contact-email" placeholder="your@email.com" required>
-        <label for="contact-org">Organization <span style="color:#c75050">*</span></label>
-        <input type="text" id="contact-org" placeholder="Company or organization" required>
-        <label for="contact-interest">I'm interested in <span style="color:#c75050">*</span></label>
-        <select id="contact-interest" required>
-          <option value="">Select one...</option>
-          <option value="Governance Architecture Engagement">Governance Architecture Engagement</option>
-          <option value="Governance Gap Report">Governance Gap Report</option>
-          <option value="Speaking">Speaking Engagement</option>
-          <option value="Other">Other</option>
-        </select>
-        <label for="contact-msg">Message <span style="color:#c75050">*</span></label>
-        <textarea id="contact-msg" placeholder="What are you looking to solve?" required></textarea>
-        <button type="button" class="btn-primary" style="cursor:pointer;width:100%;justify-content:center" onclick="sendContactForm()">Send Message <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-      </div>
-      <div class="contact-email">or email directly at <a href="/cdn-cgi/l/email-protection#2e464b4242416e4f5c5c4b42424f4a58475d415c57004d4143"><span class="__cf_email__" data-cfemail="83ebe6efefecc3e2f1f1e6efefe2e7f5eaf0ecf1faade0ecee">[email&#160;protected]</span></a></div>
-    </div>
-  </div>
-
-</div>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -1020,13 +180,13 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
     <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
   </div>
   <div class="footer-links">
-    <a onclick="goTo('methodology')">Methodology</a>
+    <a href="methodology.html">Methodology</a>
     <div class="footer-sep"></div>
-    <a onclick="goTo('insights')">Insights</a>
+    <a href="insights.html">Insights</a>
     <div class="footer-sep"></div>
-    <a onclick="goTo('principal')">Principal</a>
+    <a href="principal.html">Principal</a>
     <div class="footer-sep"></div>
-    <a onclick="goTo('contact')">Contact</a>
+    <a href="contact.html">Contact</a>
     <div class="footer-sep"></div>
     <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
     <div class="footer-sep"></div>
@@ -1038,112 +198,7 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ROUTING
-var PAGE_ALIASES = {
-  'portfolio': 'methodology',
-  'how-we-help': 'methodology',
-  'principal': 'principal',
-  'about': 'principal',
-  'speaking': 'principal',
-  'blog': 'insights',
-  'articles': 'insights'
-};
 
-function goTo(page) {
-  // Handle retired routes
-  if (PAGE_ALIASES[page]) page = PAGE_ALIASES[page];
-
-  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-  var target = document.getElementById('page-' + page);
-  if (!target) { target = document.getElementById('page-home'); page = 'home'; }
-  target.classList.add('active');
-  window.scrollTo(0, 0);
-  document.querySelectorAll('.nav-links a[data-page]').forEach(function(a) {
-    a.classList.toggle('active', a.getAttribute('data-page') === page);
-  });
-  initReveals();
-  try { history.pushState(null, '', '#' + page); } catch(e) {}
-}
-
-function handleHash() {
-  var hash = window.location.hash.replace('#', '');
-  if (hash) {
-    goTo(hash);
-  }
-}
-
-window.addEventListener('scroll', function() {
-  var nav = document.getElementById('nav');
-  if (window.scrollY > 40) { nav.classList.add('scrolled'); }
-  else { nav.classList.remove('scrolled'); }
-});
-
-function initReveals() {
-  var reveals = document.querySelectorAll('.reveal:not(.visible)');
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(function(el) { observer.observe(el); });
-  } else {
-    reveals.forEach(function(el) { el.classList.add('visible'); });
-  }
-}
-
-function sendContactForm() {
-  var name = document.getElementById('contact-name').value.trim();
-  var email = document.getElementById('contact-email').value.trim();
-  var org = document.getElementById('contact-org').value.trim();
-  var interest = document.getElementById('contact-interest').value;
-  var msg = document.getElementById('contact-msg').value.trim();
-  if (!name || !email || !org || !interest || !msg) { alert('Please fill in all fields before sending.'); return; }
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) { alert('Please enter a valid email address.'); return; }
-  var btn = document.querySelector('.contact-form .btn-primary');
-  var originalHTML = btn.innerHTML;
-  btn.innerHTML = 'Sending...';
-  btn.disabled = true;
-  btn.style.opacity = '0.6';
-  fetch('https://formsubmit.co/ajax/hello@arrelladvisory.com', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      name: name, email: email, organization: org, interest: interest, message: msg,
-      _subject: 'Inquiry from ' + name + (interest ? ' \u2014 ' + interest : '')
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (data.success) {
-      btn.innerHTML = 'Message Sent \u2713';
-      btn.style.background = '#2a6e4a';
-      btn.style.opacity = '1';
-      ['contact-name','contact-email','contact-org','contact-interest','contact-msg'].forEach(function(id) {
-        document.getElementById(id).value = '';
-      });
-      setTimeout(function() { btn.innerHTML = originalHTML; btn.style.background = ''; btn.disabled = false; }, 4000);
-    } else { throw new Error('failed'); }
-  })
-  .catch(function() {
-    btn.innerHTML = originalHTML;
-    btn.style.opacity = '1';
-    btn.disabled = false;
-    alert('Something went wrong. Please try again or email hello@arrelladvisory.com directly.');
-  });
-}
-
-// Popstate for back/forward navigation
-window.addEventListener('popstate', handleHash);
-
-// Init
-handleHash();
-initReveals();
-</script>
+<script src="scripts.js"></script>
 </body>
 </html>

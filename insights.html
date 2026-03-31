@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights | Arrell Advisory</title>
+<meta name="description" content="Analysis and frameworks for enterprise AI governance from Arrell Advisory.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-name">Arrell Advisory</span>
+    <span class="nav-brand-type">AI Governance</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="methodology.html" data-page="methodology">Methodology</a></li>
+    <li><a href="principal.html" data-page="principal">Principal</a></li>
+    <li><a href="insights.html" data-page="insights">Insights</a></li>
+    <li><a href="governance-readiness-assessment.html" class="nav-assess">Assessment</a></li>
+    <li><a href="strategy.html" data-page="strategy">Strategy Session</a></li>
+    <li><a href="debrief.html" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
+    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
+  </ul>
+  <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-overlay" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="principal.html">Principal</a>
+  <a href="insights.html">Insights</a>
+  <a href="governance-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
+  <a href="strategy.html">Strategy Session</a>
+  <a href="debrief.html" style="color:var(--gold)">Book a Debrief</a>
+  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
+</div>
+
+
+<main class="page-content">
+
+  <a href="index.html" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
+
+  <div class="insights-hero">
+    <div class="sl">Insights</div>
+    <h2 class="sh" style="margin:0 auto 1rem">AI governance in practice</h2>
+    <p class="sb" style="margin:0 auto">Analysis, case studies, and frameworks from the field — what it actually takes to operationalize AI governance in real organizations.</p>
+  </div>
+
+  <div class="insights-grid reveal">
+
+    <div class="insight-card" href="missouri-report.html">
+      <div class="insight-card-type">Case Study &bull; Public Sector</div>
+      <h3>Missouri AI Governance: From Executive Order to Governance Architecture</h3>
+      <p>Practitioner's analysis of Missouri's dual executive orders embedding AI governance inside a broader government transformation agenda. Four departments, five principles, one November 2026 deadline — and what it takes to execute.</p>
+      <div class="insight-card-meta">
+        <span>January 2026 &middot; Dr. Gbemisola Adetayo</span>
+        <span class="insight-card-cta">Read →</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:1100px;margin:4rem auto 0;padding:0 3rem 6rem">
+    <div class="divider" style="max-width:100%;margin-bottom:2.5rem"></div>
+    <p style="font-size:0.88rem;color:var(--text-3)">New analysis published periodically. Follow on <a href="https://www.linkedin.com/in/gbemisolaadetayo" target="_blank" rel="noopener" style="color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--border);transition:all 0.3s" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--text-2)';this.style.borderColor='var(--border)'">LinkedIn</a> for updates.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-brand-name">Arrell Advisory</div>
+    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
+  </div>
+  <div class="footer-links">
+    <a href="methodology.html">Methodology</a>
+    <div class="footer-sep"></div>
+    <a href="insights.html">Insights</a>
+    <div class="footer-sep"></div>
+    <a href="principal.html">Principal</a>
+    <div class="footer-sep"></div>
+    <a href="contact.html">Contact</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="footer-sep"></div>
+    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
+    <div class="footer-sep"></div>
+    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+  </div>
+</footer>
+
+
+<script src="scripts.js"></script>
+
+<script>
+document.querySelectorAll('.nav-links a[data-page]').forEach(function(a) {
+  if (a.getAttribute('data-page') === 'insights') a.classList.add('active');
+});
+</script>
+</body>
+</html>
