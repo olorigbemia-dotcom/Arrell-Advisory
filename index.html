@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arrell Advisory | AI Governance Consulting</title>
-<meta name="description" content="We design governance architectures that make AI deployment defensible to your board, your regulators, and your customers.">
+<meta name="description" content="Arrell Advisory is the advisory firm for organizations in regulated industries that need AI adoption done right. Transformation architecture, enterprise risk management, and AI governance in a single operating framework.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
+
 <!-- NAV -->
 <nav id="nav">
   <a href="index.html" class="nav-brand">
@@ -24,10 +25,9 @@
     <li><a href="methodology.html" data-page="methodology">Methodology</a></li>
     <li><a href="principal.html" data-page="principal">Principal</a></li>
     <li><a href="insights.html" data-page="insights">Insights</a></li>
-    <li><a href="governance-readiness-assessment.html" class="nav-assess">Assessment</a></li>
-    <li><a href="strategy.html" data-page="strategy">Strategy Session</a></li>
-    <li><a href="debrief.html" class="nav-cta" data-page="debrief">Book a Debrief</a></li>
-    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
+    <li><a href="ai-transformation-readiness-assessment.html" class="nav-assess">Take the Assessment</a></li>
+    <li><a href="strategy.html" class="nav-cta" data-page="strategy">Strategy Session</a></li>
+    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders &#8599;</a></li>
   </ul>
   <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -38,163 +38,246 @@
   <a href="methodology.html">Methodology</a>
   <a href="principal.html">Principal</a>
   <a href="insights.html">Insights</a>
-  <a href="governance-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
-  <a href="strategy.html">Strategy Session</a>
-  <a href="debrief.html" style="color:var(--gold)">Book a Debrief</a>
-  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
+  <a href="ai-transformation-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
+  <a href="strategy.html" style="color:var(--gold)">Strategy Session</a>
+  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders &#8599;</a>
 </div>
 
 
 <main class="page-content">
 
-  <!-- HERO -->
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-label">AI Governance and Transformation</div>
-      <h1>Autonomous AI is already<br>operational. <em>The organizational<br>architecture to scale it does not exist.</em></h1>
-      <p class="hero-sub">The Nested Governance Architecture&#8482; is built for this, embedding AI governance inside your organizational transformation so it functions as a built-in operating standard, not a compliance layer that gets bypassed the moment it creates friction.</p>
+      <div class="hero-label">AI Transformation and Governance</div>
+      <h1>Autonomous AI is already operational. <em>The organizational architecture to scale it does not exist.</em></h1>
+      <p class="hero-sub">Arrell Advisory is the advisory firm for organizations in regulated industries that need AI adoption done right. We bring transformation architecture, enterprise risk management, and AI governance together into a single operating framework so your organization adopts AI responsibly, defensibly, and sustainably.</p>
+      <p style="font-size:1rem;font-weight:300;color:var(--text-2);max-width:660px;line-height:1.85;margin-bottom:2.75rem;opacity:0;animation:fadeUp 0.8s ease 0.75s forwards">The public-facing assessment. Integrated across your three pillars. Showing where the organization sits across transformation readiness, risk infrastructure, and governance operability simultaneously.</p>
       <div class="btn-row">
-        <a href="governance-readiness-assessment.html" class="btn-primary">Find out where your governance breaks down <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="https://calendly.com/arrelladvisory/governance-debrief" target="_blank" rel="noopener" class="btn-ghost">or book a strategy session</a>
+        <a href="ai-transformation-readiness-assessment.html" class="btn-primary">Take the Responsible AI Transformation Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener" class="btn-ghost">or book a strategy session</a>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM STATEMENT -->
+  <!-- ============================================================
+       OPENING PROBLEM BLOCK
+  ============================================================ -->
   <section class="bg-alt">
     <div class="sc reveal">
-      <div class="sl">What this usually looks like</div>
-      <h2 class="sh">It is not that people do not care.<br>It is that nothing is structurally enforced.</h2>
-      <div class="problem-grid">
-        <div class="problem-card">
-          <div class="problem-label">"It lives in a document, not in a workflow."</div>
-          <p>You have a policy. Maybe a committee. Possibly a principles document with good intentions behind it. None of it is connected to how AI actually operates in your teams. A new use case goes live without review because there is no requirement that says it cannot.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-label">"We do not have a real picture of what is in use."</div>
-          <p>Different teams are doing different things. Some have informal approval. Some have nothing. The exposure is not theoretical: it is in tools already running, touching data you may not have mapped. The inventory that would tell you this does not exist yet.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-label">&#8220;AI is moving through the organization. I don&#8217;t have a complete picture of it.&#8221;</div>
-          <p>Different teams making different calls. Vendor-embedded AI no one procured as AI. Decisions being influenced by tools no governance process has touched. The exposure is not hypothetical: it is in workflows already running. And when the board question comes, the regulatory review arrives, or a deployment creates an incident, the absence of that picture is the first thing anyone asks for.</p>
-        </div>
-      </div>
-      <div style="margin-top:2.5rem">
-        <a href="governance-readiness-assessment.html" class="problem-cta">Eight questions will show you which layer of your governance is the breaking point → Take the Assessment</a>
-      </div>
+      <div class="sl">The Challenge</div>
+      <h2 class="sh">Responsible AI adoption in regulated industries isn&#8217;t one problem. It&#8217;s three &#8212; and most firms only solve one of them.</h2>
+      <p class="sb">Some get the strategy right but have no governance to back it up. Some build compliance frameworks that nobody operates. Some train employees without managing the risk those employees now carry. And almost all of them treat transformation, risk, and governance as separate workstreams &#8212; when in financial services, healthcare, and technology, they have to function as one.</p>
     </div>
   </section>
 
-  <!-- POSSIBILITIES -->
+  <!-- ============================================================
+       WHAT THIS USUALLY LOOKS LIKE — 4 CARDS
+  ============================================================ -->
   <section>
     <div class="sc reveal">
-      <div class="sl">What operational governance makes possible</div>
-      <h2 class="sh">When governance runs, every AI question<br>in your organization has an answer.</h2>
-      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1.5rem;margin-top:2.5rem">
+      <div class="sl">What This Usually Looks Like</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem">
 
-        <div class="problem-card" style="grid-column:span 2">
-          <div class="problem-label">When your board asks: &#8220;What is our AI strategy?&#8221;</div>
-          <p>You present an architecture, not an aspiration. Risk registers, accountability structures, and regulatory positioning built for your organization&#8217;s context. The board question becomes a demonstration of organizational maturity, not a gap you are managing around.</p>
+        <div class="problem-card">
+          <div class="problem-label">&#8220;Our people are using AI. We haven&#8217;t prepared them or governed their use.&#8221;</div>
+          <p>Tools are live across the organization. Employees are writing prompts, generating outputs, and making decisions influenced by AI &#8212; without training on responsible use, without frameworks governing their behavior, and without oversight structures your regulators can audit.</p>
         </div>
 
-        <div class="problem-card" style="grid-column:span 2">
-          <div class="problem-label">When a vendor pitches an AI solution</div>
-          <p>Every pitch lands inside a framework that already exists. Classification criteria, consequence tier, governance requirements: defined before the vendor called. You evaluate on fit, not on exposure you are discovering in real time.</p>
+        <div class="problem-card">
+          <div class="problem-label">&#8220;We have an AI strategy. We don&#8217;t have the risk infrastructure to execute it safely.&#8221;</div>
+          <p>The roadmap was approved. The use cases are identified. But in financial services, healthcare, and technology, strategy without risk architecture isn&#8217;t a plan &#8212; it&#8217;s exposure. Bias, fairness, privacy, and operational safety risks are accumulating in workflows nobody has formally assessed.</p>
         </div>
 
-        <div class="problem-card" style="grid-column:span 2">
-          <div class="problem-label">When your team asks: &#8220;What does this mean for our roles?&#8221;</div>
-          <p>Your people get a structural answer: what AI can and cannot do in your context, where human authority is protected, and what oversight looks like for decisions that affect them. Not a town hall that manages anxiety. A governance framework that tells people where the lines are.</p>
+        <div class="problem-card">
+          <div class="problem-label">&#8220;Our governance exists on paper. It doesn&#8217;t operate in practice.&#8221;</div>
+          <p>Policy documents. Principles statements. A committee that met once. None of it connected to how AI actually runs in your teams. New deployments go live without review. Vendor-embedded AI enters workflows without classification. And when the examiner arrives or an incident occurs, the documentation that should exist doesn&#8217;t.</p>
         </div>
 
-        <div class="problem-card" style="grid-column:span 3">
-          <div class="problem-label">When regulators ask: &#8220;Show us your AI governance.&#8221;</div>
-          <p>Documentation that reflects what actually operates, not what was intended when the policy was written. EU AI Act classification, accountability structures, audit trails. Evidence of governance, not evidence that governance was planned.</p>
+        <div class="problem-card">
+          <div class="problem-label">&#8220;We need to move fast. We can&#8217;t afford to move recklessly.&#8221;</div>
+          <p>Regulated industries don&#8217;t get the luxury of learning by incident. The cost of a biased model in a lending decision, an unaudited AI deployment in a clinical workflow, or a hallucinated output in a client-facing technology product is not theoretical. The organizations that win in this environment are the ones that built the right infrastructure before the pressure arrived.</p>
         </div>
 
-        <div class="problem-card" style="grid-column:span 3">
-          <div class="problem-label">When the CEO asks: &#8220;Show me the ROI.&#8221;</div>
-          <p>AI governance built inside your transformation mandate produces measurable outcomes from day one: success metrics, tracking frameworks, and a board reporting structure that connects AI initiatives to business value. Governance as an enablement function, not a cost center.</p>
-        </div>
-
-      </div>
-      <div style="margin-top:2.5rem;display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap">
-        <a href="governance-readiness-assessment.html" class="btn-primary">Take the Governance Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="strategy.html" class="btn-ghost" style="cursor:pointer">Or book a strategy session</a>
       </div>
     </div>
   </section>
 
-  <!-- OUR CAPABILITIES -->
+  <!-- ============================================================
+       WHAT WE DO
+  ============================================================ -->
+  <section class="bg-alt">
+    <div class="sc reveal">
+      <div class="sl">What We Do</div>
+      <h2 class="sh">We help organizations in regulated industries adopt AI responsibly.</h2>
+      <p class="sb">We bring transformation, risk management, and governance together so they function as one operating system, not three separate initiatives.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THREE-PILLAR FRAMEWORK
+  ============================================================ -->
   <section>
     <div class="sc reveal">
-      <div class="sl">Our Capabilities</div>
-      <h2 class="sh">What we build, advise, and deliver</h2>
-      <div class="problem-grid">
+      <div class="sl">Our Three-Pillar Framework</div>
+      <h2 class="sh" style="max-width:820px">Unlike consulting firms that specialize in adoption or compliance alone, Arrell Advisory delivers all three pillars that responsible AI transformation requires &#8212; and builds them to work together.</h2>
+      <div class="problem-grid" style="margin-top:2.5rem">
 
         <div class="problem-card">
-          <div class="problem-label">Consulting</div>
-          <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.6rem">Operational Governance Architecture</h3>
-          <p style="font-size:0.8rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.75rem">From the breaking point to an operating condition</p>
-          <p>Design and implementation of operational governance for AI adoption.</p>
-          <a href="methodology.html" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
+          <div class="problem-label">Pillar One</div>
+          <h3 style="font-family:var(--serif);font-size:1.3rem;font-weight:500;margin-bottom:0.75rem">Organizational Transformation &amp; AI Strategy</h3>
+          <p>Responsible adoption begins with organizational readiness. We build the transformation architecture that prepares your people, redesigns your workflows, and embeds responsible AI practice into how your organization actually operates. This includes AI strategy development, use case identification, workforce upskilling, prompt governance training, the SAFE AI Use Framework&#8482;, change management, and the cultural infrastructure that makes governance hold over time. Because in regulated industries, adoption without transformation is just risk at scale.</p>
         </div>
 
         <div class="problem-card">
-          <div class="problem-label">Advisory</div>
-          <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Strategic AI Governance</h3>
-          <p>Ongoing advisory partnership for organizations navigating the governance demands of scaling autonomous AI. Policy versioning, adversarial testing protocols, risk tiering systems, and strategic positioning.</p>
-          <a href="strategy.html" class="problem-cta" style="margin-top:1.5rem;display:inline-flex;cursor:pointer">Book a strategy session &rarr;</a>
+          <div class="problem-label">Pillar Two</div>
+          <h3 style="font-family:var(--serif);font-size:1.3rem;font-weight:500;margin-bottom:0.75rem">Enterprise Risk &amp; AI Governance</h3>
+          <p>Regulated industries operate under scrutiny that most AI governance frameworks weren&#8217;t designed to survive. We deliver AI risk assessments, bias and fairness testing, privacy and data retention protocols, vendor and third-party AI oversight, regulatory translation across EU AI Act and NIST AI RMF, and the Nested Governance Architecture&#8482; &#8212; a proprietary framework that embeds governance into your operational infrastructure rather than sitting beside it. So when the examiner asks, the board asks, or an incident occurs, your documentation reflects what actually operates.</p>
         </div>
 
         <div class="problem-card">
-          <div class="problem-label">Delivery</div>
-          <h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem">Risk-Tiered Operational Governance</h3>
-          <p>Minimum viable constraint at maximum operational confidence. Capability boundaries calibrated to deployment risk context, and sequenced for operationalizing existing AI governance standards.</p>
-          <a href="methodology.html" class="problem-cta" style="margin-top:1.5rem;cursor:pointer">Explore our Methodology →</a>
+          <div class="problem-label">Pillar Three</div>
+          <h3 style="font-family:var(--serif);font-size:1.3rem;font-weight:500;margin-bottom:0.75rem">Data &amp; Technical Governance</h3>
+          <p>Delivered in partnership with your technical team &#8212; covering data quality and lineage, training data provenance, model transparency and explainability, bias detection, access controls, and model lifecycle management. The technical foundation that makes your risk assessments accurate and your governance defensible.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ASSESSMENT BANNER -->
-  <section class="assess-banner">
+  <!-- ============================================================
+       WHAT WE BUILD, ADVISE, AND DELIVER
+  ============================================================ -->
+  <section class="bg-alt">
     <div class="sc reveal">
-      <div class="sl">Governance Readiness</div>
-      <h2 class="sh">How enforceable is your AI governance?</h2>
-      <p class="sb">Eight questions across five governance layers. Takes 3 minutes. Immediate score with layer-by-layer breakdown of your current posture.</p>
-      <div class="assess-banner-ctarow">
-        <a href="governance-readiness-assessment.html" class="btn-primary">Take the Assessment (3 min) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="debrief.html" class="btn-ghost">Already know you need help? Book a Governance Debrief</a>
+      <div class="sl">What We Build, Advise, and Deliver</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem 4rem;margin-top:2.25rem">
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Develop and execute AI transformation strategy with use cases, workflow redesign, and implementation roadmaps calibrated to regulated industry requirements</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Train and upskill employees, practitioners, and leaders on responsible AI use, prompt governance, and the SAFE AI Use Framework&#8482;</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Design and lead organizational change management so AI adoption lands at the practitioner level</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Implement the Nested Governance Architecture&#8482; (NGA&#8482;), an integrated governance model aligned to your existing IT risk management infrastructure</p>
+          </div>
+
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Execute AI risk assessments addressing bias, privacy, fairness, and operational safety threats across your deployment environment</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Build and govern generative AI workflows with prompt governance controls and hallucination mitigation protocols</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Translate EU AI Act, NIST AI RMF, and sector-specific regulatory requirements into actionable compliance protocols your teams can operate</p>
+          </div>
+
+          <div style="display:flex;gap:1rem;align-items:flex-start">
+            <span style="color:var(--gold);flex-shrink:0;margin-top:0.45rem;font-size:0.55rem">&#9632;</span>
+            <p style="font-size:0.95rem;color:var(--text-2);line-height:1.85;margin:0">Deploy operational playbooks, model card templates, accountability structures, and a structured 90-day implementation roadmap that creates immediate governance from day one</p>
+          </div>
+
+        </div>
+
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHO WE WORK WITH
+  ============================================================ -->
+  <section>
+    <div class="sc reveal">
+      <div class="sl">Who We Work With</div>
+      <h2 class="sh">Financial services, healthcare, and technology &#8212; regulated industries where the cost of getting AI wrong is a liability you can&#8217;t afford.</h2>
+      <p class="sb">Our clients are leaders who understand that responsible AI adoption requires more than a strategy deck or a compliance checklist. They need a firm that can hold transformation, risk, and governance in the same engagement and deliver all three.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ASSESSMENT BANNER
+  ============================================================ -->
+  <section class="assess-banner bg-alt">
+    <div class="sc reveal">
+      <div class="sl" style="text-align:center">Responsible AI Transformation Assessment</div>
+      <h2 class="sh" style="max-width:680px;margin:0 auto 1.5rem;text-align:center">Know exactly where your organization stands across all three pillars &#8212; before your regulators, your board, or an incident forces the question.</h2>
+      <p style="font-size:1rem;color:var(--text-2);max-width:600px;margin:0 auto 2.75rem;line-height:1.85;text-align:center">In about five minutes, across strategy readiness, workforce preparedness, risk exposure, workflow integration, and governance operability &#8212; you&#8217;ll leave with a clear picture of where you are, where the gaps are, and what needs to happen next.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a href="ai-transformation-readiness-assessment.html" class="btn-primary">Take the Assessment <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener" class="btn-ghost">Already know you need help? Book a Strategy Session</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT ARRELL ADVISORY
+  ============================================================ -->
+  <section>
+    <div class="sc reveal">
+      <div class="sl">About Arrell Advisory</div>
+      <h2 class="sh">An AI Transformation and Governance Advisory firm supporting organizations and public institutions in regulated industries.</h2>
+      <p class="sb">We sit at the intersection of organizational transformation, enterprise risk management, and AI governance &#8212; delivering the strategy, the human-layer architecture, and the risk infrastructure that responsible AI adoption requires. Our proprietary frameworks, including the Nested Governance Architecture&#8482; and the SAFE AI Use Framework&#8482;, are built for organizations where adoption without accountability is not an option.</p>
+      <a href="principal.html" class="btn-ghost">Learn more about our team &#8594;</a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER CTA
+  ============================================================ -->
+  <section style="padding:5rem 3rem;background:var(--bg2);border-top:1px solid var(--border);text-align:center">
+    <div class="sc reveal">
+      <p style="font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:400;color:var(--text);line-height:1.5;margin-bottom:2.5rem">Transformation without governance is risk.<br>Governance without transformation is theater.<br><em style="color:var(--gold)">We deliver both.</em></p>
+      <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener" class="btn-primary">Book a Strategy Session <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
     </div>
   </section>
 
 </main>
 
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <div class="footer-brand-name">Arrell Advisory</div>
-    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
-  </div>
-  <div class="footer-links">
-    <a href="methodology.html">Methodology</a>
-    <div class="footer-sep"></div>
-    <a href="insights.html">Insights</a>
-    <div class="footer-sep"></div>
-    <a href="principal.html">Principal</a>
-    <div class="footer-sep"></div>
-    <a href="contact.html">Contact</a>
-    <div class="footer-sep"></div>
-    <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
-    <div class="footer-sep"></div>
-    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
-    <div class="footer-sep"></div>
-    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
-    <div class="footer-sep"></div>
-    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+  <div class="sc footer-inner">
+    <div class="footer-top">
+      <a href="index.html" class="nav-brand">
+        <span class="nav-brand-name">Arrell Advisory</span>
+        <span class="nav-brand-type">AI Governance</span>
+      </a>
+      <nav class="footer-links">
+        <a href="methodology.html">Methodology</a>
+        <a href="insights.html">Insights</a>
+        <a href="principal.html">Principal</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://aiusersafety.org/" target="_blank" rel="noopener">AI User Safety</a>
+        <a href="https://www.aireadyleaders.org/" target="_blank" rel="noopener">AI Ready Leaders</a>
+        <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+      </nav>
+    </div>
+    <p class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</p>
   </div>
 </footer>
 

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Transformation Readiness Assessment — Arrell Advisory</title>
+<meta name="description" content="Fifteen questions across three pillars — Transformation, Risk &amp; Governance, and Data &amp; Technical. A three-pillar readiness profile that surfaces the asymmetry between where you are strong and where you are exposed. Takes 4–5 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0e1420;
+  --bg-card: #0d1219;
+  --bg-card-h: #111820;
+  --text: #e8e4de;
+  --text-2: #8a8b8e;
+  --text-3: #5c5e63;
+  --gold: #b8945f;
+  --gold-s: rgba(184,148,95,0.12);
+  --gold-h: #d4aa6a;
+  --gold-b: rgba(184,148,95,0.2);
+  --border: rgba(255,255,255,0.06);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Outfit', system-ui, sans-serif;
+  --red: #c45c4a;
+  --amber: #c49a5c;
+  --green: #7aad80;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+::selection { background: var(--gold); color: var(--bg); }
+a { color: inherit; }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(8,12,20,0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); transition: all 0.4s;
+}
+nav.scrolled { padding: 0.85rem 3rem; }
+.nav-brand { display: flex; align-items: baseline; gap: 0.15rem; text-decoration: none; }
+.nav-brand-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+.nav-brand-type { font-family: var(--sans); font-size: 0.65rem; font-weight: 400; color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase; margin-left: 0.6rem; position: relative; top: -1px; }
+.nav-links { display: flex; gap: 2.2rem; align-items: center; list-style: none; }
+.nav-links a { font-size: 0.78rem; font-weight: 400; color: var(--text-2); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
+.nav-links a:hover { color: var(--gold); }
+.nav-assess { color: var(--gold) !important; }
+.nav-cta { font-size: 0.78rem !important; font-weight: 500 !important; color: var(--gold) !important; border: 1px solid rgba(184,148,95,0.3); padding: 0.45rem 1.15rem; border-radius: 2px; transition: all 0.3s !important; }
+.nav-cta:hover { background: var(--gold-s); border-color: var(--gold); }
+.mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; z-index: 101; }
+.mobile-toggle span { width: 22px; height: 1.5px; background: var(--text-2); display: block; transition: all 0.3s; }
+.mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(8,12,20,0.97); z-index: 99; justify-content: center; align-items: center; flex-direction: column; gap: 2rem; }
+.mobile-overlay.active { display: flex; }
+.mobile-overlay a { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--text); text-decoration: none; cursor: pointer; transition: color 0.3s; }
+.mobile-overlay a:hover { color: var(--gold); }
+.mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-2); font-size: 1.5rem; cursor: pointer; padding: 0.5rem; line-height: 1; }
+
+/* ═══ BACK LINK ═══ */
+.back-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 400; color: var(--text-3);
+  text-decoration: none; letter-spacing: 0.05em; cursor: pointer;
+  transition: color 0.3s; padding: 5.5rem 3rem 0;
+}
+.back-link:hover { color: var(--gold); }
+.back-link svg { width: 14px; height: 14px; display: inline; vertical-align: middle; margin-right: 0.3rem; }
+
+/* ═══ SHARED ═══ */
+.sl { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.sh { font-family: var(--serif); font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 400; line-height: 1.25; color: var(--text); margin-bottom: 1.5rem; max-width: 700px; }
+.divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+/* ═══ INTRO ═══ */
+.intro-section { padding: 2rem 3rem 5rem; max-width: 1100px; margin: 0 auto; }
+.intro-section .sh { margin-bottom: 1rem; }
+.intro-text { font-size: 1rem; color: var(--text-2); max-width: 660px; line-height: 1.85; margin-bottom: 2.5rem; }
+.intro-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+.meta-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); }
+.meta-value { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; color: var(--text); }
+
+.layers-preview { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 3rem; }
+.layer-row { display: grid; grid-template-columns: 44px 1fr; border-bottom: 1px solid var(--border); transition: all 0.3s; }
+.layer-row:last-child { border-bottom: none; }
+.layer-row:hover { background: rgba(184,148,95,0.03); }
+.layer-num { padding: 1rem 0; font-family: var(--serif); font-size: 0.85rem; font-weight: 500; color: var(--gold); text-align: center; border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.layer-info { padding: 1rem 1.25rem; }
+.layer-info-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+.layer-info-desc { font-size: 0.82rem; color: var(--text-3); line-height: 1.5; }
+
+.btn-start {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--bg); background: var(--gold);
+  padding: 1rem 2.25rem; border-radius: 2px;
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.btn-start:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(184,148,95,0.2); }
+.btn-start svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.btn-start:hover svg { transform: translateX(3px); }
+
+/* ═══ ASSESSMENT ═══ */
+.assess-wrap { display: none; max-width: 760px; margin: 0 auto; padding: 3rem 3rem 6rem; }
+.assess-wrap.active { display: block; }
+.progress-wrap { margin-bottom: 48px; opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards; }
+.progress-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.progress-layer { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+.progress-count { font-size: 0.8rem; color: var(--text-3); }
+.progress-count span { color: var(--text-2); font-weight: 500; }
+.progress-bar { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gold); border-radius: 1px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); width: 0%; }
+
+.question-card { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+.question-number { font-family: var(--serif); font-size: 0.85rem; font-weight: 500; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 12px; }
+.question-text { font-family: var(--serif); font-size: clamp(1.2rem,2.5vw,1.55rem); font-weight: 400; line-height: 1.4; color: var(--text); margin-bottom: 32px; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px 22px; border: 1px solid var(--border); border-radius: 3px;
+  background: rgba(255,255,255,0.01); cursor: pointer; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.option::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--gold); transition: height 0.3s; }
+.option:hover { border-color: var(--gold-b); background: rgba(184,148,95,0.03); }
+.option:hover::before { height: 100%; }
+.option.selected { border-color: rgba(184,148,95,0.35); background: rgba(184,148,95,0.06); }
+.option.selected::before { height: 100%; }
+.option-marker {
+  flex-shrink: 0; width: 20px; height: 20px; border: 1px solid var(--text-3);
+  border-radius: 50%; margin-top: 2px; display: flex; align-items: center;
+  justify-content: center; transition: all 0.3s;
+}
+.option.selected .option-marker { border-color: var(--gold); background: var(--gold); }
+.option.selected .option-marker::after { content: ''; width: 6px; height: 6px; background: var(--bg); border-radius: 50%; }
+.option-label { font-size: 0.95rem; font-weight: 400; color: var(--text); line-height: 1.5; }
+
+.q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+.btn-back-q { font-family: var(--sans); font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); background: none; border: none; cursor: pointer; padding: 0.6rem 0; transition: color 0.3s; }
+.btn-back-q:hover { color: var(--text-2); }
+.btn-back-q.invisible { visibility: hidden; }
+.btn-next-q { font-family: var(--sans); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); border: none; padding: 0.85rem 2rem; border-radius: 2px; cursor: pointer; transition: all 0.3s; opacity: 0.35; pointer-events: none; }
+.btn-next-q.active { opacity: 1; pointer-events: auto; }
+.btn-next-q.active:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(184,148,95,0.2); }
+
+/* ═══ EMAIL GATE ═══ */
+.email-gate { display: none; max-width: 520px; margin: 0 auto; padding: 3rem 3rem 6rem; text-align: center; }
+.email-gate.active { display: block; }
+.email-gate-icon { margin-bottom: 24px; }
+.email-gate-icon svg { width: 48px; height: 48px; color: var(--gold); opacity: 0.7; }
+.email-gate-heading { font-family: var(--serif); font-size: 1.5rem; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+.email-gate-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-bottom: 28px; }
+.email-gate-form { display: flex; gap: 10px; margin-bottom: 12px; }
+.email-gate-input { flex: 1; font-family: var(--sans); font-size: 0.88rem; font-weight: 300; color: var(--text); background: var(--bg2); border: 1px solid var(--border); border-radius: 2px; padding: 0.85rem 1rem; outline: none; transition: border-color 0.3s; }
+.email-gate-input::placeholder { color: var(--text-3); }
+.email-gate-input:focus { border-color: var(--gold-b); }
+.email-gate-submit { font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); border: none; padding: 0 1.6rem; border-radius: 2px; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+.email-gate-submit:hover { background: var(--gold-h); }
+.email-gate-privacy { font-size: 0.72rem; color: var(--text-3); }
+
+/* ═══ RESULTS ═══ */
+.results-wrap { display: none; max-width: 760px; margin: 0 auto; padding: 3rem 3rem 6rem; }
+.results-wrap.active { display: block; }
+
+.results-header { text-align: center; margin-bottom: 36px; opacity: 0; animation: fadeUp 0.6s ease 0.1s forwards; }
+.results-profile-name { font-family: var(--serif); font-size: clamp(1.7rem,4vw,2.3rem); font-weight: 500; color: var(--gold); line-height: 1.2; margin-bottom: 14px; }
+.results-profile-desc { font-size: 1rem; color: var(--text-2); line-height: 1.8; max-width: 620px; margin: 0 auto; }
+
+/* Three-Pillar Bars — color only, no numeric scores */
+.pillar-bars-section { margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s ease 0.3s forwards; }
+.pillar-bars-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 18px; text-align: center; }
+.pillar-bar-row { display: flex; align-items: center; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--border); }
+.pillar-bar-row:last-child { border-bottom: none; }
+.pillar-bar-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.pillar-bar-name { font-size: 0.92rem; font-weight: 400; color: var(--text); width: 180px; flex-shrink: 0; line-height: 1.3; }
+.pillar-bar-track { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.pillar-bar-fill { height: 100%; border-radius: 4px; transition: width 1.1s cubic-bezier(0.4,0,0.2,1) 0.4s; width: 0%; }
+
+/* Critical Gap / Consequence Callout */
+.gap-callout { padding: 22px 26px; border: 1px solid rgba(196,92,74,0.2); border-left: 3px solid rgba(196,92,74,0.55); border-radius: 0 3px 3px 0; background: rgba(196,92,74,0.04); margin-bottom: 22px; opacity: 0; animation: fadeUp 0.5s ease 0.5s forwards; }
+.gap-callout.balanced { border-color: rgba(184,148,95,0.25); border-left-color: rgba(184,148,95,0.6); background: rgba(184,148,95,0.04); }
+.gap-callout-label { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(196,92,74,0.85); margin-bottom: 8px; }
+.gap-callout.balanced .gap-callout-label { color: var(--gold); }
+.gap-callout-text { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--text); line-height: 1.45; }
+
+/* "What this does not tell you" trust block */
+.trust-block { padding: 20px 24px; border: 1px solid var(--border); border-radius: 3px; background: rgba(255,255,255,0.01); margin-bottom: 40px; opacity: 0; animation: fadeUp 0.5s ease 0.58s forwards; }
+.trust-block-label { font-size: 0.66rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+.trust-block-text { font-size: 0.86rem; color: var(--text-2); line-height: 1.7; }
+.trust-block-text strong { color: var(--text); font-weight: 500; }
+
+/* CTA Section — profile-specific headline + Calendly */
+.cta-section { text-align: center; padding: 40px; border: 1px solid var(--border); border-radius: 3px; background: rgba(255,255,255,0.01); position: relative; overflow: hidden; opacity: 0; animation: fadeUp 0.6s ease 0.66s forwards; }
+.cta-section::before { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 120%; height: 120%; background: radial-gradient(circle,rgba(184,148,95,0.04) 0%,transparent 60%); pointer-events: none; }
+.cta-tier-headline { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--text); margin-bottom: 16px; position: relative; line-height: 1.4; }
+.btn-cta { display: inline-flex; align-items: center; gap: 0.75rem; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 1rem 2.25rem; text-decoration: none; border-radius: 2px; border: none; cursor: pointer; transition: all 0.3s; position: relative; }
+.btn-cta:hover { background: var(--gold-h); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(184,148,95,0.2); }
+.btn-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
+.btn-cta:hover svg { transform: translateX(3px); }
+.cta-details { margin-top: 16px; position: relative; }
+.cta-detail-line { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; }
+.cta-detail-line strong { color: var(--text); font-weight: 500; }
+
+/* ═══ FOOTER ═══ */
+footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { display: flex; flex-direction: column; gap: 0.25rem; }
+.footer-brand-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; color: var(--text-2); }
+.footer-copy { font-size: 0.75rem; color: var(--text-3); }
+.footer-links { display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap; }
+.footer-links a { font-size: 0.78rem; color: var(--text-3); text-decoration: none; transition: color 0.3s; cursor: pointer; }
+.footer-links a:hover { color: var(--gold); }
+.footer-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); opacity: 0.4; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-brand-type { display: none; }
+  .mobile-toggle { display: flex; }
+  .back-link { padding: 5.5rem 1.5rem 0; }
+  .intro-section { padding: 2rem 1.5rem 4rem; }
+  .intro-meta { gap: 2rem; }
+  .layer-row { grid-template-columns: 36px 1fr; }
+  .assess-wrap { padding: 2rem 1.5rem 5rem; }
+  .email-gate { padding: 2rem 1.5rem 5rem; }
+  .email-gate-form { flex-direction: column; }
+  .email-gate-submit { padding: 0.85rem 1.6rem; }
+  .results-wrap { padding: 2rem 1.5rem 5rem; }
+  .pillar-bar-row { flex-wrap: wrap; gap: 8px; }
+  .pillar-bar-name { width: 100%; }
+  .pillar-bar-dot { order: -1; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+</style>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-name">Arrell Advisory</span>
+    <span class="nav-brand-type">AI Governance</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="methodology.html">Methodology</a></li>
+    <li><a href="principal.html">Principal</a></li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="ai-transformation-readiness-assessment.html" class="nav-assess">Take the Assessment</a></li>
+    <li><a href="strategy.html" class="nav-cta">Strategy Session</a></li>
+    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
+  </ul>
+  <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-overlay" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="principal.html">Principal</a>
+  <a href="insights.html">Insights</a>
+  <a href="ai-transformation-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
+  <a href="strategy.html" style="color:var(--gold)">Strategy Session</a>
+  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
+</div>
+
+<!-- BACK LINK -->
+<a href="index.html" class="back-link" id="backLink">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+  Home
+</a>
+
+<!-- INTRO -->
+<section class="intro-section" id="introSection">
+  <div class="sl">AI Transformation Readiness Assessment</div>
+  <h1 class="sh" style="max-width:680px">Are you built to adopt AI responsibly &mdash; or <em style="font-style:italic;color:var(--gold)">strong in one dimension while the others create exposure?</em></h1>
+  <p class="intro-text">The most dangerous failure mode in regulated AI adoption is rarely weakness in a single area &mdash; it is the asymmetry between transformation, risk, and governance. This assessment maps your readiness across all three pillars and names the gap most leaders cannot see from inside the organization.</p>
+
+  <div class="intro-meta">
+    <div class="meta-item">
+      <span class="meta-label">Questions</span>
+      <span class="meta-value">15</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Time</span>
+      <span class="meta-value">4&ndash;5 minutes</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Output</span>
+      <span class="meta-value">Three-Pillar Readiness Profile</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom:0.75rem">
+    <span class="sl" style="margin-bottom:0.75rem;display:block">Three Pillars Assessed</span>
+  </div>
+  <div class="layers-preview">
+    <div class="layer-row"><div class="layer-num">01</div><div class="layer-info"><div class="layer-info-name">Transformation &amp; Strategy</div><div class="layer-info-desc">AI strategy, workforce readiness, change management, use-case governance, and cultural infrastructure at the human layer.</div></div></div>
+    <div class="layer-row"><div class="layer-num">02</div><div class="layer-info"><div class="layer-info-name">Risk &amp; AI Governance</div><div class="layer-info-desc">Risk assessment, regulatory alignment, governance operability, vendor oversight, and accountability architecture.</div></div></div>
+    <div class="layer-row"><div class="layer-num">03</div><div class="layer-info"><div class="layer-info-name">Data &amp; Technical Governance</div><div class="layer-info-desc">Data quality and lineage, model transparency, bias and performance monitoring, and model lifecycle management.</div></div></div>
+  </div>
+
+  <button class="btn-start" onclick="startAssessment()">
+    Begin Assessment
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  </button>
+</section>
+
+<div class="divider" id="dividerLine"></div>
+
+<!-- ASSESSMENT -->
+<div class="assess-wrap" id="assessWrap">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <div class="progress-layer" id="layerLabel"></div>
+      <div class="progress-count">Question <span id="currentQ">1</span> of <span id="totalQ">15</span></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+  <div id="questionArea"></div>
+  <div class="q-nav">
+    <button class="btn-back-q invisible" id="btnBack" onclick="prevQuestion()">&#8592; Back</button>
+    <button class="btn-next-q" id="btnNext" onclick="nextQuestion()">Continue</button>
+  </div>
+</div>
+
+<!-- EMAIL GATE (appears after Q15, before results) -->
+<div class="email-gate" id="emailGate">
+  <div class="email-gate-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+  </div>
+  <div class="email-gate-heading">Your readiness profile is ready</div>
+  <p class="email-gate-desc">Enter your work email to see your three-pillar profile, your asymmetry pattern, and what it means for your organization's AI adoption risk.</p>
+  <div class="email-gate-form">
+    <input type="email" class="email-gate-input" id="emailInput" placeholder="Work email address">
+    <button class="email-gate-submit" onclick="submitEmail()">See Your Profile</button>
+  </div>
+  <p id="emailError" style="font-size:0.78rem;color:var(--red);margin-top:8px;display:none"></p>
+  <p class="email-gate-privacy">Your email is used to deliver your results. No spam.</p>
+</div>
+
+<!-- RESULTS (profile, not full diagnostic) -->
+<div class="results-wrap" id="resultsWrap">
+
+  <!-- 1. Profile name + one-line description -->
+  <div class="results-header">
+    <div class="sl" style="text-align:center">Your Three-Pillar Profile</div>
+    <div class="results-profile-name" id="profileName"></div>
+    <p class="results-profile-desc" id="profileDesc"></p>
+  </div>
+
+  <!-- 2. Three-pillar bars — color only, no numeric scores -->
+  <div class="pillar-bars-section">
+    <div class="pillar-bars-label">Relative readiness across the three pillars</div>
+    <div id="pillarBars"></div>
+  </div>
+
+  <!-- 3. Critical gap / consequence statement -->
+  <div class="gap-callout" id="gapCallout">
+    <div class="gap-callout-label" id="gapLabel">Critical Gap</div>
+    <div class="gap-callout-text" id="gapText"></div>
+  </div>
+
+  <!-- 4. What this does not tell you -->
+  <div class="trust-block">
+    <div class="trust-block-label">What this assessment does not tell you</div>
+    <div class="trust-block-text">This is a <strong>directional three-pillar profile</strong> based on your self-reported responses &mdash; not a compliance determination, a layer-level diagnostic, or an action plan. It shows you where you stand and why the asymmetry matters. <strong>The strategy session is where the profile becomes a prioritized plan</strong> calibrated to your sector, jurisdiction, and constraints.</div>
+  </div>
+
+  <!-- 5. Profile-specific CTA -->
+  <div class="cta-section">
+    <div class="cta-tier-headline" id="ctaHeadline"></div>
+    <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener" class="btn-cta" id="ctaButton" onclick="trackEvent('cta_clicked')">
+      Book a Strategy Session
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    <div class="cta-details">
+      <div class="cta-detail-line" id="ctaFraming"></div>
+      <div class="cta-detail-line"><strong>$500</strong> &mdash; 60-minute session with Dr. Gbemisola Adetayo</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-brand-name">Arrell Advisory</div>
+    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
+  </div>
+  <div class="footer-links">
+    <a href="methodology.html">Methodology</a>
+    <div class="footer-sep"></div>
+    <a href="insights.html">Insights</a>
+    <div class="footer-sep"></div>
+    <a href="principal.html">Principal</a>
+    <div class="footer-sep"></div>
+    <a href="contact.html">Contact</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
+    <div class="footer-sep"></div>
+    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
+    <div class="footer-sep"></div>
+    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
+    <div class="footer-sep"></div>
+    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   AI TRANSFORMATION READINESS ASSESSMENT
+   15 questions · 3 pillars (5 each) · A=1 B=2 C=3 D=4
+   Pillar score range 5–20. Profile is driven by ASYMMETRY, not total.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── PILLARS ─── */
+var pillars = [
+  { full:'Transformation & Strategy', short:'Transformation' },
+  { full:'Risk & AI Governance',      short:'Risk & Governance' },
+  { full:'Data & Technical Governance', short:'Data & Technical' }
+];
+
+/* ─── QUESTION BANK (verbatim from Design Spec) ─── */
+var questions = [
+  /* PILLAR 1 — Transformation & Strategy (Q1–Q5) */
+  { pillar:0, sub:'Strategy', text:"How would you describe your organization's current AI strategy?", options:[
+    {label:'We do not have a documented AI strategy. Leaders are aware of AI but have not formally aligned on a direction.',score:1},
+    {label:'We have informal or emerging discussions about AI strategy, but nothing formally approved or communicated.',score:2},
+    {label:'We have a documented AI strategy that leadership has reviewed and approved, with identified use cases.',score:3},
+    {label:'We have a board-approved AI strategy with defined use cases, resource allocation, and a published roadmap.',score:4}
+  ]},
+  { pillar:0, sub:'Workforce', text:'How prepared are your employees to use AI tools responsibly?', options:[
+    {label:'Most employees use AI tools without any formal training on responsible use or risk.',score:1},
+    {label:'Some employees have received general AI training, but it does not address governance or responsible use.',score:2},
+    {label:'We have a formal responsible AI training program for employees in AI-adjacent roles.',score:3},
+    {label:'All relevant employees receive structured responsible AI training, including prompt governance and risk identification.',score:4}
+  ]},
+  { pillar:0, sub:'Change Management', text:'How does AI adoption move from executive approval to practitioner-level use in your organization?', options:[
+    {label:"It largely doesn't — tools are purchased or approved but adoption is organic and unmanaged.",score:1},
+    {label:'We communicate changes but do not have structured change management for AI adoption.',score:2},
+    {label:'We have change management processes that include communication, training rollouts, and feedback loops.',score:3},
+    {label:'AI adoption is managed through a formal organizational change architecture with accountability at the business unit level.',score:4}
+  ]},
+  { pillar:0, sub:'Use Case Governance', text:'How do you decide which AI use cases to pursue and in what order?', options:[
+    {label:'Use cases are identified informally, often based on vendor pitches or individual champions.',score:1},
+    {label:'We have informal criteria but no structured framework for use case evaluation or prioritization.',score:2},
+    {label:'Use cases are evaluated against defined criteria including business value, risk level, and feasibility.',score:3},
+    {label:'Use case selection uses a formal framework that integrates business value, risk classification, regulatory exposure, and governance readiness.',score:4}
+  ]},
+  { pillar:0, sub:'Cultural Infrastructure', text:"How embedded is responsible AI practice in the organization's operating culture?", options:[
+    {label:'AI is viewed primarily as a productivity tool. Responsible use conversations happen rarely or only after incidents.',score:1},
+    {label:'There is awareness of responsible AI at the leadership level but limited embedding at the practitioner level.',score:2},
+    {label:'Responsible AI is a stated organizational value with visible leadership commitment and some practitioner-level reinforcement.',score:3},
+    {label:'Responsible AI is operationalized through behavioral norms, accountability structures, and recognition mechanisms at all levels.',score:4}
+  ]},
+
+  /* PILLAR 2 — Enterprise Risk & AI Governance (Q6–Q10) */
+  { pillar:1, sub:'Risk Assessment', text:'How does your organization identify and assess AI-specific risks before deployment?', options:[
+    {label:'We do not conduct AI-specific risk assessments. General IT risk processes are applied informally.',score:1},
+    {label:'Risk is assessed informally on a case-by-case basis without a documented methodology.',score:2},
+    {label:'We have a documented AI risk assessment process that covers bias, privacy, and operational safety for significant deployments.',score:3},
+    {label:'Every AI deployment goes through a formal risk assessment covering bias, fairness, privacy, operational safety, and regulatory exposure before go-live.',score:4}
+  ]},
+  { pillar:1, sub:'Regulatory Alignment', text:'How does your organization translate AI regulations into operational requirements?', options:[
+    {label:'We are aware of regulations like the EU AI Act but have not translated them into internal requirements.',score:1},
+    {label:'Legal or compliance teams monitor regulations, but operational teams have limited visibility into what changes.',score:2},
+    {label:'We have mapped key regulatory requirements to internal controls and communicate changes to operational teams.',score:3},
+    {label:'Regulatory requirements (EU AI Act, NIST AI RMF, sector rules) are integrated into operational playbooks, updated regularly, and owned by named roles.',score:4}
+  ]},
+  { pillar:1, sub:'Governance Operability', text:'How would you describe the state of your AI governance in practice — not on paper?', options:[
+    {label:'Governance exists in policy documents. It is not consistently applied to how AI actually runs in our teams.',score:1},
+    {label:'Some governance requirements are applied in practice, but coverage is inconsistent across teams and use cases.',score:2},
+    {label:'Governance requirements are applied consistently for significant deployments, with defined accountability and review cadences.',score:3},
+    {label:'Governance is embedded into deployment workflows — it is a condition of use, not an advisory layer beside it.',score:4}
+  ]},
+  { pillar:1, sub:'Vendor Oversight', text:'How do you govern AI that enters your workflows through vendors, platforms, or embedded tools?', options:[
+    {label:'Vendor AI is not specifically governed. We rely on vendor assurances without independent review.',score:1},
+    {label:'We ask vendors for general AI disclosures but do not have a structured third-party AI governance process.',score:2},
+    {label:'Significant vendors undergo AI-specific due diligence, including a review of their risk practices and data handling.',score:3},
+    {label:'All vendor-embedded AI is classified by risk tier, subject to documented oversight protocols, and reviewed on a defined cadence.',score:4}
+  ]},
+  { pillar:1, sub:'Accountability Architecture', text:'Who owns AI governance accountability in your organization, and how is that ownership enforced?', options:[
+    {label:'Ownership is unclear or assumed to be shared. There is no named governance owner.',score:1},
+    {label:'IT or legal nominally owns AI governance, but accountability is not clearly defined or enforced.',score:2},
+    {label:'Named roles hold AI governance accountability, with defined responsibilities and a review structure.',score:3},
+    {label:'AI governance accountability is distributed across named roles at the executive, operational, and practitioner levels, with documented escalation paths.',score:4}
+  ]},
+
+  /* PILLAR 3 — Data & Technical Governance (Q11–Q15) */
+  { pillar:2, sub:'Data Quality', text:'How do you ensure the quality and integrity of data used to train or operate AI systems?', options:[
+    {label:'Data quality for AI is not specifically managed. We rely on existing data processes without AI-specific controls.',score:1},
+    {label:'Data quality is monitored informally. Issues are addressed reactively when they surface in AI outputs.',score:2},
+    {label:'We have data quality standards and validation processes applied to AI training and production data.',score:3},
+    {label:'Data quality for AI is formally governed — covering completeness, accuracy, lineage, and bias potential — before use in AI systems.',score:4}
+  ]},
+  { pillar:2, sub:'Data Lineage', text:'Can you trace where the data used in your AI systems came from and how it was processed?', options:[
+    {label:'We cannot reliably trace the origin or processing history of data used in AI systems.',score:1},
+    {label:'Lineage is documented for some systems, but coverage is inconsistent.',score:2},
+    {label:'Lineage documentation exists for significant AI systems and is accessible to those who need it.',score:3},
+    {label:'End-to-end lineage is tracked, auditable, and updated as data pipelines evolve. It can be produced on demand for audit or review.',score:4}
+  ]},
+  { pillar:2, sub:'Model Transparency', text:"How explainable are your AI systems' outputs to the people affected by them or accountable for them?", options:[
+    {label:'Most AI outputs are treated as black boxes. Explainability is not a design requirement.',score:1},
+    {label:'Explainability is considered for high-stakes systems but is not a standard requirement.',score:2},
+    {label:'AI systems in consequential domains are required to provide explainable outputs or human-readable rationale.',score:3},
+    {label:'Explainability is a design requirement for all AI systems above a defined risk threshold, with documented methods and user-facing communication.',score:4}
+  ]},
+  { pillar:2, sub:'Bias & Performance Monitoring', text:'How do you detect bias and performance degradation in AI systems after deployment?', options:[
+    {label:'We mainly find out about bias or performance issues through user complaints or external reports.',score:1},
+    {label:'We conduct periodic reviews of AI performance but do not have continuous monitoring in place.',score:2},
+    {label:'Key AI systems are monitored for performance degradation and bias signals on a defined schedule.',score:3},
+    {label:'Continuous monitoring with defined alert thresholds detects performance drift and bias signals before they affect outcomes. Containment steps are predefined.',score:4}
+  ]},
+  { pillar:2, sub:'Model Lifecycle Management', text:'How are AI models governed through updates, versioning, and retirement?', options:[
+    {label:'Model updates are handled informally. There is no documented lifecycle governance for AI systems.',score:1},
+    {label:'Major model updates go through IT change processes, but AI-specific governance is not applied.',score:2},
+    {label:'AI models have documented lifecycle stages, including approval gates for updates and a defined retirement process.',score:3},
+    {label:'Model lifecycle governance is formally managed — versioning, impact assessment for updates, recertification triggers, and retirement protocols are all documented and enforced.',score:4}
+  ]}
+];
+
+/* ─── PROFILE MATRIX (verbatim names, descriptions, CTA, framing) ─── */
+var PROFILES = {
+  strategyLed: {
+    name: 'Strategy-Led, Governance-Lagged',
+    desc: 'Your organization has strong strategic clarity but lacks the governance infrastructure to execute safely in a regulated environment. That gap is where liability compounds.',
+    ctaHeadline: 'Your strategy needs governance that can survive scrutiny.',
+    framing: 'Recommended entry point — AI Governance Scoping Session.'
+  },
+  complianceLed: {
+    name: 'Compliance-Led, Transformation-Lagged',
+    desc: 'Your governance exists on paper, but it has not reached the people who use AI day to day. Policy without adoption is exposure that looks like control.',
+    ctaHeadline: "Your governance exists. Your people haven't adopted it.",
+    framing: 'Recommended entry point — Workforce Readiness Session.'
+  },
+  adoptionLed: {
+    name: 'Adoption-Led, Risk-Blind',
+    desc: 'AI is already deployed across your organization, but the risk infrastructure to deploy it safely has not kept pace. Tools are live; the controls that defend them are not.',
+    ctaHeadline: "Your tools are live. Your risk infrastructure isn't.",
+    framing: 'Recommended entry point — AI Risk Assessment Session.'
+  },
+  balanced: {
+    name: 'Balanced Foundation',
+    desc: 'Your readiness is consistent across all three pillars — no single dimension is dragging the others into exposure. The opportunity now is acceleration and advanced architecture, not remediation.',
+    ctaHeadline: 'You have the foundation. Now build the architecture.',
+    framing: 'Recommended entry point — AI Transformation Strategy Session.'
+  },
+  emergent: {
+    name: 'Emergent / Early Stage',
+    desc: 'You are early across all three pillars — pre-strategy and pre-governance. That is not a disadvantage: it means you can build readiness as one integrated operating system rather than retrofitting it later.',
+    ctaHeadline: "You're earlier than you think. That's the advantage.",
+    framing: 'Recommended entry point — Full-Pillar Readiness Session.'
+  }
+};
+
+/* Consequence statement keyed by the critical gap pillar (lowest) */
+var GAP_CONSEQUENCE = {
+  0: 'Your lowest-scoring area is Transformation & Strategy. Without strategic clarity and workforce adoption, even strong governance becomes theater — controls no one operates.',
+  1: 'Your lowest-scoring area is Enterprise Risk & AI Governance. Without this infrastructure, your AI strategy creates exposure your organization may not be positioned to defend.',
+  2: 'Your lowest-scoring area is Data & Technical Governance. Without it, your risk assessments rest on foundations you cannot verify, and your governance cannot be made defensible.'
+};
+
+/* ─── STATE ─── */
+var currentIndex = 0;
+var answers = [];
+for (var i = 0; i < questions.length; i++) answers.push(null);
+
+/* ─── ANALYTICS (no-op if no GA present) ─── */
+function trackEvent(name, params) {
+  try {
+    if (typeof window.gtag === 'function') { window.gtag('event', name, params || {}); }
+    else if (window.dataLayer && window.dataLayer.push) { window.dataLayer.push(Object.assign({event:name}, params||{})); }
+  } catch (e) {}
+}
+
+/* ─── NAV SCROLL ─── */
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ─── ASSESSMENT FLOW ─── */
+function startAssessment() {
+  document.getElementById('introSection').style.display = 'none';
+  document.getElementById('dividerLine').style.display = 'none';
+  document.getElementById('backLink').style.display = 'none';
+  document.getElementById('assessWrap').classList.add('active');
+  trackEvent('assessment_started');
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderQuestion();
+}
+
+function renderQuestion() {
+  var q = questions[currentIndex];
+  var html = '<div class="question-card" style="animation-delay:0.05s">' +
+    '<div class="question-number">' + pillars[q.pillar].short + ' &middot; ' + q.sub + '</div>' +
+    '<div class="question-text">' + q.text + '</div><div class="options">';
+  for (var i = 0; i < q.options.length; i++) {
+    html += '<div class="option' + (answers[currentIndex]===i?' selected':'') + '" onclick="selectOption('+i+')">' +
+      '<div class="option-marker"></div><div class="option-label">' + q.options[i].label + '</div></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('questionArea').innerHTML = html;
+  document.getElementById('layerLabel').textContent = 'Pillar ' + (q.pillar+1) + ' — ' + pillars[q.pillar].full;
+  document.getElementById('currentQ').textContent = currentIndex+1;
+  /* Continuous progress across all 15 — does not reset at pillar boundaries */
+  document.getElementById('progressFill').style.width = (currentIndex/questions.length*100)+'%';
+  document.getElementById('btnBack').classList.toggle('invisible', currentIndex===0);
+  updateNextBtn();
+}
+
+function selectOption(i) {
+  answers[currentIndex] = i;
+  var opts = document.querySelectorAll('.option');
+  for (var j=0;j<opts.length;j++) opts[j].classList.toggle('selected',j===i);
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  var btn = document.getElementById('btnNext');
+  btn.textContent = currentIndex===questions.length-1?'See Your Profile':'Continue';
+  btn.classList.toggle('active', answers[currentIndex]!==null);
+}
+
+function nextQuestion() {
+  if (answers[currentIndex]===null) return;
+  if (currentIndex<questions.length-1) {
+    currentIndex++;
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    trackEvent('assessment_completed');
+    document.getElementById('assessWrap').classList.remove('active');
+    document.getElementById('emailGate').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+function prevQuestion() {
+  if (currentIndex>0) { currentIndex--; renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+/* ─── SCORING ─── */
+function computePillarScores() {
+  var p = [0,0,0];
+  for (var i=0;i<questions.length;i++) {
+    if (answers[i]!==null) p[questions[i].pillar] += questions[i].options[answers[i]].score;
+  }
+  return p; /* each 5–20 */
+}
+
+/* Bar color by pillar score tier: 5–9 red · 10–13 amber · 14–17 gold · 18–20 green */
+function pillarColor(score) {
+  if (score <= 9)  return 'var(--red)';
+  if (score <= 13) return 'var(--amber)';
+  if (score <= 17) return 'var(--gold)';
+  return 'var(--green)';
+}
+
+/* ─── CLASSIFICATION ───
+   Asymmetry = max pairwise gap >= 6 (out of 20 per pillar).
+   Critical gap pillar = lowest score (tie-break order: Risk&Gov, then
+   Transformation, then Data — governance gaps are the firm's priority signal).
+   Disambiguation when Risk&Gov is the gap: Strategy-Led if Transformation
+   leads, Adoption-Led/Risk-Blind if Data&Technical leads (tools deployed).
+   When not asymmetric: Emergent if average is foundational, else Balanced. */
+function classify(p) {
+  var P1=p[0], P2=p[1], P3=p[2];
+  var maxGap = Math.max(Math.abs(P1-P2), Math.abs(P1-P3), Math.abs(P2-P3));
+  var asym = maxGap >= 6;
+  var minVal = Math.min(P1,P2,P3);
+  var critical; /* 0=Transformation 1=Risk&Gov 2=Data */
+  if (P2===minVal) critical=1; else if (P1===minVal) critical=0; else critical=2;
+  var avg = (P1+P2+P3)/3;
+
+  var key;
+  if (!asym) {
+    key = (avg <= 9.5) ? 'emergent' : 'balanced';
+  } else if (critical === 1) {            /* governance is the gap */
+    key = (P1 >= P3) ? 'strategyLed' : 'adoptionLed';
+  } else if (critical === 0) {            /* transformation is the gap */
+    key = 'complianceLed';
+  } else {                                /* data & technical is the gap */
+    /* No dedicated profile for a data-only gap; tools/strategy ahead but
+       technical foundation thin reads as Adoption-Led / Risk-Blind. */
+    key = 'adoptionLed';
+  }
+  return { key:key, critical:critical, asym:asym, maxGap:maxGap, profile:PROFILES[key] };
+}
+
+/* ─── EMAIL SUBMISSION ─── */
+function submitEmail() {
+  var inp = document.getElementById('emailInput');
+  var err = document.getElementById('emailError');
+  var em = inp.value.trim();
+  if (!em || !em.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    err.textContent = 'Please enter a valid work email address.';
+    err.style.display = 'block';
+    return;
+  }
+  err.style.display = 'none';
+
+  var p = computePillarScores();
+  var c = classify(p);
+
+  /* Raw responses A/B/C/D */
+  var letters = ['A','B','C','D'];
+  var raw = {};
+  for (var i=0;i<questions.length;i++) {
+    raw['Q'+(i+1)] = answers[i]!==null ? letters[answers[i]] : '—';
+  }
+
+  var subject = 'AI Transformation Assessment — ' + c.profile.name +
+    ' (Transformation: ' + p[0] + ' | Risk & Governance: ' + p[1] + ' | Data & Technical: ' + p[2] + ')';
+
+  var payload = Object.assign({
+    email: em,
+    _subject: subject,
+    profile_name: c.profile.name,
+    pillar_1_transformation: p[0],
+    pillar_2_risk_governance: p[1],
+    pillar_3_data_technical: p[2],
+    critical_gap_pillar: pillars[c.critical].full,
+    asymmetry_flag: c.asym ? 'Yes' : 'No',
+    max_inter_pillar_gap: c.maxGap
+  }, raw);
+
+  fetch('https://formsubmit.co/ajax/hello@arrelladvisory.com', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: JSON.stringify(payload)
+  }).catch(function(){}); /* graceful: results show even if this fails */
+
+  trackEvent('email_submitted');
+
+  window._ad = { pillars:p, classification:c };
+  document.getElementById('emailGate').classList.remove('active');
+  showResults();
+}
+
+/* ─── RESULTS DISPLAY ─── */
+function showResults() {
+  var d = window._ad;
+  var p = d.pillars;
+  var c = d.classification;
+  document.getElementById('resultsWrap').classList.add('active');
+
+  /* 1. Profile name + description */
+  document.getElementById('profileName').textContent = c.profile.name;
+  document.getElementById('profileDesc').textContent = c.profile.desc;
+
+  /* 2. Three-pillar bars (color only — no numeric scores) */
+  var barsHtml = '';
+  for (var i=0;i<3;i++) {
+    var pct = ((p[i]-5)/15)*100;          /* map 5–20 → 0–100% */
+    if (pct < 6) pct = 6;                  /* keep a sliver visible */
+    var color = pillarColor(p[i]);
+    barsHtml += '<div class="pillar-bar-row">' +
+      '<div class="pillar-bar-dot" style="background:'+color+'"></div>' +
+      '<div class="pillar-bar-name">'+pillars[i].short+'</div>' +
+      '<div class="pillar-bar-track"><div class="pillar-bar-fill" data-width="'+pct+'" style="background:'+color+'"></div></div>' +
+      '</div>';
+  }
+  document.getElementById('pillarBars').innerHTML = barsHtml;
+  setTimeout(function(){
+    var fills = document.querySelectorAll('.pillar-bar-fill');
+    for (var i=0;i<fills.length;i++) fills[i].style.width = fills[i].dataset.width+'%';
+  }, 420);
+
+  /* 3. Critical gap / consequence statement */
+  var callout = document.getElementById('gapCallout');
+  if (!c.asym && c.key === 'balanced') {
+    callout.classList.add('balanced');
+    document.getElementById('gapLabel').textContent = 'Balanced Profile';
+    document.getElementById('gapText').textContent = 'No single pillar is dragging the others into exposure. Your readiness is consistent — the conversation shifts from closing a gap to advancing your maturity tier.';
+  } else {
+    document.getElementById('gapLabel').textContent = 'Critical Gap';
+    document.getElementById('gapText').textContent = GAP_CONSEQUENCE[c.critical];
+  }
+
+  /* 5. Profile-specific CTA */
+  document.getElementById('ctaHeadline').textContent = c.profile.ctaHeadline;
+  document.getElementById('ctaFraming').textContent = c.profile.framing;
+
+  trackEvent('results_viewed', { profile: c.profile.name });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
