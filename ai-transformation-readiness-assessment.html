@@ -259,7 +259,6 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
     <li><a href="insights.html">Insights</a></li>
     <li><a href="ai-transformation-readiness-assessment.html" class="nav-assess">Take the Assessment</a></li>
     <li><a href="strategy.html" class="nav-cta">Strategy Session</a></li>
-    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
   </ul>
   <button class="mobile-toggle" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -272,7 +271,6 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
   <a href="insights.html">Insights</a>
   <a href="ai-transformation-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
   <a href="strategy.html" style="color:var(--gold)">Strategy Session</a>
-  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
 </div>
 
 <!-- BACK LINK -->
@@ -347,7 +345,11 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
     <button class="email-gate-submit" onclick="submitEmail()">See Your Profile</button>
   </div>
   <p id="emailError" style="font-size:0.78rem;color:var(--red);margin-top:8px;display:none"></p>
-  <p class="email-gate-privacy">Your email is used to deliver your results. No spam.</p>
+  <div style="display:flex;align-items:flex-start;gap:0.5rem;margin-top:12px;max-width:420px;text-align:left">
+    <input type="checkbox" id="assessConsentCheck" style="margin-top:3px;flex-shrink:0;accent-color:#b8945f;width:15px;height:15px;cursor:pointer">
+    <label for="assessConsentCheck" style="font-size:0.78rem;color:#5c5e63;line-height:1.6;cursor:pointer">I agree to Arrell Advisory processing my email address and assessment responses to deliver my profile and contact me about relevant services, in accordance with the <a href="privacy.html" style="color:#8a8b8e;border-bottom:1px solid rgba(255,255,255,0.12)">Privacy Policy</a>.</label>
+  </div>
+  <p id="consentError" style="font-size:0.78rem;color:var(--red);margin-top:6px;display:none">Please confirm you agree to our Privacy Policy.</p>
 </div>
 
 <!-- RESULTS (profile, not full diagnostic) -->
@@ -407,13 +409,7 @@ footer { padding: 2.5rem 3rem; border-top: 1px solid var(--border); display: fle
     <div class="footer-sep"></div>
     <a href="contact.html">Contact</a>
     <div class="footer-sep"></div>
-    <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
-    <div class="footer-sep"></div>
-    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
-    <div class="footer-sep"></div>
-    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
-    <div class="footer-sep"></div>
-    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+    <a href="privacy.html">Privacy</a>
   </div>
 </footer>
 
@@ -702,6 +698,8 @@ function classify(p) {
 function submitEmail() {
   var inp = document.getElementById('emailInput');
   var err = document.getElementById('emailError');
+  var consentEl = document.getElementById('assessConsentCheck');
+  var consentErr = document.getElementById('consentError');
   var em = inp.value.trim();
   if (!em || !em.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
     err.textContent = 'Please enter a valid work email address.';
@@ -709,6 +707,11 @@ function submitEmail() {
     return;
   }
   err.style.display = 'none';
+  if (!consentEl.checked) {
+    consentErr.style.display = 'block';
+    return;
+  }
+  consentErr.style.display = 'none';
 
   var p = computePillarScores();
   var c = classify(p);
@@ -795,6 +798,18 @@ function showResults() {
   trackEvent('results_viewed', { profile: c.profile.name });
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+/* ─── PRIVACY NOTICE BANNER ─── */
+(function() {
+  if (localStorage.getItem('aa_privacy_ok')) return;
+  var banner = document.createElement('div');
+  banner.id = 'privacy-banner';
+  banner.innerHTML =
+    '<span style="flex:1;min-width:0">This site uses Google Fonts (which may transmit your IP to Google) and FormSubmit for form delivery. No tracking or advertising cookies are used. <a href="privacy.html" style="color:#b8945f;text-decoration:none;border-bottom:1px solid rgba(184,148,95,0.4)">Privacy Policy</a></span>' +
+    '<button onclick="(function(){localStorage.setItem(\'aa_privacy_ok\',\'1\');document.getElementById(\'privacy-banner\').remove()})()" aria-label="Dismiss privacy notice" style="flex-shrink:0;background:#b8945f;color:#080c14;border:none;padding:0.45rem 1.1rem;border-radius:2px;font-family:\'Outfit\',system-ui,sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;cursor:pointer">OK</button>';
+  banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9999;display:flex;align-items:center;gap:1.25rem;padding:0.9rem 1.5rem;background:#0e1420;border-top:1px solid rgba(255,255,255,0.07);font-family:\'Outfit\',system-ui,sans-serif;font-size:0.82rem;color:#8a8b8e;line-height:1.55';
+  document.body.appendChild(banner);
+}());
 </script>
 </body>
 </html>

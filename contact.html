@@ -26,7 +26,6 @@
     <li><a href="insights.html" data-page="insights">Insights</a></li>
     <li><a href="ai-transformation-readiness-assessment.html" class="nav-assess">Take the Assessment</a></li>
     <li><a href="strategy.html" class="nav-cta" data-page="strategy">Strategy Session</a></li>
-    <li><a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a></li>
   </ul>
   <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -39,7 +38,6 @@
   <a href="insights.html">Insights</a>
   <a href="ai-transformation-readiness-assessment.html" style="color:var(--gold)">Take the Assessment</a>
   <a href="strategy.html" style="color:var(--gold)">Strategy Session</a>
-  <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener" style="color:var(--text-3)">AI Ready Leaders ↗</a>
 </div>
 
 
@@ -69,6 +67,10 @@
         </select>
         <label for="contact-msg">Message <span style="color:#c75050">*</span></label>
         <textarea id="contact-msg" placeholder="What are you looking to solve?" required></textarea>
+        <div style="display:flex;align-items:flex-start;gap:0.65rem;margin-top:0.25rem;margin-bottom:0.25rem">
+          <input type="checkbox" id="contact-consent" style="margin-top:3px;flex-shrink:0;accent-color:var(--gold);width:16px;height:16px;cursor:pointer">
+          <label for="contact-consent" style="font-size:0.82rem;color:var(--text-3);line-height:1.6;cursor:pointer">I agree to Arrell Advisory processing my personal data to respond to this enquiry, in accordance with the <a href="privacy.html" style="color:var(--text-2);border-bottom:1px solid var(--border)">Privacy Policy</a>. <span style="color:#c75050">*</span></label>
+        </div>
         <button type="button" class="btn-primary" style="cursor:pointer;width:100%;justify-content:center" onclick="sendContactForm()">Send Message <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
       </div>
       <div class="contact-email">or email directly at <a href="mailto:hello@arrelladvisory.com">hello@arrelladvisory.com</a></div>
@@ -92,13 +94,7 @@
     <div class="footer-sep"></div>
     <a href="contact.html">Contact</a>
     <div class="footer-sep"></div>
-    <a href="https://www.linkedin.com/company/arrell-advisory" target="_blank" rel="noopener">LinkedIn</a>
-    <div class="footer-sep"></div>
-    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AI User Safety</a>
-    <div class="footer-sep"></div>
-    <a href="https://www.aireadyleaders.org" target="_blank" rel="noopener">AI Ready Leaders</a>
-    <div class="footer-sep"></div>
-    <a href="https://a.co/d/0buNPql1" target="_blank" rel="noopener">Book</a>
+    <a href="privacy.html">Privacy</a>
   </div>
 </footer>
 
@@ -118,7 +114,9 @@ function sendContactForm() {
   var org = document.getElementById('contact-org').value.trim();
   var interest = document.getElementById('contact-interest').value;
   var msg = document.getElementById('contact-msg').value.trim();
+  var consent = document.getElementById('contact-consent').checked;
   if (!name || !email || !org || !interest || !msg) { alert('Please fill in all fields before sending.'); return; }
+  if (!consent) { alert('Please confirm you agree to our Privacy Policy before sending.'); return; }
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) { alert('Please enter a valid email address.'); return; }
   var btn = document.querySelector('.contact-form .btn-primary');
@@ -143,6 +141,7 @@ function sendContactForm() {
       ['contact-name','contact-email','contact-org','contact-interest','contact-msg'].forEach(function(id) {
         document.getElementById(id).value = '';
       });
+      document.getElementById('contact-consent').checked = false;
       setTimeout(function() { btn.innerHTML = originalHTML; btn.style.background = ''; btn.disabled = false; }, 4000);
     } else { throw new Error('failed'); }
   })
