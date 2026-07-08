@@ -1,0 +1,61 @@
+{
+  "workshops": [
+    {
+      "name": "Build Your AI Chief of Staff",
+      "format": "Agent-Building Workshop",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#b8945f"
+    },
+    {
+      "name": "Build Your AI Content Management System",
+      "format": "Agent-Building Workshop",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#7d9b8a"
+    },
+    {
+      "name": "Build Your AI Assistant",
+      "format": "Agent-Building Workshop",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#8a7d9b"
+    },
+    {
+      "name": "AI Boot Camp",
+      "format": "Multi-Session Training",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#9b8a7d"
+    },
+    {
+      "name": "Identique AI Governance Lab",
+      "format": "Governance Lab",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#6f8fa8"
+    },
+    {
+      "name": "AI OS Sprint",
+      "format": "Intensive Sprint",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#a8886f"
+    },
+    {
+      "name": "AI User Safety Summit",
+      "format": "Annual Summit",
+      "duration": "",
+      "description": "",
+      "flyer_image": "",
+      "tile_color": "#7d8a9b"
+    }
+  ],
+  "sessions": []
+}
