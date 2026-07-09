@@ -127,22 +127,36 @@ function aaOpenCookieSettings() {
    footer on every page without editing each legacy file.
 ============================================================ */
 (function() {
-  // Nav: Training link before "Take the Assessment"
-  var navLinks = document.querySelector('.nav-links');
-  if (navLinks && !navLinks.querySelector('a[href="/training"]')) {
-    var li = document.createElement('li');
-    li.innerHTML = '<a href="/training" data-page="training">Training</a>';
-    var assess = navLinks.querySelector('.nav-assess');
-    navLinks.insertBefore(li, assess ? assess.parentElement : null);
+  // Matches the Training link in either URL style (/training or training.html)
+  function trainingLinks(root) {
+    return root.querySelectorAll('a[data-page="training"], a[href$="/training"], a[href$="training.html"]');
   }
-  // Mobile overlay: Training link
+  // Nav: ensure exactly one Training link, placed before "Take the Assessment"
+  var navLinks = document.querySelector('.nav-links');
+  if (navLinks) {
+    var t = trainingLinks(navLinks);
+    if (!t.length) {
+      var li = document.createElement('li');
+      li.innerHTML = '<a href="/training" data-page="training">Training</a>';
+      var assess = navLinks.querySelector('.nav-assess');
+      navLinks.insertBefore(li, assess ? assess.parentElement : null);
+    } else {
+      for (var i = 1; i < t.length; i++) { (t[i].closest('li') || t[i]).remove(); }
+    }
+  }
+  // Mobile overlay: same guarantee
   var mo = document.getElementById('mobileMenu');
-  if (mo && !mo.querySelector('a[href="/training"]')) {
-    var a = document.createElement('a');
-    a.href = '/training';
-    a.textContent = 'Training';
-    var anchor = mo.querySelector('a[href$="-assessment"]');
-    mo.insertBefore(a, anchor || null);
+  if (mo) {
+    var m = trainingLinks(mo);
+    if (!m.length) {
+      var a = document.createElement('a');
+      a.href = '/training';
+      a.textContent = 'Training';
+      var anchor = mo.querySelector('a[href$="-assessment"]');
+      mo.insertBefore(a, anchor || null);
+    } else {
+      for (var j = 1; j < m.length; j++) { m[j].remove(); }
+    }
   }
   // Footer: Terms of Service + Cookie Settings links
   var fl = document.querySelector('.footer-links');
