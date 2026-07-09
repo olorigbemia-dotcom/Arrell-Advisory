@@ -16,7 +16,7 @@
   var knownPages = ['methodology','strategy','debrief','principal','missouri-report','insights','contact','start','training','book'];
   var page = aliases[hash] || hash;
   if (knownPages.indexOf(page) !== -1) {
-    window.location.replace(page + '.html');
+    window.location.replace('/' + page);
   }
 })();
 
@@ -101,7 +101,7 @@ function aaShowConsentBanner() {
   banner.setAttribute('role', 'dialog');
   banner.setAttribute('aria-label', 'Cookie consent');
   banner.innerHTML =
-    '<span class="cb-text">We use strictly necessary cookies for site functionality. Analytics cookies are only used with your consent. No data is sold or shared for advertising. <a href="privacy.html">Privacy Policy</a></span>' +
+    '<span class="cb-text">We use strictly necessary cookies for site functionality. Analytics cookies are only used with your consent. No data is sold or shared for advertising. <a href="/privacy">Privacy Policy</a></span>' +
     '<span class="cb-actions">' +
     '<button class="cb-btn cb-reject" onclick="aaSetConsent(\'essential\',\'cookie_reject\')">Reject Non-Essential</button>' +
     '<button class="cb-btn cb-accept" onclick="aaSetConsent(\'all\',\'cookie_accept_all\')">Accept All</button>' +
@@ -129,27 +129,27 @@ function aaOpenCookieSettings() {
 (function() {
   // Nav: Training link before "Take the Assessment"
   var navLinks = document.querySelector('.nav-links');
-  if (navLinks && !navLinks.querySelector('a[href$="training.html"]')) {
+  if (navLinks && !navLinks.querySelector('a[href="/training"]')) {
     var li = document.createElement('li');
-    li.innerHTML = '<a href="training.html" data-page="training">Training</a>';
+    li.innerHTML = '<a href="/training" data-page="training">Training</a>';
     var assess = navLinks.querySelector('.nav-assess');
     navLinks.insertBefore(li, assess ? assess.parentElement : null);
   }
   // Mobile overlay: Training link
   var mo = document.getElementById('mobileMenu');
-  if (mo && !mo.querySelector('a[href$="training.html"]')) {
+  if (mo && !mo.querySelector('a[href="/training"]')) {
     var a = document.createElement('a');
-    a.href = 'training.html';
+    a.href = '/training';
     a.textContent = 'Training';
-    var anchor = mo.querySelector('a[href$="assessment.html"]');
+    var anchor = mo.querySelector('a[href$="-assessment"]');
     mo.insertBefore(a, anchor || null);
   }
   // Footer: Terms of Service + Cookie Settings links
   var fl = document.querySelector('.footer-links');
   if (fl) {
-    if (!fl.querySelector('a[href$="terms-of-service.html"]')) {
+    if (!fl.querySelector('a[href="/terms-of-service"]')) {
       var t = document.createElement('a');
-      t.href = 'terms-of-service.html';
+      t.href = '/terms-of-service';
       t.textContent = 'Terms';
       fl.appendChild(t);
     }
