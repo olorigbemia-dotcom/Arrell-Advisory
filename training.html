@@ -54,16 +54,36 @@
 <main class="page-content">
 
   <!-- HERO -->
-  <section class="hero" style="min-height:86vh">
+  <section class="hero" style="min-height:82vh">
     <img src="img/speaking-green-suit.heic" alt="Dr. Gbemisola Adetayo delivering a keynote on responsible AI adoption" class="hero-cover-img" onerror="this.style.display='none'">
     <div class="hero-cover-overlay"></div>
-    <div class="hero-inner" style="position:relative;z-index:2">
-      <div class="hero-label">Keynotes &middot; Workforce Upskilling &middot; Adoption Workshops</div>
-      <h1>Your Organization Is Already Using AI. <em>The Question Is Whether It&#8217;s Doing It Responsibly.</em></h1>
-      <p class="hero-sub">Dr. Gbemisola Adetayo brings responsible AI adoption into your organization — giving your people the mindset, the framework, and the judgment to use AI in ways that are effective, trustworthy, and built to last.</p>
-      <div class="btn-row">
-        <a href="/book" class="btn-primary" onclick="aaTrack('training_cta_hero')">Bring Dr. Adetayo to Your Organization <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-        <a href="#programs" class="btn-ghost">See past programs</a>
+    <div class="hero-inner" style="position:relative;z-index:2;text-align:center;max-width:800px">
+      <div class="hero-label" style="text-align:center">For Conferences, Businesses &amp; Organizations</div>
+      <h1 style="text-align:center">Build Responsible AI <em>Across Your Organization.</em></h1>
+      <p class="hero-sub" style="text-align:center;max-width:620px;margin-left:auto;margin-right:auto">Keynotes, workforce upskilling, and adoption workshops — delivered by a Responsible AI strategist with real-world governance and enterprise transformation experience.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a href="/book" class="btn-primary" onclick="aaTrack('training_cta_hero')">Submit a Speaking Enquiry <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+        <a href="/strategy" class="btn-ghost">Book a Strategy Session</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section style="padding:3rem 0;border-bottom:1px solid var(--border)">
+    <div class="sc">
+      <div class="stats-bar">
+        <div class="stat-box">
+          <span class="stat-num">9+</span>
+          <span class="stat-label">Organizations Served</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">Harvard</span>
+          <span class="stat-label">AI Leadership Certified</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">3</span>
+          <span class="stat-label">Organizations Founded</span>
+        </div>
       </div>
     </div>
   </section>
@@ -316,6 +336,43 @@ fetch('data/workshops.json')
 <style>
 .two-col-prose { grid-template-columns: 1fr 1fr; }
 @media (max-width: 720px) { .two-col-prose { grid-template-columns: 1fr; } }
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  padding: 1.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+}
+.stat-num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-1);
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+@media (max-width: 600px) {
+  .stats-bar { grid-template-columns: 1fr; }
+  .stat-num { font-size: 1.6rem; }
+}
 
 .topic-grid {
   display: flex;
