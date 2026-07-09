@@ -116,15 +116,15 @@
     </div>
     <div class="tb-wrap" aria-label="Organizations Dr. Gbemisola Adetayo has worked with">
       <div class="tb-track" id="tbTrack">
-        <span class="tb-item" aria-label="Lululemon">Lululemon</span>
-        <span class="tb-item" aria-label="The Coca-Cola Company">The Coca-Cola Company</span>
-        <span class="tb-item" aria-label="Google Women Techmakers">Google Women Techmakers</span>
-        <span class="tb-item" aria-label="Femme Alliance Network Canada">Femme Alliance Network Canada</span>
-        <span class="tb-item" aria-label="ACCESS BIO">ACCESS BIO</span>
-        <span class="tb-item" aria-label="Hy-Initiative">Hy-Initiative</span>
-        <span class="tb-item" aria-label="Springfield Tech Council">Springfield Tech Council</span>
-        <span class="tb-item" aria-label="World Mission Agency">World Mission Agency</span>
-        <span class="tb-item" aria-label="Center for AI and Digital Policy">Center for AI and Digital Policy</span>
+        <span class="tb-item" aria-label="Lululemon" data-logo="lululemon">Lululemon</span>
+        <span class="tb-item" aria-label="The Coca-Cola Company" data-logo="coca-cola">The Coca-Cola Company</span>
+        <span class="tb-item" aria-label="Google Women Techmakers" data-logo="women-techmakers">Google Women Techmakers</span>
+        <span class="tb-item" aria-label="Femme Alliance Network Canada" data-logo="femme-alliance">Femme Alliance Network Canada</span>
+        <span class="tb-item" aria-label="ACCESS BIO" data-logo="access-bio">ACCESS BIO</span>
+        <span class="tb-item" aria-label="Hy-Initiative" data-logo="hy-initiative">Hy-Initiative</span>
+        <span class="tb-item" aria-label="Springfield Tech Council" data-logo="springfield-tech-council">Springfield Tech Council</span>
+        <span class="tb-item" aria-label="World Mission Agency" data-logo="world-mission-agency">World Mission Agency</span>
+        <span class="tb-item" aria-label="Center for AI and Digital Policy" data-logo="caidp">Center for AI and Digital Policy</span>
       </div>
     </div>
   </section>
@@ -179,10 +179,27 @@
 
 <script src="scripts.js"></script>
 <script>
-// Duplicate the Trusted By track for a seamless continuous loop
+// Duplicate the Trusted By track for a seamless continuous loop,
+// then upgrade wordmarks to logo files where they exist in img/logos/
+// (tries slug.svg, then slug.png; keeps the wordmark if neither loads)
 (function(){
   var track = document.getElementById('tbTrack');
-  if (track) track.innerHTML += track.innerHTML;
+  if (!track) return;
+  track.innerHTML += track.innerHTML;
+  track.querySelectorAll('.tb-item[data-logo]').forEach(function(el){
+    var slug = el.getAttribute('data-logo');
+    function tryLoad(ext, next){
+      var img = new Image();
+      img.onload = function(){
+        img.alt = el.getAttribute('aria-label');
+        el.textContent = '';
+        el.appendChild(img);
+      };
+      if (next) img.onerror = next;
+      img.src = 'img/logos/' + slug + ext;
+    }
+    tryLoad('.svg', function(){ tryLoad('.png', null); });
+  });
 })();
 </script>
 </body>
