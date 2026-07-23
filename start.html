@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<!-- NAV (Phase 8: updated links) -->
+<!-- NAV -->
 <nav id="nav">
   <a href="/" class="nav-brand">
     <span class="nav-brand-name">Dr. Gbemisola Adetayo</span>
@@ -41,38 +41,39 @@
 
 <div class="mobile-overlay" id="mobileMenu">
   <button class="mobile-close" onclick="closeMobileMenu()">&times;</button>
-  <a href="/principal">About Dr. Adetayo</a>
-  <a href="/insights">Insights</a>
-  <a href="/training">Keynotes &amp; Workshops</a>
+  <a href="/principal" onclick="closeMobileMenu()">About Dr. Adetayo</a>
+  <a href="/insights" onclick="closeMobileMenu()">Insights</a>
+  <a href="/training" onclick="closeMobileMenu()">Keynotes &amp; Workshops</a>
   <a href="https://www.aiusersafety.org/" target="_blank" rel="noopener noreferrer" aria-label="AI User Safety Initiative (opens in new tab)" onclick="closeMobileMenu()">AI User Safety</a>
   <a href="/book" style="color:var(--gold)" onclick="closeMobileMenu()">Book / Enquire</a>
 </div>
 
 <main class="page-content">
 
-  <!-- HERO (Phase 1: offer-focused) -->
-  <section class="hero" style="min-height:92vh;justify-content:center;text-align:center;padding-bottom:5rem">
-    <img src="img/hero-abstract.svg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none">
-    <div class="hero-inner" style="max-width:860px">
+  <!-- HERO: speaking photo as full-bleed background -->
+  <section class="hero" style="min-height:94vh;justify-content:center;text-align:center;padding-bottom:6rem">
+    <img src="img/speaking-keynote.PNG" class="hero-cover-img" alt="Dr. Gbemisola Adetayo delivering a keynote" style="object-position:center 15%">
+    <div class="hero-cover-overlay" style="background:linear-gradient(to bottom,rgba(8,12,20,0.72) 0%,rgba(8,12,20,0.80) 60%,rgba(8,12,20,0.93) 100%)"></div>
+    <div class="hero-inner" style="max-width:820px;position:relative;z-index:2">
       <h1 style="text-align:center">From AI Interest to<br><em>Responsible Action.</em></h1>
-      <p class="hero-sub" style="margin:0 auto 2.5rem;text-align:center">Keynotes, adoption workshops, and AI User Safety programs for businesses, institutions, and communities ready to use AI safely, wisely, and responsibly.</p>
+      <p class="hero-sub" style="margin:0 auto 2.5rem;text-align:center;max-width:580px">Keynotes, adoption workshops, and AI User Safety programs for businesses, institutions, and communities.</p>
       <div class="btn-row" style="justify-content:center">
         <a href="/training" class="btn-primary" onclick="aaTrack('start_keynotes_click')">Explore Keynotes &amp; Workshops <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         <a href="https://www.aiusersafety.org/" target="_blank" rel="noopener noreferrer" class="btn-outline" onclick="aaTrack('start_aiusi_click')" aria-label="Explore AI User Safety (opens in new tab)">Explore AI User Safety</a>
       </div>
-      <a href="#pathways" class="hero-scroll-text">View enterprise and professional-development pathways ↓</a>
-      <p class="availability-signal" style="justify-content:center">Now booking keynotes, workshops, and institutional programs for 2026–2027.</p>
+      <a href="#pathways" class="hero-scroll-text" style="margin-top:1.75rem">View enterprise and professional-development pathways</a>
+      <p class="availability-signal" style="justify-content:center;margin-top:1.25rem">Now booking keynotes, workshops, and institutional programs for 2026-2027.</p>
     </div>
-    <a href="#credibility" class="scroll-cue" aria-label="Scroll to credibility section">
+    <a href="#credibility" class="scroll-cue" aria-label="Scroll down">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
     </a>
   </section>
 
-  <!-- COMPACT CREDIBILITY STRIP (Phase 5 / Phase 11 order: position 3) -->
-  <section id="credibility" style="padding:3.5rem 0 2.5rem">
+  <!-- CREDIBILITY STRIP -->
+  <section id="credibility" style="padding:4rem 0 3rem">
     <div class="sc reveal" style="padding:0 3rem">
-      <div class="sl" style="text-align:center;margin-bottom:0.4rem">Experience and Programs Across Organizations and Communities</div>
-      <p style="text-align:center;font-size:0.78rem;color:var(--text-3);letter-spacing:0.04em;margin-bottom:2rem">Speaking engagements, professional experience, client partnerships, and program collaborations.</p>
+      <div class="sl" style="text-align:center;margin-bottom:0.35rem">Experience and Programs Across Organizations and Communities</div>
+      <p style="text-align:center;font-size:0.75rem;color:var(--text-3);letter-spacing:0.04em;margin-bottom:2.25rem">Speaking engagements, client work, professional experience, and program partnerships.</p>
     </div>
     <div class="tb-wrap" aria-label="Organizations Dr. Gbemisola Adetayo has worked with, spoken for, or partnered with">
       <div class="tb-track" id="tbTrack">
@@ -87,46 +88,73 @@
         <span class="tb-item" aria-label="Center for AI and Digital Policy" data-logo="caidp">Center for AI and Digital Policy</span>
       </div>
     </div>
+    <!-- Proof indicators below the marquee -->
+    <div class="sc" style="padding:2.5rem 3rem 0">
+      <div class="proof-stat-row">
+        <div class="proof-stat-item">
+          <span class="proof-stat-value">Fortune 500</span>
+          <span class="proof-stat-label">Transformation and delivery experience</span>
+        </div>
+        <div class="proof-stat-divider"></div>
+        <div class="proof-stat-item">
+          <span class="proof-stat-value">3 Sectors</span>
+          <span class="proof-stat-label">Business, education, and community programs</span>
+        </div>
+        <div class="proof-stat-divider"></div>
+        <div class="proof-stat-item">
+          <span class="proof-stat-value">SAFE AI</span>
+          <span class="proof-stat-label">Proprietary frameworks for responsible adoption</span>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- PRIORITY PATHWAYS (Phase 2: two featured cards — Phase 11 order: position 4) -->
-  <section id="pathways" class="bg-alt">
+  <!-- PRIORITY PATHWAYS -->
+  <section id="pathways" class="bg-alt" style="padding:7rem 3rem">
     <div class="sc reveal">
       <div class="sl" style="text-align:center">Choose How We Can Work Together</div>
-      <h2 class="sh">Start with the pathway that best matches your audience, goals, and stage of AI adoption.</h2>
+      <h2 class="sh">Start with the pathway that fits your audience and stage of AI adoption.</h2>
       <div class="priority-grid">
 
-        <!-- Featured Card 1: Keynotes and Adoption Workshops -->
+        <!-- Featured Card 1: Keynotes and Workshops -->
         <div class="priority-card">
-          <div class="priority-card-badge">NOW BOOKING 2026–2027</div>
-          <div class="priority-card-label">For Businesses, Associations &amp; Leadership Teams</div>
+          <img src="img/Keynotes%20and%20workshops.jpg"
+               class="priority-card-art"
+               alt="Dr. Gbemisola Adetayo leading a responsible AI adoption workshop"
+               onerror="this.onerror=null;this.src='img/enterprise-presentation.jpg'">
+          <div class="priority-card-badge">Now Booking 2026-2027</div>
+          <div class="priority-card-label">For Businesses, Associations and Leadership Teams</div>
           <h3>Keynotes and Responsible AI Adoption Workshops</h3>
-          <p class="priority-card-copy">Move your audience from AI curiosity, anxiety, or unmanaged experimentation to responsible action. Keynotes, executive briefings, and adoption workshops give leaders and teams the judgment to decide where AI fits, where boundaries belong, and what must happen next.</p>
+          <p class="priority-card-copy">Keynotes, executive briefings, and adoption workshops that give leaders and teams the practical judgment to decide where AI fits, where limits belong, and what must happen next.</p>
           <ul class="priority-outcomes">
-            <li>Build responsible AI judgment — not just tool skills</li>
-            <li>Align leaders around use cases, risks, and ownership</li>
+            <li>Build responsible AI judgment, not just tool skills</li>
+            <li>Align leadership around use cases, risks, and ownership</li>
             <li>Leave with practical decisions and next actions</li>
           </ul>
           <div class="priority-card-ctas">
             <a href="/training" class="offer-cta-primary" onclick="aaTrack('start_keynotes_click')">Explore Keynotes &amp; Workshops</a>
-            <a href="/book?engagement=keynote" class="priority-secondary-link" onclick="aaTrack('start_keynotes_click')">Submit a booking inquiry →</a>
+            <a href="/book?engagement=keynote" class="priority-secondary-link" onclick="aaTrack('start_keynotes_click')">Submit a booking inquiry</a>
           </div>
         </div>
 
         <!-- Featured Card 2: AI User Safety -->
         <div class="priority-card">
-          <div class="priority-card-badge priority-card-badge--alt">Partners &amp; Program Hosts Welcome</div>
-          <div class="priority-card-label">For Schools, Public Institutions &amp; Community Partners</div>
+          <img src="img/aiusi-banner.png"
+               class="priority-card-art"
+               alt="AI User Safety Initiative programs for schools, families, and public institutions"
+               onerror="this.onerror=null;this.src='img/doors/door-aiusi.svg'">
+          <div class="priority-card-badge priority-card-badge--alt">Partners and Program Hosts Welcome</div>
+          <div class="priority-card-label">For Schools, Public Institutions and Community Partners</div>
           <h3>AI User Safety Programs and Partnerships</h3>
-          <p class="priority-card-copy">Bring practical AI literacy, user-level governance, and responsible AI education to the people and communities you serve. Host a keynote, sponsor a program, equip your institution, or partner with the AI User Safety Initiative.</p>
+          <p class="priority-card-copy">Practical AI literacy, user-level governance, and responsible AI education for the people and communities you serve. Host a keynote, sponsor a program, or partner with the AI User Safety Initiative.</p>
           <ul class="priority-outcomes">
             <li>Institutional AI literacy and staff training</li>
             <li>Community programs for youth, families, and older adults</li>
             <li>Hosting, sponsorship, licensing, and program partnerships</li>
           </ul>
           <div class="priority-card-ctas">
-            <a href="https://www.aiusersafety.org/partner/" target="_blank" rel="noopener noreferrer" class="offer-cta-primary" onclick="aaTrack('start_aiusi_click')" aria-label="Explore AI User Safety partnership page (opens in new tab)">Explore AI User Safety</a>
-            <a href="https://www.aiusersafety.org/" target="_blank" rel="noopener noreferrer" class="priority-secondary-link" onclick="aaTrack('start_aiusi_click')" aria-label="Visit the AI User Safety Initiative website (opens in new tab)">Visit the AI User Safety Initiative →</a>
+            <a href="https://www.aiusersafety.org/partner/" target="_blank" rel="noopener noreferrer" class="offer-cta-primary" onclick="aaTrack('start_aiusi_click')" aria-label="Explore AI User Safety partnerships (opens in new tab)">Explore AI User Safety</a>
+            <a href="https://www.aiusersafety.org/" target="_blank" rel="noopener noreferrer" class="priority-secondary-link" onclick="aaTrack('start_aiusi_click')" aria-label="Visit the AI User Safety Initiative (opens in new tab)">Visit the AI User Safety Initiative</a>
           </div>
         </div>
 
@@ -134,50 +162,56 @@
     </div>
   </section>
 
-  <!-- THREE-PART ENGINE (Phase 4 — Phase 11 order: position 5) -->
-  <section>
+  <!-- HOW THE THREE OFFERS CONNECT: infographic layout -->
+  <section style="padding:7rem 3rem">
     <div class="sc reveal">
       <div class="sl" style="text-align:center">How the Three Offers Connect</div>
-      <h2 class="sh">Start With Visibility. Continue With Action.<br>Build Lasting Capability.</h2>
-      <div class="engine-steps">
-        <div class="engine-step">
-          <span class="engine-step-num">01</span>
-          <h3>Keynotes create visibility and shared understanding</h3>
-          <p>Bring the right responsible AI conversation into the room. Leaders align. Questions surface. A shared foundation forms.</p>
+      <h2 class="sh engine-heading">Start With Visibility. Continue With Action. Build Lasting Capability.</h2>
+      <div class="engine-infographic">
+        <div class="engine-node">
+          <div class="engine-node-num">1</div>
+          <h3>Keynote</h3>
+          <p>Bring the right responsible AI conversation into the room. Leaders align. A shared foundation forms.</p>
         </div>
-        <div class="engine-step">
-          <span class="engine-step-num">02</span>
-          <h3>Adoption workshops create decisions and results</h3>
-          <p>Turn awareness into use cases, boundaries, ownership, and an action plan. Teams leave with clarity — not more questions.</p>
+        <div class="engine-arrow" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </div>
-        <div class="engine-step">
-          <span class="engine-step-num">03</span>
-          <h3>AI User Safety extends the impact</h3>
-          <p>Equip the broader workforce, institution, or community with practical AI literacy and user-level governance.</p>
+        <div class="engine-node">
+          <div class="engine-node-num">2</div>
+          <h3>Workshop</h3>
+          <p>Turn awareness into use cases, boundaries, ownership, and a concrete action plan.</p>
+        </div>
+        <div class="engine-arrow" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </div>
+        <div class="engine-node">
+          <div class="engine-node-num">3</div>
+          <h3>AI User Safety</h3>
+          <p>Equip the broader workforce, institution, or community with practical AI literacy and governance.</p>
         </div>
       </div>
-      <div style="text-align:center;margin-top:3rem">
+      <div style="text-align:center;margin-top:4rem">
         <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener noreferrer" class="btn-primary" onclick="aaTrack('start_discovery_call_click')" aria-label="Discuss the right starting point (opens in new tab)">Discuss the Right Starting Point <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
       </div>
     </div>
   </section>
 
-  <!-- SECONDARY PATHWAYS (Phase 3 — Phase 11 order: position 6) -->
-  <section class="bg-alt">
+  <!-- SECONDARY PATHWAYS -->
+  <section class="bg-alt" style="padding:7rem 3rem">
     <div class="sc reveal">
       <div class="sl" style="text-align:center">Additional Responsible AI Pathways</div>
-      <p class="sb">These offerings support long-term responsible AI capability — without competing with the priority pathways above.</p>
+      <p class="sb">These offerings support long-term responsible AI capability without competing with the priority pathways above.</p>
       <div class="secondary-grid">
 
         <div class="secondary-card">
-          <div class="secondary-card-label">For Regulated Organizations &amp; Public Institutions</div>
+          <div class="secondary-card-label">For Regulated Organizations and Public Institutions</div>
           <h3>Enterprise AI Transformation and Governance</h3>
-          <p>For regulated organizations and public institutions that need AI strategy, transformation, risk management, and governance architecture to operate as one system.</p>
+          <p>For organizations that need AI strategy, transformation, risk management, and governance architecture to operate as one system.</p>
           <a href="https://www.arrelladvisory.com/" class="offer-cta-primary" onclick="aaTrack('start_enterprise_click')">Explore Enterprise Advisory</a>
         </div>
 
         <div class="secondary-card">
-          <div class="secondary-card-label">AI Certification &amp; Professional Development</div>
+          <div class="secondary-card-label">AI Certification and Professional Development</div>
           <h3>AI Ready Leaders</h3>
           <p>Certification and professional development for individuals and organizations building confident, responsible, AI-ready professionals.</p>
           <a href="https://aireadyleaders.org" target="_blank" rel="noopener noreferrer" class="offer-cta-primary" onclick="aaTrack('start_arl_click')" aria-label="Explore AI Ready Leaders (opens in new tab)">Explore AI Ready Leaders</a>
@@ -187,54 +221,36 @@
     </div>
   </section>
 
-  <!-- PROOF STORIES &amp; SPEAKING EVIDENCE (Phase 5 — Phase 11 order: position 7) -->
-  <section>
+  <!-- PROOF STORIES -->
+  <section style="padding:7rem 3rem">
     <div class="sc reveal">
-      <div class="sl" style="text-align:center">Speaking and Program Evidence</div>
-      <h2 class="sh">Programs, decisions, and outcomes — not just presence.</h2>
-      <div class="proof-layout">
-
-        <div>
-          <div class="proof-photo">
-            <img src="img/speaking-keynote.PNG" alt="Dr. Gbemisola Adetayo delivering a responsible AI keynote to a live audience" loading="lazy" onerror="this.onerror=null;this.src='img/stc-squared-conference.jpeg'">
-          </div>
+      <div class="sl" style="text-align:center">Programs and Outcomes</div>
+      <h2 class="sh">Decisions, behaviors, and results.</h2>
+      <div class="proof-stories-grid">
+        <div class="proof-story">
+          <div class="proof-story-item"><span class="proof-story-label">The need</span> A business association needed a responsible AI conversation grounded in practical decisions for its membership.</div>
+          <div class="proof-story-item"><span class="proof-story-label">The engagement</span> Tailored keynote with leadership session and audience Q&amp;A.</div>
+          <div class="proof-story-item"><span class="proof-story-label">The result</span> Shared language, clearer risk understanding, and defined next actions for member organizations.</div>
         </div>
-
-        <div>
-          <div class="proof-indicators">
-            <div class="proof-indicator">Fortune 500 transformation and delivery experience</div>
-            <div class="proof-indicator">Responsible AI programs across business, education, and community settings</div>
-            <div class="proof-indicator">Proprietary SAFE AI and governance frameworks</div>
-          </div>
-
-          <div class="proof-stories">
-            <div class="proof-story">
-              <div class="proof-story-item"><span class="proof-story-label">The need:</span> A business association needed a responsible AI conversation grounded in practical decisions for its membership.</div>
-              <div class="proof-story-item"><span class="proof-story-label">The engagement:</span> Tailored keynote with leadership session and audience Q&amp;A.</div>
-              <div class="proof-story-item"><span class="proof-story-label">The result:</span> Shared language, clearer risk understanding, and defined next actions for member organizations.</div>
-            </div>
-            <div class="proof-story">
-              <div class="proof-story-item"><span class="proof-story-label">The need:</span> An institution preparing to deploy AI tools needed governance guidance and staff readiness before adoption.</div>
-              <div class="proof-story-item"><span class="proof-story-label">The engagement:</span> AI readiness workshop and governance framework session.</div>
-              <div class="proof-story-item"><span class="proof-story-label">The result:</span> A documented adoption policy, defined use-case boundaries, and a team prepared to proceed responsibly.</div>
-            </div>
-          </div>
+        <div class="proof-story">
+          <div class="proof-story-item"><span class="proof-story-label">The need</span> An institution preparing to deploy AI tools needed governance guidance and staff readiness before adoption.</div>
+          <div class="proof-story-item"><span class="proof-story-label">The engagement</span> AI readiness workshop and governance framework session.</div>
+          <div class="proof-story-item"><span class="proof-story-label">The result</span> A documented adoption policy, defined use-case boundaries, and a team prepared to proceed responsibly.</div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- SEGMENTED FINAL CTA (Phase 6 — Phase 11 order: position 8) -->
-  <section class="assess-banner bg-alt">
+  <!-- SEGMENTED FINAL CTA -->
+  <section class="assess-banner bg-alt" style="padding:7rem 3rem">
     <div class="sc reveal">
-      <h2 class="sh" style="max-width:640px;margin:0 auto 0.75rem;text-align:center">What Would You Like to Bring Into Your Organization or Community?</h2>
-      <p style="font-size:0.92rem;color:var(--text-2);max-width:480px;margin:0 auto 0;line-height:1.85;text-align:center">Select the path that fits — or book a short call if you're not sure yet.</p>
+      <h2 class="sh" style="max-width:600px;margin:0 auto 0.75rem;text-align:center">What Would You Like to Bring Into Your Organization or Community?</h2>
+      <p style="font-size:0.92rem;color:var(--text-2);max-width:460px;margin:0 auto;line-height:1.85;text-align:center">Select the path that fits, or book a short call if you are not sure yet.</p>
       <div class="segmented-cta-grid">
         <a href="/book?engagement=keynote" class="btn-primary" onclick="aaTrack('start_keynotes_click')">Book a Keynote or Workshop</a>
         <a href="https://www.aiusersafety.org/partner/" target="_blank" rel="noopener noreferrer" class="btn-outline" onclick="aaTrack('start_aiusi_click')" aria-label="Host or sponsor AI User Safety programs (opens in new tab)">Host or Sponsor AI User Safety</a>
         <a href="https://www.arrelladvisory.com/" class="btn-outline" onclick="aaTrack('start_enterprise_click')">Discuss Enterprise Advisory</a>
-        <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener noreferrer" class="btn-ghost-cta" onclick="aaTrack('start_discovery_call_click')" aria-label="Book a 20-minute discovery call (opens in new tab)">I'm Not Sure Yet — Book a Discovery Call</a>
+        <a href="https://calendly.com/arrelladvisory/strategy" target="_blank" rel="noopener noreferrer" class="btn-ghost-cta" onclick="aaTrack('start_discovery_call_click')" aria-label="Book a 20-minute discovery call (opens in new tab)">Not Sure Yet - Book a Discovery Call</a>
       </div>
     </div>
   </section>
@@ -262,8 +278,6 @@
 
 <script src="scripts.js?v=2"></script>
 <script>
-// Duplicate the Trusted By track for a seamless continuous loop,
-// then upgrade wordmarks to logo files where they exist in img/logos/
 (function(){
   var track = document.getElementById('tbTrack');
   if (!track) return;
@@ -284,13 +298,10 @@
   });
 })();
 
-// Phase 7: Pre-populate booking form based on URL param
 (function(){
   var params = new URLSearchParams(window.location.search);
   var engagement = params.get('engagement');
-  if (engagement) {
-    sessionStorage.setItem('aa_booking_engagement', engagement);
-  }
+  if (engagement) sessionStorage.setItem('aa_booking_engagement', engagement);
 })();
 </script>
 </body>
