@@ -476,15 +476,49 @@ footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justi
 .segmented-cta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:700px;margin:2.5rem auto 0}
 .segmented-cta-grid .btn-primary,.segmented-cta-grid .btn-outline,.segmented-cta-grid .btn-ghost-cta{justify-content:center;text-align:center;width:100%}
 
+/* Priority card top image — bleeds edge-to-edge before the badge */
+.priority-card-art{display:block;width:calc(100% + 5rem);height:200px;object-fit:cover;margin:-2.5rem -2.5rem 2rem;border-radius:3px 3px 0 0}
+
+/* Engine section heading — slightly smaller so it doesn't overwhelm the infographic */
+.engine-heading{font-size:clamp(1.5rem,2.8vw,2rem)!important;margin-bottom:0.5rem!important}
+
+/* ENGINE INFOGRAPHIC — horizontal 3-node layout */
+.engine-infographic{display:flex;align-items:stretch;gap:0;margin-top:3.5rem}
+.engine-node{flex:1;text-align:center;padding:3rem 2rem;border:1px solid var(--border);border-radius:3px;background:rgba(255,255,255,0.01);transition:border-color 0.3s;display:flex;flex-direction:column;align-items:center}
+.engine-node:hover{border-color:var(--gold-b)}
+.engine-node-num{font-family:var(--serif);font-size:3.5rem;font-weight:600;color:var(--gold);line-height:1;margin-bottom:1rem;display:block}
+.engine-node h3{font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.75rem;color:var(--text)}
+.engine-node p{font-size:0.88rem;color:var(--text-2);line-height:1.75;max-width:220px}
+.engine-arrow{display:flex;align-items:center;padding:0 0.75rem;color:var(--gold);flex-shrink:0}
+.engine-arrow svg{width:22px;height:22px}
+
+/* PROOF STAT ROW (credibility strip) */
+.proof-stat-row{display:flex;align-items:flex-start;justify-content:center;gap:0;flex-wrap:nowrap}
+.proof-stat-item{flex:1;text-align:center;padding:1.5rem 2rem;display:flex;flex-direction:column;gap:0.35rem;max-width:320px}
+.proof-stat-value{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--gold);line-height:1}
+.proof-stat-label{font-size:0.8rem;color:var(--text-3);line-height:1.5}
+.proof-stat-divider{width:1px;background:var(--border);flex-shrink:0;margin:1.5rem 0}
+
+/* PROOF STORIES: two-column grid */
+.proof-stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+
 /* RESPONSIVE — start page optimized */
+/* Priority cards collapse at 960px — they carry images + full content */
 @media(max-width:960px){
   .priority-grid{grid-template-columns:1fr}
-  .proof-layout{grid-template-columns:1fr;gap:2.5rem}
-  .engine-steps{grid-template-columns:1fr;gap:1.25rem}
-  .secondary-grid{grid-template-columns:1fr}
 }
+/* Infographic and secondary grid stay multi-column until mobile */
 @media(max-width:768px){
+  .engine-infographic{flex-direction:column}
+  .engine-arrow{padding:0.5rem 0;transform:rotate(90deg)}
+  .engine-node{padding:2rem 1.5rem}
+  .secondary-grid{grid-template-columns:1fr}
+  .proof-stories-grid{grid-template-columns:1fr}
+  .proof-stat-row{flex-direction:column;align-items:center}
+  .proof-stat-divider{width:60px;height:1px;margin:0 auto}
+  .proof-stat-item{padding:1rem 1.5rem}
   .segmented-cta-grid{grid-template-columns:1fr;max-width:400px}
   .priority-card{padding:2rem 1.5rem}
+  .priority-card-art{width:calc(100% + 3rem);margin:-2rem -1.5rem 1.5rem}
   .btn-outline{padding:0.9rem 1.75rem}
 }
