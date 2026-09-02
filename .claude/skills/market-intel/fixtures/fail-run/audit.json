@@ -1,0 +1,37 @@
+{
+  "run": ".claude/skills/market-intel/fixtures/fail-run",
+  "dossiers": 3,
+  "known_urls": 12,
+  "min_coverage": 0.85,
+  "result": "fail",
+  "files": [
+    {
+      "file": "04-patterns-gaps.md",
+      "errors": [
+        "citation coverage 80% below the 85% threshold; 1 unhedged claim(s) carry no citation"
+      ],
+      "warnings": [
+        "claim-strength: 'The market is' \u2014 asserts market behaviour; the sample evidences category language, not market demand \u2026 lic copy. https://example.com/services  ## Interpretations  The market is converging on assessment-led delivery and most firms typica",
+        "claim-strength: 'The leading' \u2014 unquantified superlative \u2026 rms typically charges a fixed fee for the first engagement. The leading firms in this category appear to treat pricing opacity as a",
+        "claim-strength: 'most firms' \u2014 unquantified plural; use 'N of M' \u2026 ns  The market is converging on assessment-led delivery and most firms typically charges a fixed fee for the first engagement. The",
+        "claim-strength: 'typically charges' \u2014 asserts pricing behaviour \u2026 ket is converging on assessment-led delivery and most firms typically charges a fixed fee for the first engagement. The leading firms in"
+      ],
+      "claims": 5,
+      "cited": 4,
+      "coverage": 0.8,
+      "uncited_examples": [
+        "The market is converging on assessment-led delivery and most firms typically charges a fixed fee for the first engagement."
+      ]
+    },
+    {
+      "file": "05-hypotheses.md",
+      "errors": [
+        "required document is missing"
+      ],
+      "warnings": [],
+      "claims": 0,
+      "cited": 0,
+      "coverage": 0.0
+    }
+  ]
+}

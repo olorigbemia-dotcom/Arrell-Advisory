@@ -1,0 +1,65 @@
+{
+  "schema_version": "1",
+  "slug": "firm-slug",
+  "name": "Firm Name",
+  "tier": "direct | adjacent | substitute | aspirational",
+  "url": "https://firm.example",
+  "retrieved_at": "YYYY-MM-DD",
+
+  "_note": "Every substantive value is an evidenced object, never a bare string. Unknown means null plus a gaps[] entry, never an empty string and never a plausible placeholder.",
+
+  "positioning": {
+    "category": {"value": null, "quote": "", "source_url": "", "retrieved_at": "", "status": "claimed", "confidence": "high", "date_confidence": "known"},
+    "promise": null,
+    "proof": null,
+    "frame": null
+  },
+
+  "target_audience": {
+    "sectors": null,
+    "org_size": null,
+    "buyer_role": null,
+    "regulatory_regime": null,
+    "geography": null
+  },
+
+  "services": [
+    {
+      "name": {"value": null, "quote": "", "source_url": "", "retrieved_at": "", "status": "claimed", "confidence": "high", "date_confidence": "known"},
+      "description": null,
+      "unit_of_sale": null,
+      "duration": null,
+      "stated_outcome": null
+    }
+  ],
+
+  "pricing": {
+    "published": false,
+    "model": "not published",
+    "figures": [],
+    "signals": []
+  },
+
+  "delivery_model": {
+    "format": null,
+    "team_shape": null,
+    "engagement_arc": null,
+    "client_effort": null
+  },
+
+  "differentiators": [
+    {
+      "claim": {"value": null, "quote": "", "source_url": "", "retrieved_at": "", "status": "claimed", "confidence": "medium", "date_confidence": "unknown"},
+      "substantiation": {"value": "none | assertion | example | credential | data", "quote": "", "source_url": "", "retrieved_at": "", "status": "claimed", "confidence": "medium", "date_confidence": "unknown"}
+    }
+  ],
+
+  "sources": [
+    {"url": "https://firm.example/services", "retrieved_at": "YYYY-MM-DD", "outcome": "used", "class": "firm_owned"},
+    {"url": "https://firm.example/pricing", "retrieved_at": "YYYY-MM-DD", "outcome": "unreachable", "class": "firm_owned"}
+  ],
+
+  "gaps": [
+    "State every field that could not be established and why. An empty gaps array on a small firm means something was inferred rather than found."
+  ]
+}
