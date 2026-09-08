@@ -2,156 +2,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact | Arrell Advisory</title>
-<meta name="description" content="Get in touch with Arrell Advisory about AI governance consulting.">
+<meta name="description" content="Contact Arrell Advisory about organizational AI adoption, team learning, strategy, workflows, and responsible use.">
+<link rel="canonical" href="https://www.arrelladvisory.com/contact">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact">
+<meta property="og:description" content="Contact Arrell Advisory about organizational AI adoption, team learning, strategy, workflows, and responsible use.">
+<meta property="og:url" content="https://www.arrelladvisory.com/contact">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact">
+<meta name="twitter:description" content="Contact Arrell Advisory about organizational AI adoption, team learning, strategy, workflows, and responsible use.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/adoption.css">
+<link rel="icon" href="/favicon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Arrell Advisory", "url": "https://www.arrelladvisory.com/", "description": "Organizational AI adoption, literacy, strategy, and governance advisory."}</script>
 </head>
-<body>
-<!-- NAV -->
-<nav id="nav">
-  <a href="/" class="nav-brand">
-    <span class="nav-brand-name">Arrell Advisory</span>
-    <span class="nav-brand-type">AI Governance</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/methodology" data-page="methodology">Methodology</a></li>
-    <li><a href="/principal" data-page="principal">Principal</a></li>
-    <li><a href="/insights" data-page="insights">Insights</a></li>
-    <li><a href="/ai-transformation-readiness-assessment" class="nav-assess">Take the Assessment</a></li>
-    <li><a href="/strategy" class="nav-cta" data-page="strategy">Strategy Session</a></li>
-  </ul>
-  <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+<body class="adoption-site">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<nav id="nav" aria-label="Main navigation">
+<a href="/" class="nav-brand">
+<span class="nav-brand-name">Arrell Advisory</span>
+<span class="nav-brand-type">Responsible AI Adoption</span>
+</a>
+<ul class="nav-links">
+<li>
+<a href="/how-we-help">How We Help</a>
+</li>
+<li>
+<a href="/methodology">Approach</a>
+</li>
+<li>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+</li>
+<li>
+<a href="/insights">Insights</a>
+</li>
+<li>
+<a href="/principal">About</a>
+</li>
+<li>
+<a href="/strategy" class="nav-cta">Book a Strategy Call</a>
+</li>
+</ul>
+<button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+<span>
+</span>
+<span>
+</span>
+<span>
+</span>
+</button>
 </nav>
-
-<div class="mobile-overlay" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobileMenu()">&times;</button>
-  <a href="/">Home</a>
-  <a href="/methodology">Methodology</a>
-  <a href="/principal">Principal</a>
-  <a href="/insights">Insights</a>
-  <a href="/ai-transformation-readiness-assessment" style="color:var(--gold)">Take the Assessment</a>
-  <a href="/strategy" style="color:var(--gold)">Strategy Session</a>
+<div class="mobile-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation" inert>
+<button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">&times;</button>
+<a href="/">Home</a>
+<a href="/how-we-help">How We Help</a>
+<a href="/methodology">Approach</a>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+<a href="/insights">Insights</a>
+<a href="/principal">About</a>
+<a href="/strategy">Book a Strategy Call</a>
 </div>
-
-
-<main class="page-content">
-
-  <a href="/" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="contact-page">
-    <div class="sc">
-      <div class="sl">Get In Touch</div>
-      <h2 class="sh">Start a conversation</h2>
-      <p class="sb">Tell us a bit about where you are and what you're working on. We'll get back to you within two business days.</p>
-      <div class="contact-form">
-        <label for="contact-name">Name <span style="color:#c75050">*</span></label>
-        <input type="text" id="contact-name" placeholder="Your name" required>
-        <label for="contact-email">Email <span style="color:#c75050">*</span></label>
-        <input type="email" id="contact-email" placeholder="your@email.com" required>
-        <label for="contact-org">Organization <span style="color:#c75050">*</span></label>
-        <input type="text" id="contact-org" placeholder="Company or organization" required>
-        <label for="contact-interest">I'm interested in <span style="color:#c75050">*</span></label>
-        <select id="contact-interest" required>
-          <option value="">Select one...</option>
-          <option value="Governance Architecture Engagement">Governance Architecture Engagement</option>
-          <option value="Governance Gap Report">Governance Gap Report</option>
-          <option value="Speaking">Speaking Engagement</option>
-          <option value="Other">Other</option>
-        </select>
-        <label for="contact-msg">Message <span style="color:#c75050">*</span></label>
-        <textarea id="contact-msg" placeholder="What are you looking to solve?" required></textarea>
-        <div style="display:flex;align-items:flex-start;gap:0.65rem;margin-top:0.25rem;margin-bottom:0.25rem">
-          <input type="checkbox" id="contact-consent" style="margin-top:3px;flex-shrink:0;accent-color:var(--gold);width:16px;height:16px;cursor:pointer">
-          <label for="contact-consent" style="font-size:0.82rem;color:var(--text-3);line-height:1.6;cursor:pointer">I agree to Arrell Advisory processing my personal data to respond to this enquiry, in accordance with the <a href="/privacy" style="color:var(--text-2);border-bottom:1px solid var(--border)">Privacy Policy</a>. <span style="color:#c75050">*</span></label>
-        </div>
-        <button type="button" class="btn-primary" style="cursor:pointer;width:100%;justify-content:center" onclick="sendContactForm()">Send Message <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
-      </div>
-      <div class="contact-email">or email directly at <a href="mailto:hello@arrelladvisory.com">hello@arrelladvisory.com</a></div>
-    </div>
-  </div>
-
+<main id="main-content" class="page-content">
+<section class="page-hero">
+<div class="sc">
+<p class="sl">Contact Arrell</p>
+<h1>Let’s understand the question behind your inquiry.</h1>
+<p class="lead">Share your organization’s priorities. You do not need to diagnose which service you need.</p>
+</div>
+</section>
+<section class="">
+<div class="sc">
+<p class="sl">Start here</p>
+<h2 class="sh">Tell us what you would like to improve.</h2>
+<form class="intake" id="adoption-intake">
+<label for="name">Your name *</label>
+<input id="name" name="name" autocomplete="name" required maxlength="120">
+<label for="email">Work email *</label>
+<input type="email" id="email" name="email" autocomplete="email" required maxlength="254">
+<label for="organization">Organization *</label>
+<input id="organization" name="organization" autocomplete="organization" required maxlength="180">
+<label for="role">Your role *</label>
+<input id="role" name="role" required maxlength="120">
+<label for="team-size">Team size *</label>
+<select id="team-size" name="team_size" required>
+<option value="">Select a range</option>
+<option>1–10</option>
+<option>11–50</option>
+<option>51–200</option>
+<option>201–1,000</option>
+<option>Over 1,000</option>
+</select>
+<label for="ai-use">How is your organization using AI today? *</label>
+<select id="ai-use" name="current_ai_use" required>
+<option value="">Select a starting point</option>
+<option>Exploring where to start</option>
+<option>Informal individual use</option>
+<option>Running pilots</option>
+<option>AI in established workflows</option>
+<option>Not sure</option>
+</select>
+<label for="outcome">What business outcome or problem would you like to discuss? *</label>
+<textarea id="outcome" name="business_outcome" required maxlength="4000">
+</textarea>
+<label for="urgency">When would support be useful? *</label>
+<select id="urgency" name="urgency" required>
+<option value="">Select a timeframe</option>
+<option>Exploring, no fixed timeline</option>
+<option>Within the next month</option>
+<option>Within three months</option>
+<option>Later this year</option>
+</select>
+<label for="support">What would help most? *</label>
+<select id="support" name="desired_support" required>
+<option value="">Select what fits best</option>
+<option>Build our team’s understanding</option>
+<option>Understand our readiness</option>
+<option>Work through an active priority</option>
+<option>Improve responsible-use practices</option>
+<option>Not sure—help us identify a starting point</option>
+</select>
+<label class="consent-label" for="intake-consent">
+<input type="checkbox" id="intake-consent" required>
+<span>I agree to Arrell Advisory processing these details to respond to my inquiry, using its form provider, as described in the <a href="/privacy">Privacy Policy</a>. This is not a marketing subscription. *</span>
+</label>
+<p>Please do not include confidential business information or sensitive personal data.</p>
+<button class="btn-primary" type="submit">Send your inquiry</button>
+<p class="form-status" id="intake-status" role="status" aria-live="polite">
+</p>
+<noscript>
+<p>Please email <a href="mailto:hello@arrelladvisory.com">hello@arrelladvisory.com</a> to arrange a conversation.</p>
+</noscript>
+</form>
+<p class="journey-note">You can also email <a href="mailto:hello@arrelladvisory.com">hello@arrelladvisory.com</a>.</p>
+</div>
+</section>
 </main>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <div class="footer-brand-name">Arrell Advisory</div>
-    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
-  </div>
-  <div class="footer-links">
-    <a href="/">Arrell</a>
-    <div class="footer-sep"></div>
-    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AIUSI</a>
-    <div class="footer-sep"></div>
-    <a href="https://aireadyleaders.org" target="_blank" rel="noopener">ARL</a>
-    <div class="footer-sep"></div>
-    <a href="/contact">Contact</a>
-    <div class="footer-sep"></div>
-    <a href="/privacy">Privacy</a>
-  </div>
+<div class="footer-brand">
+<a href="/" class="footer-brand-name">Arrell Advisory</a>
+<p class="footer-copy">Organizational capability. Responsible AI adoption.</p>
+<p class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</p>
+</div>
+<div class="footer-links">
+<a href="/how-we-help">How We Help</a>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+<a href="/insights">Insights</a>
+<a href="/principal">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+<a href="/privacy#cookie-settings" onclick="return aaOpenCookieSettings()">Cookie settings</a>
+</div>
 </footer>
-
-
-<script src="scripts.js?v=2"></script>
-
-<script>
-document.querySelectorAll('.nav-links a[data-page]').forEach(function(a) {
-  if (a.getAttribute('data-page') === 'contact') a.classList.add('active');
-});
+<script src="/scripts.js">
 </script>
-
-<script>
-function sendContactForm() {
-  var name = document.getElementById('contact-name').value.trim();
-  var email = document.getElementById('contact-email').value.trim();
-  var org = document.getElementById('contact-org').value.trim();
-  var interest = document.getElementById('contact-interest').value;
-  var msg = document.getElementById('contact-msg').value.trim();
-  var consent = document.getElementById('contact-consent').checked;
-  if (!name || !email || !org || !interest || !msg) { alert('Please fill in all fields before sending.'); return; }
-  if (!consent) { alert('Please confirm you agree to our Privacy Policy before sending.'); return; }
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) { alert('Please enter a valid email address.'); return; }
-  var btn = document.querySelector('.contact-form .btn-primary');
-  var originalHTML = btn.innerHTML;
-  btn.innerHTML = 'Sending...';
-  btn.disabled = true;
-  btn.style.opacity = '0.6';
-  fetch('https://formsubmit.co/ajax/hello@arrelladvisory.com', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      name: name, email: email, organization: org, interest: interest, message: msg,
-      _subject: 'Inquiry from ' + name + (interest ? ' \u2014 ' + interest : '')
-    })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    if (data.success) {
-      btn.innerHTML = 'Message Sent \u2713';
-      btn.style.background = '#2a6e4a';
-      btn.style.opacity = '1';
-      ['contact-name','contact-email','contact-org','contact-interest','contact-msg'].forEach(function(id) {
-        document.getElementById(id).value = '';
-      });
-      document.getElementById('contact-consent').checked = false;
-      setTimeout(function() { btn.innerHTML = originalHTML; btn.style.background = ''; btn.disabled = false; }, 4000);
-    } else { throw new Error('failed'); }
-  })
-  .catch(function() {
-    btn.innerHTML = originalHTML;
-    btn.style.opacity = '1';
-    btn.disabled = false;
-    alert('Something went wrong. Please try again or email hello@arrelladvisory.com directly.');
-  });
-}
+<script src="/intake.js">
 </script>
 </body>
 </html>

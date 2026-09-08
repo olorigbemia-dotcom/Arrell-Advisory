@@ -2,188 +2,183 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Methodology | Arrell Advisory</title>
-<meta name="description" content="The Nested Governance Architecture: a design pattern for embedding AI governance within broader organizational transformation.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Approach | Arrell Advisory</title>
+<meta name="description" content="Start with organizational outcomes, understand workflows, evaluate AI fit, and build responsible adoption capability.">
+<link rel="canonical" href="https://www.arrelladvisory.com/methodology">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Our Approach">
+<meta property="og:description" content="Start with organizational outcomes, understand workflows, evaluate AI fit, and build responsible adoption capability.">
+<meta property="og:url" content="https://www.arrelladvisory.com/methodology">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Our Approach">
+<meta name="twitter:description" content="Start with organizational outcomes, understand workflows, evaluate AI fit, and build responsible adoption capability.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/adoption.css">
+<link rel="icon" href="/favicon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Arrell Advisory", "url": "https://www.arrelladvisory.com/", "description": "Organizational AI adoption, literacy, strategy, and governance advisory."}</script>
 </head>
-<body>
-<!-- NAV -->
-<nav id="nav">
-  <a href="/" class="nav-brand">
-    <span class="nav-brand-name">Arrell Advisory</span>
-    <span class="nav-brand-type">AI Governance</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="/methodology" data-page="methodology">Methodology</a></li>
-    <li><a href="/principal" data-page="principal">Principal</a></li>
-    <li><a href="/insights" data-page="insights">Insights</a></li>
-    <li><a href="/ai-transformation-readiness-assessment" class="nav-assess">Take the Assessment</a></li>
-    <li><a href="/strategy" class="nav-cta" data-page="strategy">Strategy Session</a></li>
-  </ul>
-  <button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+<body class="adoption-site">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<nav id="nav" aria-label="Main navigation">
+<a href="/" class="nav-brand">
+<span class="nav-brand-name">Arrell Advisory</span>
+<span class="nav-brand-type">Responsible AI Adoption</span>
+</a>
+<ul class="nav-links">
+<li>
+<a href="/how-we-help">How We Help</a>
+</li>
+<li>
+<a href="/methodology">Approach</a>
+</li>
+<li>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+</li>
+<li>
+<a href="/insights">Insights</a>
+</li>
+<li>
+<a href="/principal">About</a>
+</li>
+<li>
+<a href="/strategy" class="nav-cta">Book a Strategy Call</a>
+</li>
+</ul>
+<button class="mobile-toggle" onclick="openMobileMenu()" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+<span>
+</span>
+<span>
+</span>
+<span>
+</span>
+</button>
 </nav>
-
-<div class="mobile-overlay" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobileMenu()">&times;</button>
-  <a href="/">Home</a>
-  <a href="/methodology">Methodology</a>
-  <a href="/principal">Principal</a>
-  <a href="/insights">Insights</a>
-  <a href="/ai-transformation-readiness-assessment" style="color:var(--gold)">Take the Assessment</a>
-  <a href="/strategy" style="color:var(--gold)">Strategy Session</a>
+<div class="mobile-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation" inert>
+<button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">&times;</button>
+<a href="/">Home</a>
+<a href="/how-we-help">How We Help</a>
+<a href="/methodology">Approach</a>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+<a href="/insights">Insights</a>
+<a href="/principal">About</a>
+<a href="/strategy">Book a Strategy Call</a>
 </div>
-
-
-<main class="page-content">
-
-  <a href="/" class="back-link"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg> Home</a>
-
-  <div class="hwh-hero">
-    <div class="sl">Methodology</div>
-    <h2 class="sh" style="margin:0 auto 1rem">From AI principles to operational reality</h2>
-    <p class="sb" style="margin:0 auto 0.5rem">We design governance architectures that make responsible AI enforceable, train leaders to drive AI transformation, and build the execution infrastructure organizations need to adopt AI at scale.</p>
-  </div>
-
-  <div class="divider" style="max-width:1100px;margin:0 auto"></div>
-
-  <section style="padding-top:2.5rem;padding-bottom:0">
-    <div class="sc">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 2rem;border:1px solid var(--gold-b);border-radius:3px;background:rgba(184,148,95,0.03)">
-        <div>
-          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem">Architecture Reference</div>
-          <p style="font-size:0.95rem;color:var(--text-2);line-height:1.6">The intellectual foundation behind this methodology — the Nested Governance Architecture™ and Risk-Proportional Governance™ in full.</p>
-        </div>
-        <a href="https://www.arrelladvisory.com/nga-white-paper" target="_blank" rel="noopener" class="offer-cta-ghost" style="white-space:nowrap;flex-shrink:0">Read the NGA™ White Paper →</a>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:0">
-    <div class="sc">
-      <div class="hwh-offers" style="margin-top:3rem">
-
-        <!-- LEVEL 1 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 01 · Diagnose</div>
-            <h2>Find the pillar where your AI readiness<br>actually breaks down: <em>not where you think it does.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">Responsible AI adoption holds or fails across three pillars: Transformation &amp; Strategy, Risk &amp; AI Governance, and Data &amp; Technical Governance. Most organizations discover they are strong in one and structurally thin in the others &mdash; and it is the gap between the pillars, not any single weakness, that creates the most exposure.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The assessment identifies which. Fifteen questions, immediate profile, no login required. The profile tells you where you stand. It does not tell you what that means for your organization, because that requires a conversation.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Strategy Session is that conversation: a working session with Dr. Adetayo, interpreting your three-pillar profile and the asymmetry between pillars &mdash; where the organization is moving faster than its safeguards, or building controls its people have not adopted. That reading is the diagnostic no self-service tool can produce on its own.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">That distinction — governance with structural authority versus governance that exists in name only — is why organizations spend money building things that get bypassed the first time a team moves fast on a deployment. The session names it. You leave with the direction documented.</p>
-              <div class="hwh-card-ctarow">
-                <a href="/ai-transformation-readiness-assessment" class="offer-cta-primary">Take the Assessment (Free)</a>
-                <a href="/strategy" class="offer-cta-ghost">Book a Strategy Session →</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Govern and Map functions: establishes the baseline for identifying where AI risk accountability is absent or unassigned</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Gap analysis against AI management system requirements, surfacing where governance documentation diverges from operational practice</li>
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act</strong> — Preliminary risk classification: identifying whether use cases in scope fall under prohibited, high-risk, or limited-risk categories before formal compliance work begins</li>
-                <li><strong style="color:var(--text);font-weight:500">OECD AI Principles</strong> — Accountability and transparency baseline: where structural gaps undermine the organization's ability to explain or justify AI decisions</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- LEVEL 2 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 02 · Design</div>
-            <h2>A roadmap that starts with what AI you actually have,<br><em>not what you assumed you had.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">Before anything can be governed, it has to be inventoried. Most organizations discover during this engagement that AI use is more widespread than leadership knew, including tools not labeled as AI, approved by no one in particular, touching data with no classification. The inventory that should exist does not. That is the starting point.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Gap Report maps that reality end to end: we map what actually exists across the organization, prioritize by actual consequence level rather than perceived risk, build controls adapted from tested frameworks calibrated to what your organization can operationalize, and identify which use cases are ready to pilot governance in real conditions.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The primary deliverable is the Executive Heatmap: a portfolio-level view that shows which AI use cases can move forward now, which need redesign before they do, which are creating regulatory concentration risk that no one has named yet, and which are suitable governance pilots.</p>
-              <div class="hwh-card-ctarow">
-                <a href="/contact" class="offer-cta-primary">Start a Conversation</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act (Annex III)</strong> — High-risk use case classification and conformity assessment requirements, mapped against your actual AI inventory rather than assumed scope</li>
-                <li><strong style="color:var(--text);font-weight:500">Colorado SB24-205</strong> — Developer and deployer obligations for algorithmic discrimination risk, including impact assessment triggers tied to deployment context</li>
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Measure and Manage functions: consequence-based prioritization aligned to the RMF's risk treatment hierarchy</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Implementation planning against management system requirements: controls mapped to what the organization can operationalize at current capacity</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- LEVEL 3 -->
-        <div class="hwh-card reveal">
-          <div class="hwh-card-head">
-            <div class="hwh-card-level">Level 03 · Operationalize</div>
-            <h2>Governance that runs in your workflows,<br><em>not in a document your team forgot about.</em></h2>
-          </div>
-          <div class="hwh-card-body">
-            <div>
-              <p class="hwh-card-desc">The failure mode we see most often is not organizations that ignore AI governance. It is organizations that build something real — a policy, a committee, a framework — and then watch it get bypassed the first time a team moves fast on a deployment. Not because people are careless. Because governance had no operational home, no structural authority, and no enforcement condition that did not depend on someone remembering.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The Governance Architecture Engagement is built around a live deployment, not a hypothetical. That is the only way to test whether a governance architecture survives contact with how your organization actually operates. We design the control structure alongside real AI work: use case classification by consequence, control design proportionate to actual risk level, and operating model construction with defined ownership and enforcement conditions.</p>
-              <p class="hwh-card-desc" style="margin-top:1rem">The output is a governance operating model your team owns. Not a policy update. Not a set of recommendations filed in a shared drive. A functioning architecture with a structural home, accountability at every layer, and enforcement conditions that do not require good intentions to hold.</p>
-              <div class="hwh-card-ctarow">
-                <a href="/contact" class="offer-cta-primary">Start a Conversation</a>
-              </div>
-            </div>
-            <div class="hwh-sidebar">
-              <div class="hwh-sidebar-label">Regulatory &amp; Risk Alignment</div>
-              <ul class="hwh-deliverable-list" style="margin-top:0.5rem">
-                <li><strong style="color:var(--text);font-weight:500">EU AI Act</strong> — Operational requirements for high-risk AI systems: post-market monitoring obligations, human oversight mechanisms, and logging requirements embedded into the governance architecture</li>
-                <li><strong style="color:var(--text);font-weight:500">NIST AI RMF</strong> — Govern and Manage functions at the implementation layer: defined roles, enforcement conditions, and incident response pathways aligned to the RMF operating model</li>
-                <li><strong style="color:var(--text);font-weight:500">ISO/IEC 42001</strong> — Continual improvement requirements: governance versioning, audit readiness, and management review cycles built into the operating model from day one</li>
-                <li><strong style="color:var(--text);font-weight:500">Colorado SB24-205</strong> — Deployer obligations: impact assessment processes, consumer notification conditions, and risk management documentation requirements operationalized within the governance architecture</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
+<main id="main-content" class="page-content">
+<section class="page-hero">
+<div class="sc">
+<p class="sl">Our approach</p>
+<h1>Business outcomes set the direction.</h1>
+<p class="lead">AI is one possible intervention. We start by understanding your organization’s priorities and the work that produces its current results.</p>
+</div>
+</section>
+<section class="">
+<div class="sc">
+<p class="sl">The adoption journey</p>
+<h2 class="sh">Enter where you need support.</h2>
+<ol class="journey">
+<li>
+<span>01</span>Learn</li>
+<li>
+<span>02</span>Assess</li>
+<li>
+<span>03</span>Align</li>
+<li>
+<span>04</span>Design</li>
+<li>
+<span>05</span>Adopt</li>
+<li>
+<span>06</span>Enable</li>
+<li>
+<span>07</span>Govern</li>
+<li>
+<span>08</span>Improve</li>
+</ol>
+<p class="journey-note">Start where your organization needs support. Learning is one entry point; it is not a prerequisite.</p>
+<div class="service-grid">
+<div class="service-tile">
+<span class="eyebrow">01</span>
+<h3>Learn</h3>
+<p>Build enough understanding to participate in AI decisions. Skip this stage when the team is already prepared.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">02</span>
+<h3>Assess</h3>
+<p>Understand leadership, strategy, workflow, people, governance, and data readiness.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">03</span>
+<h3>Align</h3>
+<p>Define organizational outcomes and the problems worth solving.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">04</span>
+<h3>Design</h3>
+<p>Map the workflow. Compare AI and non-AI options, then decide what to automate and what to augment.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">05</span>
+<h3>Adopt</h3>
+<p>Plan a bounded pilot with clear responsibilities. Technical implementation stays with your technical team or providers.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">06</span>
+<h3>Enable</h3>
+<p>Prepare people for their roles, develop practical skills, and reinforce responsible habits.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">07</span>
+<h3>Govern</h3>
+<p>Embed ownership, review, data boundaries, and escalation into the work. These considerations begin in discovery and develop through the journey.</p>
+</div>
+<div class="service-tile">
+<span class="eyebrow">08</span>
+<h3>Improve</h3>
+<p>Measure against the intended outcome. Learn, adapt, expand, or stop based on evidence.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-alt">
+<div class="sc">
+<p class="sl">Governance throughout</p>
+<h2 class="sh">Responsibility develops with the work.</h2>
+<p class="lead">Governance is considered from the first decision, then made concrete in the pilot, roles, data use, and operating practices. It is not a final approval stage added after adoption.</p>
+<a class="text-link" href="/nested-governance-architecture">How Nested Governance Architecture™ supports the approach ↗</a>
+</div>
+</section>
+<section class="">
+<div class="sc">
+<p class="sl">Your next step</p>
+<h2 class="sh">Bring an outcome, a question, or a workflow.</h2>
+<div class="btn-row">
+<a class="btn-primary" href="/ai-transformation-readiness-assessment" data-event="assessment_cta_click">Take the Assessment <span aria-hidden="true">↗</span>
+</a>
+<a class="btn-secondary" href="/strategy" data-event="strategy_cta_click">Book a Strategy Call</a>
+</div>
+</div>
+</section>
 </main>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-brand">
-    <div class="footer-brand-name">Arrell Advisory</div>
-    <div class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</div>
-  </div>
-  <div class="footer-links">
-    <a href="/">Arrell</a>
-    <div class="footer-sep"></div>
-    <a href="https://aiusersafety.org" target="_blank" rel="noopener">AIUSI</a>
-    <div class="footer-sep"></div>
-    <a href="https://aireadyleaders.org" target="_blank" rel="noopener">ARL</a>
-    <div class="footer-sep"></div>
-    <a href="/contact">Contact</a>
-    <div class="footer-sep"></div>
-    <a href="/privacy">Privacy</a>
-  </div>
+<div class="footer-brand">
+<a href="/" class="footer-brand-name">Arrell Advisory</a>
+<p class="footer-copy">Organizational capability. Responsible AI adoption.</p>
+<p class="footer-copy">&copy; 2026 Arrell Advisory. All rights reserved.</p>
+</div>
+<div class="footer-links">
+<a href="/how-we-help">How We Help</a>
+<a href="/ai-transformation-readiness-assessment">Assessment</a>
+<a href="/insights">Insights</a>
+<a href="/principal">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+<a href="/privacy#cookie-settings" onclick="return aaOpenCookieSettings()">Cookie settings</a>
+</div>
 </footer>
-
-
-<script src="scripts.js?v=2"></script>
-
-<script>
-document.querySelectorAll('.nav-links a[data-page]').forEach(function(a) {
-  if (a.getAttribute('data-page') === 'methodology') a.classList.add('active');
-});
+<script src="/scripts.js">
 </script>
 </body>
 </html>

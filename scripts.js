@@ -4,16 +4,16 @@
 // Only runs on the home page to handle old #page-name URLs
 (function() {
   var hash = window.location.hash.replace('#', '');
-  if (!hash) return;
+  if (!hash || (window.location.pathname !== '/' && window.location.pathname !== '/index.html')) return;
   var aliases = {
     'portfolio': 'methodology',
-    'how-we-help': 'methodology',
+    'how-we-help': 'how-we-help',
     'about': 'principal',
     'speaking': 'training',
     'blog': 'insights',
     'articles': 'insights'
   };
-  var knownPages = ['methodology','strategy','debrief','principal','missouri-report','insights','contact','start','training','book'];
+  var knownPages = ['how-we-help','methodology','strategy','debrief','principal','missouri-report','insights','contact','start','training','book'];
   var page = aliases[hash] || hash;
   if (knownPages.indexOf(page) !== -1) {
     window.location.replace('/' + page);
@@ -23,6 +23,7 @@
 // Nav scroll effect
 window.addEventListener('scroll', function() {
   var nav = document.getElementById('nav');
+  if (!nav) return;
   if (window.scrollY > 40) { nav.classList.add('scrolled'); }
   else { nav.classList.remove('scrolled'); }
 });
@@ -47,11 +48,34 @@ function initReveals() {
 
 // Mobile menu
 function openMobileMenu() {
-  document.getElementById('mobileMenu').classList.add('active');
+  var menu = document.getElementById('mobileMenu');
+  if (!menu) return;
+  menu.inert = false;
+  menu.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  var toggle = document.querySelector('.mobile-toggle');
+  if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  menu.querySelector('button, a').focus();
 }
 function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('active');
+  var menu = document.getElementById('mobileMenu');
+  if (!menu) return;
+  menu.classList.remove('active');
+  menu.inert = true;
+  document.body.style.overflow = '';
+  var toggle = document.querySelector('.mobile-toggle');
+  if (toggle) { toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); }
 }
+document.addEventListener('keydown', function(e) {
+  var menu = document.getElementById('mobileMenu');
+  if (!menu || !menu.classList.contains('active')) return;
+  if (e.key === 'Escape') { closeMobileMenu(); return; }
+  if (e.key !== 'Tab') return;
+  var items = menu.querySelectorAll('a, button');
+  var first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 // Init
 initReveals();
@@ -63,7 +87,7 @@ initReveals();
 ============================================================ */
 var AA_GA_ID = ''; // <- paste GA4 measurement ID here to enable analytics
 
-function aaConsent() { return localStorage.getItem('aa_consent'); }
+function aaConsent() { try { return localStorage.getItem('aa_consent'); } catch (e) { return window.__aaConsent || null; } }
 
 function aaLoadAnalytics() {
   if (!AA_GA_ID || aaConsent() !== 'all' || window.__aaGA) return;
@@ -87,7 +111,8 @@ function aaTrack(eventName, params) {
 }
 
 function aaSetConsent(value, eventName) {
-  localStorage.setItem('aa_consent', value);
+  window.__aaConsent = value;
+  try { localStorage.setItem('aa_consent', value); } catch (e) { /* In-memory consent when storage is unavailable. */ }
   var b = document.getElementById('consent-banner');
   if (b) b.remove();
   if (value === 'all') { aaLoadAnalytics(); }
@@ -111,7 +136,8 @@ function aaShowConsentBanner() {
 
 function aaOpenCookieSettings() {
   aaTrack('cookie_settings_open');
-  localStorage.removeItem('aa_consent');
+  window.__aaConsent = null;
+  try { localStorage.removeItem('aa_consent'); } catch (e) { /* Storage may be disabled. */ }
   aaShowConsentBanner();
   return false;
 }
@@ -134,7 +160,7 @@ function aaOpenCookieSettings() {
       t.textContent = 'Terms';
       fl.appendChild(t);
     }
-    if (!fl.querySelector('a[data-cookie-settings]')) {
+    if (!fl.querySelector('a[data-cookie-settings], a[href="/privacy#cookie-settings"]')) {
       var c = document.createElement('a');
       c.href = '#';
       c.textContent = 'Cookie Settings';
@@ -144,6 +170,16 @@ function aaOpenCookieSettings() {
     }
   }
 })();
+
+// Delegation also covers assessment result links added after page load.
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('a');
+  if (!link) return;
+  var event = link.getAttribute('data-event');
+  if (!event && link.getAttribute('href') === '/nga-white-paper') event = 'nga_white_paper_view';
+  if (!event && link.classList.contains('insight-card')) event = 'resource_open';
+  if (event) aaTrack(event, {page: window.location.pathname});
+});
 
 // Sticky mobile CTA (pages that include #stickyCta)
 (function() {

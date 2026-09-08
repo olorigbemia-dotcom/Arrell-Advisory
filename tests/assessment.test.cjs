@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const {summarize}=require('../adoption-assessment.js');
+assert(summarize(Array(12).fill(0)).every(x=>x.state==='Build the foundations'));
+assert(summarize(Array(12).fill(3)).every(x=>x.state==='Maintain and review'));
+assert(summarize(Array(12).fill(4)).every(x=>x.state==='Clarify your starting point'));
+const mixed=Array(12).fill(3);mixed[4]=0;
+const result=summarize(mixed);
+assert.equal(result[2].state,'Build the foundations');
+assert.equal(result[1].state,'Maintain and review');
+const partial=Array(12).fill(3);partial[0]=2;
+assert.equal(summarize(partial)[0].state,'Strengthen consistency');
+for(const bad of [[],Array(11).fill(0),Array(12).fill(null),Array(12).fill(5),Array(12).fill(-1)]) assert.throws(()=>summarize(bad));
+console.log('Assessment: foundational, consistent, unknown, mixed, partial, and invalid-answer cases passed.');
