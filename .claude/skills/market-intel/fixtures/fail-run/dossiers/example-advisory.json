@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "slug": "example-advisory",
+  "name": "Example Advisory",
+  "tier": "direct",
+  "url": "https://example.com",
+  "retrieved_at": "2026-09-02",
+  "positioning": {
+    "category": {"value": "AI governance advisory", "quote": "We are an AI governance advisory firm.", "source_url": "https://example.com/about", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "high", "date_confidence": "known"},
+    "promise": {"value": "board-defensible AI programs", "quote": "Make your AI program board-defensible.", "source_url": "https://example.com/services", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "high", "date_confidence": "known"}
+  },
+  "target_audience": {
+    "buyer_role": {"value": "Chief Risk Officer", "quote": "Built for Chief Risk Officers in regulated industries.", "source_url": "https://example.com/services", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "medium", "date_confidence": "unknown"}
+  },
+  "services": [
+    {"name": {"value": "Readiness Assessment", "quote": "Our Readiness Assessment runs six weeks.", "source_url": "https://example.com/services", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "high", "date_confidence": "known"},
+     "unit_of_sale": {"value": "fixed-fee assessment", "quote": "A fixed-fee six week assessment.", "source_url": "https://example.com/services", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "high", "date_confidence": "known"}}
+  ],
+  "pricing": {"published": false, "model": "not published", "figures": [], "signals": []},
+  "delivery_model": {
+    "format": {"value": "productized assessment then advisory", "quote": "We begin with an assessment, then advise.", "source_url": "https://example.com/approach", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "high", "date_confidence": "known"}
+  },
+  "differentiators": [
+    {"claim": {"value": "regulator-tested framework", "quote": "Our framework has been tested with regulators.", "source_url": "https://example.com/about", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "low", "date_confidence": "unknown"},
+     "substantiation": {"value": "assertion", "quote": "Our framework has been tested with regulators.", "source_url": "https://example.com/about", "retrieved_at": "2026-09-02", "status": "claimed", "confidence": "low", "date_confidence": "unknown"}}
+  ],
+  "sources": [
+    {"url": "https://example.com/about", "retrieved_at": "2026-09-02", "outcome": "used", "class": "firm_owned"},
+    {"url": "https://example.com/services", "retrieved_at": "2026-09-02", "outcome": "used", "class": "firm_owned"},
+    {"url": "https://example.com/approach", "retrieved_at": "2026-09-02", "outcome": "used", "class": "firm_owned"},
+    {"url": "https://example.com/pricing", "retrieved_at": "2026-09-02", "outcome": "unreachable", "class": "firm_owned"}
+  ],
+  "gaps": ["No pricing published; /pricing returns 404", "Org size of target buyer never stated"]
+}

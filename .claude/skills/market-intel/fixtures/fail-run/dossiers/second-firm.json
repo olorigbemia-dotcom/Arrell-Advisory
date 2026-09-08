@@ -1,0 +1,140 @@
+{
+  "schema_version": "1",
+  "slug": "second-firm",
+  "name": "Second Firm",
+  "tier": "adjacent",
+  "url": "https://secondfirm.com",
+  "retrieved_at": "2026-09-02",
+  "positioning": {
+    "category": {
+      "value": "responsible AI enablement",
+      "quote": "We are an AI governance advisory firm.",
+      "source_url": "https://secondfirm.com/about",
+      "retrieved_at": "2026-09-02",
+      "status": "claimed",
+      "confidence": "high",
+      "date_confidence": "known"
+    },
+    "promise": {
+      "value": "board-defensible AI programs",
+      "quote": "Make your AI program board-defensible.",
+      "source_url": "https://secondfirm.com/services",
+      "retrieved_at": "2026-09-02",
+      "status": "claimed",
+      "confidence": "high",
+      "date_confidence": "known"
+    }
+  },
+  "target_audience": {
+    "buyer_role": {
+      "value": "Chief Risk Officer",
+      "quote": "Built for Chief Risk Officers in regulated industries.",
+      "source_url": "https://secondfirm.com/services",
+      "retrieved_at": "2026-09-02",
+      "status": "claimed",
+      "confidence": "medium",
+      "date_confidence": "unknown"
+    }
+  },
+  "services": [
+    {
+      "name": {
+        "value": "Readiness Assessment",
+        "quote": "Our Readiness Assessment runs six weeks.",
+        "source_url": "https://secondfirm.com/services",
+        "retrieved_at": "2026-09-02",
+        "status": "claimed",
+        "confidence": "high",
+        "date_confidence": "known"
+      },
+      "unit_of_sale": {
+        "value": "fixed-fee assessment",
+        "quote": "A fixed-fee six week assessment.",
+        "source_url": "https://secondfirm.com/services",
+        "retrieved_at": "2026-09-02",
+        "status": "claimed",
+        "confidence": "high",
+        "date_confidence": "known"
+      }
+    }
+  ],
+  "pricing": {
+    "published": true,
+    "model": "fixed",
+    "figures": [
+      {
+        "value": "$12,500 fixed-fee sprint",
+        "quote": "Governance Sprint \u2014 $12,500.",
+        "source_url": "https://secondfirm.com/services",
+        "retrieved_at": "2026-09-02",
+        "status": "claimed",
+        "confidence": "high",
+        "date_confidence": "known"
+      }
+    ],
+    "signals": []
+  },
+  "delivery_model": {
+    "format": {
+      "value": "productized assessment then advisory",
+      "quote": "We begin with an assessment, then advise.",
+      "source_url": "https://secondfirm.com/approach",
+      "retrieved_at": "2026-09-02",
+      "status": "claimed",
+      "confidence": "high",
+      "date_confidence": "known"
+    }
+  },
+  "differentiators": [
+    {
+      "claim": {
+        "value": "regulator-tested framework",
+        "quote": "Our framework has been tested with regulators.",
+        "source_url": "https://secondfirm.com/about",
+        "retrieved_at": "2026-09-02",
+        "status": "claimed",
+        "confidence": "low",
+        "date_confidence": "unknown"
+      },
+      "substantiation": {
+        "value": "assertion",
+        "quote": "Our framework has been tested with regulators.",
+        "source_url": "https://secondfirm.com/about",
+        "retrieved_at": "2026-09-02",
+        "status": "claimed",
+        "confidence": "low",
+        "date_confidence": "unknown"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://secondfirm.com/about",
+      "retrieved_at": "2026-09-02",
+      "outcome": "used",
+      "class": "firm_owned"
+    },
+    {
+      "url": "https://secondfirm.com/services",
+      "retrieved_at": "2026-09-02",
+      "outcome": "used",
+      "class": "firm_owned"
+    },
+    {
+      "url": "https://secondfirm.com/approach",
+      "retrieved_at": "2026-09-02",
+      "outcome": "used",
+      "class": "firm_owned"
+    },
+    {
+      "url": "https://secondfirm.com/pricing",
+      "retrieved_at": "2026-09-02",
+      "outcome": "unreachable",
+      "class": "firm_owned"
+    }
+  ],
+  "gaps": [
+    "No pricing published; /pricing returns 404",
+    "Org size of target buyer never stated"
+  ]
+}

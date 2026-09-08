@@ -1,0 +1,27 @@
+{
+  "run": ".claude/skills/market-intel/fixtures/pass-run",
+  "dossiers": 2,
+  "known_urls": 10,
+  "min_coverage": 0.85,
+  "result": "pass",
+  "files": [
+    {
+      "file": "04-patterns-gaps.md",
+      "errors": [],
+      "warnings": [],
+      "claims": 5,
+      "cited": 5,
+      "coverage": 1.0,
+      "uncited_examples": []
+    },
+    {
+      "file": "05-hypotheses.md",
+      "errors": [],
+      "warnings": [],
+      "claims": 4,
+      "cited": 4,
+      "coverage": 1.0,
+      "uncited_examples": []
+    }
+  ]
+}
