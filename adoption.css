@@ -13,3 +13,22 @@
 @media(max-width:1100px){.nav-links{display:none}.mobile-toggle{display:flex}.home-hero{gap:2rem}.outcome-map{padding:1.6rem}.service-grid{grid-template-columns:1fr 1fr}.journey{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:700px){.adoption-site section{padding:3.5rem 6vw}.home-hero{grid-template-columns:1fr;padding-top:8rem!important;min-height:auto}.home-hero h1{font-size:3rem}.page-hero{padding-top:8rem!important}.three-grid,.service-grid,.capability-list,.result-grid{grid-template-columns:1fr}.principal-feature{grid-template-columns:1fr;gap:1.5rem}.principal-feature img{width:180px;height:215px}.journey{grid-template-columns:repeat(4,1fr)}.journey li{font-size:.8rem}.adoption-site footer{padding:2rem 6vw}.btn-row{align-items:stretch}.btn-row>a{justify-content:center}.outcome-map{margin-top:1rem}.mobile-overlay a{font-size:1.4rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1!important;transform:none!important}}
+/* Newsletter subscription (rendered by newsletter.js) */
+.newsletter-band{border-top:1px solid var(--gold-b);background:var(--bg2);padding:3rem 3rem 3.25rem}.newsletter-band>[data-newsletter]{max-width:1440px;margin:auto;display:grid;grid-template-columns:1.15fr 1fr;gap:2rem 4vw;align-items:start}
+.newsletter-heading{font-family:var(--serif);font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:400;line-height:1.2;margin-bottom:.7rem}
+.newsletter-blurb{color:var(--text-2);font-size:.95rem;line-height:1.75;max-width:56ch;margin:0}
+.newsletter-label{display:block;margin-bottom:.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-h)}
+.newsletter-row{display:flex;gap:.75rem;flex-wrap:wrap}
+.newsletter-row input[type=email]{flex:1 1 15rem;min-width:0;padding:.85rem 1rem;background:var(--bg);border:1px solid #687080;color:var(--text);font:inherit;font-size:.95rem;border-radius:2px;transition:border-color .3s;outline:none}
+.newsletter-row input[type=email]:focus{border-color:var(--gold)}
+.newsletter-row input[type=email]:read-only{opacity:.6}
+.newsletter-row .btn-primary{flex:0 0 auto;justify-content:center}
+.newsletter-company{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.newsletter-status{margin-top:.9rem;font-size:.88rem;line-height:1.7;color:var(--text-2);min-height:1.2em}
+.newsletter-status:empty{margin-top:0;min-height:0}
+/* Dedicated section variant sits inside a standard .sc content block */
+.newsletter-section-mount .newsletter-heading{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+.newsletter-section-mount .newsletter-form{max-width:760px;margin-top:1.8rem}
+@media(max-width:1100px){.newsletter-band{padding:2.5rem 2rem}.newsletter-band>[data-newsletter]{grid-template-columns:1fr;gap:1.5rem}}
+/* Stacked: flex-basis would size the block axis here, so the input must not flex. */
+@media(max-width:700px){.newsletter-band{padding:2.25rem 1.25rem}.newsletter-row{flex-direction:column;align-items:stretch}.newsletter-row input[type=email]{flex:0 0 auto;width:100%}.newsletter-row .btn-primary{width:100%}}
