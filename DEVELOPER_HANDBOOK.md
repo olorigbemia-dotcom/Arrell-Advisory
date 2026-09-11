@@ -45,6 +45,7 @@ Static HTML website for an AI governance consulting firm. No frameworks. No buil
 - HTML5, CSS3 (custom properties, flexbox, grid), vanilla JavaScript
 - Google Fonts (Cormorant Garamond + Outfit)
 - FormSubmit.co for form submissions
+- MailerLite (public embedded-form endpoint) for newsletter subscriptions
 - Calendly for booking
 - Hosted on GitHub Pages
 
@@ -653,6 +654,67 @@ The form submits via AJAX POST with a JSON body. On success, the button changes 
   <option value="Option B">Option B</option>
 </select>
 ```
+
+### Newsletter subscription (MailerLite)
+
+**Endpoint:** `https://assets.mailerlite.com/jsonp/{account_id}/forms/{form_id}/subscribe`
+**File:** `newsletter.js` (loaded on all 37 pages that share the footer)
+**Styles:** `adoption.css`, under `/* Newsletter subscription */`
+
+This is MailerLite's public embedded-form endpoint. **It takes no API key.** `AA_ML_ACCOUNT_ID`
+and `AA_ML_FORM_ID` at the top of `newsletter.js` are public identifiers — the same pair
+MailerLite prints in its own embed snippet — so there is no secret in the repo and nothing to
+keep server-side. This site is static (GitHub Pages, no backend), so a server-side key-based
+integration is not possible here; see Section 1.
+
+**Which group subscribers land in, whether double opt-in is on, and the confirmation email are
+all configured on the form inside the MailerLite dashboard — never in this repo.** To point the
+newsletter at a different group, change the group on the form in MailerLite. No code change.
+
+#### Placement
+
+| Where | How |
+|---|---|
+| Every page with the shared footer | `newsletter.js` injects a `<section class="newsletter-band">` immediately **before** `<footer>`. The footer's own flex layout is untouched. |
+| `/insights` | A dedicated section is declared in the page: `<div class="newsletter-section-mount" data-newsletter="section"></div>`. |
+
+A page that declares its own `[data-newsletter]` mount **opts out of the injected band**, so no
+page ever renders two newsletter forms.
+
+#### Activating it
+
+1. In MailerLite, create a group for general newsletter subscribers (see below).
+2. Create an **embedded form** bound to that group, with **double opt-in enabled**.
+3. Copy the form ID out of the embed snippet and paste it into `AA_ML_FORM_ID` in `newsletter.js`.
+
+Until `AA_ML_FORM_ID` is set, **no newsletter form renders anywhere** and any page-level mount is
+hidden — so the file is safe to deploy before the MailerLite setup is finished. This mirrors the
+`AA_GA_ID` pattern in `scripts.js`.
+
+#### Adding the newsletter to another page
+
+Put a mount point anywhere inside `<main>`:
+
+```html
+<section class="bg-alt" aria-label="Subscribe to Our Newsletter">
+  <div class="sc">
+    <div class="newsletter-section-mount" data-newsletter="section"></div>
+  </div>
+</section>
+```
+
+Use `data-newsletter="band"` instead for the compact one-line variant.
+
+#### Editing the copy
+
+All strings live in the `COPY` object at the top of the IIFE in `newsletter.js`. Change them
+there, not in the markup — the markup is generated.
+
+#### Tests
+
+`node tests/newsletter.test.cjs` covers success, rejected response, HTTP failure, network
+failure, email validation, the honeypot, and the unconfigured state. It stubs `fetch`, so it
+never contacts MailerLite and never creates a subscriber.
 
 ### Calendly booking links
 
