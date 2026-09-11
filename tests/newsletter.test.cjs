@@ -71,10 +71,25 @@ function scenario({formId='f1',ok=true,success=true,reject=false,email='reader@e
   assert.equal(bot.calls,0);
   assert.match(bot.status,/check your inbox/i);
 
-  // Unconfigured form ID renders nothing and hides its section.
+  // Staging: with no form ID the section still renders in full, so it can be
+  // reviewed on the live site. Submitting contacts nothing and must not claim
+  // a subscription that did not happen.
   const off=scenario({formId:''});
-  assert.equal(off.mount.parentNode.hidden,true,'section must be hidden when unconfigured');
-  assert.equal(off.mount.innerHTML,undefined,'no markup rendered when unconfigured');
+  assert.equal(off.mount.parentNode.hidden,false,'section must stay visible when unconfigured');
+  assert.match(off.mount.innerHTML,/Subscribe to Our Newsletter/,'heading must render when unconfigured');
+  assert.match(off.mount.innerHTML,/type="email"/,'email field must render when unconfigured');
+  assert.match(off.mount.innerHTML,/type="submit"/,'Subscribe button must render when unconfigured');
+  const offSubmit=await off.run();
+  assert.equal(offSubmit.calls,0,'must not contact MailerLite when unconfigured');
+  assert.match(offSubmit.status,/not quite live yet/i);
+  assert.doesNotMatch(offSubmit.status,/thank you|check your inbox/i,'must not imply success');
+  assert.equal(offSubmit.tracked,0,'no subscribe event when nothing was sent');
+  assert.equal(offSubmit.button.disabled,false);
 
-  console.log('Newsletter: success, string-true, rejected response, HTTP failure, network failure, validation, honeypot, and unconfigured cases passed. No subscriptions created.');
+  // Validation still runs ahead of the unconfigured notice.
+  const offInvalid=await scenario({formId:'',valid:false}).run();
+  assert.equal(offInvalid.calls,0);
+  assert.match(offInvalid.status,/valid email/i);
+
+  console.log('Newsletter: success, string-true, rejected response, HTTP failure, network failure, validation, honeypot, and unconfigured-but-visible staging cases passed. No subscriptions created.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

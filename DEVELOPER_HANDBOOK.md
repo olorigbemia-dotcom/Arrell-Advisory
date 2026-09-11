@@ -687,9 +687,21 @@ page ever renders two newsletter forms.
 2. Create an **embedded form** bound to that group, with **double opt-in enabled**.
 3. Copy the form ID out of the embed snippet and paste it into `AA_ML_FORM_ID` in `newsletter.js`.
 
-Until `AA_ML_FORM_ID` is set, **no newsletter form renders anywhere** and any page-level mount is
-hidden — so the file is safe to deploy before the MailerLite setup is finished. This mirrors the
-`AA_GA_ID` pattern in `scripts.js`.
+#### Behaviour while `AA_ML_FORM_ID` is empty (the staged state)
+
+The section **renders in full** — heading, description, email field, and Subscribe button — so the
+design can be reviewed on the live site before MailerLite is wired up. Only *submission* is gated:
+
+| | Unconfigured | Configured |
+|---|---|---|
+| Section renders | Yes | Yes |
+| Email validation | Yes | Yes |
+| Network request | **None** | POST to MailerLite |
+| On submit | "Newsletter signup is not quite live yet. Email hello@arrelladvisory.com…" | Normal loading → success/error |
+| `aaTrack` event | None | `newsletter_subscribe` |
+
+It never claims a subscription that did not happen. Setting `AA_ML_FORM_ID` is the only change
+needed to make the same form start subscribing for real — no markup or CSS changes.
 
 #### Adding the newsletter to another page
 

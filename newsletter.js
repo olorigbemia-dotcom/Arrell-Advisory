@@ -13,8 +13,14 @@
    dashboard, never here. This mirrors AA_GA_ID in scripts.js.
 
    To activate: paste the embedded form ID into AA_ML_FORM_ID.
-   Until it is set, no newsletter form renders anywhere on the
-   site, so this file is safe to deploy before setup is finished.
+
+   Until it is set, the section still renders in full - heading,
+   email field, and Subscribe button - so the design can be
+   reviewed on the live site before MailerLite is wired up.
+   Submitting in that state contacts nothing and reports the
+   signup as not yet live; it never claims a subscription that
+   did not happen. Setting AA_ML_FORM_ID is the only change
+   needed to make the same form start subscribing for real.
 ============================================================ */
 
 var AA_ML_ACCOUNT_ID = '2466818';
@@ -36,8 +42,15 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
     sending: 'Sending your subscription…',
     success: 'Thank you. Please check your inbox and confirm your subscription to finish signing up.',
     invalid: 'Please enter a valid email address.',
-    error: 'We could not complete your subscription just now. Please try again, or email hello@arrelladvisory.com.'
+    error: 'We could not complete your subscription just now. Please try again, or email hello@arrelladvisory.com.',
+    // Shown while AA_ML_FORM_ID is unset. Honest about not being live yet, and
+    // still useful to a real visitor: it gives them a way to reach us.
+    unconfigured: 'Newsletter signup is not quite live yet. Email hello@arrelladvisory.com and we will add you to the list.'
   };
+
+  function configured() {
+    return !!(AA_ML_ACCOUNT_ID && AA_ML_FORM_ID);
+  }
 
   function endpoint() {
     return 'https://assets.mailerlite.com/jsonp/' + AA_ML_ACCOUNT_ID + '/forms/' + AA_ML_FORM_ID + '/subscribe';
@@ -93,6 +106,14 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
         return;
       }
 
+      // Staging: the form is rendered so the section can be reviewed on the live
+      // site, but there is nothing to submit to until a form ID is set. Say so
+      // plainly rather than claiming a subscription that did not happen.
+      if (!configured()) {
+        status.textContent = COPY.unconfigured;
+        return;
+      }
+
       inFlight = true;
       button.disabled = true;
       input.readOnly = true;
@@ -139,15 +160,9 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
   function init() {
     var mounts = document.querySelectorAll('[data-newsletter]');
 
-    // Without a configured form ID there is nothing to submit to, so render nothing
-    // rather than showing a form that can only fail.
-    if (!AA_ML_ACCOUNT_ID || !AA_ML_FORM_ID) {
-      for (var h = 0; h < mounts.length; h++) {
-        var wrap = mounts[h].closest('section') || mounts[h];
-        wrap.hidden = true;
-      }
-      return;
-    }
+    // The section renders whether or not a form ID is set, so the design can be
+    // reviewed on the live site ahead of the MailerLite setup. Submission is what
+    // is gated, in the submit handler above - never the rendering.
 
     // The site-wide band is injected ahead of the shared footer so the footer's
     // own flex layout is untouched. A page that places its own mount point (for
