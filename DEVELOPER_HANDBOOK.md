@@ -858,6 +858,19 @@ git push
 
 ## 14. Known Issues
 
+> **Open items from the September 2026 UX/SEO pass**
+> - `nested-governance-architecture.html` renders two heroes in sequence: the
+>   `<h1>` framework block, then a `back-link` and a second `.portfolio-hero`.
+>   Merging them would move founder-written blocks, so it was left alone and
+>   flagged for approval.
+> - `img/speaking-keynote.PNG` (979 KB) is retained as the master. Pages now load
+>   the 70 KB `img/speaking-keynote.jpg` derivative. Same for
+>   `img/safe-ai-use-book.jpeg` → `img/safe-ai-use-book-400.jpeg`.
+> - Google Fonts still requests weight 700 for both families although no rule
+>   uses it. Dropping it would change how `<strong>` and unstyled `<h3>` render,
+>   so it was left in place.
+
+
 ### NGA White Paper link may not resolve
 
 `methodology.html` and `principal.html` link to `https://www.arrelladvisory.com/nga-white-paper`. The actual file is `nga-white-paper-revised.html`. Verify the URL resolves or update the links.
@@ -912,6 +925,108 @@ To activate the agentic workflow you need a separate automation layer that the s
 ### Where to change the submission target
 
 In `ai-transformation-readiness-assessment.html`, the submission is a `fetch(...)` call to the FormSubmit AJAX endpoint. To route to your own webhook instead, replace that endpoint URL with your webhook URL and adjust the JSON payload to match your agent's expected schema.
+
+---
+
+---
+
+## 16. Conversion & Wayfinding Components
+
+Added September 2026. All of these are layout and navigation components — none of
+them introduce or replace founder-written page copy. Styles live at the bottom of
+`adoption.css` under `CONVERSION & NAVIGATION UI`.
+
+### Situation router (`.situation-grid` / `.situation-card`)
+
+Lets a visitor self-select by situation and routes them to an existing capability
+page. Lives on `index.html` (above "How we help") and `how-we-help.html` (above
+"Connected capabilities").
+
+```html
+<a class="situation-card" href="/ai-literacy-fluency" data-event="situation_select" data-situation="understand-ai">
+  <span class="situation-q">We are trying to understand AI</span>
+  <span class="situation-route">
+    <span class="situation-label">Start here</span>
+    <span class="situation-target">AI Literacy &amp; Fluency <span aria-hidden="true">↗</span></span>
+  </span>
+</a>
+```
+
+The six situations map one-to-one onto the six capability pages. Adding a
+capability means adding a card here as well as to the `.service-grid`.
+
+### Assessment dimension map (`.dimension-map`)
+
+The six readiness areas rendered as a diagram. The names are copied from
+`dimensions[]` in `adoption-assessment.js` — **if you change a dimension name
+there, change it here too** (`index.html` and
+`ai-transformation-readiness-assessment.html`).
+
+### Related content (`.related-section` / `.related-block` / `.related-list`)
+
+Sits before `</main>` on every insight page and above "Start a conversation" on
+every capability page. Insight pages carry two neighbouring insights plus the
+capability that acts on the problem; capability pages carry three insights.
+Titles are copied verbatim from the cards on `insights.html`.
+
+When you add an insight article, add it to the relevant `.related-list` blocks so
+it is reachable from more than the library index.
+
+### Contextual CTA band (`.cta-band`)
+
+A compact assessment + strategy-call block for use inside a content page. Used on
+`insights.html`.
+
+### Sticky mobile CTA (`#stickyCta`)
+
+Present on the six capability pages. Renders below 768px only, appears after 75%
+of a viewport height of scroll, and stands down again once the newsletter band,
+ecosystem block or footer comes into view. Behaviour is in `scripts.js`.
+
+### Ecosystem block (`.ecosystem`)
+
+Distinguishes the three Arrell-related organizations and links out to the two
+external sites. Present on `index.html`, `how-we-help.html` and `principal.html`
+only — deliberately not site-wide. `newsletter.js` anchors its band above this
+block where it exists, so the order is content → newsletter → ecosystem → footer.
+
+### Current page marker
+
+`scripts.js` sets `aria-current="page"` on the matching nav and mobile-menu link.
+Nothing to author per page.
+
+---
+
+## 17. Analytics Events
+
+All events route through `aaTrack()` in `scripts.js` and are dropped entirely
+unless the visitor has chosen "Accept All". Set `AA_GA_ID` to a GA4 measurement ID
+to start recording them.
+
+Every event carries `page` (the current path) and `destination` (the link href).
+Router, related-content and ecosystem links also carry `detail`.
+
+| Event | Fires when |
+|---|---|
+| `assessment_cta_click` | Any "Take the Assessment" link is clicked |
+| `assessment_start` | The visitor starts the questionnaire |
+| `assessment_complete` | Results are shown |
+| `assessment_to_strategy` | "Discuss your next step" on the results screen |
+| `strategy_cta_click` | Any "Book a Strategy Call" link is clicked |
+| `introductory_call_inquiry` | The strategy intake form submits successfully |
+| `newsletter_subscribe` | A subscription is accepted by MailerLite |
+| `situation_select` | A situation router card is clicked |
+| `related_insight_click` | A related insight card is clicked |
+| `related_capability_click` | A related capability card is clicked |
+| `insights_filter` | An Insights category filter is pressed |
+| `ecosystem_click` | An AI Ready Leaders / AI User Safety Initiative link is clicked |
+| `notfound_recovery` | A recovery link on `404.html` is clicked |
+| `resource_open` | An `.insight-card` is opened |
+| `nga_white_paper_view` | The NGA white paper is opened |
+| `cookie_accept_all` / `cookie_reject` / `cookie_settings_open` | Consent banner interactions |
+
+To add an event to a link, set `data-event="my_event"` on the `<a>`. The delegated
+handler at the bottom of `scripts.js` picks it up; no per-page JavaScript needed.
 
 ---
 

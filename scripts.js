@@ -77,6 +77,23 @@ document.addEventListener('keydown', function(e) {
   else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
+/* ============================================================
+   CURRENT PAGE MARKER
+   Gives assistive technology and sighted readers the same cue
+   about where they are in the site.
+============================================================ */
+(function() {
+  var here = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+  if (here.length > 1) { here = here.replace(/\/$/, ''); }
+  var links = document.querySelectorAll('.nav-links a[href], .mobile-overlay a[href]');
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (href === here || (here === '/' && href === '/')) {
+      links[i].setAttribute('aria-current', 'page');
+    }
+  }
+})();
+
 // Init
 initReveals();
 
@@ -178,15 +195,33 @@ document.addEventListener('click', function(e) {
   var event = link.getAttribute('data-event');
   if (!event && link.getAttribute('href') === '/nga-white-paper') event = 'nga_white_paper_view';
   if (!event && link.classList.contains('insight-card')) event = 'resource_open';
-  if (event) aaTrack(event, {page: window.location.pathname});
+  if (!event) return;
+  var params = {page: window.location.pathname};
+  // Optional context set by the situation router, related-content blocks
+  // and the ecosystem links. Absent elsewhere, so the shape stays stable.
+  var detail = link.getAttribute('data-situation') || link.getAttribute('data-destination');
+  if (detail) params.detail = detail;
+  params.destination = link.getAttribute('href');
+  aaTrack(event, params);
 });
 
 // Sticky mobile CTA (pages that include #stickyCta)
 (function() {
   var sticky = document.getElementById('stickyCta');
   if (!sticky) return;
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > window.innerHeight * 0.75) { sticky.classList.add('visible'); }
+  // The bar stands down once the closing blocks come into view, so it never
+  // covers the newsletter field or the footer links. The newsletter band is
+  // injected by a deferred script, so it is looked up on demand.
+  function tailTop() {
+    var tail = document.querySelector('.newsletter-band') || document.querySelector('.ecosystem') || document.querySelector('footer');
+    return tail ? tail.getBoundingClientRect().top : Infinity;
+  }
+  function update() {
+    var scrolledEnough = window.scrollY > window.innerHeight * 0.75;
+    if (scrolledEnough && tailTop() > window.innerHeight) { sticky.classList.add('visible'); }
     else { sticky.classList.remove('visible'); }
-  });
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();

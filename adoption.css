@@ -32,3 +32,115 @@
 @media(max-width:1100px){.newsletter-band{padding:2.5rem 2rem}.newsletter-band>[data-newsletter]{grid-template-columns:1fr;gap:1.5rem}}
 /* Stacked: flex-basis would size the block axis here, so the input must not flex. */
 @media(max-width:700px){.newsletter-band{padding:2.25rem 1.25rem}.newsletter-row{flex-direction:column;align-items:stretch}.newsletter-row input[type=email]{flex:0 0 auto;width:100%}.newsletter-row .btn-primary{width:100%}}
+
+/* ============================================================
+   CONVERSION & NAVIGATION UI (2026-09)
+   Layout, hierarchy and wayfinding only. No founder copy is
+   styled away, hidden or replaced by any rule below.
+============================================================ */
+
+/* --- Hamburger bars were only defined below 768px, leaving the
+       toggle invisible between 769px and 1100px where adoption.css
+       already swaps to the mobile menu. Defined unconditionally. --- */
+.adoption-site .mobile-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:101}
+.adoption-site .mobile-toggle span{width:22px;height:1.5px;background:var(--text-2);display:block;transition:background .3s}
+.adoption-site .mobile-toggle:hover span{background:var(--gold)}
+@media(max-width:1100px){.adoption-site .mobile-toggle{display:flex}}
+
+/* Current page marker in the primary nav. */
+.nav-links a[aria-current=page]{color:var(--gold)}
+.nav-links a.nav-cta[aria-current=page]{color:var(--bg)!important}
+.mobile-overlay a[aria-current=page]{color:var(--gold)}
+
+/* --- Section rhythm ------------------------------------------------
+   Consecutive sections sharing a background read as one long slab.
+   A hairline restores the transition without moving any content. --- */
+.adoption-site .bg-alt + .bg-alt{border-top:1px solid var(--border)}
+
+/* --- "Where are you now?" situation router ------------------------- */
+.situation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-top:2.25rem}
+.situation-card{display:flex;flex-direction:column;gap:.85rem;padding:1.5rem;background:var(--bg);border:1px solid var(--border);border-top:2px solid rgba(184,148,95,.4);text-decoration:none;transition:border-color .3s,background .3s}
+.situation-card:hover,.situation-card:focus-visible{border-color:var(--gold-b);border-top-color:var(--gold);background:var(--gold-s)}
+.situation-card .situation-q{font-family:var(--serif);font-size:1.3rem;font-weight:400;line-height:1.3;color:var(--text)}
+.situation-card .situation-route{margin-top:auto;padding-top:.9rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.2rem}
+.situation-card .situation-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.situation-card .situation-target{font-size:.92rem;color:var(--gold-h);line-height:1.45}
+
+/* --- Eight-stage journey: process diagram -------------------------- */
+.journey{position:relative}
+.journey li{position:relative;padding-top:1.4rem}
+.journey li::before{content:"";position:absolute;top:-1px;left:0;width:100%;height:2px;background:var(--gold-b)}
+.journey li:last-child{border-right:0}
+.journey span{letter-spacing:.12em}
+
+/* --- Assessment: the six readiness dimensions ---------------------- */
+.dimension-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:2.25rem 0 1.75rem;border-top:1px solid var(--gold-b);border-left:1px solid var(--border)}
+.dimension-map li{list-style:none;padding:1.4rem 1.25rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dimension-map .dim-n{display:block;font-size:.68rem;letter-spacing:.14em;color:var(--gold);margin-bottom:.6rem}
+.dimension-map .dim-name{font-family:var(--serif);font-size:1.25rem;font-weight:400;line-height:1.3;color:var(--text)}
+
+/* --- Nested Governance Architecture -------------------------------
+   The three layers already exist in the markup as nested elements.
+   These rules make the nesting read as a diagram: each layer sits
+   inside the one above it, tinted a step warmer as it goes in. --- */
+.nested-system{position:relative;max-width:850px;margin:1.75rem 0;padding:1.5rem 1.5rem 1.5rem 2.6rem;border:1px solid var(--gold-b);background:rgba(184,148,95,.025);color:var(--text);font-size:1rem;line-height:1.5}
+.nested-system::before{content:"";position:absolute;left:1.5rem;top:1.65rem;width:.42rem;height:.42rem;background:var(--gold-b);border:1px solid var(--gold)}
+.nested-system .nested-system{margin:1.35rem 0 0;background:rgba(184,148,95,.055);border-color:rgba(184,148,95,.3);font-size:.95rem}
+.nested-system .nested-system .nested-system{background:rgba(184,148,95,.095);border-color:rgba(184,148,95,.45);font-size:.92rem;color:var(--text-2)}
+@media(max-width:700px){.nested-system{padding:1.15rem 1.15rem 1.15rem 2.1rem}.nested-system::before{left:1.1rem;top:1.3rem}}
+
+/* --- Contextual conversion band ------------------------------------ */
+.cta-band{border:1px solid var(--gold-b);border-left:2px solid var(--gold);background:var(--bg2);padding:1.9rem 2rem;margin:0;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between}
+.cta-band .cta-band-copy{max-width:52ch}
+.cta-band h2,.cta-band .cta-band-title{font-family:var(--serif);font-size:1.55rem;font-weight:400;line-height:1.3;margin-bottom:.4rem}
+.cta-band p{color:var(--text-2);font-size:.93rem;line-height:1.7;margin:0}
+.cta-band .btn-row{margin-top:0;flex-shrink:0}
+
+/* --- Related content -------------------------------------------- */
+.related-block{border-top:1px solid var(--border);margin-top:3.5rem;padding-top:2.25rem}
+.related-section .related-block{border-top:0;margin-top:0;padding-top:0}
+.related-block h2{font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-family:var(--sans)}
+.related-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1.25rem;list-style:none;padding:0}
+.related-list a{display:flex;flex-direction:column;gap:.45rem;height:100%;padding:1.2rem;border:1px solid var(--border);text-decoration:none;transition:border-color .3s,background .3s}
+.related-list a:hover,.related-list a:focus-visible{border-color:var(--gold-b);background:var(--gold-s)}
+.related-kind{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3)}
+.related-title{font-family:var(--serif);font-size:1.08rem;font-weight:400;line-height:1.35;color:var(--text)}
+
+/* --- Arrell ecosystem (footer) ------------------------------------ */
+.ecosystem{border-top:1px solid var(--border);background:var(--bg2);padding:2.75rem 3rem}
+.ecosystem-inner{max-width:1180px;margin:0 auto}
+.ecosystem h2{font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);font-family:var(--sans);margin-bottom:1.4rem}
+.ecosystem-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.75rem;list-style:none;padding:0}
+.ecosystem-list li{border-top:1px solid var(--gold-b);padding-top:.9rem}
+.ecosystem-name{display:block;font-family:var(--serif);font-size:1.12rem;font-weight:500;color:var(--text);text-decoration:none}
+a.ecosystem-name:hover,a.ecosystem-name:focus-visible{color:var(--gold-h)}
+.ecosystem-role{display:block;font-size:.83rem;color:var(--text-2);line-height:1.6;margin-top:.3rem}
+.ecosystem-here{display:inline-block;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:.5rem}
+
+/* --- Sticky mobile CTA (markup opts in with #stickyCta) ----------- */
+.sticky-cta .sticky-cta-inner{max-width:640px;margin:0 auto}
+/* The bar only renders below 768px, so only reserve space for it there. */
+@media(max-width:768px){body:has(.sticky-cta) footer{padding-bottom:5.5rem}}
+
+/* --- Responsive ---------------------------------------------------- */
+@media(max-width:1100px){
+  .situation-grid,.ecosystem-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dimension-map{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cta-band{padding:1.6rem}
+  .ecosystem{padding:2.25rem 2rem}
+}
+@media(max-width:760px){
+  .adoption-site nav{padding:1rem 1.25rem}
+  .situation-grid,.related-list,.ecosystem-list{grid-template-columns:1fr}
+  .dimension-map{grid-template-columns:1fr;border-left:0}
+  .dimension-map li{border-right:0;padding-left:0;padding-right:0}
+  .cta-band{flex-direction:column;align-items:flex-start;gap:1.25rem}
+  .cta-band .btn-row{width:100%}
+  .cta-band .btn-row>a{flex:1 1 auto;justify-content:center}
+  .journey{grid-template-columns:repeat(2,1fr)}
+  .journey li{font-size:.85rem}
+  .related-block{margin-top:2.5rem}
+}
+
+/* Visually hidden, still announced. Used for new-tab hints on external links. */
+.vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
