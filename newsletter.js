@@ -169,6 +169,9 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
     // example the dedicated section on /insights) opts out, so no page ever
     // shows two newsletter forms.
     var footer = document.querySelector('footer .footer-links') ? document.querySelector('footer') : null;
+    // Pages carrying the ecosystem block anchor the band above it, so the
+    // subscribe form stays the last conversion step before the page closes.
+    var anchor = document.querySelector('.ecosystem') || footer;
     if (footer && mounts.length === 0) {
       var band = document.createElement('section');
       band.className = 'newsletter-band';
@@ -176,7 +179,7 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
       var inner = document.createElement('div');
       inner.setAttribute('data-newsletter', 'band');
       band.appendChild(inner);
-      footer.parentNode.insertBefore(band, footer);
+      anchor.parentNode.insertBefore(band, anchor);
       mounts = document.querySelectorAll('[data-newsletter]');
     }
 
