@@ -76,7 +76,7 @@ function scenario({formId='f1',ok=true,success=true,reject=false,email='reader@e
   // a subscription that did not happen.
   const off=scenario({formId:''});
   assert.equal(off.mount.parentNode.hidden,false,'section must stay visible when unconfigured');
-  assert.match(off.mount.innerHTML,/Stay ahead of AI without the panic\./,'heading must render when unconfigured');
+  assert.match(off.mount.innerHTML,/Stay informed about AI without the panic\./,'heading must render when unconfigured');
   // The initiative name is fixed. Any variation of it is a defect, not a rewording.
   assert.match(off.mount.innerHTML,/AI Without The Panic/,'eyebrow must carry the exact initiative name');
   assert.doesNotMatch(off.mount.innerHTML,/AI Without Panic|AI Without the Panic|AI Without Fear/,'no variation of the name');

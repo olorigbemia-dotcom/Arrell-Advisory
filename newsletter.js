@@ -36,7 +36,7 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
     // The newsletter's public name. Title case here so a screen reader speaks it
     // correctly and the name stays exact in the DOM; the all-caps treatment is CSS.
     eyebrow: 'AI Without The Panic',
-    heading: 'Stay ahead of AI without the panic.',
+    heading: 'Stay informed about AI without the panic.',
     blurb: 'Practical insights, useful guidance, and updates to help you understand AI, make informed decisions, and use it responsibly.',
     // Carried over from the previous section copy. It is the reassurance a reader
     // looks for before giving an address, and the promise /privacy makes in writing.
