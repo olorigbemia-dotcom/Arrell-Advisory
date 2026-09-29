@@ -708,7 +708,7 @@ needed to make the same form start subscribing for real — no markup or CSS cha
 Put a mount point anywhere inside `<main>`:
 
 ```html
-<section class="bg-alt" aria-label="Subscribe to Our Newsletter">
+<section class="bg-alt" aria-label="AI Without The Panic">
   <div class="sc">
     <div class="newsletter-section-mount" data-newsletter="section"></div>
   </div>
@@ -721,6 +721,12 @@ Use `data-newsletter="band"` instead for the compact one-line variant.
 
 All strings live in the `COPY` object at the top of the IIFE in `newsletter.js`. Change them
 there, not in the markup — the markup is generated.
+
+The section is positioned around **AI Without The Panic**, the newsletter's public name. Write
+it exactly that way: not "AI Without Panic", "AI Without the Panic" or any other variation.
+`COPY.eyebrow` holds it in title case so screen readers speak it correctly; the all-caps
+treatment comes from `.eyebrow` in `adoption.css`. `tests/newsletter.test.cjs` asserts the
+exact spelling.
 
 #### Tests
 

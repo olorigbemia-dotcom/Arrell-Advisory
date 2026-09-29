@@ -14,9 +14,10 @@
 
    To activate: paste the embedded form ID into AA_ML_FORM_ID.
 
-   Until it is set, the section still renders in full - heading,
-   email field, and Subscribe button - so the design can be
-   reviewed on the live site before MailerLite is wired up.
+   Until it is set, the section still renders in full - eyebrow,
+   heading, email field, and the Stay in the Loop button - so the
+   design can be reviewed on the live site before MailerLite is
+   wired up.
    Submitting in that state contacts nothing and reports the
    signup as not yet live; it never claims a subscription that
    did not happen. Setting AA_ML_FORM_ID is the only change
@@ -32,12 +33,17 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
   var TIMEOUT_MS = 20000;
 
   var COPY = {
-    heading: 'Subscribe to Our Newsletter',
-    section: 'Practical perspectives on responsible AI adoption — new insights, resources, and announcements from Arrell Advisory. Sent occasionally. We never share your address, and you can unsubscribe at any time.',
-    band: 'Insights, resources, and announcements on responsible AI adoption — sent occasionally. Unsubscribe at any time.',
+    // The newsletter's public name. Title case here so a screen reader speaks it
+    // correctly and the name stays exact in the DOM; the all-caps treatment is CSS.
+    eyebrow: 'AI Without The Panic',
+    heading: 'Stay ahead of AI without the panic.',
+    blurb: 'Practical insights, useful guidance, and updates to help you understand AI, make informed decisions, and use it responsibly.',
+    // Carried over from the previous section copy. It is the reassurance a reader
+    // looks for before giving an address, and the promise /privacy makes in writing.
+    note: 'Sent occasionally. We never share your address, and you can unsubscribe at any time.',
     label: 'Email address',
     placeholder: 'you@organization.com',
-    button: 'Subscribe',
+    button: 'Stay in the Loop',
     pending: 'Subscribing…',
     sending: 'Sending your subscription…',
     success: 'Thank you. Please check your inbox and confirm your subscription to finish signing up.',
@@ -57,12 +63,12 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
   }
 
   // Markup is entirely literal; no user input is ever interpolated here.
-  function markup(variant, id) {
-    var blurb = variant === 'section' ? COPY.section : COPY.band;
+  function markup(id) {
     return '' +
       '<div class="newsletter-copy">' +
+        '<p class="eyebrow newsletter-eyebrow">' + COPY.eyebrow + '</p>' +
         '<h2 class="newsletter-heading">' + COPY.heading + '</h2>' +
-        '<p class="newsletter-blurb">' + blurb + '</p>' +
+        '<p class="newsletter-blurb">' + COPY.blurb + '</p>' +
       '</div>' +
       '<form class="newsletter-form" novalidate>' +
         '<label class="newsletter-label" for="' + id + '-email">' + COPY.label + '</label>' +
@@ -75,12 +81,13 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
           '<input type="text" id="' + id + '-company" name="company" tabindex="-1" autocomplete="off">' +
         '</p>' +
         '<p class="newsletter-status form-status" role="status" aria-live="polite"></p>' +
+        '<p class="newsletter-note">' + COPY.note + '</p>' +
       '</form>';
   }
 
   function bind(mount, variant, index) {
     var id = 'newsletter-' + variant + '-' + index;
-    mount.innerHTML = markup(variant, id);
+    mount.innerHTML = markup(id);
 
     var form = mount.querySelector('.newsletter-form');
     var input = mount.querySelector('input[type=email]');
@@ -175,7 +182,7 @@ var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enab
     if (footer && mounts.length === 0) {
       var band = document.createElement('section');
       band.className = 'newsletter-band';
-      band.setAttribute('aria-label', COPY.heading);
+      band.setAttribute('aria-label', COPY.eyebrow);
       var inner = document.createElement('div');
       inner.setAttribute('data-newsletter', 'band');
       band.appendChild(inner);
