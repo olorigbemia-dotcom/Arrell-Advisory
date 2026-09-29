@@ -76,9 +76,14 @@ function scenario({formId='f1',ok=true,success=true,reject=false,email='reader@e
   // a subscription that did not happen.
   const off=scenario({formId:''});
   assert.equal(off.mount.parentNode.hidden,false,'section must stay visible when unconfigured');
-  assert.match(off.mount.innerHTML,/Subscribe to Our Newsletter/,'heading must render when unconfigured');
+  assert.match(off.mount.innerHTML,/Stay ahead of AI without the panic\./,'heading must render when unconfigured');
+  // The initiative name is fixed. Any variation of it is a defect, not a rewording.
+  assert.match(off.mount.innerHTML,/AI Without The Panic/,'eyebrow must carry the exact initiative name');
+  assert.doesNotMatch(off.mount.innerHTML,/AI Without Panic|AI Without the Panic|AI Without Fear/,'no variation of the name');
   assert.match(off.mount.innerHTML,/type="email"/,'email field must render when unconfigured');
-  assert.match(off.mount.innerHTML,/type="submit"/,'Subscribe button must render when unconfigured');
+  assert.match(off.mount.innerHTML,/type="submit"/,'submit button must render when unconfigured');
+  assert.match(off.mount.innerHTML,/Stay in the Loop/,'CTA label must render when unconfigured');
+  assert.match(off.mount.innerHTML,/unsubscribe at any time/i,'unsubscribe reassurance must survive the repositioning');
   const offSubmit=await off.run();
   assert.equal(offSubmit.calls,0,'must not contact MailerLite when unconfigured');
   assert.match(offSubmit.status,/not quite live yet/i);
