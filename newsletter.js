@@ -67,46 +67,38 @@ var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Numbe
   }
 
   /**
-   * MailerLite's embedded-form endpoint is not a CORS API - note the /jsonp/
-   * segment in its own path. It returns no Access-Control-Allow-Origin, so a
-   * fetch() may post to it but can never read the reply: the promise rejects
-   * before any status is seen, and every submission looks like a failure.
+   * The endpoint is a plain JSON API, despite the legacy /jsonp/ in its path.
+   * It answers a GET with 200 and application/json, and it sends
+   * Access-Control-Allow-Origin: *, so a cross-origin fetch may read the reply
+   * directly - no preflight, because a GET with no custom headers is a simple
+   * request.
    *
-   * The official embed sidesteps that two ways. The plain HTML form does a
-   * native POST, which is a navigation and so exempt from CORS; the on-page
-   * AJAX variant uses JSONP, and a <script> load is exempt too. Only the second
-   * hands the page a readable answer, which is what lets this section go on
-   * reporting success and failure honestly rather than assuming either.
+   * It is deliberately NOT loaded as a <script>. The response carries
+   * X-Content-Type-Options: nosniff, so a browser refuses to execute JSON as
+   * JavaScript and fires onerror, which is indistinguishable from a network
+   * failure. Reading the body is also what lets this section report success and
+   * failure honestly rather than assuming either.
    *
-   * Resolves with MailerLite's parsed response. Rejects if the script fails to
-   * load or nothing answers within TIMEOUT_MS.
+   * Resolves with MailerLite's parsed response. Rejects on a non-2xx, on a body
+   * that is not JSON, or if nothing answers within TIMEOUT_MS.
    */
-  function subscribe(email) {
-    return new Promise(function (resolve, reject) {
-      var callback = 'aaMailerLite' + Date.now() + Math.floor(Math.random() * 1e6);
-      var script = document.createElement('script');
-      var timer;
+  async function subscribe(email) {
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
 
-      function cleanup() {
-        clearTimeout(timer);
-        try { delete window[callback]; } catch (e) { window[callback] = undefined; }
-        if (script.parentNode) script.parentNode.removeChild(script);
-      }
-
-      window[callback] = function (data) { cleanup(); resolve(data || {}); };
-      script.onerror = function () { cleanup(); reject(new Error('Request failed')); };
-      timer = setTimeout(function () { cleanup(); reject(new Error('Timed out')); }, TIMEOUT_MS);
-
-      // The same fields the official embed sends, carried as query parameters
-      // because a script load is a GET.
-      script.src = endpoint() +
+    try {
+      // The same fields the embedded form sends, as query parameters because
+      // this is a GET.
+      var response = await fetch(endpoint() +
         '?fields[email]=' + encodeURIComponent(email) +
         '&ml-submit=1' +
-        '&anticsrf=true' +
-        '&callback=' + callback;
+        '&anticsrf=true', { signal: controller.signal });
 
-      (document.head || document.documentElement).appendChild(script);
-    });
+      if (!response.ok) throw new Error('Request failed: ' + response.status);
+      return await response.json();
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   // Markup is entirely literal; no user input is ever interpolated here.
@@ -177,7 +169,7 @@ var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Numbe
 
       try {
         var result = await subscribe(input.value.trim());
-        if (result.success !== true && result.success !== 'true') throw new Error('Subscription not accepted');
+        if (result.success !== true && result.success !== 'true') throw new Error('Subscription not accepted' + (result.message ? ': ' + result.message : ''));
 
         status.textContent = COPY.success;
         form.reset();

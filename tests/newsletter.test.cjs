@@ -5,9 +5,8 @@ const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../newsletter.js'),'utf8');
 
 // Minimal DOM double: enough for newsletter.js to render its markup, find its
-// own nodes, and run a submit. No network is ever reached - the script element
-// the JSONP transport injects is intercepted and answered locally, so no real
-// request is made and no subscriber can be created.
+// own nodes, and run a submit. No network is ever reached - fetch is stubbed,
+// so no real request is made and no subscriber can be created.
 function makeEl(tag){
   const el={tagName:tag,children:[],attributes:{},style:{},value:'',textContent:'',className:'',hidden:false,disabled:false,readOnly:false,validity:true,
     setAttribute(k,v){this.attributes[k]=v;},removeAttribute(k){delete this.attributes[k];},getAttribute(k){return this.attributes[k]===undefined?null:this.attributes[k];},
@@ -15,7 +14,7 @@ function makeEl(tag){
     closest(){return this.parentNode||null;},querySelector(){return null;},querySelectorAll(){return [];}};
   return el;
 }
-function scenario({formId='f1',accountId='acct-test',hash='',success=true,networkError=false,silent=false,timeoutMs=null,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
+function scenario({formId='f1',accountId='acct-test',hash='',success=true,httpStatus=200,responseBody=undefined,networkError=false,silent=false,timeoutMs=null,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
   const input=makeEl('input');input.value=email;input.validity=valid;
   const company=makeEl('input');company.value=honeypot;
   const button=makeEl('button');
@@ -27,28 +26,28 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
   const mount=makeEl('div');mount.parentNode=makeEl('section');
   mount.getAttribute=k=>k==='data-newsletter'?variant:null;
   mount.querySelector=sel=>({'.newsletter-form':form,'input[type=email]':input,'input[name=company]':company,'button[type=submit]':button,'.newsletter-status':status})[sel]||null;
-  let calls=0,tracked=0,url;
-  // Stands in for document.head. Appending the JSONP script is the moment the
-  // request would leave the browser, so that is where MailerLite is simulated.
-  const head=makeEl('head');
-  head.removeChild=(n)=>{n.parentNode=null;return n;};
-  head.appendChild=(node)=>{
-    node.parentNode=head;calls++;url=node.src;
-    setTimeout(()=>{
-      if(networkError){if(node.onerror)node.onerror();return;}
-      if(silent)return;                       // nothing answers -> the timeout must fire
-      const cb=/[?&]callback=([^&]+)/.exec(node.src);
-      if(cb&&typeof context[cb[1]]==='function')context[cb[1]]({success});
-    },0);
-    return node;
-  };
+  let calls=0,tracked=0,url,method;
   let scrolled=null;
-  const document={readyState:'complete',addEventListener(){},createElement:makeEl,head,
+  const document={readyState:'complete',addEventListener(){},createElement:makeEl,head:makeEl('head'),
     getElementById:(id)=>{scrolled='looked-up:'+id;return {scrollIntoView(){scrolled='scrolled:'+id;}};},
     querySelector:()=>null,querySelectorAll:sel=>sel==='[data-newsletter]'?[mount]:[]};
-  const context={document,setTimeout,clearTimeout,console:{error(){}},
-    aaTrack:()=>{tracked++;}};
-  context.window=context;   // JSONP registers its callback as a global, as in a browser
+  const context={document,setTimeout,clearTimeout,AbortController,console:{error(){}},
+    aaTrack:()=>{tracked++;},
+    // The only route to the network, stubbed. MailerLite is never contacted.
+    fetch:(u,opts)=>{
+      calls++;url=u;method=(opts&&opts.method)||'GET';
+      const signal=opts&&opts.signal;
+      return new Promise((resolve,reject)=>{
+        // Real fetch rejects when its signal aborts; the stub must too, or the
+        // timeout path can never be exercised.
+        if(signal)signal.addEventListener('abort',()=>reject(Object.assign(new Error('The operation was aborted.'),{name:'AbortError'})));
+        if(networkError)return reject(new TypeError('Failed to fetch'));
+        if(silent)return;                    // only the abort can settle this one
+        resolve({ok:httpStatus>=200&&httpStatus<300,status:httpStatus,
+          json:()=>Promise.resolve(responseBody!==undefined?responseBody:{success})});
+      });
+    }};
+  context.window=context;
   context.location={hash,search:''};   // a browser always has one; the double did not, and that hid a bug
   // Both identifiers are stubbed by pattern, not by their literal current value, so
   // this suite keeps testing the code after real IDs are pasted in - and can never
@@ -63,7 +62,7 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
     assert(!stubbed.includes(id),'the real MailerLite identifiers must never be reachable from a test');
   }
   vm.runInNewContext(stubbed,context);
-  return {run:async()=>{await listener({preventDefault(){}});return {status:status.textContent,reset,calls,tracked,url,button,input,hidden:mount.parentNode.hidden};},mount,scrolled:()=>scrolled};
+  return {run:async()=>{await listener({preventDefault(){}});return {status:status.textContent,reset,calls,tracked,url,method,button,input,hidden:mount.parentNode.hidden};},mount,scrolled:()=>scrolled};
 }
 (async()=>{
   // Success path: subscribes, confirms, resets, re-enables the button, tracks once.
@@ -75,7 +74,9 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
   assert.match(okCase.url,/[?&]fields\[email\]=reader%40example\.com(&|$)/,'email must be URL-encoded');
   assert.match(okCase.url,/[?&]ml-submit=1(&|$)/);
   assert.match(okCase.url,/[?&]anticsrf=true(&|$)/);
-  assert.match(okCase.url,/[?&]callback=aaMailerLite\d+(&|$)/);
+  assert.equal(okCase.method,'GET','the endpoint answers GET; a POST is what failed originally');
+  // JSONP is gone for good: a <script> load cannot read a nosniff JSON response.
+  assert.doesNotMatch(okCase.url,/[?&]callback=/,'no callback parameter may be sent');
   assert.doesNotMatch(okCase.url,/\s/,'no raw whitespace may reach the query string');
   assert.match(okCase.status,/check your inbox/i);
   assert(okCase.reset);
@@ -87,7 +88,7 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
   assert.match((await scenario({success:'true'}).run()).status,/check your inbox/i);
 
   // Failure paths never leak technical detail and never claim success.
-  for(const opts of [{success:false},{success:'false'},{networkError:true}]){
+  for(const opts of [{success:false},{success:'false'},{networkError:true},{httpStatus:500},{httpStatus:422}]){
     const x=await scenario(opts).run();
     assert.match(x.status,/could not complete your subscription/i);
     assert.doesNotMatch(x.status,/fetch|network|HTTP|JSON|error:/i);
@@ -102,6 +103,14 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
     assert.equal(x.calls,0);
     assert.match(x.status,/valid email/i);
   }
+
+  // The shape MailerLite actually returned while reCAPTCHA was on. A 200 whose
+  // body says success:false is a refusal, not a subscription.
+  const refused=await scenario({responseBody:{success:false,message:'reCAPTCHA failed. Try again.'}}).run();
+  assert.match(refused.status,/could not complete your subscription/i);
+  assert.doesNotMatch(refused.status,/reCAPTCHA|thank you|check your inbox/i,'MailerLite\'s wording must not reach the reader');
+  assert.equal(refused.tracked,0);
+  assert(!refused.reset);
 
   // /subscribe lands on #newsletter. The browser cannot scroll there itself - the
   // band does not exist while it is resolving the fragment - so the script must.
@@ -156,5 +165,5 @@ function scenario({formId='f1',accountId='acct-test',hash='',success=true,networ
   assert.equal(offInvalid.calls,0);
   assert.match(offInvalid.status,/valid email/i);
 
-  console.log('Newsletter: JSONP success, string-true, rejected response, script failure, timeout, subscribe-anchor scrolling, trimming/encoding, validation, honeypot, and unconfigured-but-visible staging cases passed. No request left the process; no subscriptions created.');
+  console.log('Newsletter: fetch-GET success, string-true, rejected response, network failure, non-2xx, reCAPTCHA-style refusal, timeout, subscribe-anchor scrolling, trimming/encoding, validation, honeypot, and unconfigured-but-visible staging cases passed. No request left the process; no subscriptions created.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
