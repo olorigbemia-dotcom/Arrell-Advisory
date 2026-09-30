@@ -13,7 +13,7 @@ function makeEl(tag){
     closest(){return this.parentNode||null;},querySelector(){return null;},querySelectorAll(){return [];}};
   return el;
 }
-function scenario({formId='f1',ok=true,success=true,reject=false,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
+function scenario({formId='f1',accountId='acct-test',ok=true,success=true,reject=false,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
   const input=makeEl('input');input.value=email;input.validity=valid;
   const company=makeEl('input');company.value=honeypot;
   const button=makeEl('button');
@@ -31,14 +31,24 @@ function scenario({formId='f1',ok=true,success=true,reject=false,email='reader@e
   const context={document,FormData:class{constructor(){this.d={};}append(k,v){this.d[k]=v;}},AbortController,setTimeout,clearTimeout,
     aaTrack:()=>{tracked++;},
     fetch:async(u,o)=>{calls++;url=u;body=o.body.d;if(reject)throw new Error('network');return {ok,json:async()=>({success})};}};
-  vm.runInNewContext(source.replace("var AA_ML_FORM_ID = '';","var AA_ML_FORM_ID = "+JSON.stringify(formId)+";"),context);
+  // Both identifiers are stubbed by pattern, not by their literal current value, so
+  // this suite keeps testing the code after real IDs are pasted in - and can never
+  // reach the production form.
+  const stubbed=source
+    .replace(/var AA_ML_ACCOUNT_ID = '[^']*';/,"var AA_ML_ACCOUNT_ID = "+JSON.stringify(accountId)+";")
+    .replace(/var AA_ML_FORM_ID = '[^']*';.*/,"var AA_ML_FORM_ID = "+JSON.stringify(formId)+";");
+  // Derived from the source, not hardcoded, so this keeps holding if the IDs are rotated.
+  for(const id of (source.match(/var AA_ML_(?:ACCOUNT|FORM)_ID = '([^']*)';/g)||[]).map(m=>m.split("'")[1]).filter(Boolean)){
+    assert(!stubbed.includes(id),'the real MailerLite identifiers must never be reachable from a test');
+  }
+  vm.runInNewContext(stubbed,context);
   return {run:async()=>{await listener({preventDefault(){}});return {status:status.textContent,reset,calls,tracked,url,body,button,input,hidden:mount.parentNode.hidden};},mount};
 }
 (async()=>{
   // Success path: subscribes, confirms, resets, re-enables the button, tracks once.
   const okCase=await scenario({}).run();
   assert.equal(okCase.calls,1);
-  assert.match(okCase.url,/assets\.mailerlite\.com\/jsonp\/2466818\/forms\/f1\/subscribe/);
+  assert.match(okCase.url,/assets\.mailerlite\.com\/jsonp\/acct-test\/forms\/f1\/subscribe/);
   assert.equal(okCase.body['fields[email]'],'reader@example.com');
   assert.match(okCase.status,/check your inbox/i);
   assert(okCase.reset);

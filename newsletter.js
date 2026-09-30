@@ -24,8 +24,8 @@
    needed to make the same form start subscribing for real.
 ============================================================ */
 
-var AA_ML_ACCOUNT_ID = '2466818';
-var AA_ML_FORM_ID = ''; // <- paste the MailerLite embedded form ID here to enable the newsletter
+var AA_ML_ACCOUNT_ID = '1271838';
+var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Number.MAX_SAFE_INTEGER
 
 (function () {
   'use strict';
