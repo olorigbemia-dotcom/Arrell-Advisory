@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting to the newsletter signup | Arrell Advisory</title>
+<meta http-equiv="refresh" content="0; url=https://preview.mailerlite.io/forms/1271838/189648362613507643/share">
+<meta name="robots" content="noindex">
+<script>
+// The destination is the share page for the same MailerLite form the newsletter
+// band posts to - account 1271838, form 189648362613507643 - so this short link
+// and the on-page form feed one audience.
+//
+// The meta refresh above is the no-JavaScript path and carries no query string,
+// because it is static. This one preserves whatever the visitor arrived with,
+// joining with ? or & depending on what the destination already has.
+(function () {
+  var to = 'https://preview.mailerlite.io/forms/1271838/189648362613507643/share';
+  var query = window.location.search.slice(1);
+  if (query) to += (to.indexOf('?') === -1 ? '?' : '&') + query;
+  window.location.replace(to);
+})();
+</script>
+</head>
+<body>
+<p>Taking you to the newsletter signup. <a href="https://preview.mailerlite.io/forms/1271838/189648362613507643/share">Continue to the AI Without The Panic signup &rarr;</a></p>
+</body>
+</html>
