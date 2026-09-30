@@ -15,7 +15,7 @@ function makeEl(tag){
     closest(){return this.parentNode||null;},querySelector(){return null;},querySelectorAll(){return [];}};
   return el;
 }
-function scenario({formId='f1',accountId='acct-test',success=true,networkError=false,silent=false,timeoutMs=null,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
+function scenario({formId='f1',accountId='acct-test',hash='',success=true,networkError=false,silent=false,timeoutMs=null,email='reader@example.com',honeypot='',valid=true,variant='band'}={}){
   const input=makeEl('input');input.value=email;input.validity=valid;
   const company=makeEl('input');company.value=honeypot;
   const button=makeEl('button');
@@ -42,11 +42,14 @@ function scenario({formId='f1',accountId='acct-test',success=true,networkError=f
     },0);
     return node;
   };
+  let scrolled=null;
   const document={readyState:'complete',addEventListener(){},createElement:makeEl,head,
+    getElementById:(id)=>{scrolled='looked-up:'+id;return {scrollIntoView(){scrolled='scrolled:'+id;}};},
     querySelector:()=>null,querySelectorAll:sel=>sel==='[data-newsletter]'?[mount]:[]};
   const context={document,setTimeout,clearTimeout,console:{error(){}},
     aaTrack:()=>{tracked++;}};
   context.window=context;   // JSONP registers its callback as a global, as in a browser
+  context.location={hash,search:''};   // a browser always has one; the double did not, and that hid a bug
   // Both identifiers are stubbed by pattern, not by their literal current value, so
   // this suite keeps testing the code after real IDs are pasted in - and can never
   // reach the production form.
@@ -60,7 +63,7 @@ function scenario({formId='f1',accountId='acct-test',success=true,networkError=f
     assert(!stubbed.includes(id),'the real MailerLite identifiers must never be reachable from a test');
   }
   vm.runInNewContext(stubbed,context);
-  return {run:async()=>{await listener({preventDefault(){}});return {status:status.textContent,reset,calls,tracked,url,button,input,hidden:mount.parentNode.hidden};},mount};
+  return {run:async()=>{await listener({preventDefault(){}});return {status:status.textContent,reset,calls,tracked,url,button,input,hidden:mount.parentNode.hidden};},mount,scrolled:()=>scrolled};
 }
 (async()=>{
   // Success path: subscribes, confirms, resets, re-enables the button, tracks once.
@@ -98,6 +101,14 @@ function scenario({formId='f1',accountId='acct-test',success=true,networkError=f
     const x=await scenario(opts).run();
     assert.equal(x.calls,0);
     assert.match(x.status,/valid email/i);
+  }
+
+  // /subscribe lands on #newsletter. The browser cannot scroll there itself - the
+  // band does not exist while it is resolving the fragment - so the script must.
+  assert.equal(scenario({hash:'#newsletter'}).scrolled(),'scrolled:newsletter','arriving at #newsletter must scroll to the section');
+  // And it must stay out of the way on every ordinary page load.
+  for(const h of ['','#main-content','#newsletters','#newsletter-x']){
+    assert.equal(scenario({hash:h}).scrolled(),null,'no scroll for hash '+JSON.stringify(h));
   }
 
   // An endpoint that accepts the script but never calls back must time out into
@@ -145,5 +156,5 @@ function scenario({formId='f1',accountId='acct-test',success=true,networkError=f
   assert.equal(offInvalid.calls,0);
   assert.match(offInvalid.status,/valid email/i);
 
-  console.log('Newsletter: JSONP success, string-true, rejected response, script failure, timeout, trimming/encoding, validation, honeypot, and unconfigured-but-visible staging cases passed. No request left the process; no subscriptions created.');
+  console.log('Newsletter: JSONP success, string-true, rejected response, script failure, timeout, subscribe-anchor scrolling, trimming/encoding, validation, honeypot, and unconfigured-but-visible staging cases passed. No request left the process; no subscriptions created.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

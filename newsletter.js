@@ -32,6 +32,10 @@ var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Numbe
 
   var TIMEOUT_MS = 20000;
 
+  // The anchor /subscribe points at. The band is built here rather than in the
+  // HTML, so this is the only place the id can come from.
+  var BAND_ID = 'newsletter';
+
   var COPY = {
     // The newsletter's public name. Title case here so a screen reader speaks it
     // correctly and the name stays exact in the DOM; the all-caps treatment is CSS.
@@ -210,6 +214,7 @@ var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Numbe
     if (footer && mounts.length === 0) {
       var band = document.createElement('section');
       band.className = 'newsletter-band';
+      band.id = BAND_ID;
       band.setAttribute('aria-label', COPY.eyebrow);
       var inner = document.createElement('div');
       inner.setAttribute('data-newsletter', 'band');
@@ -220,6 +225,16 @@ var AA_ML_FORM_ID = '189648362613507643'; // string, not a number: exceeds Numbe
 
     for (var i = 0; i < mounts.length; i++) {
       bind(mounts[i], mounts[i].getAttribute('data-newsletter') === 'section' ? 'section' : 'band', i);
+    }
+
+    // A visitor arriving from /subscribe asks for #newsletter, but this script is
+    // deferred: the browser resolves the fragment while the band still does not
+    // exist, finds nothing, and gives up. By the time it is inserted, moments
+    // later, nothing is listening. So scroll to it here instead, once it is
+    // genuinely in the document. Only ever runs for that one fragment.
+    if (window.location && window.location.hash === '#' + BAND_ID) {
+      var target = document.getElementById(BAND_ID);
+      if (target && target.scrollIntoView) target.scrollIntoView();
     }
   }
 

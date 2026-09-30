@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Redirecting to the newsletter signup | Arrell Advisory</title>
-<meta http-equiv="refresh" content="0; url=https://preview.mailerlite.io/forms/1271838/189648362613507643/share">
+<meta http-equiv="refresh" content="0; url=/#newsletter">
 <meta name="robots" content="noindex">
 <script>
-// The destination is the share page for the same MailerLite form the newsletter
-// band posts to - account 1271838, form 189648362613507643 - so this short link
-// and the on-page form feed one audience.
+// Takes visitors to the newsletter section already on the site, which posts to
+// MailerLite account 1271838, form 189648362613507643. Nothing is embedded or
+// recreated here, and no second subscription pathway exists.
 //
-// The meta refresh above is the no-JavaScript path and carries no query string,
-// because it is static. This one preserves whatever the visitor arrived with,
-// joining with ? or & depending on what the destination already has.
+// A query string has to sit before the fragment, so it cannot simply be appended
+// the way the other stubs append window.location.search. The meta refresh above
+// is the no-JavaScript path and is static, so it carries no parameters.
 (function () {
-  var to = 'https://preview.mailerlite.io/forms/1271838/189648362613507643/share';
   var query = window.location.search.slice(1);
-  if (query) to += (to.indexOf('?') === -1 ? '?' : '&') + query;
-  window.location.replace(to);
+  window.location.replace('/' + (query ? '?' + query : '') + '#newsletter');
 })();
 </script>
 </head>
 <body>
-<p>Taking you to the newsletter signup. <a href="https://preview.mailerlite.io/forms/1271838/189648362613507643/share">Continue to the AI Without The Panic signup &rarr;</a></p>
+<p>Taking you to the newsletter signup. <a href="/#newsletter">Continue to the AI Without The Panic signup &rarr;</a></p>
 </body>
 </html>
