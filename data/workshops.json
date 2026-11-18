@@ -57,5 +57,12 @@
       "tile_color": "#7d8a9b"
     }
   ],
-  "sessions": []
+  "sessions": [
+    {
+      "name": "AI for Everyday Business",
+      "date": "Early 2027 · Republic, Missouri",
+      "details": "Practice using AI as a business assistant on one recurring task. Advance registration is open for Republic business owners and their teams.",
+      "registration_path": "/republic-ai/"
+    }
+  ]
 }

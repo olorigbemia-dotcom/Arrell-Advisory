@@ -176,6 +176,13 @@ fetch('data/workshops.json')
         var c = document.createElement('div');
         c.className = 'problem-card';
         c.innerHTML = '<div class="problem-label">' + (s.date || '') + '</div><h3 style="font-family:var(--serif);font-size:1.25rem;font-weight:500;margin-bottom:0.5rem">' + (s.name || '') + '</h3><p>' + (s.details || '') + '</p>';
+        if (s.registration_path && /^\/[a-z0-9-]+\/$/.test(s.registration_path)) {
+          var link = document.createElement('a');
+          link.href = s.registration_path;
+          link.className = 'text-link';
+          link.textContent = 'Workshop details and registration';
+          c.appendChild(link);
+        }
         sg.appendChild(c);
       });
       document.getElementById('upcoming').style.display = '';
