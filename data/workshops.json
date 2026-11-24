@@ -1,6 +1,22 @@
 {
   "workshops": [
     {
+      "name": "Responsible AI Leadership",
+      "format": "Conference Session · Springfield",
+      "duration": "STC Squared, Springfield Tech Week 2026",
+      "description": "A session for Springfield’s tech and business community on leading AI adoption with business value and human judgment in view.",
+      "flyer_image": "",
+      "tile_color": "#6f8fa8"
+    },
+    {
+      "name": "AI Foundations & Prompt Engineering",
+      "format": "8-Week Cohort",
+      "duration": "The Reinvention Lab · Women Techmakers Calgary × Femme Alliance Network",
+      "description": "An eight-week learning and mentorship experience covering AI foundations, prompting frameworks, a personal prompt library, and evaluating AI risks before use. Participants completed with a certificate.",
+      "flyer_image": "",
+      "tile_color": "#8a7d9b"
+    },
+    {
       "name": "Build Your AI Chief of Staff",
       "format": "Agent-Building Workshop",
       "duration": "",
