@@ -187,3 +187,28 @@ a.ecosystem-name:hover,a.ecosystem-name:focus-visible{color:var(--gold-h)}
 /* training page variant */
 .training-page .quote-card{background:#0e1420}
 .training-page .quote-card blockquote{color:#e8e4de}
+
+/* ============================================================
+   LONG-FORM ARTICLE TYPOGRAPHY (Phase 1)
+
+   These replace inline styles that were repeated on every paragraph of the
+   long-form articles. Each declaration reproduces the inline style it replaces
+   exactly, so no page changes appearance on desktop. The only deliberate change
+   is the mobile block at the end, which lifts body text from 0.97rem to 1rem
+   for readability on a phone.
+
+   Headings matter here beyond looks: the FAQ questions and article subheads
+   were <p style="font-weight:600">, which gave screen readers and search
+   engines no heading outline at all. They are now real h3/h4 elements, and
+   these rules keep them looking identical.
+============================================================ */
+.article-lead{font-size:1.05rem;color:var(--text-2);line-height:1.9;margin-bottom:1.25rem}
+.article-p{font-size:.97rem;color:var(--text-2);line-height:1.85;margin-bottom:1.25rem}
+.article-subhead{font-size:.97rem;font-weight:600;color:var(--text);line-height:1.7;margin:1.5rem 0 .5rem}
+.faq-q{font-size:.92rem;font-weight:600;color:var(--text);line-height:1.7;margin:0 0 .4rem}
+.faq-a{font-size:.88rem;color:var(--text-2);line-height:1.7;margin:0}
+@media(max-width:700px){
+  .article-lead,.article-p{font-size:1rem;line-height:1.8;margin-bottom:1.15rem}
+  .article-subhead{margin:1.25rem 0 .45rem}
+  .faq-a{font-size:.92rem;line-height:1.75}
+}
