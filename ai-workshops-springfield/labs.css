@@ -1,1 +1,64 @@
 :root{--lab-gold:#e3c28f;--lab-muted:#c7c9cf;--lab-panel:#111a28} .labs{font-weight:400}.labs .labwrap{max-width:1160px;margin:auto;padding:0 24px}.labs section{padding:64px 0}.labs .labhero{padding:150px 0 70px;background:radial-gradient(ellipse at 85% 0%,#3c3026 0,transparent 58%),#0b111c;border-bottom:1px solid #ffffff20}.labs .eyebrow{color:var(--lab-gold);text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:600;margin-bottom:12px}.labs h1,.labs h2,.labs h3{font-family:var(--serif);font-weight:600;line-height:1.08}.labs h1{font-size:clamp(2.8rem,6.2vw,5.5rem);max-width:880px;margin:0 0 20px}.labs h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:20px}.labs h3{font-size:1.75rem;margin:10px 0}.labs p{margin-bottom:16px}.labs .lead{font-size:1.18rem;color:var(--lab-muted);max-width:740px}.labs .tags{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0;color:var(--lab-gold);font-size:.91rem}.labs .labgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.labs .labcard,.labs .register{background:var(--lab-panel);border:1px solid #ffffff26;padding:26px;border-radius:12px}.labs .labcard{display:flex;flex-direction:column}.labs .labcard .btn-primary{margin-top:auto;align-self:start}.labs .labcard p{color:var(--lab-muted)}.labs .date{font-weight:600;color:var(--lab-gold)!important;font-size:.9rem}.labs .price{font-size:2rem;font-weight:600;line-height:1.2;color:var(--lab-gold);margin:8px 0}.labs .price-note{color:var(--lab-muted);font-size:.9rem}.labs .labcols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,.85fr);gap:48px;align-items:start}.labs .lablist{padding-left:1.3rem;margin-bottom:24px}.labs .lablist li{margin:0 0 12px;color:var(--lab-muted)}.labs .register{scroll-margin-top:100px}.labs label{display:block;margin:12px 0 5px;font-size:.94rem}.labs input:not([type=checkbox]),.labs textarea{display:block;width:100%;background:#080c14;border:1px solid #737982;color:white;padding:12px;border-radius:5px;font:inherit}.labs .consent{display:flex;gap:10px;align-items:start;font-size:.84rem;color:var(--lab-muted)}.labs .consent input{margin-top:5px;flex:none}.labs .btn-primary{background:var(--lab-gold);color:#080c14;min-height:48px;justify-content:center;white-space:normal;text-align:center;border-radius:5px}.labs button.btn-primary{width:100%;margin-top:15px}.labs a:focus-visible,.labs button:focus-visible,.labs input:focus-visible,.labs textarea:focus-visible{outline:3px solid #e3c28f;outline-offset:3px}.labs .status{margin-top:12px}.labs .quiet{color:var(--lab-muted)}.labs .facilitator{display:grid;grid-template-columns:140px 1fr;gap:25px;align-items:center}.labs .facilitator img{width:140px;height:140px;object-fit:cover;border-radius:8px}.labs .faq details{border-bottom:1px solid #ffffff25;padding:15px 0}.labs .faq summary{font-weight:600;cursor:pointer}.labs .faq p{margin-top:10px;color:var(--lab-muted)}.labs .back{display:inline-block;margin:0 0 20px;color:var(--lab-gold)}.labs .labclose{border-top:1px solid #ffffff20;background:#0e1420}.labs .labfooter{padding:30px 24px;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;color:var(--lab-muted);background:#080c14}.labs .labnav{position:relative;flex-wrap:wrap;gap:12px;padding:16px 24px}.labs .labnav .nav-brand{display:block}.labs .labnav a{text-decoration:none}.labs .labnavlinks{display:flex;gap:20px;flex-wrap:wrap;font-size:.9rem}.labs .labhero{padding-top:64px}.labs .skip-link{position:absolute;left:-9999px}.labs .skip-link:focus{left:12px;top:12px;background:#fff;color:#000;padding:10px;z-index:101}@media(max-width:800px){.labs .labgrid,.labs .labcols{grid-template-columns:1fr}.labs .labhero{padding:48px 0}.labs section{padding:44px 0}.labs .labcard,.labs .register{padding:20px}.labs .facilitator{grid-template-columns:1fr}.labs .labnavlinks{gap:12px}.labs .labnav .nav-brand-type{display:none}}
+/* ============================================================
+   PHOTOGRAPHIC OVERLAY TREATMENT
+   Ported from the /training page (.training-hero / .format-card) and adapted to
+   this page's palette: a photograph fills the block, a dark gradient sits over
+   it, and the existing copy sits on top unchanged.
+
+   OPT-IN ONLY. labs.css is loaded by 25 pages - this subtree plus all of
+   /ai-ready-leaders/, where 21 pages use .labhero and 19 use .labclose. So every
+   rule below is gated behind an extra class (.has-photo / .is-visual) that only
+   the Workshop page carries. A page that does not ask for the treatment renders
+   exactly as it did before.
+
+   Each block also keeps its original background declaration underneath, so if an
+   image fails to load the block falls back to how it looked before.
+
+   REPLACING IMAGES LATER: every photograph is a plain <img> as the first child of
+   its block, carrying a *-photo class. Swap the src and the intrinsic
+   width/height; no CSS change is needed.
+============================================================ */
+
+/* --- Hero --------------------------------------------------------------- */
+.labhero.has-photo{position:relative;isolation:isolate;overflow:hidden}
+.labhero-photo,.labhero-shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.labhero-photo{object-position:76% 45%}
+.labhero-shade{z-index:-1;background:
+  linear-gradient(90deg,rgba(11,17,28,.97),rgba(11,17,28,.88) 44%,rgba(11,17,28,.4) 84%),
+  linear-gradient(0deg,rgba(11,17,28,.92),transparent 52%)}
+/* Hold every line of hero copy inside the darkened column. Without this the
+   eyebrow and the tag row run the full 1160px wrap and spill into the lit
+   side of the photograph on wide screens. */
+.labhero.has-photo h1,.labhero.has-photo .lead,
+.labhero.has-photo .eyebrow,.labhero.has-photo .tags{max-width:660px}
+
+/* --- Workshop cards ----------------------------------------------------- */
+/* Same geometry as .format-card on /training: content pinned to the bottom of a
+   tall block, over a background layer. The tone layer is a stand-in for a
+   photograph - drop in <img class="labcard-photo"> and it takes over. */
+.labcard.is-visual{position:relative;isolation:isolate;overflow:hidden;min-height:540px;justify-content:flex-end}
+.labcard-photo,.labcard-tone,.labcard-shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.labcard-photo{transition:transform .5s;object-position:center 30%}
+.labcard.is-visual:hover .labcard-photo{transform:scale(1.035)}
+.labcard-tone{background:
+  radial-gradient(ellipse at 78% 6%,rgba(227,194,143,.17) 0,transparent 60%),
+  linear-gradient(168deg,#182335,#0d1420 74%)}
+.labcard-shade{z-index:-1;background:linear-gradient(0deg,rgba(11,17,28,.96),rgba(11,17,28,.7) 48%,rgba(11,17,28,.16))}
+
+/* --- Closing band ------------------------------------------------------- */
+.labclose.has-photo{position:relative;isolation:isolate;overflow:hidden}
+.labclose-photo,.labclose-shade{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.labclose-photo{object-position:58% 48%}
+.labclose-shade{z-index:-1;background:
+  linear-gradient(90deg,rgba(14,20,32,.95),rgba(14,20,32,.9) 58%,rgba(14,20,32,.93)),
+  linear-gradient(0deg,rgba(14,20,32,.6),rgba(14,20,32,.35) 55%,rgba(14,20,32,.55))}
+
+/* --- Narrow screens ----------------------------------------------------- */
+@media(max-width:800px){
+  /* On a phone the copy sits over the lower half, so the gradient darkens from
+     the bottom instead of the left, exactly as the training hero does. */
+  .labhero.has-photo .labhero-shade,
+  .labclose.has-photo .labclose-shade{background:linear-gradient(0deg,#0b111c 5%,rgba(11,17,28,.95) 54%,rgba(11,17,28,.72))}
+  .labhero-photo{object-position:70% 26%}
+  .labcard.is-visual{min-height:460px}
+}
